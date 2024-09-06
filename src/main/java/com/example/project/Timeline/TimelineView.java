@@ -11,9 +11,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.util.HashMap;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,6 +30,7 @@ public class TimelineView {
     public Button buttonAddCard;
     public Button buttonExport;
     public Label cardStatus;
+    public HBox cardHolder;
     @FXML
     private Label projectTitle;
     private int ID = 0;
@@ -63,6 +67,7 @@ public class TimelineView {
         setLikes(likes);
         if (generateCardList(cardsToAdd)){
             cardStatus.setText(description);
+            addCardsToTimeline();
         }
         else{
             cardStatus.setText("No cards in this project, please click add new:");
@@ -89,6 +94,46 @@ public class TimelineView {
             addCard(cardToImport);
         }
         return false;
+    }
+
+    /**
+     * Generates cards to the timeline
+     * @return returns true if the cards were succesfully added, else return false
+     */
+    private boolean addCardsToTimeline(){
+        try{
+            for (cardEntry cardToAdd: listOfCards){
+                StackPane cardOverLay = new StackPane();
+                VBox cardLayout = new VBox();
+
+                // Top Menu Bar
+                HBox topMenuBar = new HBox();
+                Button returnButton = new Button("Return");
+                Label cardTitle = new Label(cardToAdd.getTitle());
+                topMenuBar.getChildren().addAll(returnButton, cardTitle);
+
+                // Media Container
+                HBox mediaContainer = new HBox();
+
+                // Description
+                VBox descriptionContainer = new VBox();
+                Label descriptionTitle = new Label("Description:");
+                Label descriptionContent = new Label(cardToAdd.getDescription());
+                descriptionContainer.getChildren().addAll(descriptionTitle, descriptionContent);
+
+                // SetID
+                cardOverLay.setId("card_" + cardToAdd.getID());
+
+                // Add to main container
+                cardLayout.getChildren().addAll(topMenuBar, mediaContainer, descriptionContainer);
+                cardOverLay.getChildren().addAll(cardLayout);
+                cardHolder.getChildren().addAll(cardOverLay);
+
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return true;
     }
 
     public int getID(){

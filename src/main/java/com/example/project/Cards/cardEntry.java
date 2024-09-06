@@ -14,4 +14,24 @@ public class cardEntry {
         this.dateCreated = setDateCreated;
         this.dateFinished = setDateFinished;
     }
+
+    public int getID(){
+        return this.ID;
+    }
+
+    public String getTitle(){
+        return this.title;
+    }
+
+    public String getDescription(){
+        return this.description;
+    }
+
+    public String getDateCreated(){
+        return this.dateCreated;
+    }
+
+    public String getDateFinished(){
+        return this.dateFinished;
+    }
 }
