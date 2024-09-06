@@ -1,6 +1,6 @@
 package com.example.project.Timeline;
 
-import com.example.project.Cards.cardEntry;
+import com.example.project.Cards.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TimelineView {
+    public ScrollPane cardSpace;
     @FXML
     private Label projectTitle;
     private int timelineID = 0;
@@ -33,7 +35,7 @@ public class TimelineView {
 
 
 
-    private GridPane cardSpace;
+    @FXML
 
     public String getTitle(){
         return timelineTitleName;
@@ -55,7 +57,7 @@ public class TimelineView {
         return timelineTimeCreated;
     }
 
-    private void setDateCreated(String timelineCreatedDate{
+    private void setDateCreated(String timelineCreatedDate){
         this.timelineTimeCreated = timelineCreatedDate;
     }
 
@@ -115,12 +117,10 @@ public class TimelineView {
     @FXML
     private void onEditClick(ActionEvent actionEvent) {
         try {
-            // Load dashboard scene
             FXMLLoader loader = new FXMLLoader(getClass().getResource("EditProject.fxml"));
             Parent newRoot = loader.load();
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
 
-            // Set to Edit Project Scene
             stage.setScene(new Scene(newRoot));
             stage.show();
         } catch (IOException e) {

@@ -1,23 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_LEFT" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.project.Timeline.TimelineView">
+<VBox alignment="TOP_LEFT" prefHeight="237.0" prefWidth="330.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.Timeline.TimelineView">
+    <!-- Top Row Buttons -->
+    <FlowPane prefHeight="13.0" prefWidth="330.0">
+        <children>
+            <Button onAction="#onReturnClick" text="Return to Dashboard" />
+            <Label fx:id="projectTitle" text="Project Title" />
+            <Button onAction="#onEditClick" text="Edit Project" />
+        </children>
+    </FlowPane>
 
-    <!-- HBox for top menu -->
-    <HBox spacing="10.0">
-        <Button text="Return to Dashboard" onAction="#onReturnClick"/>
-        <Label fx:id="projectTitle" text="Project Title" />
-        <Button text="Edit Project" onAction="#onEditClick"/>
-    </HBox>
 
+    <ScrollPane fx:id="cardSpace" prefHeight="181.0" prefWidth="330.0" />
+    <ButtonBar prefHeight="25.0" prefWidth="330.0">
+        <buttons>
+            <Button fx:id="buttonAddCard" mnemonicParsing="false" text="Add Card" />
+            <Button fx:id="buttonExport" mnemonicParsing="false" text="Export" />
+        </buttons>
+    </ButtonBar>
     <!-- GridPane for holding card entries -->
-    <GridPane fx:id="cardSpace">
+    <GridPane >
         <!-- Cards will be added via java code -->
     </GridPane>
 </VBox>
