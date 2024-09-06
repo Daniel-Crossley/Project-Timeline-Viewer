@@ -104,6 +104,7 @@ public class TimelineView {
         try{
             for (cardEntry cardToAdd: listOfCards){
                 StackPane cardOverLay = new StackPane();
+                cardOverLay.prefWidthProperty().bind(cardHolder.widthProperty().multiply(0.3));
                 VBox cardLayout = new VBox();
 
                 // Top Menu Bar
