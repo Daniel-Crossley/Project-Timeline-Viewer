@@ -11,15 +11,15 @@
 <VBox alignment="TOP_LEFT" prefHeight="237.0" prefWidth="330.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.Timeline.TimelineView">
     <!-- Top Row Buttons -->
     <FlowPane prefHeight="13.0" prefWidth="330.0" fx:id="TopBar">
-        <children>
-            <Button onAction="#onReturnClick" text="Return to Dashboard" />
-            <Label fx:id="projectTitle" text="Project Title" />
-            <Button onAction="#onEditClick" text="Edit Project" />
-        </children>
+        <Button onAction="#onReturnClick" text="Return to Dashboard"/>
+        <Label fx:id="projectTitle" text="Project Title"/>
+        <Button onAction="#onEditClick" text="Edit Project"/>
     </FlowPane>
 
 
-    <ScrollPane fx:id="cardSpace" prefHeight="181.0" prefWidth="330.0" />
+    <ScrollPane fx:id="cardSpace" prefHeight="181.0" prefWidth="330.0">
+        <Label fx:id="cardStatus" text=" " />
+    <ScrollPane/>
     <ButtonBar prefHeight="25.0" prefWidth="330.0">
         <buttons>
             <Button fx:id="buttonAddCard" mnemonicParsing="false" text="Add Card" />

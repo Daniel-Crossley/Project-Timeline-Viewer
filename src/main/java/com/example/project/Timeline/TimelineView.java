@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
@@ -18,15 +19,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Integer.parseInt;
+
 public class TimelineView {
     public ScrollPane cardSpace;
     public FlowPane TopBar;
+    public Button buttonAddCard;
+    public Button buttonExport;
+    public Label cardStatus;
     @FXML
     private Label projectTitle;
     private int ID = 0;
 
 
-    private List<cardEntry> listOfCards = new ArrayList<cardEntry>();
+    private List<cardEntry> listOfCards = new ArrayList<>();
 
     private String titleName = "Project Default Title";
     private String description = "Project Default Description";
@@ -36,25 +42,52 @@ public class TimelineView {
     private int likes = 0;
     private String colour = "#9FA1AC";
 
-    public TimelineView(int id, String title, String description, String timeCreated, String timeCompleted, String colour, int likes, List<HashMap<String, String>> cardsToAdd){
+    /**
+     * Initiates project's timeline, set up
+     * @param id the id of the timeline
+     * @param title the title of the timeline
+     * @param description the description of the timeline
+     * @param dateCreated the date the project was published
+     * @param dateCompleted the date the project was completed
+     * @param colour the colour of the top bar of the project
+     * @param likes the number of likes the project has
+     * @param cardsToAdd list of HashMap to add cards
+     */
+    public TimelineView(int id, String title, String description, String dateCreated, String dateCompleted, String colour, int likes, List<HashMap<String, String>> cardsToAdd){
         setID(id);
         setTitle(title);
         setDescription(description);
-        setDateCreated(timeCreated);
-        setDateFinished(timeCompleted);
+        setDateCreated(dateCreated);
+        setDateFinished(dateCompleted);
         setColour(colour);
         setLikes(likes);
+        if (generateCardList(cardsToAdd)){
+            cardStatus.setText(description);
+        }
+        else{
+            cardStatus.setText("No cards in this project, please click add new:");
+        }
     }
 
+    /**
+     * Generates cards to be added to the timeline
+     * @param cardsToAdd list of hashmap of cards to be added
+     * @return Returns true if the cards were added successfully, else returns false
+     */
     private boolean generateCardList(List<HashMap<String, String>> cardsToAdd){
         if (cardsToAdd == null || cardsToAdd.isEmpty()) {
             return false; // Indicate failure or nothing to process
         }
 
-        for (HashMap<String,String> card : cardsToAdd){
-
+        for (HashMap<String,String> importCard : cardsToAdd){
+            int addID = parseInt(importCard.get("ID"));
+            String addTitle = importCard.get("title");
+            String addDescription = importCard.get("description");
+            String addDateCreated = importCard.get("dateCreated");
+            String addDateFinished = importCard.get("dateFinished");
+            cardEntry cardToImport = new cardEntry(addID, addTitle, addDescription, addDateCreated, addDateFinished);
+            addCard(cardToImport);
         }
-
         return false;
     }
 
@@ -124,7 +157,7 @@ public class TimelineView {
         TopBar.setStyle("-fx-background-color: #9FA1AC;");
     }
 
-    public void addTimelineCard(cardEntry cardAdd){
+    public void addCard(cardEntry cardAdd){
         listOfCards.add(cardAdd);
     }
 
