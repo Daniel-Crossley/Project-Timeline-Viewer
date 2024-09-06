@@ -67,10 +67,13 @@ public class TimelineView {
         setLikes(likes);
         if (generateCardList(cardsToAdd)){
             cardStatus.setText(description);
-            addCardsToTimeline();
+
+            if (!addCardsToTimeline()){
+                cardStatus.setText("Error adding cards");
+            }
         }
         else{
-            cardStatus.setText("No cards in this project, please click add new:");
+            cardStatus.setText("No cards in this project, please click add new.");
         }
     }
 
@@ -100,41 +103,60 @@ public class TimelineView {
      * Generates cards to the timeline
      * @return returns true if the cards were succesfully added, else return false
      */
+    /**
+     * Generates cards to the timeline
+     * @return returns true if the cards were successfully added, else return false
+     */
     private boolean addCardsToTimeline(){
-        try{
-            for (cardEntry cardToAdd: listOfCards){
-                StackPane cardOverLay = new StackPane();
-                VBox cardLayout = new VBox();
-
-                // Top Menu Bar
-                HBox topMenuBar = new HBox();
-                Button returnButton = new Button("Return");
-                Label cardTitle = new Label(cardToAdd.getTitle());
-                topMenuBar.getChildren().addAll(returnButton, cardTitle);
-
-                // Media Container
-                HBox mediaContainer = new HBox();
-
-                // Description
-                VBox descriptionContainer = new VBox();
-                Label descriptionTitle = new Label("Description:");
-                Label descriptionContent = new Label(cardToAdd.getDescription());
-                descriptionContainer.getChildren().addAll(descriptionTitle, descriptionContent);
-
-                // SetID
-                cardOverLay.setId("card_" + cardToAdd.getID());
-
-                // Add to main container
-                cardLayout.getChildren().addAll(topMenuBar, mediaContainer, descriptionContainer);
-                cardOverLay.getChildren().addAll(cardLayout);
-                cardHolder.getChildren().addAll(cardOverLay);
-
+        try {
+            if (cardHolder == null) {
+                return false;
             }
+
+            boolean allCardsAdded = true;
+
+            for (cardEntry cardToAdd : listOfCards) {
+                try {
+                    StackPane cardOverlay = new StackPane();
+                    cardOverlay.prefWidthProperty().bind(cardHolder.widthProperty().multiply(0.3));
+
+                    VBox cardLayout = new VBox();
+
+                    // Top Menu Bar
+                    HBox topMenuBar = new HBox();
+                    Button returnButton = new Button("Return");
+                    Label cardTitle = new Label(cardToAdd.getTitle());
+                    topMenuBar.getChildren().addAll(returnButton, cardTitle);
+
+                    // Media Container
+                    HBox mediaContainer = new HBox();
+
+                    // Description
+                    VBox descriptionContainer = new VBox();
+                    Label descriptionTitle = new Label("Description:");
+                    Label descriptionContent = new Label(cardToAdd.getDescription());
+                    descriptionContainer.getChildren().addAll(descriptionTitle, descriptionContent);
+
+                    // Set ID
+                    cardOverlay.setId("card_" + cardToAdd.getID());
+
+                    // Add to main container
+                    cardLayout.getChildren().addAll(topMenuBar, mediaContainer, descriptionContainer);
+                    cardOverlay.getChildren().addAll(cardLayout);
+                    cardHolder.getChildren().add(cardOverlay);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    allCardsAdded = false;
+                }
+            }
+
+            return allCardsAdded;
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            return false;
         }
-        return true;
     }
+
 
     public int getID(){
         return ID;
