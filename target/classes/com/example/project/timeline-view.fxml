@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="TOP_LEFT" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+    <!-- HBox for top menu -->
+    <HBox spacing="10.0">
+        <Button text="Return to Dashboard" onAction="#onReturnClick"/>
+        <Label fx:id="projectTitle" text="Project Title"/>
+        <Button text="Edit Project" onAction="#onEditClick"/>
+    </HBox>
+
+    <!-- GridPane for holding card entries -->
+    <GridPane fx:id="cardSpace">
+        <!-- Cards will be added via java code -->
+    </GridPane>
+</VBox>
