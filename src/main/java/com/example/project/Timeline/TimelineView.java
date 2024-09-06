@@ -9,93 +9,125 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import java.util.HashMap;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TimelineView {
     public ScrollPane cardSpace;
+    public FlowPane TopBar;
     @FXML
     private Label projectTitle;
-    private int timelineID = 0;
+    private int ID = 0;
 
 
     private List<cardEntry> listOfCards = new ArrayList<cardEntry>();
 
-    private String timelineTitleName = "Project Default Title";
-    private String timelineDescription = "Project Default Description";
-    private String timelineTimeCreated = "DD/MM/YYYY";
-    private String timelineTimeFinished = "DD/MM/YYYY";
-    private boolean timelineVisibility = true;
-    private int timelineLikes = 0;
-    private String timelineColour = "#9FA1AC";
+    private String titleName = "Project Default Title";
+    private String description = "Project Default Description";
+    private String dateCreated = "DD/MM/YYYY";
+    private String dateFinished = "DD/MM/YYYY";
+    private boolean visibility = true;
+    private int likes = 0;
+    private String colour = "#9FA1AC";
 
+    public TimelineView(int id, String title, String description, String timeCreated, String timeCompleted, String colour, int likes, List<HashMap<String, String>> cardsToAdd){
+        setID(id);
+        setTitle(title);
+        setDescription(description);
+        setDateCreated(timeCreated);
+        setDateFinished(timeCompleted);
+        setColour(colour);
+        setLikes(likes);
+    }
 
+    private boolean generateCardList(List<HashMap<String, String>> cardsToAdd){
+        if (cardsToAdd == null || cardsToAdd.isEmpty()) {
+            return false; // Indicate failure or nothing to process
+        }
 
-    @FXML
+        for (HashMap<String,String> card : cardsToAdd){
+
+        }
+
+        return false;
+    }
+
+    public int getID(){
+        return ID;
+    }
+
+    private void setID(int projectID){
+        this.ID = projectID;
+    }
 
     public String getTitle(){
-        return timelineTitleName;
+        return this.titleName;
     }
 
     private void setTitle(String timelineTitle){
-        this.timelineTitleName = timelineTitle;
+        this.titleName = timelineTitle;
+        projectTitle.setText(timelineTitle);
     }
 
     public String getDescription (){
-        return timelineDescription;
+        return this.description;
     }
 
     private void setDescription(String timelineDescription){
-        this.timelineDescription = timelineDescription;
+        this.description = timelineDescription;
     }
 
     public String getDateCreated(){
-        return timelineTimeCreated;
+        return this.dateCreated;
     }
 
     private void setDateCreated(String timelineCreatedDate){
-        this.timelineTimeCreated = timelineCreatedDate;
+        this.dateCreated = timelineCreatedDate;
     }
 
     public String getDateFinished(){
-        return timelineTimeFinished;
+        return dateFinished;
     }
 
     private void setDateFinished(String timelineFinishedDate){
-        this.timelineTimeFinished = timelineFinishedDate;
+        this.dateFinished = timelineFinishedDate;
     }
 
     public boolean isVisible(){
-        return timelineVisibility;
+        return this.visibility;
     }
 
-    public void setTimelineVisibility(boolean visibility){
-        this.timelineVisibility = visibility;
+    public void setVisibility(boolean setVisibility){
+        this.visibility = setVisibility;
     }
 
-    public int getTimelineLikes(){
-        return this.timelineLikes;
+    public int getLikes(){
+        return this.likes;
     }
 
-    public void setTimelineLikes(int likes){
-        this.timelineLikes = likes;
+    public void setLikes(int setLikes){
+        this.likes = setLikes;
     }
 
-    public String getColour(){
-        return timelineColour;
+    public String getTimelineColour(){
+        return colour;
     }
 
-    public void setColour(String colour){
-        this.timelineColour = colour;
+    public void setColour(String setColour){
+        this.colour = setColour;
+        TopBar.setStyle("-fx-background-color: #9FA1AC;");
     }
 
-    public void addCard(cardEntry cardAdd){
+    public void addTimelineCard(cardEntry cardAdd){
         listOfCards.add(cardAdd);
     }
+
 
     @FXML
     private void onReturnClick(ActionEvent actionEvent) {
