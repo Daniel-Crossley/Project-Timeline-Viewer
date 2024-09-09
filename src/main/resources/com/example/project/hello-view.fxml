@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
-<VBox alignment="CENTER" spacing="20" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.project.HelloController">
-  <HBox alignment="CENTER" spacing="10" fx:id="topMenu">
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
-    <Label text="Username:"/>
-    <TextField></TextField>
-    <Label text="Password:"/>
-    <TextField></TextField>
-
-  </HBox>
+<VBox alignment="CENTER" prefHeight="347.0" prefWidth="616.0" spacing="20" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="com.example.project.controller.HelloController">
+  <HBox fx:id="topMenu" alignment="CENTER" spacing="10" />
   <HBox alignment="CENTER">
-    <Button text="Login"/>
-    <Button text="Register"/>
-    <Button text="Guest Temp process" fx:id="GuestLogin" onAction="#onGuestLoginClick"/>
+      <Pane prefHeight="191.0" prefWidth="522.0" style="-fx-background-color: C8915E; -fx-opacity: 80; -fx-background-radius: 30;" stylesheets="@stylesheet.css">
+         <children>
+             <Button fx:id="loginButton" layoutX="233.0" layoutY="96.0" text="Login" onAction="#loginProcess" />
+             <Button layoutX="158.0" layoutY="96.0" text="Register" />
+          <Button fx:id="GuestLogin" layoutX="290.0" layoutY="96.0" onAction="#onGuestLoginClick" text="Guest Temp process" />
+      
+          <Label layoutX="51.0" layoutY="63.0" text="Username:" />
+          <Label layoutX="264.0" layoutY="63.0" text="Password:" />
+          <TextField fx:id="userNameTextField" layoutX="107.0" layoutY="59.0" />
+            <PasswordField fx:id="passworPasswordField" layoutX="317.0" layoutY="59.0" />
+         </children>
+      </Pane>
   </HBox>
   <HBox>
 
