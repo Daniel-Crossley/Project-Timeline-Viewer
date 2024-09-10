@@ -16,7 +16,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.util.HashMap;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,6 +30,7 @@ public class TimelineView {
     public Button buttonExport;
     public Label cardStatus;
     public HBox cardHolder;
+
     @FXML
     private Label projectTitle;
     private int ID = 0;
@@ -65,6 +65,11 @@ public class TimelineView {
         setDateFinished(dateCompleted);
         setColour(colour);
         setLikes(likes);
+
+        // Replace below with:
+        // getCards(id)
+
+        // Need to sort cards by date
         if (generateCardList(cardsToAdd)){
             cardStatus.setText(description);
 
@@ -102,10 +107,6 @@ public class TimelineView {
     /**
      * Generates cards to the timeline
      * @return returns true if the cards were succesfully added, else return false
-     */
-    /**
-     * Generates cards to the timeline
-     * @return returns true if the cards were successfully added, else return false
      */
     private boolean addCardsToTimeline(){
         try {
@@ -157,78 +158,148 @@ public class TimelineView {
         }
     }
 
-
+    /**
+     * Retrieves the project(timeline) ID
+     * @return Returns the project ID as an int
+     */
     public int getID(){
         return ID;
     }
 
+    /**
+     * Sets the project(timeline) ID
+     * @param projectID The ID of the project(timeline)
+     */
     private void setID(int projectID){
         this.ID = projectID;
     }
 
+    /**
+     * Retrieves the project(timeline) title
+     * @return Returns the project(timeline) title as a String
+     */
     public String getTitle(){
         return this.titleName;
     }
 
+    /**
+     * Sets the project(timeline) title
+     * @param timelineTitle String of the project title
+     */
     private void setTitle(String timelineTitle){
         this.titleName = timelineTitle;
         projectTitle.setText(timelineTitle);
     }
 
+    /**
+     * Retrieves the description of the project(timeline)
+     * @return Returns the project(timeline) description as a String
+     */
     public String getDescription (){
         return this.description;
     }
 
+    /**
+     * Sets the project(timeline) description
+     * @param timelineDescription The project(timeline) description
+     */
     private void setDescription(String timelineDescription){
         this.description = timelineDescription;
     }
 
+    /**
+     * Retrieves the project(timeline) date of creation
+     * @return Returns the project(timeline) date of creation as a string
+     */
     public String getDateCreated(){
         return this.dateCreated;
     }
 
+    /**
+     * Sets the project(timeline) date of creation
+     * @param timelineCreatedDate Date of the project(timeline) commencement as a string
+     */
     private void setDateCreated(String timelineCreatedDate){
         this.dateCreated = timelineCreatedDate;
     }
 
+    /**
+     * Retrieves the project(timeline) date of completion
+     * @return Returns the project(timeline) date of completion as a string
+     */
     public String getDateFinished(){
         return dateFinished;
     }
 
+    /**
+     * Sets the project(timeline) date of completion
+     * @param timelineFinishedDate Date of the project(timeline) completion as a string
+     */
     private void setDateFinished(String timelineFinishedDate){
         this.dateFinished = timelineFinishedDate;
     }
 
+    /**
+     * Retrieves the project visibility
+     * @return returns the project visibility as a boolean value
+     */
     public boolean isVisible(){
         return this.visibility;
     }
 
+    /**
+     * Sets the visibility of the project
+     * @param setVisibility Sets the visibility of the project
+     */
     public void setVisibility(boolean setVisibility){
         this.visibility = setVisibility;
     }
 
+    /**
+     * Retrieves the project(timeline) likes
+     * @return Returns the project(timeline) likes as an int
+     */
     public int getLikes(){
         return this.likes;
     }
 
+    /**
+     * Set the project(timeline) likes
+     * @param setLikes Set the number of likes the project has
+     */
     public void setLikes(int setLikes){
         this.likes = setLikes;
     }
 
+    /**
+     * Retrieves the project(timeline) colour
+     * @return Returns the project(timeline) colour as a string (hexcode)
+     */
     public String getTimelineColour(){
         return colour;
     }
 
+    /**
+     * Set the colour of the project
+     * @param setColour the colour of the project as a hexcode
+     */
     public void setColour(String setColour){
         this.colour = setColour;
         TopBar.setStyle("-fx-background-color: #9FA1AC;");
     }
 
+    /**
+     * Add card to list of cards
+     * @param cardAdd Card to add to list
+     */
     public void addCard(cardEntry cardAdd){
         listOfCards.add(cardAdd);
     }
 
-
+    /**
+     * On click return to the dashboard
+     * @param actionEvent Click Action
+     */
     @FXML
     private void onReturnClick(ActionEvent actionEvent) {
         try {
@@ -245,7 +316,10 @@ public class TimelineView {
         }
     }
 
-
+    /**
+     * On click opens up edit page for project(timeline)
+     * @param actionEvent Click Action
+     */
     @FXML
     private void onEditClick(ActionEvent actionEvent) {
         try {
