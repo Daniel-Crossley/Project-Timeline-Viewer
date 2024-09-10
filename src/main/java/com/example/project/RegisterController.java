@@ -15,6 +15,9 @@ public class RegisterController {
     private IUserDAO userDAO;
 
     @FXML
+    private Label registerErrorText;
+
+    @FXML
     private TextField usernameField;
     @FXML
     private TextField emailField;
@@ -26,6 +29,7 @@ public class RegisterController {
     @FXML
     private Button onAdd;
 
+
     @FXML
     private void onAdd() {
         // Default values for a new contact
@@ -33,6 +37,17 @@ public class RegisterController {
         String EMAIL = emailField.getText();
         String PASSWORD = passwordField.getText();
         String CONFIRM_PASSWORD = confirmPasswordField.getText();
+
+        if (USERNAME.isEmpty() || EMAIL.isEmpty() || PASSWORD.isEmpty() || CONFIRM_PASSWORD.isEmpty()) {
+            registerErrorText.setText("Please fill in all fields");
+            return;
+        }
+
+        if (!PASSWORD.equals(CONFIRM_PASSWORD)) {;
+            registerErrorText.setText("Passwords do not match");
+            return;
+        }
+
 
 
         User newUser = new User(USERNAME, EMAIL, PASSWORD);
@@ -44,6 +59,11 @@ public class RegisterController {
             System.out.println(contact.getUser());
         }
     }
+
+    //@FXML
+    //protected void onHelloButtonClick() {
+        //registerErrorText.setText("");
+    //}
 
     public RegisterController() {
         userDAO = new MockUserDAO();

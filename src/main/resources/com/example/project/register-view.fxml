@@ -36,5 +36,7 @@
 
         <!-- Submit Button -->
         <Button text="Register" GridPane.columnIndex="1" GridPane.rowIndex="4" onAction="#onAdd"/>
+
+        <Label fx:id="registerErrorText" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
     </GridPane>
 </VBox>
