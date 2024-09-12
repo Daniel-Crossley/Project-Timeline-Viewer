@@ -2,7 +2,6 @@ module com.example.project {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.desktop;
-    requires org.junit.jupiter.api;
 
 
     opens com.example.project to javafx.fxml;
