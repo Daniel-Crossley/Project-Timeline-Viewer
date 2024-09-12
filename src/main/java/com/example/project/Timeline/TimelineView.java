@@ -57,7 +57,7 @@ public class TimelineView {
      * @param likes the number of likes the project has
      * @param cardsToAdd list of HashMap to add cards
      */
-    public TimelineView(int id, String title, String description, String dateCreated, String dateCompleted, String colour, int likes, List<cardEntry> cardsToAdd){
+    public TimelineView(int id, String title, String description, String dateCreated, String dateCompleted, String colour, int likes, List<HashMap<String, String>> cardsToAdd){
         setID(id);
         setTitle(title);
         setDescription(description);
@@ -87,26 +87,21 @@ public class TimelineView {
      * @param cardsToAdd list of hashmap of cards to be added
      * @return Returns true if the cards were added successfully, else returns false
      */
-    private boolean generateCardList(List<cardEntry> cardsToAdd){
+    private boolean generateCardList(List<HashMap<String, String>> cardsToAdd){
         if (cardsToAdd == null || cardsToAdd.isEmpty()) {
             return false; // Indicate failure or nothing to process
         }
 
-        try{
-            for (cardEntry importCard : cardsToAdd){
-                int addID = importCard.getID();
-                String addTitle = importCard.getTitle();
-                String addDescription = importCard.getDescription();
-                String addDateCreated = importCard.getDateCreated();
-                String addDateFinished = importCard.getDateFinished();
-                cardEntry cardToImport = new cardEntry(addID, addTitle, addDescription, addDateCreated, addDateFinished);
-                addCard(cardToImport);
-            }
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+        for (HashMap<String,String> importCard : cardsToAdd){
+            int addID = parseInt(importCard.get("ID"));
+            String addTitle = importCard.get("title");
+            String addDescription = importCard.get("description");
+            String addDateCreated = importCard.get("dateCreated");
+            String addDateFinished = importCard.get("dateFinished");
+            cardEntry cardToImport = new cardEntry(addID, addTitle, addDescription, addDateCreated, addDateFinished);
+            addCard(cardToImport);
         }
+        return false;
     }
 
     /**
