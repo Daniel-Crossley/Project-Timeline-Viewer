@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class ApplicationStart extends Application {
     public static final String TITLE = "Model Hut";
     public static final int WIDTH = 800;
     public static final int HEIGHT = 400;
@@ -15,7 +15,7 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(),WIDTH,HEIGHT);
         scene.getStylesheets().add(getClass().getResource("stylesheet.css").toExternalForm());
         stage.setTitle(TITLE);

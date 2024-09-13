@@ -1,22 +1,24 @@
-package com.example.project.Cards;
+package com.example.project.model;
 
-public class cardEntry {
-    private int ID;
+public class Card {
+    private int id;
     private String title;
     private String description;
     private String dateCreated;
     private String dateFinished;
+    // Uncomment when comment class is created
+    //private List<Comment> comments = new ArrayList<>();
 
-    public cardEntry(int setID, String setTitle, String setDescription, String setDateCreated, String setDateFinished){
-        this.ID = setID;
+    public Card(int setID, String setTitle, String setDescription, String setDateCreated, String setDateFinished){
+        this.id = setID;
         this.title = setTitle;
         this.description = setDescription;
         this.dateCreated = setDateCreated;
         this.dateFinished = setDateFinished;
     }
 
-    public int getID(){
-        return this.ID;
+    public int getId(){
+        return this.id;
     }
 
     public String getTitle(){

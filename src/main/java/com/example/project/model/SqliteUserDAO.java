@@ -9,12 +9,12 @@ import java.sql.*;
 public class SqliteUserDAO {
     private Connection connection;
 
-            public SqliteUserDAO(){
-                connection = SqliteConnection.getInstance();
-                createTable();
-            }
+    public SqliteUserDAO(){
+        connection = SqliteConnection.getInstance();
+        createTable();
+    }
 
-            private void createTable(){
+    private void createTable(){
         try {
             Statement statement = connection.createStatement();
             String query = "CREATE TABLE IF NOT EXISTS UserAccounts ("
@@ -26,7 +26,7 @@ public class SqliteUserDAO {
         } catch (Exception e){
             e.printStackTrace();
         }
-            }
+    }
 
 
 

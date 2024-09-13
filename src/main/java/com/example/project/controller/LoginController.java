@@ -1,8 +1,6 @@
 package com.example.project.controller;
 
-import com.example.project.HelloApplication;
-import com.example.project.model.Login;
-import com.example.project.model.UserDAO;
+import com.example.project.ApplicationStart;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,17 +8,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import com.example.project.model.ISqliteUserDAO;
-import com.example.project.model.Login;
 
 import java.io.IOException;
-import java.util.List;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class HelloController {
+public class LoginController {
     @FXML
     private TextField userNameTextField;
     @FXML
@@ -38,9 +32,9 @@ public class HelloController {
     @FXML
     protected void onGuestLoginClick() throws IOException {
         Stage stage = (Stage) GuestLogin.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Owner-Dashboard.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
-        String stylesheet = HelloApplication.class.getResource("stylesheet.css").toExternalForm();
+        FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("Owner-Dashboard.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
+        String stylesheet = ApplicationStart.class.getResource("stylesheet.css").toExternalForm();
         scene.getStylesheets().add(stylesheet);
         stage.setScene(scene);
     }
@@ -90,9 +84,9 @@ public class HelloController {
         //if to login currently in a test mode and not connected to the DB
         if ("test".equals(username) && hashing(password).equals(hashing(password))) {
             Stage stage = (Stage) loginButton.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Owner-Dashboard.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
-            String stylesheet = HelloApplication.class.getResource("stylesheet.css").toExternalForm();
+            FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("Owner-Dashboard.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
+            String stylesheet = ApplicationStart.class.getResource("stylesheet.css").toExternalForm();
             scene.getStylesheets().add(stylesheet);
             stage.setScene(scene);
         }else {

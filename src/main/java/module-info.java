@@ -10,6 +10,4 @@ module com.example.project {
     exports com.example.project;
     exports com.example.project.controller;
     opens com.example.project.controller to javafx.fxml;
-    exports com.example.project.Timeline;
-    opens com.example.project.Timeline to javafx.fxml;
 }
