@@ -20,7 +20,7 @@
                <DropShadow />
             </effect>
          </Button>
-         <Button layoutX="79.0" layoutY="12.0" mnemonicParsing="false" style="-fx-background-color: A1662F; -fx-background-radius: 50;" text="Dashboard">
+         <Button layoutX="79.0" layoutY="12.0" mnemonicParsing="false" style="-fx-background-color: A1662F; -fx-background-radius: 50;" text="Dashboard" >
             <effect>
                <DropShadow />
             </effect>

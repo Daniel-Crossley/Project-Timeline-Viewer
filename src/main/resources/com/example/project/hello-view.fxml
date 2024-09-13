@@ -8,12 +8,12 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="347.0" prefWidth="616.0" spacing="20" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="com.example.project.controller.HelloController">
+<VBox alignment="CENTER" prefHeight="347.0" prefWidth="616.0" spacing="20" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.controller.HelloController">
   <HBox fx:id="topMenu" alignment="CENTER" spacing="10" />
   <HBox alignment="CENTER">
       <Pane prefHeight="191.0" prefWidth="522.0" style="-fx-background-color: C8915E; -fx-opacity: 80; -fx-background-radius: 30;" stylesheets="@stylesheet.css">
          <children>
-             <Button fx:id="loginButton" layoutX="233.0" layoutY="96.0" text="Login" onAction="#loginProcess" />
+             <Button fx:id="loginButton" layoutX="233.0" layoutY="96.0" onAction="#loginProcess" text="Login" />
              <Button layoutX="158.0" layoutY="96.0" text="Register" />
           <Button fx:id="GuestLogin" layoutX="290.0" layoutY="96.0" onAction="#onGuestLoginClick" text="Guest Temp process" />
       
@@ -21,6 +21,7 @@
           <Label layoutX="264.0" layoutY="63.0" text="Password:" />
           <TextField fx:id="userNameTextField" layoutX="107.0" layoutY="59.0" />
             <PasswordField fx:id="passworPasswordField" layoutX="317.0" layoutY="59.0" />
+            <Label fx:id="InvalidPass" visible="false" layoutX="198.0" layoutY="133.0" text="Bad User or Password" textFill="#721414" />
          </children>
       </Pane>
   </HBox>

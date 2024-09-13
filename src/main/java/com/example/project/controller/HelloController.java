@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -28,8 +29,8 @@ public class HelloController {
     private Button loginButton;
     @FXML
     private Button GuestLogin;
-
-    ;
+    @FXML
+    private Label InvalidPass;
 
 
 
@@ -96,6 +97,7 @@ public class HelloController {
             stage.setScene(scene);
         }else {
             System.out.println("Invalid username");
+            InvalidPass.setVisible(true);
         }
 
     }
