@@ -11,7 +11,6 @@ import static java.lang.Integer.parseInt;
 
 public class Project {
     private int id = 0;
-    private Label projectTitle;
     private List<Card> listOfCards = new ArrayList<>();
     private String titleName = "Project Default Title";
     private String description = "Project Default Description";
@@ -41,33 +40,8 @@ public class Project {
         setLikes(likes);
 
         // Replace below with:
-        // getCards(id)
+        //getCards(id);
     }
-
-    // I dont think we need this as DOA or Controller will handle this
-    ///**
-    // * Generates cards to be added to the timeline
-    // * @param cardsToAdd list of hashmap of cards to be added
-    // * @return Returns true if the cards were added successfully, else returns false
-    // */
-    //private boolean generateCardList(List<HashMap<String, String>> cardsToAdd){
-    //    if (cardsToAdd == null || cardsToAdd.isEmpty()) {
-    //        return false; // Indicate failure or nothing to process
-    //    }
-
-    //    for (HashMap<String,String> importCard : cardsToAdd){
-    //        int addID = parseInt(importCard.get("ID"));
-    //        String addTitle = importCard.get("title");
-    //        String addDescription = importCard.get("description");
-    //        String addDateCreated = importCard.get("dateCreated");
-    //        String addDateFinished = importCard.get("dateFinished");
-    //        Card cardToImport = new Card(addID, addTitle, addDescription, addDateCreated, addDateFinished);
-    //        addCard(cardToImport);
-    //    }
-    //    return false;
-    //}
-
-
 
     /**
      * Retrieves the project(timeline) ID
