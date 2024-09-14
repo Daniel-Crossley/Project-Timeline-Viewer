@@ -7,7 +7,7 @@ public class TestLogin {
     @Test
     void testUsernameAndPassword() {
         // Create a new Login object
-        User login = new User("testuser", "testpassword", "email");
+        User login = new User("testuser", "testpassword", "testemail");
 
         // Assert that the username and password are correctly set
         assertEquals("testuser", login.getUsername(), "Username should be 'testuser'");
@@ -25,7 +25,7 @@ public class TestLogin {
     @Test
     void testEmptyLogin() {
         // Test an empty Login object
-        User emptyLogin = new User("", "","");
+        User emptyLogin = new User("", "", "");
 
         // Assert that both username and password are empty strings
         assertEquals("", emptyLogin.getUsername(), "Username should be an empty string");
