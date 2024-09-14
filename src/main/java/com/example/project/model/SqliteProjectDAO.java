@@ -18,7 +18,12 @@ public class SqliteProjectDAO {
                     + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
                     + "title VARCHAR,"
                     + "description VARCHAR,"
-                    + "dateCreated VARCHAR"
+                    + "dateCreated VARCHAR,"
+                    + "dateFinished VARCHAR,"
+                    + "visibility INTEGER,"
+                    + "likes INTEGER,"
+                    + "colour VARCHAR,"
+                    + "tags VARCHAR"
                     + ")";
             statement.execute(query);
         } catch (Exception e){
