@@ -27,8 +27,10 @@ public class LoginController {
     private Label InvalidPass;
 
 
-
-    //login for guest
+    /**
+     * Login without username and password using guest
+     * @throws IOException Issues for login
+     */
     @FXML
     protected void onGuestLoginClick() throws IOException {
         Stage stage = (Stage) GuestLogin.getScene().getWindow();
@@ -40,7 +42,12 @@ public class LoginController {
         scene.getStylesheets().add(stylesheet);
         stage.setScene(scene);
     }
-    //password hashing
+
+    /**
+     * Hashes password using Sha-256
+     * @param password password to hash
+     * @return encrypted password
+     */
     private String hashing(String password){
     try {
         // 256 algo
@@ -63,7 +70,10 @@ public class LoginController {
 
     }
 
-    //login for window
+    /**
+     * login for window
+     * @throws IOException Issues with login process
+     */
     @FXML
     protected void loginProcess() throws IOException {
         String username = userNameTextField.getText();
