@@ -44,6 +44,10 @@ public class Project {
         // getCards(id)
     }
 
+    public void SetListofCards(List<Card> cardSet){
+        this.listOfCards = cardSet;
+    }
+
     // I dont think we need this as DOA or Controller will handle this
     ///**
     // * Generates cards to be added to the timeline
