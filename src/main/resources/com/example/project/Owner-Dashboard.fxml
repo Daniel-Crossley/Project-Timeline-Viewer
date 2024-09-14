@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="TOP_CENTER" prefHeight="411.0" prefWidth="596.0" spacing="20" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="com.example.project.controller.DashboardController">
+<VBox alignment="TOP_CENTER" prefHeight="411.0" prefWidth="596.0" spacing="20" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22">
    <Pane prefHeight="48.0" prefWidth="596.0" style="-fx-background-color: A1662F;">
       <children>
          <Button layoutX="534.0" layoutY="9.0" mnemonicParsing="false" style="-fx-background-color: A1662F; -fx-background-radius: 50;" stylesheets="@stylesheet.css" text="Logout">

@@ -33,6 +33,8 @@ public class LoginController {
     protected void onGuestLoginClick() throws IOException {
         Stage stage = (Stage) GuestLogin.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("Owner-Dashboard.fxml"));
+        DashboardController dashboardController = new DashboardController("", "", "", true); // Guest login, so set to `true`
+        fxmlLoader.setController(dashboardController);
         Scene scene = new Scene(fxmlLoader.load(), ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
         String stylesheet = ApplicationStart.class.getResource("stylesheet.css").toExternalForm();
         scene.getStylesheets().add(stylesheet);
