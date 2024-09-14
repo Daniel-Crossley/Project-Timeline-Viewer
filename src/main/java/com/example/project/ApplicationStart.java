@@ -15,7 +15,8 @@ public class ApplicationStart extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("create-new-project.fxml"));
+//        FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(),WIDTH,HEIGHT);
         scene.getStylesheets().add(getClass().getResource("stylesheet.css").toExternalForm());
         stage.setTitle(TITLE);
