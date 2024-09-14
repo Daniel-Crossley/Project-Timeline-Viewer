@@ -10,7 +10,7 @@ import java.util.List;
 import static java.lang.Integer.parseInt;
 
 public class Project {
-    private int id = 0;
+    private int id;
     private Label projectTitle;
     private List<Card> listOfCards = new ArrayList<>();
     private String titleName = "Project Default Title";
