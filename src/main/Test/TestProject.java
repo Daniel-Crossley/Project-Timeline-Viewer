@@ -49,8 +49,9 @@ public class TestProject {
     }
     @Test
     void testCardImportNone() {
+        int numberTested = 0;
         //Setup List of Cards
-        List<Card> testCardList = randomCardListSetup(0);
+        List<Card> testCardList = randomCardListSetup(numberTested);
 
         //Setup Timeline Object
         Project testProject = projectSetup();
@@ -62,8 +63,9 @@ public class TestProject {
 
     @Test
     void testCardImportOne() {
+        int numberTested = 1;
         //Setup List of Cards
-        List<Card> testCardList = randomCardListSetup(1);
+        List<Card> testCardList = randomCardListSetup(numberTested);
 
         //Setup Timeline Object
         Project testProject = projectSetup();
@@ -75,8 +77,9 @@ public class TestProject {
 
     @Test
     void testCardImportFive() {
+        int numberTested = 5;
         //Setup List of Cards
-        List<Card> testCardList = randomCardListSetup(5);
+        List<Card> testCardList = randomCardListSetup(numberTested);
 
         //Setup Timeline Object
         Project testProject = projectSetup();
@@ -86,6 +89,49 @@ public class TestProject {
         assertEquals(testProject.getListOfCards(),testCardList,"No cards added test");
     }
 
+    @Test
+    void testCardAddOne(){
+        int numberTested = 1;
+        //Setup List of Cards
+        List<Card> testCardList = randomCardListSetup(1);
+
+        //Setup Timeline Object
+        Project testProject = projectSetup();
+        testProject.SetListofCards(testCardList);
+
+        //New Card
+        List<Card> newCard = randomCardListSetup(numberTested);
+
+        for (Card card : newCard) {
+            testProject.addCard(card);
+            testCardList.add(card);
+        }
+
+        //Test
+        assertEquals(testProject.getListOfCards(),testCardList,"No cards added test");
+    }
+
+    @Test
+    void testCardAddFive(){
+        int numberTested = 5;
+        //Setup List of Cards
+        List<Card> testCardList = randomCardListSetup(1);
+
+        //Setup Timeline Object
+        Project testProject = projectSetup();
+        testProject.SetListofCards(testCardList);
+
+        //New Card
+        List<Card> newCard = randomCardListSetup(numberTested);
+
+        for (Card card : newCard) {
+            testProject.addCard(card);
+            testCardList.add(card);
+        }
+
+        //Test
+        assertEquals(testProject.getListOfCards(),testCardList,"No cards added test");
+    }
 
 
 }
