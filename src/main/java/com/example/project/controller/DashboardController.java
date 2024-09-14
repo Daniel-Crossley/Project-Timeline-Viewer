@@ -1,15 +1,15 @@
 package com.example.project.controller;
 
-import com.example.project.model.Dashboard;
+import com.example.project.model.User;
 import javafx.fxml.FXML;
 
 public class DashboardController {
-    Dashboard dashboardData;
+    User userInformation;
     boolean Guest = false;
 
     public DashboardController(String username, String password, String email, boolean Guest){
         if (!Guest){
-            dashboardData = new Dashboard(username, password, email);
+            userInformation = new User(username, password, email);
         }
     }
 }
