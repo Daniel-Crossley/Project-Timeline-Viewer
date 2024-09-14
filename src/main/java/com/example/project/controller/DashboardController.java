@@ -7,9 +7,7 @@ public class DashboardController {
     User userInformation;
     boolean Guest = false;
 
-    public DashboardController(String username, String password, String email, boolean Guest){
-        if (!Guest){
-            userInformation = new User(username, password, email);
-        }
+    public DashboardController(boolean Guest, User user){
+
     }
 }

@@ -1,6 +1,7 @@
 package com.example.project.controller;
 
 import com.example.project.ApplicationStart;
+import com.example.project.model.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,6 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
+import com.example.project.model.User.*;
 
 import java.io.IOException;
 import java.security.MessageDigest;
@@ -35,7 +38,11 @@ public class LoginController {
     protected void onGuestLoginClick() throws IOException {
         Stage stage = (Stage) GuestLogin.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("Owner-Dashboard.fxml"));
-        DashboardController dashboardController = new DashboardController("", "", "", true); // Guest login, so set to `true`
+
+        User guestUser = new User("","","");
+
+        DashboardController dashboardController = new DashboardController(true, guestUser);
+        // Guest login, so set to `true`
         fxmlLoader.setController(dashboardController);
         Scene scene = new Scene(fxmlLoader.load(), ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
         String stylesheet = ApplicationStart.class.getResource("stylesheet.css").toExternalForm();
