@@ -1,10 +1,14 @@
 package com.example.project.model;
 
-public class Login {
+import java.util.ArrayList;
+import java.util.List;
+
+public class User {
     private String username;
     private String password;
+    private List<Project> projects = new ArrayList<>();
 
-    public Login(String username,String password){
+    public User(String username, String password){
         this.username = username;
         this.password = password;
     }

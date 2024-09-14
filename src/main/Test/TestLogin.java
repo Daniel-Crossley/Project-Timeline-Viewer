@@ -1,6 +1,5 @@
 
-import com.example.project.model.Login;
-import org.junit.jupiter.api.BeforeEach;
+import com.example.project.model.User;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -8,7 +7,7 @@ public class TestLogin {
     @Test
     void testUsernameAndPassword() {
         // Create a new Login object
-        Login login = new Login("testuser", "testpassword");
+        User login = new User("testuser", "testpassword");
 
         // Assert that the username and password are correctly set
         assertEquals("testuser", login.getUsername(), "Username should be 'testuser'");
@@ -26,7 +25,7 @@ public class TestLogin {
     @Test
     void testEmptyLogin() {
         // Test an empty Login object
-        Login emptyLogin = new Login("", "");
+        User emptyLogin = new User("", "");
 
         // Assert that both username and password are empty strings
         assertEquals("", emptyLogin.getUsername(), "Username should be an empty string");
