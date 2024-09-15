@@ -20,6 +20,7 @@ public class Project {
     private boolean visibility = true;
     private int likes = 0;
     private String colour = "#9FA1AC";
+    private String tags;
 
     /**
      * Initiates project's timeline, set up
@@ -31,17 +32,16 @@ public class Project {
      * @param colour the colour of the top bar of the project
      * @param likes the number of likes the project has
      */
-    public Project(int id, String title, String description, String dateCreated, String dateCompleted, String colour, int likes){
-        setId(id);
-        setTitle(title);
-        setDescription(description);
-        setDateCreated(dateCreated);
-        setDateFinished(dateCompleted);
-        setColour(colour);
-        setLikes(likes);
-
-        // Replace below with:
-        // getCards(id)
+    public Project(int id, String title, String description, String dateCreated, String dateCompleted, boolean visibility, String colour, int likes, String tags){
+        this.id = id;
+        this.titleName = title;
+        this.description = description;
+        this.dateCreated = dateCreated;
+        this.dateFinished = dateCompleted;
+        this.visibility = visibility;
+        this.colour = colour;
+        this.likes = likes;
+        this.tags = tags;
     }
 
     public void SetListofCards(List<Card> cardSet){
@@ -85,7 +85,7 @@ public class Project {
      * Sets the project(timeline) ID
      * @param projectID The ID of the project(timeline)
      */
-    private void setId(int projectID){
+    public void setId(int projectID){
         this.id = projectID;
     }
 
@@ -210,4 +210,6 @@ public class Project {
     public List<Card> getListOfCards(){
         return listOfCards;
     }
+
+    public String getTags() {return tags;}
 }

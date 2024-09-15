@@ -39,7 +39,6 @@ public class TimeLineController {
 
     public void initialize(int id, String title, String description, String dateCreated, String dateCompleted, String colour, int likes) {
         // Initialize the model
-        project = new Project(id, title, description, dateCreated, dateCompleted, colour, likes);
 
         // Set initial UI state
         updateView();
