@@ -3,7 +3,6 @@ package com.example.project.controller;
 import com.example.project.ApplicationStart;
 import com.example.project.model.SqliteUserDAO;
 import com.example.project.model.User;
-import com.example.project.model.UserHolder;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -116,8 +115,8 @@ public class LoginController {
                 Scene scene = new Scene(fxmlLoader.load(), ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
                 String stylesheet = ApplicationStart.class.getResource("stylesheet.css").toExternalForm();
 
-                UserHolder holder = UserHolder.getInstance();
-                holder.setUser(user);
+                //UserHolder holder = UserHolder.getInstance();
+                //holder.setUser(user);
                 //System.out.println(user.getUsername());
                 scene.getStylesheets().add(stylesheet);
                 stage.setScene(scene);

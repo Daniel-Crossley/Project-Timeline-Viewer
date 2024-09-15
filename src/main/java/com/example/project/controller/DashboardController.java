@@ -1,7 +1,7 @@
 package com.example.project.controller;
 
 import com.example.project.model.User;
-import com.example.project.model.UserHolder;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -15,14 +15,8 @@ public class DashboardController {
     @FXML
     void recieveData(){
 
-        UserHolder holder = UserHolder.getInstance();
-        User u= holder.getUser();
-        if (u !=null){
-            //System.out.println(u.getUsername());
-            UserID.setText(u.getUsername());
-        }
-
-
+            //System.out.println(userInformation.getUsername());
+            UserID.setText(userInformation.getUsername());
     }
 
     @FXML
@@ -32,6 +26,7 @@ public class DashboardController {
     }
 
     public DashboardController(boolean Guest, User user){
-
+        this.Guest = Guest;
+        this.userInformation = user;
     }
 }
