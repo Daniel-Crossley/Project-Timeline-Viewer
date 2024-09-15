@@ -118,7 +118,7 @@ public class LoginController {
 
                 UserHolder holder = UserHolder.getInstance();
                 holder.setUser(user);
-                System.out.println(user.getUsername());
+                //System.out.println(user.getUsername());
                 scene.getStylesheets().add(stylesheet);
                 stage.setScene(scene);
 

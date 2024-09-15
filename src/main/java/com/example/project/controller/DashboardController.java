@@ -18,11 +18,11 @@ public class DashboardController {
         UserHolder holder = UserHolder.getInstance();
         User u= holder.getUser();
         if (u !=null){
-            System.out.println(u.getUsername());
+            //System.out.println(u.getUsername());
             UserID.setText(u.getUsername());
         }
 
-       // UserID.setText(u.getUsername());
+
     }
 
     @FXML
