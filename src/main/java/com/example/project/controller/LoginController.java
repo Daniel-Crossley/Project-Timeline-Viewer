@@ -1,7 +1,9 @@
 package com.example.project.controller;
 
 import com.example.project.ApplicationStart;
+import com.example.project.model.SqliteUserDAO;
 import com.example.project.model.User;
+import com.example.project.model.UserHolder;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,11 +13,14 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+
 import com.example.project.model.User.*;
 
 import java.io.IOException;
+import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ResourceBundle;
 
 public class LoginController {
     @FXML
@@ -29,6 +34,12 @@ public class LoginController {
     @FXML
     private Label InvalidPass;
 
+    //SQL user instance
+    private SqliteUserDAO userDAO;
+
+    public void initialize() {
+        userDAO = new SqliteUserDAO(); // Initialize the DAO here
+    }
 
     /**
      * Login without username and password using guest
@@ -76,42 +87,54 @@ public class LoginController {
     }
 
     }
-
     /**
      * login for window
      * @throws IOException Issues with login process
      */
+
+    /**
+     * This method will be automatically called after the FXML elements are initialized.
+     * Initializes the SqliteUserDAO object.
+     */
+
+
     @FXML
     protected void loginProcess() throws IOException {
         String username = userNameTextField.getText();
         String password = passworPasswordField.getText();
         String HassedPass = hashing(password);
-    /*
-    //User check for password
-    if (userDAOS.verifyUser(username,password)){
-        Stage stage = (Stage) loginButton.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Owner-Dashboard.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
-        String stylesheet = HelloApplication.class.getResource("stylesheet.css").toExternalForm();
-        scene.getStylesheets().add(stylesheet);
-        stage.setScene(scene);
-    }else {
-        System.out.println("Invalid username");
-    }
-    */
-        System.out.println(HassedPass);
-        //if to login currently in a test mode and not connected to the DB
-        if ("test".equals(username) && hashing(password).equals(hashing(password))) {
-            Stage stage = (Stage) loginButton.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("Owner-Dashboard.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
-            String stylesheet = ApplicationStart.class.getResource("stylesheet.css").toExternalForm();
-            scene.getStylesheets().add(stylesheet);
-            stage.setScene(scene);
-        }else {
+
+        User user = userDAO.getUser(username);
+        if (user != null){
+            if (user.getPassword().equals(HassedPass)){
+                Stage stage = (Stage) loginButton.getScene().getWindow();
+                FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("Owner-Dashboard.fxml"));
+
+                DashboardController dashboardController = new DashboardController(false, user);
+                fxmlLoader.setController(dashboardController);
+
+                Scene scene = new Scene(fxmlLoader.load(), ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
+                String stylesheet = ApplicationStart.class.getResource("stylesheet.css").toExternalForm();
+
+                UserHolder holder = UserHolder.getInstance();
+                holder.setUser(user);
+                System.out.println(user.getUsername());
+                scene.getStylesheets().add(stylesheet);
+                stage.setScene(scene);
+
+                dashboardController.recieveData();
+
+            }else {
+                System.out.println("Invalid username");
+                InvalidPass.setVisible(true);
+            }
+        }
+        else {
             System.out.println("Invalid username");
             InvalidPass.setVisible(true);
         }
+
+
 
     }
 

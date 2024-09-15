@@ -26,4 +26,5 @@ public class ApplicationStart extends Application {
     public static void main(String[] args) {
         launch();
     }
+
 }

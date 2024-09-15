@@ -35,6 +35,7 @@ public class SqliteUserDAO {
      */
     public User getUser(String username){
         try {
+
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM UserAccounts WHERE username = ?");
             statement.setString(1, username);
             ResultSet resultSet = statement.executeQuery();
