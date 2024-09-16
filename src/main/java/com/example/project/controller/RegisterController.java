@@ -37,6 +37,17 @@ public class RegisterController {
     private Button registerButton;
 
     @FXML
+    private Button backButton;
+
+    @FXML
+    protected void onBack() throws IOException {
+        Stage stage = (Stage) backButton.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("hello-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
+        stage.setScene(scene);
+    }
+
+    @FXML
     private String hashing(String password) {
         try {
             // 256 algo
