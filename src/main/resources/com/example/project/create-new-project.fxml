@@ -14,7 +14,7 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.controller.CreateNewProjectController" stylesheets="@styles.css">
     <VBox spacing="15" prefWidth="800" prefHeight="450" alignment="TOP_CENTER">
         <HBox spacing="10" alignment="CENTER_LEFT" styleClass="label-title">
-            <Button text="←" onAction="#goBack" styleClass="button-back"/>
+            <Button fx:id="goBack" text="←" onAction="#goBack" styleClass="button-back"/>
             <Label text="Make New Project Timeline"/>
         </HBox>
         <HBox spacing="20" alignment="CENTER" styleClass="container">

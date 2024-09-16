@@ -181,17 +181,20 @@ public class DashboardController implements Initializable {
         projectContainer.getChildren().addAll(cardTitle);
 
         projectContainer.setOnMouseClicked(event -> {
-            System.out.println("New Project Button clicked");
-            Stage stage = (Stage) projectContainer.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("create-new-project.fxml"));
-            Parent root = null;
-            try {
-                root = fxmlLoader.load();
-                CreateNewProjectController newProjectController = fxmlLoader.getController();
-                Scene scene = new Scene(root, ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
-                stage.setScene(scene);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            if (!guest) {
+                System.out.println("New Project Button clicked");
+                Stage stage = (Stage) projectContainer.getScene().getWindow();
+                FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("create-new-project.fxml"));
+                Parent root = null;
+                try {
+                    root = fxmlLoader.load();
+                    CreateNewProjectController newProjectController = fxmlLoader.getController();
+                    newProjectController.setUserInformation(userInformation);
+                    Scene scene = new Scene(root, ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
+                    stage.setScene(scene);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
         parentContainer.getChildren().addAll(projectContainer);
