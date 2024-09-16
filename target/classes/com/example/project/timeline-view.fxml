@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.layout.HBox?>
+<VBox alignment="TOP_LEFT" prefHeight="237.0" prefWidth="330.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+    <!-- Top Row Buttons -->
+    <FlowPane prefHeight="13.0" prefWidth="330.0" fx:id="TopBar">
+        <Button onAction="#onReturnClick" text="Return to Dashboard"/>
+        <Label fx:id="projectTitle" text="Project Title"/>
+        <Button onAction="#onEditClick" text="Edit Project"/>
+    </FlowPane>
+
+
+    <ScrollPane fx:id="cardSpace" prefHeight="181.0" prefWidth="330.0">
+        <Label fx:id="cardStatus" text=" " />
+        <HBox fx:id="cardHolder" spacing="10.0"/>
+    <ScrollPane/>
+
+    <ButtonBar prefHeight="25.0" prefWidth="330.0">
+        <buttons>
+            <Button fx:id="buttonAddCard" mnemonicParsing="false" text="Add Card" />
+            <Button fx:id="buttonExport" mnemonicParsing="false" text="Export" />
+        </buttons>
+    </ButtonBar>
+    <!-- GridPane for holding card entries -->
+    <GridPane >
+        <!-- Cards will be added via java code -->
+    </GridPane>
+</VBox>
