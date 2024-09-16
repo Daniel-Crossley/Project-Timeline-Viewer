@@ -1,19 +1,25 @@
 package com.example.project.controller;
 
-import com.example.project.model.IUserDAO;
+import com.example.project.ApplicationStart;
+import com.example.project.model.SqliteUserDAO;
 import com.example.project.model.MockUserDAO;
 import com.example.project.model.User;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
+
 public class RegisterController {
     @FXML
     private ListView<User> contactsListView;
-    private IUserDAO userDAO;
+    private SqliteUserDAO userDAO;
 
     @FXML
     private Label registerErrorText;
@@ -28,7 +34,7 @@ public class RegisterController {
     private PasswordField confirmPasswordField;
 
     @FXML
-    private Button onAdd;
+    private Button registerButton;
 
     @FXML
     private String hashing(String password) {
@@ -54,7 +60,7 @@ public class RegisterController {
 
 
     @FXML
-    private void onAdd() {
+    private void onAdd() throws IOException {
         // Default values for a new contact
         String USERNAME = usernameField.getText();
         String EMAIL = emailField.getText();
@@ -72,23 +78,24 @@ public class RegisterController {
             return;
         }
 
-        System.out.println(userDAO.getUsername(USERNAME));
+        User search = userDAO.getUser(USERNAME);
 
-        if (userDAO.getUsername(USERNAME) != null) {
+        if (search != null) {
             registerErrorText.setText("User Already exists");
             return;
         }
 
-        if (userDAO.getEmail(EMAIL) != null) {
-            registerErrorText.setText("Email is already in use");
+        User newUser = new User(USERNAME, HASHED_PASSWORD, EMAIL);
+        // Add the new contact to the database
+        if (userDAO.addUser(newUser)) {
+            Stage stage = (Stage) registerButton.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("hello-view.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
+            stage.setScene(scene);
+        } else {
+            registerErrorText.setText("Email has already been registered");
             return;
         }
-
-
-
-        User newUser = new User(USERNAME, EMAIL, HASHED_PASSWORD);
-        // Add the new contact to the database
-        userDAO.addUser(newUser);
     }
 
     //@FXML
@@ -97,6 +104,6 @@ public class RegisterController {
     //}
 
     public RegisterController() {
-        userDAO = new MockUserDAO();
+        userDAO = new SqliteUserDAO();
     }
 }

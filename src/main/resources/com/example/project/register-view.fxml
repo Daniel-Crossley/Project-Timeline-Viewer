@@ -35,7 +35,7 @@
         <PasswordField fx:id="confirmPasswordField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
 
         <!-- Submit Button -->
-        <Button text="Register" GridPane.columnIndex="1" GridPane.rowIndex="4" onAction="#onAdd"/>
+        <Button text="Register" fx:id="registerButton" GridPane.columnIndex="1" GridPane.rowIndex="4" onAction="#onAdd"/>
 
         <Label fx:id="registerErrorText" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
     </GridPane>

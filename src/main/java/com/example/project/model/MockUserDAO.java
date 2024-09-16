@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class MockUserDAO implements IUserDAO {
+public class MockUserDAO {
     public static final ArrayList<User> users = new ArrayList<>();
 
     public MockUserDAO() {
@@ -14,12 +14,10 @@ public class MockUserDAO implements IUserDAO {
         addUser(new User("user3", "email3", "password3"));
     }
 
-    @Override
     public void addUser(User user) {
         users.add(user);
     }
 
-    @Override
     public String getUsername(String username) {
         for (User user : users) {
             if (Objects.equals(user.getUsername(), username)) {
@@ -29,7 +27,6 @@ public class MockUserDAO implements IUserDAO {
         return null;
     }
 
-    @Override
     public String getEmail(String email) {
         for (User user : users) {
             if (Objects.equals(user.getEmail(), email)) {
@@ -39,7 +36,6 @@ public class MockUserDAO implements IUserDAO {
         return null;
     }
 
-    @Override
     public List<User> getAllContacts() {
         return new ArrayList<>(users);
     }
