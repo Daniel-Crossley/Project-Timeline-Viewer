@@ -2,12 +2,14 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.layout.HBox?>
 <VBox alignment="TOP_CENTER" prefHeight="411.0" prefWidth="596.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.controller.DashboardController">
    <Pane fx:id="Menu" prefHeight="48.0" prefWidth="596.0" style="-fx-background-color: A1662F;">
       <children>
@@ -38,7 +40,7 @@
          </Label>
       </children>
    </Pane>
-   <Pane prefHeight="38.0" prefWidth="596.0" style="-fx-background-color: e5c08b;">
+   <Pane prefHeight="37.0" prefWidth="596.0" style="-fx-background-color: e5c08b;">
       <children>
          <Label layoutX="36.0" layoutY="9.0" text="In-Progress Projects">
             <font>
@@ -47,7 +49,11 @@
          </Label>
       </children>
    </Pane>
-   <Pane fx:id="Container_In_Progress" prefHeight="141.0" prefWidth="596.0" style="-fx-background-color: d6b88d;" />
+   <ScrollPane fx:id="Scrollpane_Progress" hbarPolicy="ALWAYS" prefHeight="137.0" prefWidth="596.0" vbarPolicy="NEVER">
+      <content>
+         <HBox fx:id="Container_In_Progress" prefHeight="123.0" prefWidth="596.0" style="-fx-background-color: d6b88d;" />
+      </content>
+   </ScrollPane>
    <Pane prefHeight="38.0" prefWidth="596.0" style="-fx-background-color: e5c08b;">
       <children>
          <Label layoutX="38.0" layoutY="9.0" text="Completed Projects">
@@ -57,6 +63,10 @@
          </Label>
       </children>
    </Pane>
-   <Pane fx:id="Container_Completed" prefHeight="145.0" prefWidth="596.0" style="-fx-background-color: d6b88d;" />
+   <ScrollPane fx:id="Scrollpane_Completed" hbarPolicy="ALWAYS" prefHeight="148.0" prefWidth="596.0" vbarPolicy="NEVER">
+      <content>
+         <HBox fx:id="Container_Completed" prefHeight="133.0" prefWidth="596.0" style="-fx-background-color: d6b88d;" />
+      </content>
+   </ScrollPane>
 
 </VBox>

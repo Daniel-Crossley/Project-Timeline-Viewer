@@ -11,6 +11,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -28,8 +30,11 @@ public class DashboardController implements Initializable {
     public Button Button_Logout;
     public Button Button_Search;
     public Button Button_Dashboard;
-    public Pane Container_In_Progress;
-    public Pane Container_Completed;
+    public HBox Container_In_Progress;
+    public HBox Container_Completed;
+    public ScrollPane Scrollpane_Completed;
+    public ScrollPane Scrollpane_Progress;
+
     @FXML
     private Label Label_Username;
 
@@ -41,6 +46,7 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         updateUserName();
+        addProjectsToDash();
 
     }
 
@@ -63,12 +69,14 @@ public class DashboardController implements Initializable {
     }
 
     private void addProjectsToDash(){
+        newCardContainer();
+
         for(Project projectToAdd: projectList){
             if (Objects.equals(projectToAdd.getDateFinished(), "none")){
-                generateContainer(projectToAdd, Container_In_Progress);
+                generateContainer(projectToAdd, Container_In_Progress, Scrollpane_Progress);
             }
             else{
-                generateContainer(projectToAdd, Container_Completed);
+                generateContainer(projectToAdd, Container_Completed, Scrollpane_Completed);
             }
         }
     }
@@ -77,7 +85,7 @@ public class DashboardController implements Initializable {
      * Generates the container of project information to add
      * @param projectToAdd project to generate container from
      */
-    private void generateContainer(Project projectToAdd, Pane parentContainer){
+    private void generateContainer(Project projectToAdd, HBox parentContainer, ScrollPane scrollPane){
         VBox projectContainer = new VBox();
         projectContainer.setSpacing(10);
         projectContainer.prefHeightProperty().bind(Container_In_Progress.heightProperty().multiply(0.95));
@@ -107,6 +115,33 @@ public class DashboardController implements Initializable {
             }
         });
         parentContainer.getChildren().addAll(projectContainer);
+        parentContainer.prefWidthProperty().bind(scrollPane.widthProperty());
+    }
+
+    private void newCardContainer(HBox parentContainer, ScrollPane scrollPane){
+        VBox projectContainer = new VBox();
+        projectContainer.setSpacing(10);
+        projectContainer.prefHeightProperty().bind(Container_In_Progress.heightProperty().multiply(0.95));
+        projectContainer.prefWidthProperty().bind(Container_In_Progress.widthProperty().multiply(0.3));
+        Label cardTitle = new Label("Create Project");
+
+
+        projectContainer.setOnMouseClicked(event -> {
+            System.out.println("New Project Button clicked");
+            Stage stage = (Stage) projectContainer.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("create-new-project.fxml"));
+            Parent root = null;
+            try {
+                root = fxmlLoader.load();
+                CreateNewProjectController newProjectController = fxmlLoader.getController();
+                Scene scene = new Scene(root, ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
+                stage.setScene(scene);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        parentContainer.getChildren().addAll(projectContainer);
+        parentContainer.prefWidthProperty().bind(scrollPane.widthProperty());
     }
 
     public void Logout(ActionEvent actionEvent) throws IOException {
