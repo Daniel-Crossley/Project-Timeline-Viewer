@@ -99,7 +99,20 @@ public class DashboardController implements Initializable {
      * Adds project containers to the different containers based on if they have a completion date set
      */
     private void addProjectsToDash(){
-        newCardContainer(Container_In_Progress, Scrollpane_Progress);
+        if (!guest){
+            newCardContainer(Container_In_Progress, Scrollpane_Progress);
+        }
+        else{
+            Scrollpane_Progress.widthProperty().addListener((obs, oldWidth, newWidth) -> {
+                int widthCalculation = (int) (newWidth.doubleValue() + projectWidth);
+                Container_In_Progress.setPrefWidth(widthCalculation);
+            });
+            Scrollpane_Completed.widthProperty().addListener((obs, oldWidth, newWidth) -> {
+                int widthCalculation = (int) (newWidth.doubleValue() + projectWidth);
+                Container_Completed.setPrefWidth(widthCalculation);
+            });
+        }
+
 
         for(Project projectToAdd: projectList){
             if (Objects.equals(projectToAdd.getDateFinished(), "none")){
