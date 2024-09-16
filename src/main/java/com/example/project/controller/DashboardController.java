@@ -3,6 +3,7 @@ package com.example.project.controller;
 import com.example.project.ApplicationStart;
 import com.example.project.model.Project;
 import com.example.project.model.User;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,6 +43,9 @@ public class DashboardController implements Initializable {
     private boolean guest = false;
 
     private List<Project> projectList = new ArrayList<>();
+
+    private int projectWidth = 150;
+    private String projectColour = "#f1d9b7";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -88,8 +92,9 @@ public class DashboardController implements Initializable {
     private void generateContainer(Project projectToAdd, HBox parentContainer, ScrollPane scrollPane){
         VBox projectContainer = new VBox();
         projectContainer.setSpacing(10);
+        projectContainer.setStyle("-fx-background-color: " + projectToAdd.getColour());
         projectContainer.prefHeightProperty().bind(Container_In_Progress.heightProperty().multiply(0.95));
-        projectContainer.prefWidthProperty().bind(Container_In_Progress.widthProperty().multiply(0.3));
+        projectContainer.setPrefWidth(projectWidth);
         Label cardTitle = new Label(projectToAdd.getTitle());
         Label DateCommenced = new Label ("Commenced: " + projectToAdd.getDateCreated());
         projectContainer.getChildren().addAll(cardTitle,DateCommenced);
@@ -115,16 +120,21 @@ public class DashboardController implements Initializable {
             }
         });
         parentContainer.getChildren().addAll(projectContainer);
-        parentContainer.prefWidthProperty().bind(scrollPane.widthProperty());
+        scrollPane.widthProperty().addListener((obs, oldWidth, newWidth) -> {
+            int widthCalculation = (int) (newWidth.doubleValue() + projectWidth);
+            parentContainer.setPrefWidth(widthCalculation);
+        });
     }
 
     private void newCardContainer(HBox parentContainer, ScrollPane scrollPane){
         VBox projectContainer = new VBox();
         projectContainer.setSpacing(10);
+        projectContainer.setStyle("-fx-background-color: " + projectColour);
         projectContainer.prefHeightProperty().bind(Container_In_Progress.heightProperty().multiply(0.95));
-        projectContainer.prefWidthProperty().bind(Container_In_Progress.widthProperty().multiply(0.3));
+        projectContainer.setPrefWidth(projectWidth);
         Label cardTitle = new Label("Create Project");
 
+        projectContainer.getChildren().addAll(cardTitle);
 
         projectContainer.setOnMouseClicked(event -> {
             System.out.println("New Project Button clicked");
@@ -141,7 +151,10 @@ public class DashboardController implements Initializable {
             }
         });
         parentContainer.getChildren().addAll(projectContainer);
-        parentContainer.prefWidthProperty().bind(scrollPane.widthProperty());
+        scrollPane.widthProperty().addListener((obs, oldWidth, newWidth) -> {
+            int widthCalculation = (int) (newWidth.doubleValue() + projectWidth);
+            parentContainer.setPrefWidth(widthCalculation);
+        });
     }
 
     public void Logout(ActionEvent actionEvent) throws IOException {
