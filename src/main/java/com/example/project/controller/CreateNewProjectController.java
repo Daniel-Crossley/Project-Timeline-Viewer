@@ -83,7 +83,7 @@ public class CreateNewProjectController implements Initializable {
         System.out.println("Visibility: " + visibility);
         System.out.println("Colour: " + colour);
 
-        Project newProject = new Project(0, title, description, "Place holder", "", visibility, colour, 0, "");
+        Project newProject = new Project(0, title, description, "Place holder", "none", visibility, colour, 0, "");
         projectDAO.addProject(newProject, userInformation);
 
         Stage stage = (Stage) create.getScene().getWindow();

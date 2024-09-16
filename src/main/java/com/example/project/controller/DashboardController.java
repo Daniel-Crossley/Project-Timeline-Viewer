@@ -59,7 +59,6 @@ public class DashboardController implements Initializable {
         updateUserName();
         Container_In_Progress.prefHeightProperty().bind(Scrollpane_Progress.heightProperty().multiply(0.88));
         Container_Completed.prefHeightProperty().bind(Scrollpane_Completed.heightProperty().multiply(0.88));
-        addProjectsToDash();
 
     }
 
@@ -74,6 +73,7 @@ public class DashboardController implements Initializable {
         this.userInformation = user;
         updateUserName();
         UpdateLists();
+        addProjectsToDash();
     }
 
     /**
