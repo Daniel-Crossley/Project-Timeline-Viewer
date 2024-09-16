@@ -48,7 +48,7 @@ public class TestUser {
 
         User tempUser = new User(username,password,email);
 
-        assertEquals(username,tempUser.getEmail());
+        assertEquals(email,tempUser.getEmail());
     }
 
     @Test
@@ -58,7 +58,7 @@ public class TestUser {
         String email = "testEmail";
 
         User tempUser = new User(username,password,email);
-        List<Project> projectList = ProjectLists();
+        List<Project> projectList = new ArrayList<>();
         assertEquals(projectList,tempUser.getProjects());
     }
 
