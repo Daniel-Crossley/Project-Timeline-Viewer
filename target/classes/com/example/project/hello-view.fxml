@@ -14,7 +14,7 @@
       <Pane prefHeight="191.0" prefWidth="522.0" style="-fx-background-color: C8915E; -fx-opacity: 80; -fx-background-radius: 30;" stylesheets="@stylesheet.css">
          <children>
              <Button fx:id="loginButton" layoutX="233.0" layoutY="96.0" onAction="#loginProcess" text="Login" />
-             <Button layoutX="158.0" layoutY="96.0" text="Register" />
+             <Button layoutX="158.0" layoutY="96.0" fx:id="registerButton" text="Register" onAction="#onRegisterButtonClick"/>
           <Button fx:id="GuestLogin" layoutX="290.0" layoutY="96.0" onAction="#onGuestLoginClick" text="Guest Temp process" />
       
           <Label layoutX="51.0" layoutY="63.0" text="Username:" />

@@ -10,7 +10,7 @@
 
 <?import javafx.scene.layout.VBox?>
 <VBox alignment="TOP_LEFT" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.project.RegisterController"
+      fx:controller="com.example.project.controller.RegisterController"
 >
 
     <GridPane fx:id="registerGridPane" xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">

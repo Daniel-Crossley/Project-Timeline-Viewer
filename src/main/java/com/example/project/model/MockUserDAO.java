@@ -22,7 +22,7 @@ public class MockUserDAO implements IUserDAO {
     @Override
     public String getUsername(String username) {
         for (User user : users) {
-            if (Objects.equals(user.getUser(), username)) {
+            if (Objects.equals(user.getUsername(), username)) {
                 return username;
             }
         }

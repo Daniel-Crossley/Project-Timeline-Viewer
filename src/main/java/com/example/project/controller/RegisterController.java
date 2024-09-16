@@ -86,14 +86,9 @@ public class RegisterController {
 
 
 
-        User newUser = new User(USERNAME, EMAIL, PASSWORD);
+        User newUser = new User(USERNAME, EMAIL, HASHED_PASSWORD);
         // Add the new contact to the database
         userDAO.addUser(newUser);
-
-        List<User> contacts = userDAO.getAllContacts();
-        for (User contact : contacts) {
-            System.out.println(contact.getUser());
-        }
     }
 
     //@FXML
