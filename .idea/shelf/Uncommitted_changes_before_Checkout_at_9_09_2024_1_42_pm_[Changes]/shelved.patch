@@ -1,0 +1,57 @@
+Index: target/classes/com/example/project/timeline-view.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<?import java.lang.*?>\r\n<?import java.util.*?>\r\n<?import javafx.scene.*?>\r\n<?import javafx.scene.control.*?>\r\n<?import javafx.scene.layout.*?>\r\n\r\n<VBox alignment=\"TOP_LEFT\" spacing=\"20.0\" xmlns:fx=\"http://javafx.com/fxml\"\r\n    <!-- HBox for top menu -->\r\n    <HBox spacing=\"10.0\">\r\n        <Button text=\"Return to Dashboard\" onAction=\"#onReturnClick\"/>\r\n        <Label fx:id=\"projectTitle\" text=\"Project Title\"/>\r\n        <Button text=\"Edit Project\" onAction=\"#onEditClick\"/>\r\n    </HBox>\r\n\r\n    <!-- GridPane for holding card entries -->\r\n    <GridPane fx:id=\"cardSpace\">\r\n        <!-- Cards will be added via java code -->\r\n    </GridPane>\r\n</VBox>\r\n
+===================================================================
+diff --git a/target/classes/com/example/project/timeline-view.fxml b/target/classes/com/example/project/timeline-view.fxml
+--- a/target/classes/com/example/project/timeline-view.fxml	
++++ b/target/classes/com/example/project/timeline-view.fxml	
+@@ -1,21 +1,36 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ 
+-<?import java.lang.*?>
+-<?import java.util.*?>
+-<?import javafx.scene.*?>
+-<?import javafx.scene.control.*?>
+-<?import javafx.scene.layout.*?>
++<?import javafx.scene.control.Button?>
++<?import javafx.scene.control.ButtonBar?>
++<?import javafx.scene.control.Label?>
++<?import javafx.scene.control.ScrollPane?>
++<?import javafx.scene.layout.FlowPane?>
++<?import javafx.scene.layout.GridPane?>
++<?import javafx.scene.layout.VBox?>
+ 
+-<VBox alignment="TOP_LEFT" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+-    <!-- HBox for top menu -->
+-    <HBox spacing="10.0">
+-        <Button text="Return to Dashboard" onAction="#onReturnClick"/>
++<?import javafx.scene.layout.HBox?>
++<VBox alignment="TOP_LEFT" prefHeight="237.0" prefWidth="330.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.Timeline.TimelineView">
++    <!-- Top Row Buttons -->
++    <FlowPane prefHeight="13.0" prefWidth="330.0" fx:id="TopBar">
++        <Button onAction="#onReturnClick" text="Return to Dashboard"/>
+         <Label fx:id="projectTitle" text="Project Title"/>
+-        <Button text="Edit Project" onAction="#onEditClick"/>
+-    </HBox>
++        <Button onAction="#onEditClick" text="Edit Project"/>
++    </FlowPane>
++
+ 
++    <ScrollPane fx:id="cardSpace" prefHeight="181.0" prefWidth="330.0">
++        <Label fx:id="cardStatus" text=" " />
++        <HBox fx:id="cardHolder" spacing="10.0"/>
++    <ScrollPane/>
++
++    <ButtonBar prefHeight="25.0" prefWidth="330.0">
++        <buttons>
++            <Button fx:id="buttonAddCard" mnemonicParsing="false" text="Add Card" />
++            <Button fx:id="buttonExport" mnemonicParsing="false" text="Export" />
++        </buttons>
++    </ButtonBar>
+     <!-- GridPane for holding card entries -->
+-    <GridPane fx:id="cardSpace">
++    <GridPane >
+         <!-- Cards will be added via java code -->
+     </GridPane>
+ </VBox>
