@@ -31,7 +31,6 @@ public class DashboardController implements Initializable {
     public Pane Menu;
     public Button Button_Logout;
     public Button Button_Search;
-    public Button Button_Dashboard;
     public HBox Container_In_Progress;
     public HBox Container_Completed;
     public ScrollPane Scrollpane_Completed;
@@ -46,11 +45,11 @@ public class DashboardController implements Initializable {
     private List<Project> projectList = new ArrayList<>();
 
     //Generic Styling
-    private int projectWidth = 150;
-    private String projectColour = "#f1d9b7";
-    private int projectRadius = 10;
-    private String projectBorderColour = "#c27c18";
-    private int projectBorderWidth = 2;
+    private final int projectWidth = 150;
+    private final String projectColour = "#f1d9b7";
+    private final int projectRadius = 10;
+    private final String projectBorderColour = "#c27c18";
+    private final int projectBorderWidth = 2;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -60,6 +59,7 @@ public class DashboardController implements Initializable {
         addProjectsToDash();
 
     }
+
 
     public void setUserInformation(boolean guest, User user) {
         this.guest = guest;

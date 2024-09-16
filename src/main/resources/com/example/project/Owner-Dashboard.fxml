@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <VBox alignment="TOP_CENTER" prefHeight="411.0" prefWidth="596.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.controller.DashboardController">
    <Pane fx:id="Menu" prefHeight="48.0" prefWidth="596.0" style="-fx-background-color: A1662F;">
@@ -23,19 +22,9 @@
                <DropShadow />
             </effect>
          </Button>
-         <Button fx:id="Button_Dashboard" layoutX="79.0" layoutY="12.0" mnemonicParsing="false" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" text="Dashboard">
-            <effect>
-               <DropShadow />
-            </effect>
-         </Button>
-         <Text layoutX="180.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Model Hut">
+         <Label fx:id="Label_Username" layoutX="93.0" layoutY="6.0" text="Guest" textFill="WHITE">
             <font>
-               <Font name="Forte" size="25.0" />
-            </font>
-         </Text>
-         <Label fx:id="Label_Username" layoutX="338.0" layoutY="11.0" text="Guest">
-            <font>
-               <Font size="18.0" />
+               <Font name="System Bold" size="24.0" />
             </font>
          </Label>
       </children>
