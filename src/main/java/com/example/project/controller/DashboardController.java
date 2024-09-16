@@ -1,32 +1,36 @@
 package com.example.project.controller;
 
 import com.example.project.model.User;
-
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
-public class DashboardController {
-    User userInformation;
-    boolean Guest = false;
-   @FXML
-   private Label UserID;
+import java.net.URL;
+import java.util.ResourceBundle;
 
+public class DashboardController implements Initializable {
     @FXML
-    void recieveData(){
+    private Label Label_Username;
 
-            //System.out.println(userInformation.getUsername());
-            UserID.setText(userInformation.getUsername());
+    private User userInformation;
+    private boolean guest = false;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        updateUserName();
     }
 
-    @FXML
-    public void initialize() {
-        // This method is called after the FXML file has been loaded
-        recieveData();
-    }
-
-    public DashboardController(boolean Guest, User user){
-        this.Guest = Guest;
+    public void setUserInformation(boolean guest, User user) {
+        this.guest = guest;
         this.userInformation = user;
+        updateUserName();
+    }
+
+    private void updateUserName(){
+        if (guest) {
+            Label_Username.setText("Welcome Guest");
+        } else if (userInformation != null && userInformation.getUsername() != null) {
+            Label_Username.setText("Welcome, " + userInformation.getUsername());
+        }
     }
 }

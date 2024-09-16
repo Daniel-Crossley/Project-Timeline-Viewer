@@ -11,7 +11,7 @@ public class TestUser {
 
     private List<Project> ProjectLists(){
         List<Project> listOfProjects = new ArrayList<>();
-        Project projectToTest = new Project(0,"TestTitle","TestDescription","23/11/1963","23/11/1963", "#", 0);
+        Project projectToTest = new Project(0,"TestTitle","TestDescription","23/11/1963","23/11/1963", true, "#", 0, "Tag");
         listOfProjects.add(projectToTest);
         return listOfProjects;
     }
