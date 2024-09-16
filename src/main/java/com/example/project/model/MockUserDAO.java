@@ -1,7 +1,8 @@
-package com.example.project;
+package com.example.project.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MockUserDAO implements IUserDAO {
     public static final ArrayList<User> users = new ArrayList<>();
@@ -21,7 +22,7 @@ public class MockUserDAO implements IUserDAO {
     @Override
     public String getUsername(String username) {
         for (User user : users) {
-            if (user.getUser() == username) {
+            if (Objects.equals(user.getUser(), username)) {
                 return username;
             }
         }
@@ -31,7 +32,7 @@ public class MockUserDAO implements IUserDAO {
     @Override
     public String getEmail(String email) {
         for (User user : users) {
-            if (user.getEmail() == email) {
+            if (Objects.equals(user.getEmail(), email)) {
                 return email;
             }
         }
