@@ -16,10 +16,8 @@ public class TestProject {
         String testDateCreated = "23/11/1963";
         String testDateCompleted = "23/11/1963";
         String testColour = "#ffffff";
-        boolean testVisibility = true;
-        String testTags = "";
         int testLikes = 0;
-        return new Project(testID, testTitle, testDescription, testDateCreated, testDateCompleted, testVisibility, testColour, testLikes, testTags);
+        return new Project(testID, testTitle, testDescription, testDateCreated, testDateCompleted, true, testColour, testLikes, "Tag");
     }
 
     public List<Card> randomCardListSetup(int numberOfCards){

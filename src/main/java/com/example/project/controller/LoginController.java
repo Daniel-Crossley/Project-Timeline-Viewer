@@ -5,6 +5,7 @@ import com.example.project.model.SqliteUserDAO;
 import com.example.project.model.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -59,15 +60,11 @@ public class LoginController {
     protected void onGuestLoginClick() throws IOException {
         Stage stage = (Stage) GuestLogin.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("Owner-Dashboard.fxml"));
-
-        User guestUser = new User("","","");
-
-        DashboardController dashboardController = new DashboardController(true, guestUser);
-        // Guest login, so set to `true`
-        fxmlLoader.setController(dashboardController);
-        Scene scene = new Scene(fxmlLoader.load(), ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
-        String stylesheet = ApplicationStart.class.getResource("stylesheet.css").toExternalForm();
-        scene.getStylesheets().add(stylesheet);
+        Parent root = fxmlLoader.load();
+        DashboardController dashboardController = fxmlLoader.getController();
+        User guestUser = new User("", "", "");
+        dashboardController.setUserInformation(true, guestUser);
+        Scene scene = new Scene(root, ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
         stage.setScene(scene);
     }
 
@@ -119,20 +116,12 @@ public class LoginController {
             if (user.getPassword().equals(HassedPass)){
                 Stage stage = (Stage) loginButton.getScene().getWindow();
                 FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("Owner-Dashboard.fxml"));
+                Parent root = fxmlLoader.load();
+                DashboardController dashboardController = fxmlLoader.getController();
 
-                DashboardController dashboardController = new DashboardController(false, user);
-                fxmlLoader.setController(dashboardController);
-
-                Scene scene = new Scene(fxmlLoader.load(), ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
-                String stylesheet = ApplicationStart.class.getResource("stylesheet.css").toExternalForm();
-
-                //UserHolder holder = UserHolder.getInstance();
-                //holder.setUser(user);
-                //System.out.println(user.getUsername());
-                scene.getStylesheets().add(stylesheet);
+                dashboardController.setUserInformation(false, user);
+                Scene scene = new Scene(root, ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
                 stage.setScene(scene);
-
-                dashboardController.recieveData();
 
             }else {
                 System.out.println("Invalid username");

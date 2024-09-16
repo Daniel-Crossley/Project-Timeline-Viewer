@@ -8,20 +8,20 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="TOP_CENTER" prefHeight="411.0" prefWidth="596.0" spacing="20" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
-   <Pane prefHeight="48.0" prefWidth="596.0" style="-fx-background-color: A1662F;">
+<VBox alignment="TOP_CENTER" prefHeight="411.0" prefWidth="596.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.controller.DashboardController">
+   <Pane fx:id="Menu" prefHeight="48.0" prefWidth="596.0" style="-fx-background-color: A1662F;">
       <children>
-         <Button layoutX="534.0" layoutY="9.0" mnemonicParsing="false" style="-fx-background-color: A1662F; -fx-background-radius: 50;" stylesheets="@stylesheet.css" text="Logout">
+         <Button fx:id="Button_Logout" layoutX="534.0" layoutY="9.0" mnemonicParsing="false" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" stylesheets="@stylesheet.css" text="Logout">
             <effect>
                <DropShadow />
             </effect>
          </Button>
-         <Button layoutX="14.0" layoutY="12.0" mnemonicParsing="false" style="-fx-background-color: A1662F; -fx-background-radius: 50;" text="Search">
+         <Button fx:id="Button_Search" layoutX="14.0" layoutY="12.0" mnemonicParsing="false" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" text="Search">
             <effect>
                <DropShadow />
             </effect>
          </Button>
-         <Button layoutX="79.0" layoutY="12.0" mnemonicParsing="false" style="-fx-background-color: A1662F; -fx-background-radius: 50;" text="Dashboard">
+         <Button fx:id="Button_Dashboard" layoutX="79.0" layoutY="12.0" mnemonicParsing="false" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" text="Dashboard">
             <effect>
                <DropShadow />
             </effect>
@@ -31,8 +31,32 @@
                <Font name="Forte" size="25.0" />
             </font>
          </Text>
-         <Label fx:id="UserID" layoutX="442.0" layoutY="13.0" text="Guest" />
+         <Label fx:id="Label_Username" layoutX="469.0" layoutY="10.0" text="Guest">
+            <font>
+               <Font size="18.0" />
+            </font>
+         </Label>
       </children>
    </Pane>
+   <Pane prefHeight="38.0" prefWidth="596.0" style="-fx-background-color: e5c08b;">
+      <children>
+         <Label layoutX="36.0" layoutY="9.0" text="In-Progress Projects">
+            <font>
+               <Font name="Berlin Sans FB" size="18.0" />
+            </font>
+         </Label>
+      </children>
+   </Pane>
+   <Pane fx:id="Container_In_Progress" prefHeight="141.0" prefWidth="596.0" style="-fx-background-color: d6b88d;" />
+   <Pane prefHeight="38.0" prefWidth="596.0" style="-fx-background-color: e5c08b;">
+      <children>
+         <Label layoutX="38.0" layoutY="9.0" text="Completed Projects">
+            <font>
+               <Font name="Berlin Sans FB" size="18.0" />
+            </font>
+         </Label>
+      </children>
+   </Pane>
+   <Pane fx:id="Container_Completed" prefHeight="145.0" prefWidth="596.0" style="-fx-background-color: d6b88d;" />
 
 </VBox>
