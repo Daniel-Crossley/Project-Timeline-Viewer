@@ -11,7 +11,7 @@ public class TestUser {
 
     private List<Project> ProjectLists(){
         List<Project> listOfProjects = new ArrayList<>();
-        Project projectToTest = new Project(0,"TestTitle","TestDescription","23/11/1963","23/11/1963", "#", 0);
+        Project projectToTest = new Project(0,"TestTitle","TestDescription","23/11/1963","23/11/1963", true ,"#", 0, "");
         listOfProjects.add(projectToTest);
         return listOfProjects;
     }
@@ -48,7 +48,7 @@ public class TestUser {
 
         User tempUser = new User(username,password,email);
 
-        assertEquals(username,tempUser.getEmail());
+        assertEquals(email,tempUser.getEmail());
     }
 
     @Test
@@ -59,6 +59,7 @@ public class TestUser {
 
         User tempUser = new User(username,password,email);
         List<Project> projectList = ProjectLists();
+        tempUser.addProject(projectList.getFirst());
         assertEquals(projectList,tempUser.getProjects());
     }
 
