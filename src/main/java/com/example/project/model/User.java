@@ -26,4 +26,6 @@ public class User {
     public void addProject(Project project){
         this.projects.add(project);
     }
+
+    public void setProjects(List<Project> projects){this.projects=projects;}
 }
