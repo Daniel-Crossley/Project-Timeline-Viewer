@@ -69,7 +69,7 @@ public class DashboardController implements Initializable {
     }
 
     private void addProjectsToDash(){
-        newCardContainer();
+        newCardContainer(Container_In_Progress, Scrollpane_Progress);
 
         for(Project projectToAdd: projectList){
             if (Objects.equals(projectToAdd.getDateFinished(), "none")){
