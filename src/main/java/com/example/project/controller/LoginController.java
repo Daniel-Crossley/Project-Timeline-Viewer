@@ -33,12 +33,23 @@ public class LoginController {
     private Button GuestLogin;
     @FXML
     private Label InvalidPass;
+    @FXML
+    private Button registerButton;
 
     //SQL user instance
     private SqliteUserDAO userDAO;
 
     public void initialize() {
         userDAO = new SqliteUserDAO(); // Initialize the DAO here
+    }
+
+    //go to separate registration page
+    @FXML
+    protected void onRegisterButtonClick() throws IOException {
+        Stage stage = (Stage) registerButton.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("register-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
+        stage.setScene(scene);
     }
 
     /**

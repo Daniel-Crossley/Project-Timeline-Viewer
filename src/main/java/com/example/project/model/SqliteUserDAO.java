@@ -55,7 +55,7 @@ public class SqliteUserDAO {
      * @param user User object
      * @return True if upload was successful False if otherwise
      */
-    public boolean AddUser(User user){
+    public boolean addUser(User user){
         try {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO UserAccounts (username, password, email) VALUES (?, ?, ?)");
             statement.setString(1, user.getUsername());
