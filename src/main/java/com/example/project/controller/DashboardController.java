@@ -41,6 +41,7 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         updateUserName();
+
     }
 
     public void setUserInformation(boolean guest, User user) {
@@ -61,11 +62,22 @@ public class DashboardController implements Initializable {
         this.projectList =  userInformation.getProjects();
     }
 
+    private void addProjectsToDash(){
+        for(Project projectToAdd: projectList){
+            if (Objects.equals(projectToAdd.getDateFinished(), "none")){
+                generateContainer(projectToAdd, Container_In_Progress);
+            }
+            else{
+                generateContainer(projectToAdd, Container_Completed);
+            }
+        }
+    }
+
     /**
      * Generates the container of project information to add
      * @param projectToAdd project to generate container from
      */
-    private void generateContainer(Project projectToAdd){
+    private void generateContainer(Project projectToAdd, Pane parentContainer){
         VBox projectContainer = new VBox();
         projectContainer.setSpacing(10);
         projectContainer.prefHeightProperty().bind(Container_In_Progress.heightProperty().multiply(0.95));
@@ -94,7 +106,7 @@ public class DashboardController implements Initializable {
                 throw new RuntimeException(e);
             }
         });
-
+        parentContainer.getChildren().addAll(projectContainer);
     }
 
     public void Logout(ActionEvent actionEvent) throws IOException {
@@ -107,4 +119,6 @@ public class DashboardController implements Initializable {
 
     public void Open_Search(ActionEvent actionEvent) {
     }
+
+
 }
