@@ -37,6 +37,6 @@
                 <TextField fx:id="colourField" text="Kopi Luwak" />
             </VBox>
         </HBox>
-        <Button text="Publish Project" onAction="#publishProject" styleClass="button-publish"/>
+        <Button text="Publish Project" fx:id="create" onAction="#publishProject" styleClass="button-publish"/>
     </VBox>
 </AnchorPane>

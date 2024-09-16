@@ -68,7 +68,7 @@ public class SqliteProjectDAO {
                 String description = resultSet.getString("description");
                 String dateCreated = resultSet.getString("dateCreated");
                 String dateFinished = resultSet.getString("dateFinished");
-                boolean visibility = resultSet.getInt("visiblity") != 0;
+                boolean visibility = resultSet.getInt("visibility") != 0;
                 int likes = resultSet.getInt("likes");
                 String colour = resultSet.getString("colour");
                 String tags = resultSet.getString("tags");
@@ -83,7 +83,7 @@ public class SqliteProjectDAO {
     public void addProject(Project project, User user) {
         try {
             PreparedStatement statement = connection.prepareStatement(
-                    "INSERT INTO Projects (username, title, description, dateCreated, dateFinsihed, visibility, likes, colour, tags) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    "INSERT INTO Projects (username, title, description, dateCreated, dateFinished, visibility, likes, colour, tags) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
             statement.setString(1, user.getUsername());
             statement.setString(2, project.getTitle());
             statement.setString(3, project.getDescription());

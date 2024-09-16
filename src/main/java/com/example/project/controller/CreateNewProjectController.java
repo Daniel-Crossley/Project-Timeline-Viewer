@@ -1,7 +1,9 @@
 package com.example.project.controller;
 
 import com.example.project.ApplicationStart;
+import com.example.project.model.SqliteProjectDAO;
 import com.example.project.model.User;
+import com.example.project.model.Project;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -40,10 +42,16 @@ public class CreateNewProjectController implements Initializable {
     @FXML
     private Button goBack;
 
+    @FXML
+    private Button create;
+
     private User userInformation;
+
+    private SqliteProjectDAO projectDAO;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        projectDAO = new SqliteProjectDAO();
         ObservableList<String> visibilityOptions = FXCollections.observableArrayList("Private", "Public");
         visibilityComboBox.setItems(visibilityOptions);
     }
@@ -61,19 +69,30 @@ public class CreateNewProjectController implements Initializable {
     }
 
     @FXML
-    protected void publishProject() {
+    protected void publishProject() throws IOException {
 
         String title = titleField.getText();
         String description = descriptionField.getText();
-        String visibility = visibilityComboBox.getValue();
         String colour = colourField.getText();
 
+        boolean visibility = visibilityComboBox.getValue().equals("True");
 
         System.out.println("Publishing project:");
         System.out.println("Title: " + title);
         System.out.println("Description: " + description);
         System.out.println("Visibility: " + visibility);
         System.out.println("Colour: " + colour);
+
+        Project newProject = new Project(0, title, description, "Place holder", "", visibility, colour, 0, "");
+        projectDAO.addProject(newProject, userInformation);
+
+        Stage stage = (Stage) create.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("Owner-Dashboard.fxml"));
+        Parent root = fxmlLoader.load();
+        DashboardController dashboardController = fxmlLoader.getController();
+        dashboardController.setUserInformation(false, userInformation);
+        Scene scene = new Scene(root, ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
+        stage.setScene(scene);
     }
 
     public void setUserInformation(User user) {
