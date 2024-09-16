@@ -56,17 +56,26 @@ public class DashboardController implements Initializable {
         updateUserName();
         Container_In_Progress.prefHeightProperty().bind(Scrollpane_Progress.heightProperty().multiply(0.88));
         Container_Completed.prefHeightProperty().bind(Scrollpane_Completed.heightProperty().multiply(0.88));
+        UpdateLists();
         addProjectsToDash();
 
     }
 
 
+    /**
+     * Retrieves user type and user information
+     * @param guest Set to true if person is a guest, false if not
+     * @param user User information
+     */
     public void setUserInformation(boolean guest, User user) {
         this.guest = guest;
         this.userInformation = user;
         updateUserName();
     }
 
+    /**
+     * Update username in topbar based on user information
+     */
     private void updateUserName(){
         if (guest) {
             Label_Username.setText("Welcome Guest");
@@ -75,10 +84,16 @@ public class DashboardController implements Initializable {
         }
     }
 
+    /**
+     * Updates project list using user information
+     */
     private void UpdateLists(){
         this.projectList =  userInformation.getProjects();
     }
 
+    /**
+     * Adds project containers to the different containers based on if they have a completion date set
+     */
     private void addProjectsToDash(){
         newCardContainer(Container_In_Progress, Scrollpane_Progress);
 
@@ -92,6 +107,11 @@ public class DashboardController implements Initializable {
         }
     }
 
+    /**
+     * Generates generic vbox for project container
+     * @param colour Colour of the vbox
+     * @return Generated project container
+     */
     private VBox projectVBoxStyling(String colour) {
         VBox projectContainer = new VBox();
         projectContainer.setAlignment(Pos.CENTER);
@@ -112,6 +132,8 @@ public class DashboardController implements Initializable {
     /**
      * Generates the container of project information to add
      * @param projectToAdd project to generate container from
+     * @param parentContainer container to add the project to
+     * @param scrollPane container to be used as reference
      */
     private void generateContainer(Project projectToAdd, HBox parentContainer, ScrollPane scrollPane){
         VBox projectContainer = projectVBoxStyling(projectToAdd.getColour());
@@ -147,6 +169,11 @@ public class DashboardController implements Initializable {
         });
     }
 
+    /**
+     * Generates the container for generating a new project
+     * @param parentContainer container to add the project to
+     * @param scrollPane container to be used as reference
+     */
     private void newCardContainer(HBox parentContainer, ScrollPane scrollPane){
         VBox projectContainer = projectVBoxStyling(projectColour);
         Label cardTitle = new Label("Create Project");
@@ -174,6 +201,11 @@ public class DashboardController implements Initializable {
         });
     }
 
+    /**
+     * Action of logging out
+     * @param actionEvent Clicking Action
+     * @throws IOException IOException
+     */
     public void Logout(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) Button_Logout.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("hello-view.fxml"));
@@ -182,6 +214,10 @@ public class DashboardController implements Initializable {
         stage.setScene(scene);
     }
 
+    /**
+     * Action of opening the pane for search
+     * @param actionEvent Clicking Action
+     */
     public void Open_Search(ActionEvent actionEvent) {
     }
 
