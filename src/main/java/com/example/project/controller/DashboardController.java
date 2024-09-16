@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -44,12 +45,18 @@ public class DashboardController implements Initializable {
 
     private List<Project> projectList = new ArrayList<>();
 
+    //Generic Styling
     private int projectWidth = 150;
     private String projectColour = "#f1d9b7";
+    private int projectRadius = 10;
+    private String projectBorderColour = "#c27c18";
+    private int projectBorderWidth = 2;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         updateUserName();
+        Container_In_Progress.prefHeightProperty().bind(Scrollpane_Progress.heightProperty().multiply(0.88));
+        Container_Completed.prefHeightProperty().bind(Scrollpane_Completed.heightProperty().multiply(0.88));
         addProjectsToDash();
 
     }
@@ -85,16 +92,29 @@ public class DashboardController implements Initializable {
         }
     }
 
+    private VBox projectVBoxStyling(String colour) {
+        VBox projectContainer = new VBox();
+        projectContainer.setAlignment(Pos.CENTER);
+        projectContainer.setSpacing(10);
+        projectContainer.prefHeightProperty().bind(Container_In_Progress.heightProperty().multiply(0.95));
+        projectContainer.setPrefWidth(projectWidth);
+        projectContainer.setStyle(
+                "-fx-border-width: " + this.projectBorderWidth + "; " +
+                "-fx-background-color: " + colour + "; " +
+                "-fx-background-radius: "  + this.projectRadius + "; " +
+                "-fx-border-color: " + this.projectBorderColour + "; " +
+                "-fx-border-radius: " + this.projectRadius + "; "
+        );
+
+        return projectContainer;
+    }
+
     /**
      * Generates the container of project information to add
      * @param projectToAdd project to generate container from
      */
     private void generateContainer(Project projectToAdd, HBox parentContainer, ScrollPane scrollPane){
-        VBox projectContainer = new VBox();
-        projectContainer.setSpacing(10);
-        projectContainer.setStyle("-fx-background-color: " + projectToAdd.getColour());
-        projectContainer.prefHeightProperty().bind(Container_In_Progress.heightProperty().multiply(0.95));
-        projectContainer.setPrefWidth(projectWidth);
+        VBox projectContainer = projectVBoxStyling(projectToAdd.getColour());
         Label cardTitle = new Label(projectToAdd.getTitle());
         Label DateCommenced = new Label ("Commenced: " + projectToAdd.getDateCreated());
         projectContainer.getChildren().addAll(cardTitle,DateCommenced);
@@ -113,6 +133,7 @@ public class DashboardController implements Initializable {
                 root = fxmlLoader.load();
                 TimeLineController timelineController = fxmlLoader.getController();
                 timelineController.setProject(projectToAdd);
+                timelineController.setUser(userInformation);
                 Scene scene = new Scene(root, ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
                 stage.setScene(scene);
             } catch (IOException e) {
@@ -127,11 +148,7 @@ public class DashboardController implements Initializable {
     }
 
     private void newCardContainer(HBox parentContainer, ScrollPane scrollPane){
-        VBox projectContainer = new VBox();
-        projectContainer.setSpacing(10);
-        projectContainer.setStyle("-fx-background-color: " + projectColour);
-        projectContainer.prefHeightProperty().bind(Container_In_Progress.heightProperty().multiply(0.95));
-        projectContainer.setPrefWidth(projectWidth);
+        VBox projectContainer = projectVBoxStyling(projectColour);
         Label cardTitle = new Label("Create Project");
 
         projectContainer.getChildren().addAll(cardTitle);

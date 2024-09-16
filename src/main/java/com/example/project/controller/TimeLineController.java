@@ -1,5 +1,6 @@
 package com.example.project.controller;
 
+import com.example.project.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,6 +36,7 @@ public class TimeLineController {
     @FXML
     private Label projectTitle;
 
+    private User user;
     private Project project;
 
     public void initialize(int id, String title, String description, String dateCreated, String dateCompleted, String colour, int likes) {
@@ -44,6 +46,9 @@ public class TimeLineController {
         updateView();
     }
 
+    public void setUser(User user){
+        this.user = user;
+    }
     public void setProject(Project project){
         this.project = project;
     }
