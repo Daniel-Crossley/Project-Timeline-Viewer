@@ -18,7 +18,7 @@ public class SqliteProjectDAO {
             Statement statement = connection.createStatement();
             String query = "CREATE TABLE IF NOT EXISTS Projects ("
                     + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    + "username VARCHAR FOREIGN KEY,"
+                    + "username VARCHAR,"
                     + "title VARCHAR,"
                     + "description VARCHAR,"
                     + "dateCreated VARCHAR,"
@@ -57,7 +57,7 @@ public class SqliteProjectDAO {
         return null;
     }
 
-    public Project getProjects(User user) {
+    public void getProjects(User user) {
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM Projects WHERE username = ?");
             statement.setString(1, user.getUsername());
@@ -78,7 +78,6 @@ public class SqliteProjectDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
     }
 
     public void addProject(Project project, User user) {

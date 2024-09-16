@@ -2,6 +2,7 @@ package com.example.project.controller;
 
 import com.example.project.ApplicationStart;
 import com.example.project.model.Project;
+import com.example.project.model.SqliteProjectDAO;
 import com.example.project.model.User;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
@@ -40,6 +41,7 @@ public class DashboardController implements Initializable {
     private Label Label_Username;
 
     private User userInformation;
+    private SqliteProjectDAO projectDAO;
     private boolean guest = false;
 
     private List<Project> projectList = new ArrayList<>();
@@ -53,10 +55,10 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        projectDAO = new SqliteProjectDAO();
         updateUserName();
         Container_In_Progress.prefHeightProperty().bind(Scrollpane_Progress.heightProperty().multiply(0.88));
         Container_Completed.prefHeightProperty().bind(Scrollpane_Completed.heightProperty().multiply(0.88));
-        UpdateLists();
         addProjectsToDash();
 
     }
@@ -71,6 +73,7 @@ public class DashboardController implements Initializable {
         this.guest = guest;
         this.userInformation = user;
         updateUserName();
+        UpdateLists();
     }
 
     /**
@@ -88,6 +91,7 @@ public class DashboardController implements Initializable {
      * Updates project list using user information
      */
     private void UpdateLists(){
+        projectDAO.getProjects(userInformation);
         this.projectList =  userInformation.getProjects();
     }
 
