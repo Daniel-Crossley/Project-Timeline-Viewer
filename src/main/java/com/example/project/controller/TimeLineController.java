@@ -44,6 +44,10 @@ public class TimeLineController {
         updateView();
     }
 
+    public void setProject(Project project){
+        this.project = project;
+    }
+
     /**
      * Updates the timeline view based on stored data in timeline
      */
