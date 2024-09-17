@@ -100,9 +100,14 @@ public class RegisterController {
             return;
         }
 
-        User newUser = new User(USERNAME, EMAIL, HASHED_PASSWORD);
+        User newUser = new User(USERNAME, HASHED_PASSWORD, EMAIL);
         // Add the new contact to the database
-        userDAO.addUser(newUser);        
+        userDAO.addUser(newUser);
+
+        Stage stage = (Stage) registerButton.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("hello-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
+        stage.setScene(scene);
     }
 
 
