@@ -67,4 +67,24 @@ public class SqliteCardDAO {
             e.printStackTrace();
         }
     }
+
+    public void addCard(Card card, Project project) {
+        try {
+            PreparedStatement statement = connection.prepareStatement(
+                    "INSERT INTO Projects (projectId, title, description, dateCreated, dateFinished) VALUES (?, ?, ?, ?, ?, ?)");
+            statement.setInt(1, project.getId());
+            statement.setString(2, card.getTitle());
+            statement.setString(3, card.getDescription());
+            statement.setString(4, card.getDateCreated());
+            statement.setString(5, card.getDateFinished());
+            statement.executeUpdate();
+            // Set the id of the new project
+            ResultSet generatedKeys = statement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                card.setId(generatedKeys.getInt(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
