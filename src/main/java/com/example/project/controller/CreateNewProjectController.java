@@ -63,6 +63,7 @@ public class CreateNewProjectController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("Owner-Dashboard.fxml"));
         Parent root = fxmlLoader.load();
         DashboardController dashboardController = fxmlLoader.getController();
+        userInformation.setProjects(new ArrayList<>());
         dashboardController.setUserInformation(false, userInformation);
         Scene scene = new Scene(root, ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
         stage.setScene(scene);
