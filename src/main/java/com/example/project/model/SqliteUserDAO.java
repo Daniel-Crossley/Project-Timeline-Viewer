@@ -49,6 +49,27 @@ public class SqliteUserDAO {
         }
         return null;
     }
+    /**
+     * Gets user based on the secondary key email
+     * @param email the primary key
+     * @return A User object
+     */
+    public User getEmail(String email){
+        try {
+
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM UserAccounts WHERE email = ?");
+            statement.setString(1, email);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                String password = resultSet.getString("password");
+                String username = resultSet.getString("username");
+                return new User(username, password, email);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     /**
      * Adds user to database

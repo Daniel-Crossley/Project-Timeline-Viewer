@@ -1,43 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-
-
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<VBox alignment="TOP_LEFT" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.project.controller.RegisterController"
->
 
-    <GridPane fx:id="registerGridPane" xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-        <padding>
-            <Insets top="20" right="20" bottom="20" left="20"/>
-        </padding>
+<VBox alignment="CENTER" prefHeight="347.0" prefWidth="616.0" spacing="20" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.controller.RegisterController">
+<HBox fx:id="topMenu" alignment="CENTER" spacing="10" />
+<HBox alignment="CENTER">
+    <Pane prefHeight="191.0" prefWidth="522.0" style="-fx-background-color: C8915E; -fx-opacity: 80; -fx-background-radius: 30;" stylesheets="@stylesheet.css">
+        <children>
+            <Label fx:id="InvalidPass" layoutX="198.0" layoutY="158.0" text="Bad User or Password" textFill="#721414" visible="false" />
+            <GridPane layoutX="19.0" layoutY="26.0" prefHeight="139.0" prefWidth="473.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="127.0" minWidth="10.0" prefWidth="127.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="350.0" minWidth="10.0" prefWidth="244.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="30.0" minHeight="18.0" prefHeight="30.0" />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                </rowConstraints>
+                <children>
+                    <!-- Username -->
+                    <Label text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <TextField fx:id="usernameField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-        <!-- Username -->
-        <Label text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-        <TextField fx:id="usernameField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                    <!-- Email -->
+                    <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <TextField fx:id="emailField" prefHeight="25.0" prefWidth="146.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-        <!-- Email -->
-        <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-        <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                    <!-- Password -->
+                    <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-        <!-- Password -->
-        <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-        <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                    <!-- Confirm Password -->
+                    <Label text="Confirm Password:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                    <PasswordField fx:id="confirmPasswordField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-        <!-- Confirm Password -->
-        <Label text="Confirm Password:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-        <PasswordField fx:id="confirmPasswordField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                    <!-- Submit Button -->
+                    <Button fx:id="registerButton" onAction="#onAdd" text="Register" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                    <Button fx:id="backButton" onAction="#onBack" text="Back" translateX="270.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 
-        <!-- Submit Button -->
-        <Button text="Register" fx:id="registerButton" GridPane.columnIndex="2" GridPane.rowIndex="4" onAction="#onAdd"/>
-        <Button text="Back" fx:id="backButton" GridPane.columnIndex="1" GridPane.rowIndex="4" onAction="#onBack"/>
+                    <Label fx:id="registerErrorText" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                </children>
+            </GridPane>
+        </children>
+    </Pane>
+</HBox>
+<HBox>
 
-        <Label fx:id="registerErrorText" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
-    </GridPane>
+</HBox>
+
 </VBox>

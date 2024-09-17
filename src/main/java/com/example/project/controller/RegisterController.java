@@ -84,30 +84,30 @@ public class RegisterController {
             return;
         }
 
-        if (!PASSWORD.equals(CONFIRM_PASSWORD)) {;
+        if (!PASSWORD.equals(CONFIRM_PASSWORD)) {
+            ;
             registerErrorText.setText("Passwords do not match");
             return;
         }
 
-        User search = userDAO.getUser(USERNAME);
-
-        if (search != null) {
+        if (userDAO.getUser(USERNAME) != null) {
             registerErrorText.setText("User Already exists");
             return;
         }
 
-        User newUser = new User(USERNAME, HASHED_PASSWORD, EMAIL);
-        // Add the new contact to the database
-        if (userDAO.addUser(newUser)) {
-            Stage stage = (Stage) registerButton.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("hello-view.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
-            stage.setScene(scene);
-        } else {
+        if (userDAO.getEmail(EMAIL) != null) {
             registerErrorText.setText("Email has already been registered");
             return;
         }
+
+        User newUser = new User(USERNAME, EMAIL, HASHED_PASSWORD);
+        // Add the new contact to the database
+        userDAO.addUser(newUser);        
     }
+
+
+
+
 
     //@FXML
     //protected void onHelloButtonClick() {
