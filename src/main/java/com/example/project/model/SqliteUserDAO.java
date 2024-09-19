@@ -9,11 +9,17 @@ import java.sql.*;
 public class SqliteUserDAO {
     private Connection connection;
 
+    /**
+     * Create instance of userDAO
+     */
     public SqliteUserDAO(){
         connection = SqliteConnection.getInstance();
         createTable();
     }
 
+    /**
+     * Creates table for User accounts
+     */
     private void createTable(){
         try {
             Statement statement = connection.createStatement();

@@ -6,6 +6,9 @@ import java.sql.*;
 public class SqliteConnection {
     private static Connection instance = null;
 
+    /**
+     * Set ups connection with sqlite driver
+     */
     private SqliteConnection() {
         String url = "jdbc:sqlite:contacts.db";
         try {
@@ -15,6 +18,10 @@ public class SqliteConnection {
         }
     }
 
+    /**
+     * get instance of db
+     * @return instance of db
+     */
     public static Connection getInstance() {
         if (instance == null) {
             new SqliteConnection();

@@ -8,11 +8,17 @@ import java.sql.Statement;
 public class SqliteCardDAO {
     private Connection connection;
 
+    /**
+     * Create instance of CardDAO
+     */
     public SqliteCardDAO(){
         connection = SqliteConnection.getInstance();
         createTable();
     }
 
+    /**
+     * Create Cards table
+     */
     private void createTable(){
         try {
             Statement statement = connection.createStatement();
@@ -30,6 +36,10 @@ public class SqliteCardDAO {
         }
     }
 
+    /**
+     * @param id primary key of card
+     * @return a card object
+     */
     public Card getCard(int id) {
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM Cards WHERE id = ?");
@@ -49,6 +59,10 @@ public class SqliteCardDAO {
         return null;
     }
 
+    /**
+     * get all cards owned by project
+     * @param project project to add cards to
+     */
     public void getCards(Project project) {
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM Cards WHERE projectId = ?");
@@ -68,6 +82,10 @@ public class SqliteCardDAO {
         }
     }
 
+    /**
+     * @param card card object
+     * @param project project object for foreign key
+     */
     public void addCard(Card card, Project project) {
         try {
             PreparedStatement statement = connection.prepareStatement(
