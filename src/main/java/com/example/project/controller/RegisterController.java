@@ -15,10 +15,18 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
+/**
+ * A simple controller class that takes button inputs to add new user information to a database.
+ */
+
 
 public class RegisterController {
     @FXML
     private ListView<User> contactsListView;
+
+    /**
+     * object for interacting with the user database.
+     */
     private SqliteUserDAO userDAO;
 
     @FXML
@@ -39,6 +47,12 @@ public class RegisterController {
     @FXML
     private Button backButton;
 
+    /**
+     * Handles the action when the 'Back' button is clicked.
+     * It switches the scene from register-view to the hello-view.
+     * @throws IOException if the FXML file cannot be loaded.
+     */
+
     @FXML
     protected void onBack() throws IOException {
         Stage stage = (Stage) backButton.getScene().getWindow();
@@ -47,6 +61,11 @@ public class RegisterController {
         stage.setScene(scene);
     }
 
+    /**
+     * Hashes a password using the SHA-256 algorithm.
+     * @param password the password to be hashed.
+     * @return the hashed password as a string.
+     */
     @FXML
     private String hashing(String password) {
         try {
@@ -69,7 +88,11 @@ public class RegisterController {
         }
     }
 
-
+    /**
+     * Handles the action when the 'Register' button is clicked to validate
+     * the inputted user info and adds the user to the database if validation passes.
+     * @throws IOException if the FXML file cannot be loaded.
+     */
     @FXML
     private void onAdd() throws IOException {
         // Default values for a new contact
@@ -111,13 +134,10 @@ public class RegisterController {
     }
 
 
-
-
-
-    //@FXML
-    //protected void onHelloButtonClick() {
-        //registerErrorText.setText("");
-    //}
+    /**
+     * Constructor for the RegisterController.
+     * Creates a new user data object.
+     */
 
     public RegisterController() {
         userDAO = new SqliteUserDAO();

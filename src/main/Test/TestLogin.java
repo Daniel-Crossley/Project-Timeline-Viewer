@@ -32,5 +32,4 @@ public class TestLogin {
         assertEquals("", emptyLogin.getPassword(), "Password should be an empty string");
     }
 
-
 }
