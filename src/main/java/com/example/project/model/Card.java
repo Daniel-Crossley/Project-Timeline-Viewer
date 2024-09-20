@@ -28,18 +28,35 @@ public class Card {
         this.id = id;
     }
 
+    /**
+     * Retrieves the title of the card
+     * @return the title of the card
+     */
+
     public String getTitle(){
         return this.title;
     }
 
+    /**
+     * Retrieves the description of the card
+     * @return the description of the card
+     */
     public String getDescription(){
         return this.description;
     }
 
+    /**
+     * Retrieves the card's date of creation as a string
+     * @return the date the card was created
+     */
     public String getDateCreated(){
         return this.dateCreated;
     }
 
+    /**
+     * Retrieves the card's date of finished as a string
+     * @return the date the card was finished
+     */
     public String getDateFinished(){
         return this.dateFinished;
     }

@@ -9,6 +9,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestUser {
 
+    /**
+     * Generates a list of projects to be used for testing
+     * @return list of projects
+     */
     private List<Project> ProjectLists(){
         List<Project> listOfProjects = new ArrayList<>();
         Project projectToTest = new Project(0,"TestTitle","TestDescription","23/11/1963","23/11/1963", true, "#", 0, "Tag");
@@ -17,6 +21,9 @@ public class TestUser {
     }
 
 
+    /**
+     * Checks to see if the username is stored properly
+     */
     @Test
     void setUsername(){
         String username = "testUsername";
@@ -28,6 +35,9 @@ public class TestUser {
         assertEquals(username,tempUser.getUsername());
     }
 
+    /**
+     * Checks to see if the password is stored properly
+     */
     @Test
     void setPassword(){
         String username = "testUsername";
@@ -39,6 +49,9 @@ public class TestUser {
         assertEquals(password,tempUser.getPassword());
     }
 
+    /**
+     * Checks to see if the email is stored properly
+     */
     @Test
     void setEmail(){
         String username = "testUsername";
@@ -51,6 +64,9 @@ public class TestUser {
         assertEquals(email,tempUser.getEmail());
     }
 
+    /**
+     * Checks to see if projects are  stored properly
+     */
     @Test
     void setProjects(){
         String username = "testUsername";

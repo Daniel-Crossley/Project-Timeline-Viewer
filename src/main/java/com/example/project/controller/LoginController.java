@@ -74,37 +74,31 @@ public class LoginController {
      * @return encrypted password
      */
     private String hashing(String password){
-    try {
-        // 256 algo
-        MessageDigest digest=MessageDigest.getInstance("Sha-256");
+        try {
+            // 256 algo
+            MessageDigest digest=MessageDigest.getInstance("Sha-256");
 
-        //hashing password to bytes
-        byte[] hashByte = digest.digest(password.getBytes());
+            //hashing password to bytes
+            byte[] hashByte = digest.digest(password.getBytes());
 
-        //back to hex
-        StringBuilder hexString = new StringBuilder();
-        for (byte b: hashByte){
-            String hex = Integer.toHexString(0xff & b);
-            if (hex.length() == 1) hexString.append('0');
-            hexString.append(hex);
+            //back to hex
+            StringBuilder hexString = new StringBuilder();
+            for (byte b: hashByte){
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
         }
-        return hexString.toString();
-    } catch (NoSuchAlgorithmException e) {
-        throw new RuntimeException(e);
     }
-
-    }
-    /**
-     * login for window
-     * @throws IOException Issues with login process
-     */
 
     /**
      * This method will be automatically called after the FXML elements are initialized.
      * Initializes the SqliteUserDAO object.
+     * @throws IOException Issues with login process
      */
-
-
     @FXML
     protected void loginProcess() throws IOException {
         String username = userNameTextField.getText();

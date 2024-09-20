@@ -9,6 +9,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestProject {
 
+    /**
+     * Generates project to be used for testing
+     * @return Returns a generic project to be used for testing
+     */
     public Project projectSetup(){
         int testID = 0;
         String testTitle = "testTitle";
@@ -20,6 +24,11 @@ public class TestProject {
         return new Project(testID, testTitle, testDescription, testDateCreated, testDateCompleted, true, testColour, testLikes, "Tag");
     }
 
+    /**
+     * Generates a random number of cards
+     * @param numberOfCards The number of random cards to be generated
+     * @return a list of randomly generated cards
+     */
     public List<Card> randomCardListSetup(int numberOfCards){
         List<Card> setOfCards = new ArrayList<>();
 
@@ -36,6 +45,11 @@ public class TestProject {
         return setOfCards;
     }
 
+    /**
+     * Generates a string of a given length with random characters
+     * @param CharacterLength The length of the randomly generated string
+     * @return randomly generated string
+     */
     public String RandomString(int CharacterLength){
         StringBuilder randomString = new StringBuilder();
         String setCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -47,6 +61,10 @@ public class TestProject {
         }
         return randomString.toString();
     }
+
+    /**
+     * Checks to see if 0 cards are able to be stored properly
+     */
     @Test
     void testCardImportNone() {
         int numberTested = 0;
@@ -61,6 +79,9 @@ public class TestProject {
         assertEquals(testProject.getListOfCards(),testCardList,"No cards added test");
     }
 
+    /**
+     * Checks to see if 1 card is imported properly
+     */
     @Test
     void testCardImportOne() {
         int numberTested = 1;
@@ -75,6 +96,9 @@ public class TestProject {
         assertEquals(testProject.getListOfCards(),testCardList,"No cards added test");
     }
 
+    /**
+     * Checks to see if 5 cards are imported properly
+     */
     @Test
     void testCardImportFive() {
         int numberTested = 5;
@@ -89,6 +113,10 @@ public class TestProject {
         assertEquals(testProject.getListOfCards(),testCardList,"No cards added test");
     }
 
+
+    /**
+     * Checks to see if a card can be added
+     */
     @Test
     void testCardAddOne(){
         int numberTested = 1;
@@ -110,6 +138,10 @@ public class TestProject {
         //Test
         assertEquals(testProject.getListOfCards(),testCardList,"No cards added test");
     }
+
+    /**
+     * Checks to see if 5 cards can be added separately
+     */
 
     @Test
     void testCardAddFive(){
