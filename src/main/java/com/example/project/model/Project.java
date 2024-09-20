@@ -9,6 +9,9 @@ import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
+/**
+ * Project class to store project data
+ */
 public class Project {
     private int id;
     private Label projectTitle;

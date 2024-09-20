@@ -3,6 +3,9 @@ package com.example.project.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * User class to store user data
+ */
 public class User {
     private String username;
     private String password;

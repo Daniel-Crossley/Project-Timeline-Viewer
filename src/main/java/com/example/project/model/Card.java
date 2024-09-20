@@ -1,5 +1,8 @@
 package com.example.project.model;
 
+/**
+ * Card class to store card data
+ */
 public class Card {
     private int id;
     private String title;
