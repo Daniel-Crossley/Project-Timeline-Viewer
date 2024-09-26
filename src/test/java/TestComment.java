@@ -1,6 +1,4 @@
-import com.example.project.model.Card;
 import com.example.project.model.CardComment;
-import com.example.project.model.User;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
