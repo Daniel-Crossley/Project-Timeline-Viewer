@@ -1,5 +1,10 @@
 package com.example.project.model;
 
+import javafx.scene.image.Image;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Card class to store card data
  */
@@ -9,8 +14,37 @@ public class Card {
     private String description;
     private String dateCreated;
     private String dateFinished;
-    // Uncomment when comment class is created
-    //private List<Comment> comments = new ArrayList<>();
+    private List<CardComment> comments = new ArrayList<>();
+    private List<Image> mediaImages = new ArrayList<>();
+
+
+    /**
+     * Sets the list of image's
+     * @param setmediaImages The media images associated with the card
+     */
+    public void setmediaImages(List<Image> setmediaImages) {
+        this.mediaImages = setmediaImages;
+    }
+
+    /**
+     * Retrieves the card's set media images
+     * @return The media images
+     */
+    public List<Image> getmediaImages(){return mediaImages;}
+
+    /**
+     * Sets the list of comments
+     * @param setComments The comments associated with the card
+     */
+    public void setComments(List<CardComment> setComments) {
+        this.comments = setComments;
+    }
+
+    /**
+     * Retrieves the card's set comments
+     * @return The media comments
+     */
+    public List<CardComment> getComments(){return comments;}
 
     public Card(int setID, String setTitle, String setDescription, String setDateCreated, String setDateFinished){
         this.id = setID;
