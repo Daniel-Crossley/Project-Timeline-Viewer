@@ -10,10 +10,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -149,5 +150,65 @@ public class TimeLineController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    /**
+     * Opens the card as a popup
+     * @param stage The stage of the application
+     * @param cardToRead The card to be used to construct the card popup
+     */
+    public void OpenCard(Stage stage, Card cardToRead) {
+        // Title of the card
+        Label cardTitle = new Label("Card - " + cardToRead.getTitle());
+        Pane titleContainer = new Pane(cardTitle);
+
+        // Media Container for Images
+        HBox mediaContainer = new HBox();
+        if (!cardToRead.getmediaImages().isEmpty()) {
+            Image firstImage = new Image(cardToRead.getmediaImages().get(0));
+            ImageView firstImageView = new ImageView(firstImage);
+            mediaContainer.getChildren().add(firstImageView);
+        }
+
+        // Adding up to three more images
+        if (cardToRead.getmediaImages().size() >= 3) {
+            VBox leftMediaContainer = new VBox();
+            for (int i = 1; i < 4; i++) {
+                Image otherImages = new Image(cardToRead.getmediaImages().get(i));
+                ImageView otherImageView = new ImageView(otherImages);
+                otherImageView.setFitWidth(30);
+                otherImageView.setPreserveRatio(true);
+                leftMediaContainer.getChildren().add(otherImageView);
+            }
+            mediaContainer.getChildren().add(leftMediaContainer);
+        }
+
+        // Card information
+        Label dateAddedTitle = new Label("Date Added:");
+        Label dateAdded = new Label(cardToRead.getDateCreated());
+        Label descriptionTitle = new Label("Description:");
+        Label description = new Label(cardToRead.getDescription());
+        HBox cardInformation = new HBox(dateAddedTitle, dateAdded, descriptionTitle, description);
+
+        // Create the popup
+        Popup cardPopup = new Popup();
+        VBox cardContainer = new VBox(titleContainer, mediaContainer, cardInformation);
+        cardPopup.getContent().add(cardContainer);
+
+        // Set the size of the popup based on the size of the stage
+        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
+            cardContainer.setMinWidth(newVal.doubleValue() * 0.5);
+        });
+        stage.heightProperty().addListener((obs, oldVal, newVal) -> {
+            cardContainer.setMinHeight(newVal.doubleValue() * 0.5);
+        });
+
+        // (Haven't tested this), close if clicked outside the popup
+        stage.getScene().addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
+            if (cardPopup.isShowing() && !cardPopup.getContent().get(0).isHover()) {
+                cardPopup.hide();
+            }
+        });
     }
 }
