@@ -1,5 +1,6 @@
 package com.example.project.controller;
 
+import com.example.project.ApplicationStart;
 import com.example.project.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,14 +25,31 @@ import com.example.project.model.Card;
 public class TimeLineController {
 
 
+    public Button Button_Return;
+    public Label Label_Project_Title;
+    public Button Button_Edit_Project;
+    public HBox Cards_Container;
+    public Button Button_New_Card;
+    public Button Button_Export;
+    public Pane Top_Bar;
+    public Label cardStatus;
+    public Pane Buffer_Cards;
+    public ScrollPane scroll_Container;
+    public VBox vBox_Cards;
     private User user;
     private Project project;
 
-    public void initialize(int id, String title, String description, String dateCreated, String dateCompleted, String colour, int likes) {
-        // Initialize the model
 
-        // Set initial UI state
-        updateView();
+    private final int projectWidth = 150;
+    private final String projectColour = "#f1d9b7";
+    private final int projectRadius = 10;
+    private final String projectBorderColour = "#c27c18";
+    private final int projectBorderWidth = 2;
+
+
+    public void initialize(User user, Project projectReference) {
+        setUser(user);
+        setProject(projectReference);
     }
 
     public void setUser(User user){
@@ -44,16 +62,34 @@ public class TimeLineController {
     /**
      * Updates the timeline view based on stored data in timeline
      */
-    private void updateView() {
-        projectTitle.setText(project.getTitle());
-        TopBar.setStyle("-fx-background-color: " + project.getColour() + ";");
+    void updateView(Stage stage) {
+
+        // Change width to fit size of stage
+        stage.widthProperty().addListener((obs, oldWidth, newWidth) -> {
+            int widthCalculation = (int) (newWidth.doubleValue() + projectWidth);
+            Cards_Container.setPrefWidth(widthCalculation);
+            Buffer_Cards.setPrefWidth(widthCalculation);
+        });
+
+
+        //Set colour
+        Label_Project_Title.setText(project.getTitle());
+        if(project.getColour() != null){
+            String color = project.getColour();
+            if (color.matches("^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$")){
+                System.out.println("Project Colour: " + color);
+                Top_Bar.setStyle("-fx-background-color: " + project.getColour() + ";");
+            } else{
+                System.out.println("Project Colour is Wack: " + color);
+            }
+        }
 
         // Update other UI elements as needed
         if (project.getListOfCards().isEmpty()) {
             cardStatus.setText("No cards in this project, please click add new.");
         } else {
             cardStatus.setText(project.getDescription());
-            addCardsToTimeline();
+            addCardsToTimeline(stage);
         }
     }
 
@@ -89,11 +125,11 @@ public class TimeLineController {
     }
 
     /**
-     * Generates cards to the timeline
+     * Generates card containers to display on timeline
      */
-    private void addCardsToTimeline(){
+    private void addCardsToTimeline(Stage stage){
         try {
-            if (cardHolder == null) {
+            if (project.getListOfCards() == null) {
                 return;
             }
 
@@ -102,32 +138,25 @@ public class TimeLineController {
             for (Card cardToAdd : project.getListOfCards()) {
                 try {
                     StackPane cardOverlay = new StackPane();
-                    cardOverlay.prefWidthProperty().bind(cardHolder.widthProperty().multiply(0.3));
+                    cardOverlay.prefWidthProperty().bind(Cards_Container.widthProperty().multiply(0.3));
 
+                    // Card
+                    Label cardTitle = new Label("Title: " + cardToAdd.getTitle());
+                    Label cardDate = new Label("Date: " + cardToAdd.getDateCreated());
                     VBox cardLayout = new VBox();
 
-                    // Top Menu Bar
-                    HBox topMenuBar = new HBox();
-                    Button returnButton = new Button("Return");
-                    Label cardTitle = new Label(cardToAdd.getTitle());
-                    topMenuBar.getChildren().addAll(returnButton, cardTitle);
-
-                    // Media Container
-                    HBox mediaContainer = new HBox();
-
-                    // Description
-                    VBox descriptionContainer = new VBox();
-                    Label descriptionTitle = new Label("Description:");
-                    Label descriptionContent = new Label(cardToAdd.getDescription());
-                    descriptionContainer.getChildren().addAll(descriptionTitle, descriptionContent);
-
-                    // Set ID
+                    // Set Controller stuff
                     cardOverlay.setId("card_" + cardToAdd.getId());
 
+                    cardOverlay.setOnMouseClicked(event -> {
+                        System.out.println("Card clicked: " + cardToAdd.getTitle());
+                        OpenCard(stage, cardToAdd);
+                    });
+
                     // Add to main container
-                    cardLayout.getChildren().addAll(topMenuBar, mediaContainer, descriptionContainer);
+                    cardLayout.getChildren().addAll(cardTitle, cardDate);
                     cardOverlay.getChildren().addAll(cardLayout);
-                    cardHolder.getChildren().add(cardOverlay);
+                    Cards_Container.getChildren().add(cardOverlay);
                 } catch (Exception e) {
                     e.printStackTrace();
                     allCardsAdded = false;
@@ -152,17 +181,17 @@ public class TimeLineController {
 
         // Media Container for Images
         HBox mediaContainer = new HBox();
-        if (!cardToRead.getmediaImages().isEmpty()) {
-            Image firstImage = new Image(cardToRead.getmediaImages().get(0));
+        if (!cardToRead.getMediaImages().isEmpty()) {
+            Image firstImage = new Image(cardToRead.getMediaImages().get(0));
             ImageView firstImageView = new ImageView(firstImage);
             mediaContainer.getChildren().add(firstImageView);
         }
 
         // Adding up to three more images
-        if (cardToRead.getmediaImages().size() >= 3) {
+        if (cardToRead.getMediaImages().size() >= 3) {
             VBox leftMediaContainer = new VBox();
             for (int i = 1; i < 4; i++) {
-                Image otherImages = new Image(cardToRead.getmediaImages().get(i));
+                Image otherImages = new Image(cardToRead.getMediaImages().get(i));
                 ImageView otherImageView = new ImageView(otherImages);
                 otherImageView.setFitWidth(30);
                 otherImageView.setPreserveRatio(true);
@@ -193,9 +222,25 @@ public class TimeLineController {
 
         // (Haven't tested this), close if clicked outside the popup
         stage.getScene().addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
-            if (cardPopup.isShowing() && !cardPopup.getContent().get(0).isHover()) {
+            if (cardPopup.isShowing() && cardPopup.getContent().stream().noneMatch(Node::isHover)) {
                 cardPopup.hide();
             }
         });
+    }
+    /**
+     * This will return the scene to the dashboard
+     * @throws IOException Issues with login process
+     */
+
+    @FXML
+    protected void returnToDashboard(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) Button_Return.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("Owner-Dashboard.fxml"));
+        Parent root = fxmlLoader.load();
+        DashboardController dashboardController = fxmlLoader.getController();
+
+        dashboardController.setUserInformation(false, user);
+        Scene scene = new Scene(root, ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
+        stage.setScene(scene);
     }
 }

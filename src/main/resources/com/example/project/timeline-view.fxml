@@ -9,12 +9,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.controller.TimeLineController">
    <children>
       <Pane fx:id="Top_Bar" prefHeight="49.0" prefWidth="600.0" style="-fx-background-color: A1662F;">
          <children>
-            <Button fx:id="Button_Return" layoutX="14.0" layoutY="12.0" mnemonicParsing="false" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" stylesheets="@stylesheet.css" text="Go Back">
+            <Button fx:id="Button_Return" layoutX="14.0" layoutY="12.0" mnemonicParsing="false" onAction="#returnToDashboard" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" stylesheets="@stylesheet.css" text="Go Back">
                <effect>
                   <DropShadow />
                </effect>
@@ -24,18 +23,21 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Button fx:id="Button_Edit_Project" alignment="CENTER_RIGHT" layoutX="499.0" layoutY="12.0" mnemonicParsing="false" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" stylesheets="@stylesheet.css" text="Edit Project">
+            <Button fx:id="Button_Edit_Project" alignment="CENTER_RIGHT" layoutX="709.0" layoutY="12.0" mnemonicParsing="false" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" stylesheets="@stylesheet.css" text="Edit Project">
                <effect>
                   <DropShadow />
                </effect>
             </Button>
          </children>
       </Pane>
-      <ScrollPane hbarPolicy="ALWAYS" prefHeight="309.0" prefWidth="600.0" vbarPolicy="NEVER">
+      <ScrollPane fx:id="scroll_Container" hbarPolicy="ALWAYS" prefHeight="309.0" prefWidth="600.0" vbarPolicy="NEVER">
          <content>
-            <VBox prefHeight="298.0" prefWidth="598.0" style="-fx-background-color: e5c08b;">
+            <VBox fx:id="vBox_Cards" prefHeight="296.0" prefWidth="798.0" style="-fx-background-color: e5c08b;">
                <children>
-                  <Pane prefHeight="79.0" prefWidth="598.0" style="-fx-background-color: e5c08b;" />
+                  <Pane fx:id="Buffer_Cards" prefHeight="79.0" prefWidth="598.0" style="-fx-background-color: e5c08b;">
+                     <children>
+                        <Label fx:id="cardStatus" layoutX="32.0" layoutY="48.0" />
+                     </children></Pane>
                   <HBox fx:id="Cards_Container" prefHeight="147.0" prefWidth="598.0" style="-fx-background-color: d6b88d;" />
                </children>
             </VBox>
@@ -43,12 +45,12 @@
       </ScrollPane>
       <Pane prefHeight="43.0" prefWidth="600.0" style="-fx-background-color: A1662F;">
          <children>
-            <Button fx:id="Button_New_Card" layoutX="507.0" layoutY="9.0" mnemonicParsing="false" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" stylesheets="@stylesheet.css" text="New Card">
+            <Button fx:id="Button_New_Card" layoutX="710.0" layoutY="9.0" mnemonicParsing="false" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" stylesheets="@stylesheet.css" text="New Card">
                <effect>
                   <DropShadow />
                </effect>
             </Button>
-            <Button fx:id="Button_Export" layoutX="427.0" layoutY="9.0" mnemonicParsing="false" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" stylesheets="@stylesheet.css" text="Export">
+            <Button fx:id="Button_Export" layoutX="630.0" layoutY="9.0" mnemonicParsing="false" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" stylesheets="@stylesheet.css" text="Export">
                <effect>
                   <DropShadow />
                </effect>
