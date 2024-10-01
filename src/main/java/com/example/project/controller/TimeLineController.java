@@ -22,20 +22,7 @@ import com.example.project.model.Project;
 import com.example.project.model.Card;
 
 public class TimeLineController {
-    @FXML
-    private ScrollPane cardSpace;
-    @FXML
-    private FlowPane TopBar;
-    @FXML
-    private Button buttonAddCard;
-    @FXML
-    private Button buttonExport;
-    @FXML
-    private Label cardStatus;
-    @FXML
-    private HBox cardHolder;
-    @FXML
-    private Label projectTitle;
+
 
     private User user;
     private Project project;
