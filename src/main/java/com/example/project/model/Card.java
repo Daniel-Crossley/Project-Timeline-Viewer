@@ -20,17 +20,17 @@ public class Card {
 
     /**
      * Sets the list of image's
-     * @param setmediaImages The media images associated with the card
+     * @param setMediaImages The media images associated with the card
      */
-    public void setmediaImages(List<String> setmediaImages) {
-        this.mediaImages = setmediaImages;
+    public void setmediaImages(List<String> setMediaImages) {
+        this.mediaImages = setMediaImages;
     }
 
     /**
      * Retrieves the card's set media images
      * @return The media images addresses
      */
-    public List<String> getmediaImages(){return mediaImages;}
+    public List<String> getMediaImages(){return mediaImages;}
 
     /**
      * Sets the list of comments

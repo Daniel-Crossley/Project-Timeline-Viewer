@@ -173,6 +173,7 @@ public class DashboardController implements Initializable {
                 TimeLineController timelineController = fxmlLoader.getController();
                 timelineController.setProject(projectToAdd);
                 timelineController.setUser(userInformation);
+                timelineController.updateView(stage);
                 Scene scene = new Scene(root, ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
                 stage.setScene(scene);
             } catch (IOException e) {
