@@ -19,6 +19,8 @@ import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import com.example.project.model.Project;
 import com.example.project.model.Card;
 
@@ -238,7 +240,7 @@ public class TimeLineController {
         FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("Owner-Dashboard.fxml"));
         Parent root = fxmlLoader.load();
         DashboardController dashboardController = fxmlLoader.getController();
-
+        user.setProjects(new ArrayList<>()); // Resets the user's project list
         dashboardController.setUserInformation(false, user);
         Scene scene = new Scene(root, ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
         stage.setScene(scene);
