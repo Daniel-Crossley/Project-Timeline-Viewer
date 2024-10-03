@@ -18,7 +18,7 @@ public class ApplicationStart extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(),WIDTH,HEIGHT);
         scene.getStylesheets().add(getClass().getResource("stylesheet.css").toExternalForm());
-        stage.setTitle(TI]TLE);
+        stage.setTitle(TITLE);
         stage.setScene(scene);
         stage.show();
     }
