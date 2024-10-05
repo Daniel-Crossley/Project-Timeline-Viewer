@@ -13,6 +13,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SearchController {
 
@@ -24,6 +26,45 @@ public class SearchController {
     public Button Button_Logout;
     @FXML
     public Button DashboardSearch;
+    @FXML
+    private Button threeDTag;
+    @FXML
+    private Button metalTag;
+    @FXML
+    private Button clayTag;
+    @FXML
+    private Button sculptingTag;
+    @FXML
+    private Button woodTag;
+    @FXML
+    private Button paperTag;
+    @FXML
+    private Button searchButton;
+
+
+    private Map<Button, Boolean> buttonStates = new HashMap<>();
+
+    @FXML
+    public void initialize(){
+
+        buttonStates.put(threeDTag, false);
+        buttonStates.put(metalTag, false);
+        buttonStates.put(clayTag, false);
+        buttonStates.put(sculptingTag, false);
+        buttonStates.put(woodTag, false);
+        buttonStates.put(paperTag, false);
+
+        threeDTag.setOnAction(event -> TagColourChange(threeDTag));
+        metalTag.setOnAction(event -> TagColourChange(metalTag));
+        clayTag.setOnAction(event -> TagColourChange(clayTag));
+        sculptingTag.setOnAction(event -> TagColourChange(sculptingTag));
+        woodTag.setOnAction(event -> TagColourChange(woodTag));
+        paperTag.setOnAction(event -> TagColourChange(paperTag));
+
+        searchButton.setOnAction(event -> printTrueButtons());
+    }
+
+
     /**
      * Retrieves user type and user information
      * @param guest Set to true if person is a guest, false if not
@@ -73,4 +114,28 @@ public class SearchController {
         System.out.println("Going back to the previous screen.");
     }
 
+    public void TagColourChange(Button clickedButton){
+        boolean newState =!buttonStates.get(clickedButton);
+        buttonStates.put(clickedButton,newState);
+        if (newState) {
+            clickedButton.setStyle("-fx-background-color: #ff0000; -fx-background-radius: 50;");
+        } else {
+            clickedButton.setStyle("-fx-background-color: #e5c08b; -fx-background-radius: 50;");
+        }
+
+        System.out.println(clickedButton.getId() + " is now " + (newState ? "ON" : "OFF"));
+    }
+
+    private void printTrueButtons() {
+        System.out.println("Buttons currently ON:");
+        for (Map.Entry<Button, Boolean> entry : buttonStates.entrySet()) {
+            if (entry.getValue()) {
+                System.out.println("- " + entry.getKey().getId());
+            }
+        }
+    }
+
+    public boolean getButtonState(Button button) {
+        return buttonStates.getOrDefault(button, false);
+    }
 }
