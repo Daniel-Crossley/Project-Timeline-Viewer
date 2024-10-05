@@ -1,20 +1,25 @@
 package com.example.project.controller;
 
 import com.example.project.ApplicationStart;
+import com.example.project.model.Project;
+import com.example.project.model.SqliteProjectDAO;
 import com.example.project.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class SearchController {
 
@@ -40,13 +45,27 @@ public class SearchController {
     private Button paperTag;
     @FXML
     private Button searchButton;
-
-
+    public HBox topHBOX;
+    public HBox midHBOX;
+    public HBox botHBOX;
+    public ScrollPane SearchScroll;
     private Map<Button, Boolean> buttonStates = new HashMap<>();
+    private SqliteProjectDAO projectDAO;
+    private List<Project> projectList = new ArrayList<>();
+    @FXML
+    private TextField titleSearch;
+
+    private final int projectWidth = 150;
+    private final String projectColour = "#f1d9b7";
+    private final int projectRadius = 10;
+    private final String projectBorderColour = "#c27c18";
+    private final int projectBorderWidth = 2;
 
     @FXML
     public void initialize(){
 
+        topHBOX.prefHeightProperty().bind(SearchScroll.heightProperty().multiply(0.88));
+        projectDAO = new SqliteProjectDAO();
         buttonStates.put(threeDTag, false);
         buttonStates.put(metalTag, false);
         buttonStates.put(clayTag, false);
@@ -61,7 +80,8 @@ public class SearchController {
         woodTag.setOnAction(event -> TagColourChange(woodTag));
         paperTag.setOnAction(event -> TagColourChange(paperTag));
 
-        searchButton.setOnAction(event -> printTrueButtons());
+        searchButton.setOnAction(event -> SearchButton());
+
     }
 
 
@@ -118,7 +138,7 @@ public class SearchController {
         boolean newState =!buttonStates.get(clickedButton);
         buttonStates.put(clickedButton,newState);
         if (newState) {
-            clickedButton.setStyle("-fx-background-color: #ff0000; -fx-background-radius: 50;");
+            clickedButton.setStyle("-fx-background-color: #cc8b2e; -fx-background-radius: 50;");
         } else {
             clickedButton.setStyle("-fx-background-color: #e5c08b; -fx-background-radius: 50;");
         }
@@ -126,16 +146,97 @@ public class SearchController {
         System.out.println(clickedButton.getId() + " is now " + (newState ? "ON" : "OFF"));
     }
 
-    private void printTrueButtons() {
-        System.out.println("Buttons currently ON:");
-        for (Map.Entry<Button, Boolean> entry : buttonStates.entrySet()) {
-            if (entry.getValue()) {
-                System.out.println("- " + entry.getKey().getId());
+
+
+    private void SearchButton() {
+        if (titleSearch != null) {
+            String searchText = titleSearch.getText();
+            System.out.println("Searching for: " + searchText);
+            List<Project> searchResults = projectDAO.getSearchProjects(searchText);
+            if (searchResults !=null && !searchResults.isEmpty()){
+                this.projectList = searchResults;
+                System.out.println("Found " + searchResults.size() + " results.");
+                addProjectsToDash();
+            } else {
+                System.out.println("No results found or an error occurred.");
             }
+
+
+        } else {
+            System.out.println("Error: titleSearch TextField is null");
         }
     }
+
+
 
     public boolean getButtonState(Button button) {
         return buttonStates.getOrDefault(button, false);
     }
+
+    private void addProjectsToDash(){
+
+            SearchScroll.widthProperty().addListener((obs, oldWidth, newWidth) -> {
+                int widthCalculation = (int) (newWidth.doubleValue() + projectWidth);
+                topHBOX.setPrefWidth(widthCalculation);
+            });
+
+        for(Project projectToAdd: projectList){
+            if (Objects.equals(projectToAdd.getDateFinished(), "none")){
+                generateContainer(projectToAdd, topHBOX, SearchScroll);
+            }
+
+        }
+    }
+
+    private VBox projectVBoxStyling(String colour) {
+        VBox projectContainer = new VBox();
+        projectContainer.setAlignment(Pos.CENTER);
+        projectContainer.setSpacing(10);
+        projectContainer.prefHeightProperty().bind(topHBOX.heightProperty().multiply(0.95));
+        projectContainer.setPrefWidth(projectWidth);
+        projectContainer.setStyle(
+                "-fx-border-width: " + this.projectBorderWidth + "; " +
+                        "-fx-background-color: " + colour + "; " +
+                        "-fx-background-radius: "  + this.projectRadius + "; " +
+                        "-fx-border-color: " + this.projectBorderColour + "; " +
+                        "-fx-border-radius: " + this.projectRadius + "; "
+        );
+
+        return projectContainer;
+    }
+
+    private void generateContainer(Project projectToAdd, HBox parentContainer, ScrollPane scrollPane){
+        VBox projectContainer = projectVBoxStyling(projectToAdd.getColour());
+        Label cardTitle = new Label(projectToAdd.getTitle());
+        Label DateCommenced = new Label ("Commenced: " + projectToAdd.getDateCreated());
+        projectContainer.getChildren().addAll(cardTitle,DateCommenced);
+
+        if (!Objects.equals(projectToAdd.getDateCreated(), "none")){
+            Label DateCompleted = new Label ("Completed: " + projectToAdd.getDateFinished());
+            projectContainer.getChildren().addAll(DateCompleted);
+        }
+
+        projectContainer.setOnMouseClicked(event -> {
+            System.out.println("Project clicked: " + projectToAdd.getTitle());
+            Stage stage = (Stage) projectContainer.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("timeline-view.fxml"));
+            Parent root = null;
+            try {
+                root = fxmlLoader.load();
+                TimeLineController timelineController = fxmlLoader.getController();
+                timelineController.setProject(projectToAdd);
+                timelineController.setUser(userInformation);
+                Scene scene = new Scene(root, ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
+                stage.setScene(scene);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        parentContainer.getChildren().addAll(projectContainer);
+        scrollPane.widthProperty().addListener((obs, oldWidth, newWidth) -> {
+            int widthCalculation = (int) (newWidth.doubleValue() + projectWidth);
+            parentContainer.setPrefWidth(widthCalculation);
+        });
+    }
+
 }

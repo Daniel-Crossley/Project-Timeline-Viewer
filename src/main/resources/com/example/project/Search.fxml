@@ -126,15 +126,15 @@
                   <DropShadow />
                </effect>
             </Pane>
-            <ScrollPane prefHeight="357.0" prefWidth="387.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <ScrollPane fx:id="SearchScroll" prefHeight="357.0" prefWidth="387.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="334.0" prefWidth="396.0" style="-fx-background-color: d6b88d;">
                      <children>
                         <VBox prefHeight="342.0" prefWidth="373.0" style="-fx-background-color: d6b88d;">
                            <children>
-                              <HBox id="topHBOX" prefHeight="112.0" prefWidth="373.0" style="-fx-background-color: d6b88d;" />
-                              <HBox id="midHBOX" prefHeight="112.0" prefWidth="373.0" style="-fx-background-color: d6b88d;" />
-                              <HBox id="botHBOX" prefHeight="112.0" prefWidth="373.0" style="-fx-background-color: d6b88d;" />
+                              <HBox fx:id="topHBOX" prefHeight="112.0" prefWidth="373.0" style="-fx-background-color: d6b88d;" />
+                              <HBox fx:id="midHBOX" prefHeight="112.0" prefWidth="373.0" style="-fx-background-color: d6b88d;" />
+                              <HBox fx:id="botHBOX" prefHeight="112.0" prefWidth="373.0" style="-fx-background-color: d6b88d;" />
                            </children>
                         </VBox>
                      </children>
