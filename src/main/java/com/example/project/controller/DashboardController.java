@@ -239,7 +239,19 @@ public class DashboardController implements Initializable {
      * @param actionEvent Clicking Action
      */
     public void Open_Search(ActionEvent actionEvent) {
+        try {
+            Stage stage = (Stage) Button_Search.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("Search.fxml"));
+            Parent root = fxmlLoader.load();
+            SearchController searchController = fxmlLoader.getController();
+            searchController.setUserInformation(guest, userInformation);
+            Scene scene = new Scene(root, ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
+            stage.setScene(scene);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
     }
+
 
 
 }
