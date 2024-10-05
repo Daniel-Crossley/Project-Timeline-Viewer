@@ -46,21 +46,22 @@ public class Card {
      */
     public List<CardComment> getComments(){return comments;}
 
-    public Card(int setID, String setTitle, String setDescription, String setDateCreated, String setDateFinished){
-        this.id = setID;
+    public Card(String setTitle, String setDescription, String setDateCreated, String setDateFinished){
         this.title = setTitle;
         this.description = setDescription;
         this.dateCreated = setDateCreated;
         this.dateFinished = setDateFinished;
     }
 
-    public int getId(){
+   public int getId(){
         return this.id;
     }
 
     public void setId(int id) {
         this.id = id;
     }
+
+
 
     /**
      * Retrieves the title of the card

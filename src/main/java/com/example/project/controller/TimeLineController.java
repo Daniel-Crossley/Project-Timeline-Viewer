@@ -15,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 
@@ -121,6 +122,49 @@ public class TimeLineController {
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(new Scene(newRoot));
             stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void onNewCardClick(ActionEvent event) {
+        try {
+            //Load the popup
+            FXMLLoader loader = new FXMLLoader(ApplicationStart.class.getResource("new-card-popup.fxml"));
+            Parent popupRoot = loader.load();
+            NewCardPopupController controller = loader.getController();
+            Stage popupStage = new Stage();
+            controller.setStage(popupStage);
+
+            controller.setProject(project);
+
+            //make only popup clickable
+            Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            popupStage.initModality(Modality.WINDOW_MODAL);
+            popupStage.initOwner(primaryStage);
+
+
+            //set popup position and size
+            popupStage.setWidth(500);
+            popupStage.setHeight(300);
+
+            popupStage.setX(500);
+            popupStage.setY(200);
+
+            popupStage.setScene(new Scene(popupRoot));
+            popupStage.setTitle("Add New Card");
+            popupStage.showAndWait();  // Wait for the popup to close
+
+            // After the popup closes, retrieve the newly created card
+            //Card newCard = controller.getNewCard();
+            //if (newCard != null) {
+                // Add the new card to the project
+                //project.getListOfCards().add(newCard);
+
+                // Update the timeline to reflect the new card
+                updateView((Stage) ((Node) event.getSource()).getScene().getWindow());
+            //}
         } catch (IOException e) {
             e.printStackTrace();
         }

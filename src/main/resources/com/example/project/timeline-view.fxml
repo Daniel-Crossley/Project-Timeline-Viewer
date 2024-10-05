@@ -45,7 +45,7 @@
       </ScrollPane>
       <Pane prefHeight="43.0" prefWidth="600.0" style="-fx-background-color: A1662F;">
          <children>
-            <Button fx:id="Button_New_Card" layoutX="710.0" layoutY="9.0" mnemonicParsing="false" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" stylesheets="@stylesheet.css" text="New Card">
+            <Button fx:id="Button_New_Card" layoutX="710.0" layoutY="9.0" mnemonicParsing="false" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" stylesheets="@stylesheet.css" text="New Card" onAction="#onNewCardClick">
                <effect>
                   <DropShadow />
                </effect>

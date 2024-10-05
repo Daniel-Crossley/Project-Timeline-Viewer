@@ -50,7 +50,7 @@ public class SqliteCardDAO {
                 String description = resultSet.getString("description");
                 String dateCreated = resultSet.getString("dateCreated");
                 String dateFinished = resultSet.getString("dateFinished");
-                Card card = new Card(id, title, description, dateCreated, dateFinished);
+                Card card = new Card(title, description, dateCreated, dateFinished);
                 return card;
             }
         } catch (Exception e) {
@@ -69,12 +69,11 @@ public class SqliteCardDAO {
             statement.setInt(1, project.getId());
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                int id = resultSet.getInt("id");
                 String title = resultSet.getString("title");
                 String description = resultSet.getString("description");
                 String dateCreated = resultSet.getString("dateCreated");
                 String dateFinished = resultSet.getString("dateFinished");
-                Card card = new Card(id, title, description, dateCreated, dateFinished);
+                Card card = new Card(title, description, dateCreated, dateFinished);
                 project.addCard(card);
             }
         } catch (Exception e) {
@@ -89,7 +88,7 @@ public class SqliteCardDAO {
     public void addCard(Card card, Project project) {
         try {
             PreparedStatement statement = connection.prepareStatement(
-                    "INSERT INTO Projects (projectId, title, description, dateCreated, dateFinished) VALUES (?, ?, ?, ?, ?, ?)");
+                    "INSERT INTO Cards (projectId, title, description, dateCreated, dateFinished) VALUES (?, ?, ?, ?, ?)");
             statement.setInt(1, project.getId());
             statement.setString(2, card.getTitle());
             statement.setString(3, card.getDescription());

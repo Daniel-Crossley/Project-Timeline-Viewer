@@ -34,11 +34,12 @@ public class TestProject {
 
         if (numberOfCards != 0){
             for (int i = 0; i < numberOfCards; i++){
+                int projectId = 4;
                 String cardTitle = RandomString(5);
                 String cardDescription = RandomString(20);
                 String dateCreated = "23/11/1963";
                 String dateFinished = "23/11/1963";
-                Card randomCard = new Card(i,cardTitle,cardDescription,dateCreated,dateFinished);
+                Card randomCard = new Card(cardTitle,cardDescription,dateCreated,dateFinished);
                 setOfCards.add(randomCard);
             }
         }
