@@ -15,22 +15,22 @@ public class Card {
     private String dateCreated;
     private String dateFinished;
     private List<CardComment> comments = new ArrayList<>();
-    private List<String> mediaImages = new ArrayList<>();
+    private String mediaImage;
 
 
     /**
      * Sets the list of image's
-     * @param setMediaImages The media images associated with the card
+     * @param mediaImage The media images associated with the card
      */
-    public void setmediaImages(List<String> setMediaImages) {
-        this.mediaImages = setMediaImages;
+    public void setMediaImage(String mediaImage) {
+        this.mediaImage = mediaImage;
     }
 
     /**
      * Retrieves the card's set media images
      * @return The media images addresses
      */
-    public List<String> getMediaImages(){return mediaImages;}
+    public String getMediaImage(){return mediaImage;}
 
     /**
      * Sets the list of comments
