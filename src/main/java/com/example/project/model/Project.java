@@ -23,7 +23,7 @@ public class Project {
     private boolean visibility = true;
     private int likes = 0;
     private String colour = "#9FA1AC";
-    private String tags;
+    private List<String> tags = new ArrayList<>();
 
     /**
      * Initiates project's timeline, set up
@@ -35,7 +35,7 @@ public class Project {
      * @param colour the colour of the top bar of the project
      * @param likes the number of likes the project has
      */
-    public Project(int id, String title, String description, String dateCreated, String dateCompleted, boolean visibility, String colour, int likes, String tags){
+    public Project(int id, String title, String description, String dateCreated, String dateCompleted, boolean visibility, String colour, int likes, List<String> tags){
         this.id = id;
         this.titleName = title;
         this.description = description;
@@ -214,5 +214,7 @@ public class Project {
         return listOfCards;
     }
 
-    public String getTags() {return tags;}
+    public List<String> getTags() {return tags;}
+
+    public void addTag(String tag){this.tags.add(tag);}
 }

@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Arrays;
+import java.util.List;
 
 public class SqliteProjectDAO {
     private Connection connection;
@@ -58,7 +60,8 @@ public class SqliteProjectDAO {
                 int likes = resultSet.getInt("likes");
                 String colour = resultSet.getString("colour");
                 String tags = resultSet.getString("tags");
-                Project project = new Project(id, title, description, dateCreated, dateFinished, visibility, colour, likes, tags);
+                List<String> tagsList = Arrays.asList(tags.split(",\\s*"));
+                Project project = new Project(id, title, description, dateCreated, dateFinished, visibility, colour, likes, tagsList);
                 return project;
             }
         } catch (Exception e) {
@@ -87,7 +90,8 @@ public class SqliteProjectDAO {
                 int likes = resultSet.getInt("likes");
                 String colour = resultSet.getString("colour");
                 String tags = resultSet.getString("tags");
-                Project project = new Project(id, title, description, dateCreated, dateFinished, visibility, colour, likes, tags);
+                List<String> tagsList = Arrays.asList(tags.split(",\\s*"));
+                Project project = new Project(id, title, description, dateCreated, dateFinished, visibility, colour, likes, tagsList);
                 user.addProject(project);
             }
         } catch (Exception e) {
@@ -111,7 +115,7 @@ public class SqliteProjectDAO {
             statement.setBoolean(6, project.isVisible());
             statement.setInt(7, project.getLikes());
             statement.setString(8, project.getColour());
-            statement.setString(9, project.getTags());
+            statement.setString(9, String.join(", ", project.getTags()));
             statement.executeUpdate();
             // Set the id of the new project
             ResultSet generatedKeys = statement.getGeneratedKeys();
