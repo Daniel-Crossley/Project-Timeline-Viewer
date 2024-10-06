@@ -15,14 +15,14 @@ public class Card {
     private String dateCreated;
     private String dateFinished;
     private List<CardComment> comments = new ArrayList<>();
-    private String mediaImage;
+    private Image mediaImage;
 
 
     /**
      * Sets the list of image's
      * @param mediaImage The media images associated with the card
      */
-    public void setMediaImage(String mediaImage) {
+    public void setMediaImage(Image mediaImage) {
         this.mediaImage = mediaImage;
     }
 
@@ -30,7 +30,7 @@ public class Card {
      * Retrieves the card's set media images
      * @return The media images addresses
      */
-    public String getMediaImage(){return mediaImage;}
+    public Image getMediaImage(){return mediaImage;}
 
     /**
      * Sets the list of comments
@@ -46,12 +46,13 @@ public class Card {
      */
     public List<CardComment> getComments(){return comments;}
 
-    public Card(int setID, String setTitle, String setDescription, String setDateCreated, String setDateFinished){
+    public Card(int setID, String setTitle, String setDescription, String setDateCreated, String setDateFinished, Image setMediaImage){
         this.id = setID;
         this.title = setTitle;
         this.description = setDescription;
         this.dateCreated = setDateCreated;
         this.dateFinished = setDateFinished;
+        this.mediaImage = setMediaImage;
     }
 
     public int getId(){

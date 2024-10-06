@@ -1,6 +1,7 @@
 module com.example.project {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.swing;
     requires java.sql;
     exports com.example.project.model;
     requires java.desktop;

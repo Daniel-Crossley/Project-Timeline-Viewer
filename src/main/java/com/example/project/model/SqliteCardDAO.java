@@ -1,9 +1,16 @@
 package com.example.project.model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import javafx.scene.image.Image;
+import javafx.embed.swing.SwingFXUtils;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+
+import java.sql.*;
 
 public class SqliteCardDAO {
     private Connection connection;
@@ -28,7 +35,8 @@ public class SqliteCardDAO {
                     + "title VARCHAR,"
                     + "description VARCHAR,"
                     + "dateCreated VARCHAR,"
-                    + "dateFinished VARCHAR"
+                    + "dateFinished VARCHAR,"
+                    + "image BLOB"
                     + ")";
             statement.execute(query);
         } catch (Exception e){
@@ -50,7 +58,10 @@ public class SqliteCardDAO {
                 String description = resultSet.getString("description");
                 String dateCreated = resultSet.getString("dateCreated");
                 String dateFinished = resultSet.getString("dateFinished");
-                Card card = new Card(id, title, description, dateCreated, dateFinished);
+                Blob imageBlob = resultSet.getBlob("image");
+                InputStream inputStream = imageBlob.getBinaryStream();
+                Image image = new Image(inputStream);
+                Card card = new Card(id, title, description, dateCreated, dateFinished, image);
                 return card;
             }
         } catch (Exception e) {
@@ -74,7 +85,10 @@ public class SqliteCardDAO {
                 String description = resultSet.getString("description");
                 String dateCreated = resultSet.getString("dateCreated");
                 String dateFinished = resultSet.getString("dateFinished");
-                Card card = new Card(id, title, description, dateCreated, dateFinished);
+                Blob imageBlob = resultSet.getBlob("image");
+                InputStream inputStream = imageBlob.getBinaryStream();
+                Image image = new Image(inputStream);
+                Card card = new Card(id, title, description, dateCreated, dateFinished, image);
                 project.addCard(card);
             }
         } catch (Exception e) {
@@ -89,12 +103,18 @@ public class SqliteCardDAO {
     public void addCard(Card card, Project project) {
         try {
             PreparedStatement statement = connection.prepareStatement(
-                    "INSERT INTO Projects (projectId, title, description, dateCreated, dateFinished) VALUES (?, ?, ?, ?, ?, ?)");
+                    "INSERT INTO Projects (projectId, title, description, dateCreated, dateFinished, image) VALUES (?, ?, ?, ?, ?, ?, ?)");
             statement.setInt(1, project.getId());
             statement.setString(2, card.getTitle());
             statement.setString(3, card.getDescription());
             statement.setString(4, card.getDateCreated());
             statement.setString(5, card.getDateFinished());
+            Image image = card.getMediaImage();
+            BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(bufferedImage, "png", baos);
+            byte[] imageBytes = baos.toByteArray();
+            statement.setBytes(6, imageBytes);
             statement.executeUpdate();
             // Set the id of the new project
             ResultSet generatedKeys = statement.getGeneratedKeys();
