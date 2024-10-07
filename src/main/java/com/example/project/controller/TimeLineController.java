@@ -192,17 +192,32 @@ public class TimeLineController extends DisplayStylings {
      * Generates timeline spacer
      * @return VBox used to display the spacer
      */
-    private VBox GenerateBetween(){
-        Label AboveSpace = new Label("  ");
+    private HBox GenerateBetween(){
+        Label SpaceText = new Label(" ");
 
-        AboveSpace.setFont(Font.font("System", FontWeight.BOLD, 20));
-        Label Space = new Label("www");
-        Space.setFont(Font.font("System", FontWeight.BOLD, 5));
+        VBox StartLine = new VBox (new HBox(new Label(" ")));
+        StartLine.setAlignment(Pos.CENTER);
+        StartLine.setStyle("-fx-background-color: #3d3d3d;");
+
+        HBox StartLineContainer = new HBox(StartLine);
+        StartLineContainer.setMaxHeight(30);
+
+
+        Label Space = new Label("");
         HBox Line = new HBox(Space);
+        Space.setFont(Font.font("System", FontWeight.BOLD, 5));
         Line.setStyle("-fx-background-color: #3d3d3d;");
-        VBox spacer = new VBox(AboveSpace,Line);
+
+        VBox spacer = new VBox(Line);
+
         spacer.setAlignment(Pos.CENTER);
-        return spacer;
+
+        VBox DateContainer = new VBox(SpaceText, spacer);
+        DateContainer.setAlignment(Pos.CENTER);
+
+        HBox Start = new HBox (DateContainer);
+        Start.setAlignment(Pos.CENTER);
+        return Start;
     }
 
     /**
@@ -221,7 +236,11 @@ public class TimeLineController extends DisplayStylings {
 
             for (Card cardToAdd : project.getListOfCards()) {
                 try {
-                    StackPane cardOverlay = StackPaneStyling(projectColour, projectWidth, projectBorderWidth, projectRadius, Integer.parseInt(projectBorderColour));
+                    //Add Spacer
+                    Cards_Container.getChildren().add(GenerateBetween());
+
+                    //Containers for Cards
+                    StackPane cardOverlay = StackPaneStyling(projectColour, projectWidth, projectBorderWidth, projectRadius, projectBorderColour);
                     cardOverlay.prefWidthProperty().bind(Cards_Container.widthProperty().multiply(0.3));
 
                     // Card
@@ -246,7 +265,7 @@ public class TimeLineController extends DisplayStylings {
                     });
 
                     // Add to main container
-                    ImageView mediaContainer = DisplayImage(cardToAdd);
+                    HBox mediaContainer = DisplayImage(cardToAdd, 150, 100);
                     cardLayout.getChildren().add(mediaContainer);
 
                     VBox textContent = new VBox(cardTitle, cardTitleContent, cardDate, cardDateContent);
@@ -255,8 +274,7 @@ public class TimeLineController extends DisplayStylings {
                     cardOverlay.getChildren().addAll(cardLayout);
                     Cards_Container.getChildren().add(cardOverlay);
 
-                    //Add Spacer
-                    Cards_Container.getChildren().add(GenerateBetween());
+
 
 
                     System.out.println("Card added: " + cardToAdd.getTitle());
@@ -273,19 +291,26 @@ public class TimeLineController extends DisplayStylings {
     /**
      * Generates an ImageView for displaying the media stored in the card
      * @param card The card used as reference
+     * @param fitWidth The width of ImageView
+     * @param fitHeight The height of ImageView
      * @return generated imageview
      */
-    private ImageView DisplayImage (Card card){
+    private HBox DisplayImage (Card card, int fitWidth, int fitHeight){
+        // Media Container for Images
+        Image mediaImage = card.getMediaImage();
+
+
         if (card.getMediaImage() != null) {
             ImageView mediaImageView = new ImageView(card.getMediaImage());
-            mediaImageView.setFitWidth(150);
-            mediaImageView.setFitHeight(100);
+            mediaImageView.setFitWidth(fitWidth);
+            mediaImageView.setFitHeight(fitHeight);
             mediaImageView.setPreserveRatio(true);
+
             HBox mediaContainer = new HBox();
             mediaContainer.setAlignment(Pos.CENTER);
             mediaContainer.getChildren().add(mediaImageView);
 
-            return mediaImageView;
+            return mediaContainer;
         }
         return null;
     }
@@ -347,16 +372,8 @@ public class TimeLineController extends DisplayStylings {
         titleContainer.setPadding(new Insets(10));
 
         // Media Container for Images
-        HBox mediaContainer = new HBox();
-        Image mediaImage = cardToRead.getMediaImage();
+        HBox mediaContainer = DisplayImage(cardToRead, 250, 200);
 
-        if (mediaImage != null) {
-            ImageView mediaImageView = new ImageView(mediaImage);
-            mediaImageView.setFitWidth(250);
-            mediaImageView.setFitHeight(200);
-            mediaImageView.setPreserveRatio(true);
-            mediaContainer.getChildren().add(mediaImageView);
-        }
 
         // Card information
         int TitleSize = 15;

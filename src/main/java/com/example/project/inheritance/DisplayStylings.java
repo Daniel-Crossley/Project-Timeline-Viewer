@@ -15,7 +15,7 @@ public class DisplayStylings{
      * @param borderColour The colour of the border
      * @return stylised stackpane
      */
-    protected StackPane StackPaneStyling(String colour, int width, int borderWidth, int radius, int borderColour) {
+    protected StackPane StackPaneStyling(String colour, int width, int borderWidth, int radius, String borderColour) {
         StackPane projectContainer = new StackPane();
         projectContainer.setAlignment(Pos.CENTER);
         projectContainer.setPrefWidth(width);
