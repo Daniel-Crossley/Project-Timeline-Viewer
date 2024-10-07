@@ -155,7 +155,7 @@ public class TimeLineController extends DisplayStylings {
 
             for (Card cardToAdd : project.getListOfCards()) {
                 try {
-                    StackPane cardOverlay = StackPaneStyling(projectColour, projectWidth, projectBorderWidth, projectRadius, Integer.parseInt(projectBorderColour));
+                    StackPane cardOverlay = StackPaneStyling(projectColour, projectWidth, projectBorderWidth, projectRadius, projectBorderColour);
                     cardOverlay.prefWidthProperty().bind(Cards_Container.widthProperty().multiply(0.3));
 
                     // Card
