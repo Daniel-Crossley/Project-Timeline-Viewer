@@ -77,31 +77,39 @@ public class SqliteCardDAO {
      * @param project project to add cards to
      */
     public List<Card> getCards(Project project) {
-        try {
+        List<Card> listOfCards = new ArrayList<>();
 
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Cards WHERE projectId = ?");
+        String query = "SELECT * FROM Cards WHERE projectId = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, project.getId());
-            ResultSet resultSet = statement.executeQuery();
 
-            List<Card> listOfCards = new ArrayList<>();
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    String title = resultSet.getString("title");
+                    String description = resultSet.getString("description");
+                    String dateCreated = resultSet.getString("dateCreated");
+                    String dateFinished = resultSet.getString("dateFinished");
 
-            while (resultSet.next()) {
-                //int id = resultSet.getInt("id");
-                String title = resultSet.getString("title");
-                String description = resultSet.getString("description");
-                String dateCreated = resultSet.getString("dateCreated");
-                String dateFinished = resultSet.getString("dateFinished");
-                Blob imageBlob = resultSet.getBlob("image");
-                InputStream inputStream = imageBlob.getBinaryStream();
-                Image image = new Image(inputStream);
-                Card card = new Card(title, description, dateCreated, dateFinished, image);
-                listOfCards.add(card);
+                    Blob imageBlob = resultSet.getBlob("image");
+                    Image image = null;
+                    if (imageBlob != null) {
+                        try (InputStream inputStream = imageBlob.getBinaryStream()) {
+                            image = new Image(inputStream); // Check Image class compatibility
+                        }
+                    }
+
+                    Card card = new Card(title, description, dateCreated, dateFinished, image);
+                    listOfCards.add(card);
+                }
             }
-            return listOfCards;
+
         } catch (Exception e) {
             e.printStackTrace();
+
         }
-        return null;
+
+        return listOfCards;
     }
 
     /**
