@@ -1,4 +1,4 @@
-package com.example.project.interfaces;
+package com.example.project.inheritance;
 
 import javafx.geometry.Pos;
 import javafx.scene.layout.StackPane;

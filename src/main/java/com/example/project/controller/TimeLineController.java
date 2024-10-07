@@ -1,7 +1,7 @@
 package com.example.project.controller;
 
 import com.example.project.ApplicationStart;
-import com.example.project.interfaces.DisplayStylings;
+import com.example.project.inheritance.DisplayStylings;
 import com.example.project.model.SqliteCardDAO;
 import com.example.project.model.User;
 import javafx.event.ActionEvent;
@@ -171,8 +171,6 @@ public class TimeLineController extends DisplayStylings {
                     cardDateContent.setFont(Font.font("System", FontWeight.NORMAL, ContentSize));
                     VBox cardLayout = new VBox();
 
-
-
                     // Set Controller stuff
                     cardOverlay.setId("card_" + cardToAdd.getId());
 
@@ -182,17 +180,8 @@ public class TimeLineController extends DisplayStylings {
                     });
 
                     // Add to main container
-                    if (cardToAdd.getMediaImage() != null) {
-                        ImageView mediaImageView = new ImageView(cardToAdd.getMediaImage());
-                        mediaImageView.setFitWidth(150);
-                        mediaImageView.setFitHeight(100);
-                        mediaImageView.setPreserveRatio(true);
-                        HBox mediaContainer = new HBox();
-                        mediaContainer.setAlignment(Pos.CENTER);
-                        mediaContainer.getChildren().add(mediaImageView);
-
-                        cardLayout.getChildren().add(mediaContainer);
-                    }
+                    ImageView mediaContainer = DisplayImage(cardToAdd);
+                    cardLayout.getChildren().add(mediaContainer);
 
                     VBox textContent = new VBox(cardTitle, cardTitleContent, cardDate, cardDateContent);
                     textContent.setPadding(new Insets(0, 0, 5, 5));
@@ -213,7 +202,20 @@ public class TimeLineController extends DisplayStylings {
         }
     }
 
+    private ImageView DisplayImage (Card card){
+        if (card.getMediaImage() != null) {
+            ImageView mediaImageView = new ImageView(card.getMediaImage());
+            mediaImageView.setFitWidth(150);
+            mediaImageView.setFitHeight(100);
+            mediaImageView.setPreserveRatio(true);
+            HBox mediaContainer = new HBox();
+            mediaContainer.setAlignment(Pos.CENTER);
+            mediaContainer.getChildren().add(mediaImageView);
 
+            return mediaImageView;
+        }
+        return null;
+    }
 
     @FXML
     private void onNewCardClick(ActionEvent event) {
@@ -302,14 +304,9 @@ public class TimeLineController extends DisplayStylings {
         cardPopup.getContent().add(cardContainer);
 
         // Set the size of the popup based on the size of the stage
-        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
-            cardContainer.setMinWidth(newVal.doubleValue() * 4);
-        });
-        stage.heightProperty().addListener((obs, oldVal, newVal) -> {
-            cardContainer.setMinHeight(newVal.doubleValue() * 4);
-        });
+        SetPopUpSize(stage, cardContainer, 4, 4);
 
-        // (Haven't tested this), close if clicked outside the popup
+        //Close
         stage.getScene().addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
             if (cardPopup.isShowing() && cardPopup.getContent().stream().noneMatch(Node::isHover)) {
                 cardPopup.hide();
@@ -319,8 +316,23 @@ public class TimeLineController extends DisplayStylings {
         cardPopup.show(stage);
     }
 
+    /**
+     * Sets the size of the Popup
+     * @param stage The stage to base the ratio off of
+     * @param popUpContainer The container to set the size of
+     * @param widthRatio The width ratio
+     * @param heightRatio The height ratio
+     */
+    private void SetPopUpSize(Stage stage, VBox popUpContainer, int widthRatio, int heightRatio){
+        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
+            popUpContainer.setMinWidth(newVal.doubleValue() * widthRatio);
+        });
+        stage.heightProperty().addListener((obs, oldVal, newVal) -> {
+            popUpContainer.setMinHeight(newVal.doubleValue() * heightRatio);
+        });
+    }
 
-
+    
     /**
      * This will return the scene to the dashboard
      * @throws IOException Issues with login process
