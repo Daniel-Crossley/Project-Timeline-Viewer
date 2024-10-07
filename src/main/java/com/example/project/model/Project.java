@@ -1,9 +1,8 @@
 package com.example.project.model;
 
-import com.example.project.model.Card.*;
 import javafx.scene.control.Label;
 
-import java.util.HashMap;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +14,8 @@ public class Project {
     private List<Card> listOfCards = new ArrayList<>();
     private String titleName = "Project Default Title";
     private String description = "Project Default Description";
-    private String dateCreated = "DD/MM/YYYY";
-    private String dateFinished = "DD/MM/YYYY";
+    private Date dateCreated;
+    private Date dateFinished;
     private boolean visibility = true;
     private int likes = 0;
     private String colour = "#9FA1AC";
@@ -32,7 +31,7 @@ public class Project {
      * @param colour the colour of the top bar of the project
      * @param likes the number of likes the project has
      */
-    public Project(int id, String title, String description, String dateCreated, String dateCompleted, boolean visibility, String colour, int likes, String tags){
+    public Project(int id, String title, String description, Date dateCreated, Date dateCompleted, boolean visibility, String colour, int likes, String tags){
         this.id = id;
         this.titleName = title;
         this.description = description;
@@ -123,33 +122,35 @@ public class Project {
 
     /**
      * Retrieves the project(timeline) date of creation
+     *
      * @return Returns the project(timeline) date of creation as a string
      */
-    public String getDateCreated(){
-        return this.dateCreated;
+    public java.sql.Date getDateCreated(){
+        return (java.sql.Date) this.dateCreated;
     }
 
     /**
      * Sets the project(timeline) date of creation
      * @param timelineCreatedDate Date of the project(timeline) commencement as a string
      */
-    private void setDateCreated(String timelineCreatedDate){
+    private void setDateCreated(Date timelineCreatedDate){
         this.dateCreated = timelineCreatedDate;
     }
 
     /**
      * Retrieves the project(timeline) date of completion
+     *
      * @return Returns the project(timeline) date of completion as a string
      */
-    public String getDateFinished(){
-        return dateFinished;
+    public java.sql.Date getDateFinished(){
+        return (java.sql.Date) dateFinished;
     }
 
     /**
      * Sets the project(timeline) date of completion
      * @param timelineFinishedDate Date of the project(timeline) completion as a string
      */
-    private void setDateFinished(String timelineFinishedDate){
+    private void setDateFinished(Date timelineFinishedDate){
         this.dateFinished = timelineFinishedDate;
     }
 

@@ -4,6 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class SqliteProjectDAO {
     private Connection connection;
@@ -27,8 +31,8 @@ public class SqliteProjectDAO {
                     + "username VARCHAR,"
                     + "title VARCHAR,"
                     + "description VARCHAR,"
-                    + "dateCreated VARCHAR,"
-                    + "dateFinished VARCHAR,"
+                    + "dateCreated DATE,"
+                    + "dateFinished DATE,"
                     + "visibility INTEGER,"
                     + "likes INTEGER,"
                     + "colour VARCHAR,"
@@ -52,8 +56,8 @@ public class SqliteProjectDAO {
             if (resultSet.next()) {
                 String title = resultSet.getString("title");
                 String description = resultSet.getString("description");
-                String dateCreated = resultSet.getString("dateCreated");
-                String dateFinished = resultSet.getString("dateFinished");
+                Date dateCreated = resultSet.getDate("dateCreated");
+                Date dateFinished = resultSet.getDate("dateFinished");
                 boolean visibility = resultSet.getInt("visiblity") != 0;
                 int likes = resultSet.getInt("likes");
                 String colour = resultSet.getString("colour");
@@ -81,8 +85,8 @@ public class SqliteProjectDAO {
                 int id = resultSet.getInt("id");
                 String title = resultSet.getString("title");
                 String description = resultSet.getString("description");
-                String dateCreated = resultSet.getString("dateCreated");
-                String dateFinished = resultSet.getString("dateFinished");
+                Date dateCreated = resultSet.getDate("dateCreated");
+                Date dateFinished = resultSet.getDate("dateFinished");
                 boolean visibility = resultSet.getInt("visibility") != 0;
                 int likes = resultSet.getInt("likes");
                 String colour = resultSet.getString("colour");
@@ -106,8 +110,8 @@ public class SqliteProjectDAO {
             statement.setString(1, user.getUsername());
             statement.setString(2, project.getTitle());
             statement.setString(3, project.getDescription());
-            statement.setString(4, project.getDateCreated());
-            statement.setString(5, project.getDateFinished());
+            statement.setDate(4, project.getDateCreated());
+            statement.setDate(5, project.getDateFinished());
             statement.setBoolean(6, project.isVisible());
             statement.setInt(7, project.getLikes());
             statement.setString(8, project.getColour());
@@ -122,4 +126,64 @@ public class SqliteProjectDAO {
             e.printStackTrace();
         }
     }
+
+    /**
+     *
+     * @param titleSearch
+     * @param  date
+     * @return list of projects containing title
+     */
+    public List<Project> getSearchProjects(String titleSearch , LocalDate date) {
+        List<Project> projects = new ArrayList<>();
+        try {
+            PreparedStatement statement = null;
+            if (date == null && (titleSearch == null || titleSearch.isEmpty())) {
+                statement = connection.prepareStatement("SELECT * FROM Projects");
+            } else if (date == null) {
+                statement = connection.prepareStatement("SELECT * FROM Projects WHERE title LIKE ?");
+                statement.setString(1, "%" + titleSearch + "%");
+            } else if (titleSearch == null || titleSearch.isEmpty()) {
+                statement = connection.prepareStatement("SELECT * FROM Projects WHERE " +
+                        "DATETIME(CAST(dateCreated AS INTEGER) / 1000, 'unixepoch') " +
+                        "BETWEEN DATETIME(?) AND DATETIME('now')");
+                statement.setString(1, date.toString());
+            } else {
+                statement = connection.prepareStatement("SELECT * FROM Projects WHERE " +
+                        "DATETIME(CAST(dateCreated AS INTEGER) / 1000, 'unixepoch') " +
+                        "BETWEEN DATETIME(?) AND DATETIME('now')" +
+                        " AND title LIKE ?");
+                statement.setString(1, date.toString());
+                statement.setString(2, "%" + titleSearch + "%");
+            }
+            System.out.println("Date: " + date);
+            System.out.println("Title Search: " + titleSearch);
+            System.out.println("SQL: " + statement.toString());
+            try (ResultSet resultSet = statement.executeQuery()){
+                while (resultSet.next()){
+                    int id = resultSet.getInt("id");
+                    String title = resultSet.getString("title");
+                    String description = resultSet.getString("description");
+                    Date dateCreated = resultSet.getDate("dateCreated");
+                    Date dateFinished = resultSet.getDate("dateFinished");
+                    boolean visibility = resultSet.getInt("visibility") != 0;
+                    int likes = resultSet.getInt("likes");
+                    String colour = resultSet.getString("colour");
+                    String tags = resultSet.getString("tags");
+                    Project project = new Project(id, title, description, dateCreated, dateFinished, visibility, colour, likes, tags);
+                    projects.add(project);
+                    System.out.println("Found project: " + title);
+                }
+            }
+            System.out.println("Total projects found: " + projects.size());
+        } catch (Exception e) {
+            System.out.println("Error in getSearchProjects: " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
+        return projects;
+    }
+
+
 }
+
+

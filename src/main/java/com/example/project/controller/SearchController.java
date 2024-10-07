@@ -10,15 +10,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.*;
 
 public class SearchController {
@@ -54,6 +52,9 @@ public class SearchController {
     private List<Project> projectList = new ArrayList<>();
     @FXML
     private TextField titleSearch;
+    @FXML
+    private DatePicker DateSearch;
+
 
     private final int projectWidth = 150;
     private final String projectColour = "#f1d9b7";
@@ -150,12 +151,25 @@ public class SearchController {
 
     private void SearchButton() {
         if (titleSearch != null) {
+            topHBOX.getChildren().clear();
             String searchText = titleSearch.getText();
+            LocalDate selectedDate = DateSearch.getValue();
             System.out.println("Searching for: " + searchText);
-            List<Project> searchResults = projectDAO.getSearchProjects(searchText);
+            List<Project> searchResults = projectDAO.getSearchProjects(searchText, selectedDate);
+
+            System.out.println("Selected tags:");
+            for (Map.Entry<Button, Boolean> entry : buttonStates.entrySet()) {
+                if (entry.getValue()) {
+                    System.out.println(entry.getKey().getText());
+                }
+            }
+
+
             if (searchResults !=null && !searchResults.isEmpty()){
                 this.projectList = searchResults;
                 System.out.println("Found " + searchResults.size() + " results.");
+
+                System.out.println(selectedDate);
                 addProjectsToDash();
             } else {
                 System.out.println("No results found or an error occurred.");
@@ -181,7 +195,7 @@ public class SearchController {
             });
 
         for(Project projectToAdd: projectList){
-            if (Objects.equals(projectToAdd.getDateFinished(), "none")){
+            if (Objects.equals(projectToAdd.getDateFinished(), null)){
                 generateContainer(projectToAdd, topHBOX, SearchScroll);
             }
 
