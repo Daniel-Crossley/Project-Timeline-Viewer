@@ -1,8 +1,11 @@
 package com.example.project.inheritance;
 
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 public class DisplayStylings{
 
@@ -54,4 +57,27 @@ public class DisplayStylings{
         return projectContainer;
     }
 
+    /**
+     * Creates Label for Titles
+     * @param textContent The content of the label
+     * @param fontSize The font size
+     * @return Label
+     */
+    protected Label titleLabel(String textContent, int fontSize){
+        Label titleLabel = new Label(textContent);
+        titleLabel.setFont(Font.font("System", FontWeight.BOLD, fontSize));
+        return titleLabel;
+    }
+
+    /**
+     * Creates Label for text content
+     * @param textContent The content of the label
+     * @param fontSize The font size
+     * @return Label
+     */
+    protected Label contentLabel(String textContent, int fontSize){
+        Label titleLabel = new Label(textContent);
+        titleLabel.setFont(Font.font("System", FontWeight.NORMAL, fontSize));
+        return titleLabel;
+    }
 }

@@ -246,14 +246,10 @@ public class TimeLineController extends DisplayStylings {
                     // Card
                     int TitleSize = 15;
                     int ContentSize = 10;
-                    Label cardTitle = new Label("Title:");
-                    cardTitle.setFont(Font.font("System", FontWeight.BOLD, TitleSize));
-                    Label cardTitleContent = new Label(cardToAdd.getTitle());
-                    cardTitleContent.setFont(Font.font("System", FontWeight.NORMAL, ContentSize));
-                    Label cardDate = new Label("Date:");
-                    cardDate.setFont(Font.font("System", FontWeight.BOLD, TitleSize));
-                    Label cardDateContent = new Label(cardToAdd.getDateCreated());
-                    cardDateContent.setFont(Font.font("System", FontWeight.NORMAL, ContentSize));
+                    Label cardTitle = titleLabel("Title:", TitleSize);
+                    Label cardTitleContent = contentLabel(cardToAdd.getTitle(), ContentSize);
+                    Label cardDate = titleLabel("Date:", TitleSize);
+                    Label cardDateContent = contentLabel(cardToAdd.getDateCreated(), ContentSize);
                     VBox cardLayout = new VBox();
 
                     // Set Controller stuff
