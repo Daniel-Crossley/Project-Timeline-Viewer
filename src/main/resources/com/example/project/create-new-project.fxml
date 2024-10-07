@@ -14,9 +14,9 @@
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.text.Font?>
 <?import javafx.geometry.Insets?>
-
+<?import javafx.scene.control.ScrollPane?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.controller.CreateNewProjectController" stylesheets="@styles.css">
-    <VBox spacing="10" prefWidth="800" prefHeight="450" alignment="TOP_CENTER" styleClass="main-container">
+    <VBox spacing="10" prefWidth="800" prefHeight="390" alignment="TOP_CENTER" styleClass="main-container">
 
         <!-- Header section for navigating back and title of the page -->
         <HBox spacing="10" alignment="CENTER_LEFT" styleClass="header">
@@ -37,6 +37,8 @@
         </HBox>
 
         <!-- Body section where project details are entered -->
+
+        <ScrollPane styleClass=""  fitToWidth="true" maxWidth="750" fitToHeight="true"  hbarPolicy="ALWAYS"  vbarPolicy="ALWAYS">
         <HBox spacing="6" alignment="CENTER" maxWidth="750" styleClass="body-container">
 
             <!-- Left-side form for entering project details -->
@@ -129,6 +131,7 @@
                 <TextField fx:id="colourField" text="Kopi Luwak" styleClass="input-field"/>
             </VBox>
         </HBox>
+        </ScrollPane>
 
         <!-- Validation message for missing required fields -->
         <Label fx:id="InvalidProject" text="Please Enter All Fields" textFill="#721414" visible="false">
@@ -141,6 +144,7 @@
         </Label>
 
         <!-- Publish button for creating the project -->
+
         <Button text="Publish Project" fx:id="create" onAction="#publishProject" styleClass="publish-button"/>
 
     </VBox>
