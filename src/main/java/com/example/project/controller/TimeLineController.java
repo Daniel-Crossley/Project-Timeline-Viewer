@@ -195,7 +195,7 @@ public class TimeLineController {
                     }
 
                     VBox textContent = new VBox(cardTitle, cardTitleContent, cardDate, cardDateContent);
-                    textContent.setPadding(new Insets(10, 0, 10, 10));
+                    textContent.setPadding(new Insets(0, 0, 5, 5));
                     cardLayout.getChildren().addAll(textContent);
                     cardOverlay.getChildren().addAll(cardLayout);
                     Cards_Container.getChildren().add(cardOverlay);
@@ -301,7 +301,7 @@ public class TimeLineController {
         Label descriptionTitle = new Label("Description:");
         Label description = new Label(cardToRead.getDescription());
         VBox cardInformation = new VBox(dateAddedTitle, dateAdded, descriptionTitle, description);
-        cardInformation.setPadding(new Insets(10, 0, 10, 10));
+        cardInformation.setPadding(new Insets(0, 0, 10, 10));
 
         dateAddedTitle.setFont(Font.font("System", FontWeight.BOLD, TitleSize));
         descriptionTitle.setFont(Font.font("System", FontWeight.BOLD, TitleSize));
