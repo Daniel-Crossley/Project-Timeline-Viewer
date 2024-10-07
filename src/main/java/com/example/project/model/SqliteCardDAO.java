@@ -123,7 +123,6 @@ public class SqliteCardDAO {
             statement.setString(4, card.getDateCreated());
             statement.setString(5, card.getDateFinished());
 
-            // Convert JavaFX Image to byte array
             Image image = card.getMediaImage();
             byte[] imageBytes = null;
             if (image != null) {
