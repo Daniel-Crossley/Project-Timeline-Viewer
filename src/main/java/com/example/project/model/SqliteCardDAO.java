@@ -1,5 +1,6 @@
 package com.example.project.model;
 
+import com.example.project.interfaces.ISqliteCardDAO;
 import javafx.scene.image.Image;
 import javafx.embed.swing.SwingFXUtils;
 
@@ -11,7 +12,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SqliteCardDAO {
+public class SqliteCardDAO implements ISqliteCardDAO {
     private Connection connection;
 
     /**

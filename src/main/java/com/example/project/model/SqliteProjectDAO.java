@@ -1,5 +1,7 @@
 package com.example.project.model;
 
+import com.example.project.interfaces.ISqliteProjectDAO;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,7 +9,7 @@ import java.sql.Statement;
 import java.util.Arrays;
 import java.util.List;
 
-public class SqliteProjectDAO {
+public class SqliteProjectDAO implements ISqliteProjectDAO {
     private Connection connection;
 
     /**

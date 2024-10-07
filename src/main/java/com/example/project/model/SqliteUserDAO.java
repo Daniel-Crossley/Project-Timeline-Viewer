@@ -1,12 +1,12 @@
 package com.example.project.model;
 
-import com.example.project.model.SqliteConnection;
+import com.example.project.interfaces.ISqliteUserDAO;
 
 
 import java.sql.*;
 
 
-public class SqliteUserDAO {
+public class SqliteUserDAO implements ISqliteUserDAO {
     private Connection connection;
 
     /**
