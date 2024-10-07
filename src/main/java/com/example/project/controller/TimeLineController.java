@@ -1,6 +1,7 @@
 package com.example.project.controller;
 
 import com.example.project.ApplicationStart;
+import com.example.project.inheritance.DisplayStylings;
 import com.example.project.model.SqliteCardDAO;
 import com.example.project.model.User;
 import javafx.event.ActionEvent;
@@ -30,7 +31,7 @@ import java.util.ArrayList;
 import com.example.project.model.Project;
 import com.example.project.model.Card;
 
-public class TimeLineController {
+public class TimeLineController extends DisplayStylings {
 
 
     public Button Button_Return;
@@ -72,7 +73,7 @@ public class TimeLineController {
     /**
      * Updates the timeline view based on stored data in timeline
      */
-    void updateView(Stage stage) {
+    public void updateView(Stage stage) {
         project.setListOfCards(cardDAO.getCards(project));
 
         // Change width to fit size of stage
@@ -120,6 +121,7 @@ public class TimeLineController {
      * @param actionEvent Click action
      */
     @FXML
+
     private void onEditClick(ActionEvent actionEvent) {
         navigateTo("EditProject.fxml", actionEvent);
     }
@@ -153,9 +155,7 @@ public class TimeLineController {
 
             for (Card cardToAdd : project.getListOfCards()) {
                 try {
-                    StackPane cardOverlay = projectCardStyling(projectColour);
-
-
+                    StackPane cardOverlay = StackPaneStyling(projectColour, projectWidth, projectBorderWidth, projectRadius, Integer.parseInt(projectBorderColour));
                     cardOverlay.prefWidthProperty().bind(Cards_Container.widthProperty().multiply(0.3));
 
                     // Card
@@ -171,8 +171,6 @@ public class TimeLineController {
                     cardDateContent.setFont(Font.font("System", FontWeight.NORMAL, ContentSize));
                     VBox cardLayout = new VBox();
 
-
-
                     // Set Controller stuff
                     cardOverlay.setId("card_" + cardToAdd.getId());
 
@@ -182,17 +180,8 @@ public class TimeLineController {
                     });
 
                     // Add to main container
-                    if (cardToAdd.getMediaImage() != null) {
-                        ImageView mediaImageView = new ImageView(cardToAdd.getMediaImage());
-                        mediaImageView.setFitWidth(200);
-                        mediaImageView.setFitHeight(150);
-                        mediaImageView.setPreserveRatio(true);
-                        HBox mediaContainer = new HBox();
-                        mediaContainer.setAlignment(Pos.CENTER);
-                        mediaContainer.getChildren().add(mediaImageView);
-
-                        cardLayout.getChildren().add(mediaContainer);
-                    }
+                    ImageView mediaContainer = DisplayImage(cardToAdd);
+                    cardLayout.getChildren().add(mediaContainer);
 
                     VBox textContent = new VBox(cardTitle, cardTitleContent, cardDate, cardDateContent);
                     textContent.setPadding(new Insets(0, 0, 5, 5));
@@ -213,19 +202,19 @@ public class TimeLineController {
         }
     }
 
-    private StackPane projectCardStyling(String colour) {
-        StackPane projectContainer = new StackPane();
-        projectContainer.setAlignment(Pos.CENTER);
-        projectContainer.setPrefWidth(projectWidth);
-        projectContainer.setStyle(
-                "-fx-border-width: " + this.projectBorderWidth + "; " +
-                        "-fx-background-color: " + colour + "; " +
-                        "-fx-background-radius: "  + this.projectRadius + "; " +
-                        "-fx-border-color: " + this.projectBorderColour + "; " +
-                        "-fx-border-radius: " + this.projectRadius + "; "
-        );
+    private ImageView DisplayImage (Card card){
+        if (card.getMediaImage() != null) {
+            ImageView mediaImageView = new ImageView(card.getMediaImage());
+            mediaImageView.setFitWidth(150);
+            mediaImageView.setFitHeight(100);
+            mediaImageView.setPreserveRatio(true);
+            HBox mediaContainer = new HBox();
+            mediaContainer.setAlignment(Pos.CENTER);
+            mediaContainer.getChildren().add(mediaImageView);
 
-        return projectContainer;
+            return mediaImageView;
+        }
+        return null;
     }
 
     @FXML
@@ -310,19 +299,14 @@ public class TimeLineController {
 
         // Create the popup
         Popup cardPopup = new Popup();
-        VBox cardContainer = popupCardStyling(projectColour);
+        VBox cardContainer = vBoxStyling(projectColour, projectWidth, projectBorderWidth, projectBorderColour, String.valueOf(projectRadius));
         cardContainer.getChildren().addAll(titleContainer, mediaContainer, cardInformation);
         cardPopup.getContent().add(cardContainer);
 
         // Set the size of the popup based on the size of the stage
-        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
-            cardContainer.setMinWidth(newVal.doubleValue() * 4);
-        });
-        stage.heightProperty().addListener((obs, oldVal, newVal) -> {
-            cardContainer.setMinHeight(newVal.doubleValue() * 4);
-        });
+        SetPopUpSize(stage, cardContainer, 4, 4);
 
-        // (Haven't tested this), close if clicked outside the popup
+        //Close
         stage.getScene().addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
             if (cardPopup.isShowing() && cardPopup.getContent().stream().noneMatch(Node::isHover)) {
                 cardPopup.hide();
@@ -332,21 +316,23 @@ public class TimeLineController {
         cardPopup.show(stage);
     }
 
-    private VBox popupCardStyling(String colour) {
-        VBox projectContainer = new VBox();
-        projectContainer.setAlignment(Pos.CENTER);
-        projectContainer.setPrefWidth(projectWidth);
-        projectContainer.setStyle(
-                "-fx-border-width: " + this.projectBorderWidth + "; " +
-                        "-fx-background-color: " + colour + "; " +
-                        "-fx-background-radius: "  + this.projectRadius + "; " +
-                        "-fx-border-color: " + this.projectBorderColour + "; " +
-                        "-fx-border-radius: " + this.projectRadius + "; "
-        );
-
-        return projectContainer;
+    /**
+     * Sets the size of the Popup
+     * @param stage The stage to base the ratio off of
+     * @param popUpContainer The container to set the size of
+     * @param widthRatio The width ratio
+     * @param heightRatio The height ratio
+     */
+    private void SetPopUpSize(Stage stage, VBox popUpContainer, int widthRatio, int heightRatio){
+        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
+            popUpContainer.setMinWidth(newVal.doubleValue() * widthRatio);
+        });
+        stage.heightProperty().addListener((obs, oldVal, newVal) -> {
+            popUpContainer.setMinHeight(newVal.doubleValue() * heightRatio);
+        });
     }
 
+    
     /**
      * This will return the scene to the dashboard
      * @throws IOException Issues with login process
