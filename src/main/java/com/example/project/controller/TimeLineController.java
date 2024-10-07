@@ -274,7 +274,11 @@ public class TimeLineController {
     public void OpenCard(Stage stage, Card cardToRead) {
         // Title of the card
         Label cardTitle = new Label("Card - " + cardToRead.getTitle());
-        Pane titleContainer = new Pane(cardTitle);
+        cardTitle.setFont(Font.font("System", FontWeight.BOLD, 15));
+
+        VBox titleContainer = new VBox(cardTitle);
+        titleContainer.setAlignment(Pos.CENTER);
+        titleContainer.setPadding(new Insets(10));
 
         // Media Container for Images
         HBox mediaContainer = new HBox();
@@ -282,18 +286,27 @@ public class TimeLineController {
 
         if (mediaImage != null) {
             ImageView mediaImageView = new ImageView(mediaImage);
-            mediaImageView.setFitWidth(200);
-            mediaImageView.setFitHeight(150);
+            mediaImageView.setFitWidth(250);
+            mediaImageView.setFitHeight(200);
             mediaImageView.setPreserveRatio(true);
             mediaContainer.getChildren().add(mediaImageView);
         }
 
         // Card information
+        int TitleSize = 15;
+        int ContentSize = 10;
+
         Label dateAddedTitle = new Label("Date Added:");
         Label dateAdded = new Label(cardToRead.getDateCreated());
         Label descriptionTitle = new Label("Description:");
         Label description = new Label(cardToRead.getDescription());
         VBox cardInformation = new VBox(dateAddedTitle, dateAdded, descriptionTitle, description);
+        cardInformation.setPadding(new Insets(10, 0, 10, 10));
+
+        dateAddedTitle.setFont(Font.font("System", FontWeight.BOLD, TitleSize));
+        descriptionTitle.setFont(Font.font("System", FontWeight.BOLD, TitleSize));
+        dateAdded.setFont(Font.font("System", FontWeight.NORMAL, ContentSize));
+        description.setFont(Font.font("System", FontWeight.NORMAL, ContentSize));
 
         // Create the popup
         Popup cardPopup = new Popup();
@@ -303,10 +316,10 @@ public class TimeLineController {
 
         // Set the size of the popup based on the size of the stage
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
-            cardContainer.setMinWidth(newVal.doubleValue() * 1);
+            cardContainer.setMinWidth(newVal.doubleValue() * 4);
         });
         stage.heightProperty().addListener((obs, oldVal, newVal) -> {
-            cardContainer.setMinHeight(newVal.doubleValue() * 1);
+            cardContainer.setMinHeight(newVal.doubleValue() * 4);
         });
 
         // (Haven't tested this), close if clicked outside the popup
