@@ -115,7 +115,7 @@ public class DashboardController implements Initializable {
 
 
         for(Project projectToAdd: projectList){
-            if (Objects.equals(projectToAdd.getDateFinished(), "none")){
+            if (Objects.equals(projectToAdd.getDateFinished(), null)){
                 generateContainer(projectToAdd, Container_In_Progress, Scrollpane_Progress);
             }
             else{

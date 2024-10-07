@@ -17,10 +17,13 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-
+import java.sql.Date;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
 import java.util.ResourceBundle;
 
 public class CreateNewProjectController implements Initializable {
@@ -85,7 +88,10 @@ public class CreateNewProjectController implements Initializable {
         System.out.println("Visibility: " + visibility);
         System.out.println("Colour: " + colour);
 
-        Project newProject = new Project(0, title, description, "Place holder", "none", visibility, colour, 0, "");
+        LocalDate currentDate = LocalDate.now();
+        Date projectDate = Date.valueOf(currentDate);
+
+        Project newProject = new Project(0, title, description, projectDate, null, visibility, colour, 0, "");
         projectDAO.addProject(newProject, userInformation);
 
         Stage stage = (Stage) create.getScene().getWindow();
