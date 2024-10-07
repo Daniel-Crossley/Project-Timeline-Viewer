@@ -1,9 +1,6 @@
 package com.example.project.model;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 public class SqliteCardDAO {
     private Connection connection;
@@ -48,8 +45,8 @@ public class SqliteCardDAO {
             if (resultSet.next()) {
                 String title = resultSet.getString("title");
                 String description = resultSet.getString("description");
-                String dateCreated = resultSet.getString("dateCreated");
-                String dateFinished = resultSet.getString("dateFinished");
+                Date dateCreated = resultSet.getDate("dateCreated");
+                Date dateFinished = resultSet.getDate("dateFinished");
                 Card card = new Card(id, title, description, dateCreated, dateFinished);
                 return card;
             }
@@ -72,8 +69,8 @@ public class SqliteCardDAO {
                 int id = resultSet.getInt("id");
                 String title = resultSet.getString("title");
                 String description = resultSet.getString("description");
-                String dateCreated = resultSet.getString("dateCreated");
-                String dateFinished = resultSet.getString("dateFinished");
+                Date dateCreated = resultSet.getDate("dateCreated");
+                Date dateFinished = resultSet.getDate("dateFinished");
                 Card card = new Card(id, title, description, dateCreated, dateFinished);
                 project.addCard(card);
             }
@@ -93,8 +90,8 @@ public class SqliteCardDAO {
             statement.setInt(1, project.getId());
             statement.setString(2, card.getTitle());
             statement.setString(3, card.getDescription());
-            statement.setString(4, card.getDateCreated());
-            statement.setString(5, card.getDateFinished());
+            statement.setDate(4, card.getDateCreated());
+            statement.setDate(5, card.getDateFinished());
             statement.executeUpdate();
             // Set the id of the new project
             ResultSet generatedKeys = statement.getGeneratedKeys();
