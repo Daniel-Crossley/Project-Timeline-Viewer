@@ -4,6 +4,7 @@ import com.example.project.model.Card;
 import com.example.project.model.SqliteCardDAO;
 import com.example.project.model.Project;
 import com.example.project.model.User;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -11,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser;
 import java.io.File;
+import javafx.scene.image.Image;
 
 import java.time.LocalDate;
 
@@ -39,6 +41,9 @@ public class NewCardPopupController {
     private Card newCard;
     private Stage popupStage;
     private Project project;
+
+    private SimpleObjectProperty<Image> image = new SimpleObjectProperty<>();
+    //private SimpleObjectProperty<Image> image = new SimpleObjectProperty<Image>(this, "image");
 
     public void setProject(Project project) {
         this.project = project;
@@ -69,7 +74,7 @@ public class NewCardPopupController {
         LocalDate datePublished = datePublishedField.getValue();
         String imageUrl = imageField.getText();
 
-        newCard = new Card(title, description, dateCreated.toString(), datePublished.toString());  // Assuming Card constructor supports these arguments
+        newCard = new Card(title, description, dateCreated.toString(), datePublished.toString(), image.get());
         //newCard.setDatePublished(datePublished.toString());
 
         // Add the new card to the database
@@ -93,6 +98,8 @@ public class NewCardPopupController {
         if (selectedImageFile != null) {
             // Set the file path to the imageField
             imageField.setText(selectedImageFile.getAbsolutePath());
+            image.set(new Image(selectedImageFile.toURI().toString()));
+
         }
     }
 }

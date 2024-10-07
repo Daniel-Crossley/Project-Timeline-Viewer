@@ -227,23 +227,10 @@ public class TimeLineController {
 
         // Media Container for Images
         HBox mediaContainer = new HBox();
-        if (!cardToRead.getMediaImages().isEmpty()) {
-            Image firstImage = new Image(cardToRead.getMediaImages().get(0));
-            ImageView firstImageView = new ImageView(firstImage);
-            mediaContainer.getChildren().add(firstImageView);
-        }
-
-        // Adding up to three more images
-        if (cardToRead.getMediaImages().size() >= 3) {
-            VBox leftMediaContainer = new VBox();
-            for (int i = 1; i < 4; i++) {
-                Image otherImages = new Image(cardToRead.getMediaImages().get(i));
-                ImageView otherImageView = new ImageView(otherImages);
-                otherImageView.setFitWidth(30);
-                otherImageView.setPreserveRatio(true);
-                leftMediaContainer.getChildren().add(otherImageView);
-            }
-            mediaContainer.getChildren().add(leftMediaContainer);
+        Image mediaImage = cardToRead.getMediaImage();
+        if (mediaImage != null) {
+            ImageView mediaImageView = new ImageView(mediaImage);
+            mediaContainer.getChildren().add(mediaImageView);
         }
 
         // Card information

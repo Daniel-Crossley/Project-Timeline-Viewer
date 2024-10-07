@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class CreateNewProjectController implements Initializable {
@@ -101,7 +102,7 @@ public class CreateNewProjectController implements Initializable {
         System.out.println("Colour: " + colour);
 
         // Creates a new Project object with the gathered information
-        Project newProject = new Project(0, title, description, "Place holder", "none", visibility, colour, 0, "");
+        Project newProject = new Project(0, title, description, "Place holder", "none", visibility, colour, 0, Arrays.asList("Place holder"));
         projectDAO.addProject(newProject, userInformation); // Adds the new project to the database
 
         // Navigates back to the dashboard after the project is created

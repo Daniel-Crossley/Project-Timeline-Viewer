@@ -61,7 +61,7 @@ public class SqliteCardDAO {
                 Blob imageBlob = resultSet.getBlob("image");
                 InputStream inputStream = imageBlob.getBinaryStream();
                 Image image = new Image(inputStream);
-                Card card = new Card(id, title, description, dateCreated, dateFinished, image);
+                Card card = new Card(title, description, dateCreated, dateFinished, image);
                 return card;
             }
         } catch (Exception e) {
@@ -88,7 +88,7 @@ public class SqliteCardDAO {
                 Blob imageBlob = resultSet.getBlob("image");
                 InputStream inputStream = imageBlob.getBinaryStream();
                 Image image = new Image(inputStream);
-                Card card = new Card(id, title, description, dateCreated, dateFinished, image);
+                Card card = new Card(title, description, dateCreated, dateFinished, image);
                 project.addCard(card);
             }
         } catch (Exception e) {
@@ -103,12 +103,13 @@ public class SqliteCardDAO {
     public void addCard(Card card, Project project) {
         try {
             PreparedStatement statement = connection.prepareStatement(
-                    "INSERT INTO Projects (projectId, title, description, dateCreated, dateFinished, image) VALUES (?, ?, ?, ?, ?, ?, ?)");
+                    "INSERT INTO Cards (projectId, title, description, dateCreated, dateFinished, image) VALUES (?, ?, ?, ?, ?, ?)");
             statement.setInt(1, project.getId());
             statement.setString(2, card.getTitle());
             statement.setString(3, card.getDescription());
             statement.setString(4, card.getDateCreated());
             statement.setString(5, card.getDateFinished());
+
             Image image = card.getMediaImage();
             BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();

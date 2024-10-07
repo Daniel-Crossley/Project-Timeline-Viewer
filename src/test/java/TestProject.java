@@ -1,8 +1,10 @@
 import com.example.project.model.Card;
 import com.example.project.model.Project;
 import org.junit.jupiter.api.Test;
+import javafx.scene.image.Image;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -21,7 +23,7 @@ public class TestProject {
         String testDateCompleted = "23/11/1963";
         String testColour = "#ffffff";
         int testLikes = 0;
-        return new Project(testID, testTitle, testDescription, testDateCreated, testDateCompleted, true, testColour, testLikes, "Tag");
+        return new Project(testID, testTitle, testDescription, testDateCreated, testDateCompleted, true, testColour, testLikes, Arrays.asList("Place holder"));
     }
 
     /**
@@ -39,7 +41,8 @@ public class TestProject {
                 String cardDescription = RandomString(20);
                 String dateCreated = "23/11/1963";
                 String dateFinished = "23/11/1963";
-                Card randomCard = new Card(cardTitle,cardDescription,dateCreated,dateFinished);
+                Image image = null;
+                Card randomCard = new Card(cardTitle,cardDescription,dateCreated,dateFinished, image);
                 setOfCards.add(randomCard);
             }
         }

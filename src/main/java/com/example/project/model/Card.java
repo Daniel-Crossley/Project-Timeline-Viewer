@@ -46,8 +46,8 @@ public class Card {
      */
     public List<CardComment> getComments(){return comments;}
 
-    public Card(int setID, String setTitle, String setDescription, String setDateCreated, String setDateFinished, Image setMediaImage){
-        this.id = setID;
+    public Card(String setTitle, String setDescription, String setDateCreated, String setDateFinished, Image setMediaImage){
+        //this.id = setID;
         this.title = setTitle;
         this.description = setDescription;
         this.dateCreated = setDateCreated;
