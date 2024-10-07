@@ -2,7 +2,6 @@ package com.example.project.controller;
 
 import com.example.project.ApplicationStart;
 import com.example.project.model.*;
-import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +16,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -25,10 +23,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class DashboardController implements Initializable {
     public Pane Menu;
@@ -166,13 +161,17 @@ public class DashboardController implements Initializable {
         cardTitle.setFont(Font.font("System", FontWeight.BOLD, 15));
         projectContainer.getChildren().addAll(cardTitle);
 
-        List<Card> listofCards = cardDAO.getCards(projectToAdd);
-        if (listofCards.getFirst().getMediaImage() != null) {
-            ImageView mediaImageView = new ImageView(listofCards.getFirst().getMediaImage());
-            mediaImageView.setFitWidth(100);
-            mediaImageView.setFitHeight(50);
-            mediaImageView.setPreserveRatio(true);
-            projectContainer.getChildren().add(mediaImageView);
+        try {
+            List<Card> listofCards = cardDAO.getCards(projectToAdd);
+            if (listofCards.getFirst().getMediaImage() != null) {
+                ImageView mediaImageView = new ImageView(listofCards.getFirst().getMediaImage());
+                mediaImageView.setFitWidth(100);
+                mediaImageView.setFitHeight(50);
+                mediaImageView.setPreserveRatio(true);
+                projectContainer.getChildren().add(mediaImageView);
+            }
+        } catch(NoSuchElementException ignored) {
+
         }
 
 
