@@ -56,7 +56,7 @@ public class SqliteProjectDAO {
             if (resultSet.next()) {
                 String title = resultSet.getString("title");
                 String description = resultSet.getString("description");
-                Date dateCreated = resultSet.getDate("dateCreated");
+                Date dateCreated = new java.sql.Date(resultSet.getLong("dateCreated"));
                 Date dateFinished = resultSet.getDate("dateFinished");
                 boolean visibility = resultSet.getInt("visiblity") != 0;
                 int likes = resultSet.getInt("likes");
@@ -85,8 +85,8 @@ public class SqliteProjectDAO {
                 int id = resultSet.getInt("id");
                 String title = resultSet.getString("title");
                 String description = resultSet.getString("description");
-                Date dateCreated = resultSet.getDate("dateCreated");
-                Date dateFinished = resultSet.getDate("dateFinished");
+                Date dateCreated = new java.sql.Date(resultSet.getLong("dateCreated"));
+                Date dateFinished = null;
                 boolean visibility = resultSet.getInt("visibility") != 0;
                 int likes = resultSet.getInt("likes");
                 String colour = resultSet.getString("colour");
@@ -163,8 +163,8 @@ public class SqliteProjectDAO {
                     int id = resultSet.getInt("id");
                     String title = resultSet.getString("title");
                     String description = resultSet.getString("description");
-                    Date dateCreated = resultSet.getDate("dateCreated");
-                    Date dateFinished = resultSet.getDate("dateFinished");
+                    Date dateCreated = new java.sql.Date(resultSet.getLong("dateCreated"));
+                    Date dateFinished = null;
                     boolean visibility = resultSet.getInt("visibility") != 0;
                     int likes = resultSet.getInt("likes");
                     String colour = resultSet.getString("colour");
