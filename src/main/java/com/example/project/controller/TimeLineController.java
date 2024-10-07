@@ -4,6 +4,8 @@ import com.example.project.ApplicationStart;
 import com.example.project.model.SqliteCardDAO;
 import com.example.project.model.User;
 import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
+import javafx.scene.text.Font;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -17,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
@@ -147,7 +150,6 @@ public class TimeLineController {
                 return;
             }
 
-            boolean allCardsAdded = true;
 
             for (Card cardToAdd : project.getListOfCards()) {
                 try {
@@ -157,9 +159,19 @@ public class TimeLineController {
                     cardOverlay.prefWidthProperty().bind(Cards_Container.widthProperty().multiply(0.3));
 
                     // Card
-                    Label cardTitle = new Label("Title: " + cardToAdd.getTitle());
-                    Label cardDate = new Label("Date: " + cardToAdd.getDateCreated());
+                    int TitleSize = 15;
+                    int ContentSize = 10;
+                    Label cardTitle = new Label("Title:");
+                    cardTitle.setFont(Font.font("System", FontWeight.BOLD, TitleSize));
+                    Label cardTitleContent = new Label(cardToAdd.getTitle());
+                    cardTitleContent.setFont(Font.font("System", FontWeight.NORMAL, ContentSize));
+                    Label cardDate = new Label("Date:");
+                    cardDate.setFont(Font.font("System", FontWeight.BOLD, TitleSize));
+                    Label cardDateContent = new Label(cardToAdd.getDateCreated());
+                    cardDateContent.setFont(Font.font("System", FontWeight.NORMAL, ContentSize));
                     VBox cardLayout = new VBox();
+
+
 
                     // Set Controller stuff
                     cardOverlay.setId("card_" + cardToAdd.getId());
@@ -170,13 +182,29 @@ public class TimeLineController {
                     });
 
                     // Add to main container
-                    cardLayout.getChildren().addAll(cardTitle, cardDate);
+                    if (cardToAdd.getMediaImage() != null) {
+                        ImageView mediaImageView = new ImageView(cardToAdd.getMediaImage());
+                        mediaImageView.setFitWidth(200);
+                        mediaImageView.setFitHeight(150);
+                        mediaImageView.setPreserveRatio(true);
+                        HBox mediaContainer = new HBox();
+                        mediaContainer.setAlignment(Pos.CENTER);
+                        mediaContainer.getChildren().add(mediaImageView);
+
+                        cardLayout.getChildren().add(mediaContainer);
+                    }
+
+                    VBox textContent = new VBox(cardTitle, cardTitleContent, cardDate, cardDateContent);
+                    textContent.setPadding(new Insets(10, 0, 10, 10));
+                    cardLayout.getChildren().addAll(textContent);
                     cardOverlay.getChildren().addAll(cardLayout);
                     Cards_Container.getChildren().add(cardOverlay);
+
+
+
                     System.out.println("Card added: " + cardToAdd.getTitle());
                 } catch (Exception e) {
                     e.printStackTrace();
-                    allCardsAdded = false;
                 }
             }
 
@@ -275,10 +303,10 @@ public class TimeLineController {
 
         // Set the size of the popup based on the size of the stage
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
-            cardContainer.setMinWidth(newVal.doubleValue() * 3);
+            cardContainer.setMinWidth(newVal.doubleValue() * 1);
         });
         stage.heightProperty().addListener((obs, oldVal, newVal) -> {
-            cardContainer.setMinHeight(newVal.doubleValue() * 3);
+            cardContainer.setMinHeight(newVal.doubleValue() * 1);
         });
 
         // (Haven't tested this), close if clicked outside the popup
