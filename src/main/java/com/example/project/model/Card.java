@@ -47,7 +47,7 @@ public class Card {
     public List<CardComment> getComments(){return comments;}
 
     public Card(String setTitle, String setDescription, String setDateCreated, String setDateFinished, Image setMediaImage){
-        //this.id = setID;
+        //this.id = ID;
         this.title = setTitle;
         this.description = setDescription;
         this.dateCreated = setDateCreated;

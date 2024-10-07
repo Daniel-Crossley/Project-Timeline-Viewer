@@ -63,6 +63,7 @@ public class NewCardPopupController {
     @FXML
     private void onAddCard() {
         //Create a new Card object with the inputted data
+        int id = 1;
         String title = titleField.getText();
         String description = descriptionField.getText();
         LocalDate dateCreated = dateCreatedField.getValue();

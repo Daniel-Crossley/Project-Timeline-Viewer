@@ -1,6 +1,7 @@
 package com.example.project.controller;
 
 import com.example.project.ApplicationStart;
+import com.example.project.model.SqliteCardDAO;
 import com.example.project.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -49,10 +50,12 @@ public class TimeLineController {
     private final String projectBorderColour = "#c27c18";
     private final int projectBorderWidth = 2;
 
+    private SqliteCardDAO cardDAO = new SqliteCardDAO();
 
     public void initialize(User user, Project projectReference) {
         setUser(user);
         setProject(projectReference);
+        project.setListOfCards(cardDAO.getCards(projectReference));
     }
 
     public void setUser(User user){
@@ -66,6 +69,7 @@ public class TimeLineController {
      * Updates the timeline view based on stored data in timeline
      */
     void updateView(Stage stage) {
+        project.setListOfCards(cardDAO.getCards(project));
 
         // Change width to fit size of stage
         stage.widthProperty().addListener((obs, oldWidth, newWidth) -> {
@@ -89,9 +93,11 @@ public class TimeLineController {
 
         // Update other UI elements as needed
         if (project.getListOfCards().isEmpty()) {
+            System.out.println("Project has no cards to add");
             cardStatus.setText("No cards in this project, please click add new.");
         } else {
             cardStatus.setText(project.getDescription());
+            System.out.println("Adding Cards");
             addCardsToTimeline(stage);
         }
     }
@@ -168,8 +174,11 @@ public class TimeLineController {
      * Generates card containers to display on timeline
      */
     private void addCardsToTimeline(Stage stage){
+        System.out.println("addCardsToTimeline was run");
         try {
+            Cards_Container.getChildren().clear();
             if (project.getListOfCards() == null) {
+                System.out.println("No cards stored in project!");
                 return;
             }
 
@@ -197,6 +206,7 @@ public class TimeLineController {
                     cardLayout.getChildren().addAll(cardTitle, cardDate);
                     cardOverlay.getChildren().addAll(cardLayout);
                     Cards_Container.getChildren().add(cardOverlay);
+                    System.out.println("Card added: " + cardToAdd.getTitle());
                 } catch (Exception e) {
                     e.printStackTrace();
                     allCardsAdded = false;

@@ -210,6 +210,10 @@ public class Project {
         listOfCards.add(cardAdd);
     }
 
+    public void setListOfCards(List<Card> importedCards){
+        this.listOfCards = importedCards;
+    }
+
     public List<Card> getListOfCards(){
         return listOfCards;
     }

@@ -11,6 +11,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SqliteCardDAO {
     private Connection connection;
@@ -74,13 +76,17 @@ public class SqliteCardDAO {
      * get all cards owned by project
      * @param project project to add cards to
      */
-    public void getCards(Project project) {
+    public List<Card> getCards(Project project) {
         try {
+
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM Cards WHERE projectId = ?");
             statement.setInt(1, project.getId());
             ResultSet resultSet = statement.executeQuery();
+
+            List<Card> listOfCards = new ArrayList<>();
+
             while (resultSet.next()) {
-                int id = resultSet.getInt("id");
+                //int id = resultSet.getInt("id");
                 String title = resultSet.getString("title");
                 String description = resultSet.getString("description");
                 String dateCreated = resultSet.getString("dateCreated");
@@ -89,11 +95,13 @@ public class SqliteCardDAO {
                 InputStream inputStream = imageBlob.getBinaryStream();
                 Image image = new Image(inputStream);
                 Card card = new Card(title, description, dateCreated, dateFinished, image);
-                project.addCard(card);
+                listOfCards.add(card);
             }
+            return listOfCards;
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     /**
