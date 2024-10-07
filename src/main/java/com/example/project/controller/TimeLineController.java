@@ -1,10 +1,14 @@
 package com.example.project.controller;
 
 import com.example.project.ApplicationStart;
+import com.example.project.model.SqliteCardDAO;
 import com.example.project.model.User;
 import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
+import javafx.scene.text.Font;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
@@ -49,10 +54,12 @@ public class TimeLineController {
     private final String projectBorderColour = "#c27c18";
     private final int projectBorderWidth = 2;
 
+    private SqliteCardDAO cardDAO = new SqliteCardDAO();
 
     public void initialize(User user, Project projectReference) {
         setUser(user);
         setProject(projectReference);
+        project.setListOfCards(cardDAO.getCards(projectReference));
     }
 
     public void setUser(User user){
@@ -66,6 +73,7 @@ public class TimeLineController {
      * Updates the timeline view based on stored data in timeline
      */
     void updateView(Stage stage) {
+        project.setListOfCards(cardDAO.getCards(project));
 
         // Change width to fit size of stage
         stage.widthProperty().addListener((obs, oldWidth, newWidth) -> {
@@ -89,9 +97,11 @@ public class TimeLineController {
 
         // Update other UI elements as needed
         if (project.getListOfCards().isEmpty()) {
+            System.out.println("Project has no cards to add");
             cardStatus.setText("No cards in this project, please click add new.");
         } else {
             cardStatus.setText(project.getDescription());
+            System.out.println("Adding Cards");
             addCardsToTimeline(stage);
         }
     }
@@ -125,6 +135,97 @@ public class TimeLineController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+
+    /**
+     * Generates card containers to display on timeline
+     */
+    private void addCardsToTimeline(Stage stage){
+        System.out.println("addCardsToTimeline was run");
+        try {
+            Cards_Container.getChildren().clear();
+            if (project.getListOfCards() == null) {
+                System.out.println("No cards stored in project!");
+                return;
+            }
+
+
+            for (Card cardToAdd : project.getListOfCards()) {
+                try {
+                    StackPane cardOverlay = projectCardStyling(projectColour);
+
+
+                    cardOverlay.prefWidthProperty().bind(Cards_Container.widthProperty().multiply(0.3));
+
+                    // Card
+                    int TitleSize = 15;
+                    int ContentSize = 10;
+                    Label cardTitle = new Label("Title:");
+                    cardTitle.setFont(Font.font("System", FontWeight.BOLD, TitleSize));
+                    Label cardTitleContent = new Label(cardToAdd.getTitle());
+                    cardTitleContent.setFont(Font.font("System", FontWeight.NORMAL, ContentSize));
+                    Label cardDate = new Label("Date:");
+                    cardDate.setFont(Font.font("System", FontWeight.BOLD, TitleSize));
+                    Label cardDateContent = new Label(cardToAdd.getDateCreated());
+                    cardDateContent.setFont(Font.font("System", FontWeight.NORMAL, ContentSize));
+                    VBox cardLayout = new VBox();
+
+
+
+                    // Set Controller stuff
+                    cardOverlay.setId("card_" + cardToAdd.getId());
+
+                    cardOverlay.setOnMouseClicked(event -> {
+                        System.out.println("Card clicked: " + cardToAdd.getTitle());
+                        OpenCard(stage, cardToAdd);
+                    });
+
+                    // Add to main container
+                    if (cardToAdd.getMediaImage() != null) {
+                        ImageView mediaImageView = new ImageView(cardToAdd.getMediaImage());
+                        mediaImageView.setFitWidth(200);
+                        mediaImageView.setFitHeight(150);
+                        mediaImageView.setPreserveRatio(true);
+                        HBox mediaContainer = new HBox();
+                        mediaContainer.setAlignment(Pos.CENTER);
+                        mediaContainer.getChildren().add(mediaImageView);
+
+                        cardLayout.getChildren().add(mediaContainer);
+                    }
+
+                    VBox textContent = new VBox(cardTitle, cardTitleContent, cardDate, cardDateContent);
+                    textContent.setPadding(new Insets(10, 0, 10, 10));
+                    cardLayout.getChildren().addAll(textContent);
+                    cardOverlay.getChildren().addAll(cardLayout);
+                    Cards_Container.getChildren().add(cardOverlay);
+
+
+
+                    System.out.println("Card added: " + cardToAdd.getTitle());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private StackPane projectCardStyling(String colour) {
+        StackPane projectContainer = new StackPane();
+        projectContainer.setAlignment(Pos.CENTER);
+        projectContainer.setPrefWidth(projectWidth);
+        projectContainer.setStyle(
+                "-fx-border-width: " + this.projectBorderWidth + "; " +
+                        "-fx-background-color: " + colour + "; " +
+                        "-fx-background-radius: "  + this.projectRadius + "; " +
+                        "-fx-border-color: " + this.projectBorderColour + "; " +
+                        "-fx-border-radius: " + this.projectRadius + "; "
+        );
+
+        return projectContainer;
     }
 
     @FXML
@@ -164,50 +265,6 @@ public class TimeLineController {
         }
     }
 
-    /**
-     * Generates card containers to display on timeline
-     */
-    private void addCardsToTimeline(Stage stage){
-        try {
-            if (project.getListOfCards() == null) {
-                return;
-            }
-
-            boolean allCardsAdded = true;
-
-            for (Card cardToAdd : project.getListOfCards()) {
-                try {
-                    StackPane cardOverlay = new StackPane();
-                    cardOverlay.prefWidthProperty().bind(Cards_Container.widthProperty().multiply(0.3));
-
-                    // Card
-                    Label cardTitle = new Label("Title: " + cardToAdd.getTitle());
-                    Label cardDate = new Label("Date: " + cardToAdd.getDateCreated());
-                    VBox cardLayout = new VBox();
-
-                    // Set Controller stuff
-                    cardOverlay.setId("card_" + cardToAdd.getId());
-
-                    cardOverlay.setOnMouseClicked(event -> {
-                        System.out.println("Card clicked: " + cardToAdd.getTitle());
-                        OpenCard(stage, cardToAdd);
-                    });
-
-                    // Add to main container
-                    cardLayout.getChildren().addAll(cardTitle, cardDate);
-                    cardOverlay.getChildren().addAll(cardLayout);
-                    Cards_Container.getChildren().add(cardOverlay);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    allCardsAdded = false;
-                }
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
 
     /**
      * Opens the card as a popup
@@ -222,8 +279,12 @@ public class TimeLineController {
         // Media Container for Images
         HBox mediaContainer = new HBox();
         Image mediaImage = cardToRead.getMediaImage();
+
         if (mediaImage != null) {
             ImageView mediaImageView = new ImageView(mediaImage);
+            mediaImageView.setFitWidth(200);
+            mediaImageView.setFitHeight(150);
+            mediaImageView.setPreserveRatio(true);
             mediaContainer.getChildren().add(mediaImageView);
         }
 
@@ -232,19 +293,20 @@ public class TimeLineController {
         Label dateAdded = new Label(cardToRead.getDateCreated());
         Label descriptionTitle = new Label("Description:");
         Label description = new Label(cardToRead.getDescription());
-        HBox cardInformation = new HBox(dateAddedTitle, dateAdded, descriptionTitle, description);
+        VBox cardInformation = new VBox(dateAddedTitle, dateAdded, descriptionTitle, description);
 
         // Create the popup
         Popup cardPopup = new Popup();
-        VBox cardContainer = new VBox(titleContainer, mediaContainer, cardInformation);
+        VBox cardContainer = popupCardStyling(projectColour);
+        cardContainer.getChildren().addAll(titleContainer, mediaContainer, cardInformation);
         cardPopup.getContent().add(cardContainer);
 
         // Set the size of the popup based on the size of the stage
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
-            cardContainer.setMinWidth(newVal.doubleValue() * 0.5);
+            cardContainer.setMinWidth(newVal.doubleValue() * 1);
         });
         stage.heightProperty().addListener((obs, oldVal, newVal) -> {
-            cardContainer.setMinHeight(newVal.doubleValue() * 0.5);
+            cardContainer.setMinHeight(newVal.doubleValue() * 1);
         });
 
         // (Haven't tested this), close if clicked outside the popup
@@ -253,7 +315,25 @@ public class TimeLineController {
                 cardPopup.hide();
             }
         });
+
+        cardPopup.show(stage);
     }
+
+    private VBox popupCardStyling(String colour) {
+        VBox projectContainer = new VBox();
+        projectContainer.setAlignment(Pos.CENTER);
+        projectContainer.setPrefWidth(projectWidth);
+        projectContainer.setStyle(
+                "-fx-border-width: " + this.projectBorderWidth + "; " +
+                        "-fx-background-color: " + colour + "; " +
+                        "-fx-background-radius: "  + this.projectRadius + "; " +
+                        "-fx-border-color: " + this.projectBorderColour + "; " +
+                        "-fx-border-radius: " + this.projectRadius + "; "
+        );
+
+        return projectContainer;
+    }
+
     /**
      * This will return the scene to the dashboard
      * @throws IOException Issues with login process

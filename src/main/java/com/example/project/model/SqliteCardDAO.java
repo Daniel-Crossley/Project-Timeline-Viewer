@@ -5,12 +5,11 @@ import javafx.embed.swing.SwingFXUtils;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
+import java.io.*;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SqliteCardDAO {
     private Connection connection;
@@ -74,26 +73,40 @@ public class SqliteCardDAO {
      * get all cards owned by project
      * @param project project to add cards to
      */
-    public void getCards(Project project) {
-        try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Cards WHERE projectId = ?");
+    public List<Card> getCards(Project project) {
+        List<Card> listOfCards = new ArrayList<>();
+
+        String query = "SELECT * FROM Cards WHERE projectId = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, project.getId());
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String title = resultSet.getString("title");
-                String description = resultSet.getString("description");
-                String dateCreated = resultSet.getString("dateCreated");
-                String dateFinished = resultSet.getString("dateFinished");
-                Blob imageBlob = resultSet.getBlob("image");
-                InputStream inputStream = imageBlob.getBinaryStream();
-                Image image = new Image(inputStream);
-                Card card = new Card(title, description, dateCreated, dateFinished, image);
-                project.addCard(card);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    String title = resultSet.getString("title");
+                    String description = resultSet.getString("description");
+                    String dateCreated = resultSet.getString("dateCreated");
+                    String dateFinished = resultSet.getString("dateFinished");
+
+                    byte[] imageBytes = resultSet.getBytes("image");
+                    Image image = null;
+                    if (imageBytes != null) {
+                        try (InputStream inputStream = new ByteArrayInputStream(imageBytes)) {
+                            image = new Image(inputStream);
+                        }
+                    }
+
+                    Card card = new Card(title, description, dateCreated, dateFinished, image);
+                    listOfCards.add(card);
+                }
             }
+
         } catch (Exception e) {
             e.printStackTrace();
+
         }
+
+        return listOfCards;
     }
 
     /**
@@ -101,9 +114,9 @@ public class SqliteCardDAO {
      * @param project project object for foreign key
      */
     public void addCard(Card card, Project project) {
-        try {
-            PreparedStatement statement = connection.prepareStatement(
-                    "INSERT INTO Cards (projectId, title, description, dateCreated, dateFinished, image) VALUES (?, ?, ?, ?, ?, ?)");
+        String query = "INSERT INTO Cards (projectId, title, description, dateCreated, dateFinished, image) VALUES (?, ?, ?, ?, ?, ?)";
+
+        try (PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             statement.setInt(1, project.getId());
             statement.setString(2, card.getTitle());
             statement.setString(3, card.getDescription());
@@ -111,19 +124,30 @@ public class SqliteCardDAO {
             statement.setString(5, card.getDateFinished());
 
             Image image = card.getMediaImage();
-            BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(bufferedImage, "png", baos);
-            byte[] imageBytes = baos.toByteArray();
-            statement.setBytes(6, imageBytes);
-            statement.executeUpdate();
-            // Set the id of the new project
-            ResultSet generatedKeys = statement.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                card.setId(generatedKeys.getInt(1));
+            byte[] imageBytes = null;
+            if (image != null) {
+                BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
+                try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+                    ImageIO.write(bufferedImage, "png", baos);
+                    imageBytes = baos.toByteArray();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+            statement.setBytes(6, imageBytes);
+
+            statement.executeUpdate();
+
+            // Retrieve the generated key (id)
+            try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    card.setId(generatedKeys.getInt(1));  // Set the id of the new card
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();  // Consider logging or throwing a custom exception
         }
     }
+
 }
