@@ -3,6 +3,7 @@ import com.example.project.model.User;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,7 +16,7 @@ public class TestUser {
      */
     private List<Project> ProjectLists(){
         List<Project> listOfProjects = new ArrayList<>();
-        Project projectToTest = new Project(0,"TestTitle","TestDescription","23/11/1963","23/11/1963", true, "#", 0, "Tag");
+        Project projectToTest = new Project(0,"TestTitle","TestDescription","23/11/1963","23/11/1963", true, "#", 0, Arrays.asList("Tag"));
         listOfProjects.add(projectToTest);
         return listOfProjects;
     }
