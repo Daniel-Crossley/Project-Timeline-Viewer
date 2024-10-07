@@ -1,4 +1,4 @@
-package com.example.project.inheritance;
+package com.example.project.interfaces;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
