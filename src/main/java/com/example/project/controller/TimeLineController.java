@@ -154,17 +154,11 @@ public class TimeLineController {
 
             popupStage.setScene(new Scene(popupRoot));
             popupStage.setTitle("Add New Card");
-            popupStage.showAndWait();  // Wait for the popup to close
 
-            // After the popup closes, retrieve the newly created card
-            //Card newCard = controller.getNewCard();
-            //if (newCard != null) {
-                // Add the new card to the project
-                //project.getListOfCards().add(newCard);
+            popupStage.showAndWait();
 
-                // Update the timeline to reflect the new card
-                updateView((Stage) ((Node) event.getSource()).getScene().getWindow());
-            //}
+            updateView((Stage) ((Node) event.getSource()).getScene().getWindow());
+
         } catch (IOException e) {
             e.printStackTrace();
         }

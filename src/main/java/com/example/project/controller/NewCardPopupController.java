@@ -43,7 +43,6 @@ public class NewCardPopupController {
     private Project project;
 
     private SimpleObjectProperty<Image> image = new SimpleObjectProperty<>();
-    //private SimpleObjectProperty<Image> image = new SimpleObjectProperty<Image>(this, "image");
 
     public void setProject(Project project) {
         this.project = project;
@@ -57,17 +56,13 @@ public class NewCardPopupController {
         this.popupStage = stage;
     }
 
-    public Card getNewCard() {
-        return newCard;
-    }
-
     public NewCardPopupController() {
         cardDAO = new SqliteCardDAO();
     }
 
     @FXML
     private void onAddCard() {
-        // Create a new Card object with the inputted data
+        //Create a new Card object with the inputted data
         String title = titleField.getText();
         String description = descriptionField.getText();
         LocalDate dateCreated = dateCreatedField.getValue();
@@ -75,28 +70,25 @@ public class NewCardPopupController {
         String imageUrl = imageField.getText();
 
         newCard = new Card(title, description, dateCreated.toString(), datePublished.toString(), image.get());
-        //newCard.setDatePublished(datePublished.toString());
 
-        // Add the new card to the database
         cardDAO.addCard(newCard, getProject());
 
-        // Close the popup after creating the card
         popupStage.close();
     }
 
     @FXML
     private void onChooseImage() {
-        // Create a FileChooser to select the image
+        //Create a FileChooser to select the image
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Image File");
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
         );
 
-        // Show the file chooser dialog
+        //Show the file chooser dialog
         File selectedImageFile = fileChooser.showOpenDialog(popupStage);
         if (selectedImageFile != null) {
-            // Set the file path to the imageField
+            //Set the file path to the imageField
             imageField.setText(selectedImageFile.getAbsolutePath());
             image.set(new Image(selectedImageFile.toURI().toString()));
 
