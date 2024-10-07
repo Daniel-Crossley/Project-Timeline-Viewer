@@ -128,12 +128,16 @@ public class TimeLineController extends DisplayStylings {
      * @param actionEvent Click action
      */
     @FXML
-
     private void onEditClick(ActionEvent actionEvent) {
         navigateTo("EditProject.fxml", actionEvent);
     }
 
 
+    /**
+     * Adds action to button to navigate to another scene
+     * @param fxmlFile The scene's fxml filepath
+     * @param actionEvent The action
+     */
     private void navigateTo(String fxmlFile, ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
@@ -147,8 +151,11 @@ public class TimeLineController extends DisplayStylings {
     }
 
 
+    /**
+     * Used to generate the display for the date and start
+     * @return The HBox for display
+     */
     private HBox GenerateStart(){
-
 
         Label Date = new Label(project.getDateCreated());
 
@@ -181,6 +188,10 @@ public class TimeLineController extends DisplayStylings {
         return Start;
     }
 
+    /**
+     * Generates timeline spacer
+     * @return VBox used to display the spacer
+     */
     private VBox GenerateBetween(){
         Label AboveSpace = new Label("  ");
 
@@ -259,6 +270,11 @@ public class TimeLineController extends DisplayStylings {
         }
     }
 
+    /**
+     * Generates an ImageView for displaying the media stored in the card
+     * @param card The card used as reference
+     * @return generated imageview
+     */
     private ImageView DisplayImage (Card card){
         if (card.getMediaImage() != null) {
             ImageView mediaImageView = new ImageView(card.getMediaImage());
@@ -274,6 +290,10 @@ public class TimeLineController extends DisplayStylings {
         return null;
     }
 
+    /**
+     * Opens popup for creating a new card
+     * @param event event
+     */
     @FXML
     private void onNewCardClick(ActionEvent event) {
         try {
