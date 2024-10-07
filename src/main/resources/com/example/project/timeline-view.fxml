@@ -36,7 +36,10 @@
                <children>
                   <Pane fx:id="Buffer_Cards" prefHeight="79.0" prefWidth="598.0" style="-fx-background-color: e5c08b;">
                      <children>
-                        <Label fx:id="cardStatus" layoutX="32.0" layoutY="48.0" />
+                        <HBox fx:id="statusContainer" layoutX="32.0" layoutY="48.0">
+                           <Label fx:id="cardStatusLabel"/>
+                           <Label fx:id="cardStatus"/>
+                        </HBox>
                      </children></Pane>
                   <HBox fx:id="Cards_Container" prefHeight="147.0" prefWidth="598.0" style="-fx-background-color: d6b88d;" />
                </children>

@@ -31,6 +31,8 @@ import java.util.ArrayList;
 import com.example.project.model.Project;
 import com.example.project.model.Card;
 
+import javax.swing.text.LabelView;
+
 public class TimeLineController extends DisplayStylings {
 
 
@@ -45,6 +47,8 @@ public class TimeLineController extends DisplayStylings {
     public Pane Buffer_Cards;
     public ScrollPane scroll_Container;
     public VBox vBox_Cards;
+    public HBox statusContainer;
+    public Label cardStatusLabel;
     private User user;
     private Project project;
 
@@ -101,6 +105,9 @@ public class TimeLineController extends DisplayStylings {
             System.out.println("Project has no cards to add");
             cardStatus.setText("No cards in this project, please click add new.");
         } else {
+            statusContainer.setAlignment(Pos.CENTER);
+            cardStatusLabel.setText("Description: ");
+            cardStatusLabel.setFont(Font.font("System", FontWeight.BOLD, 15));
             cardStatus.setText(project.getDescription());
             System.out.println("Adding Cards");
             addCardsToTimeline(stage);
@@ -140,6 +147,53 @@ public class TimeLineController extends DisplayStylings {
     }
 
 
+    private HBox GenerateStart(){
+
+
+        Label Date = new Label(project.getDateCreated());
+
+
+        VBox LeftBracket = new VBox (new HBox(new Label("     ")));
+        LeftBracket.setAlignment(Pos.CENTER);
+
+        VBox StartLine = new VBox (new HBox(new Label(" ")));
+        StartLine.setAlignment(Pos.CENTER);
+        StartLine.setStyle("-fx-background-color: #3d3d3d;");
+
+        HBox StartLineContainer = new HBox(StartLine);
+        StartLineContainer.setMaxHeight(30);
+
+
+        Label Space = new Label("");
+        HBox Line = new HBox(Space);
+        Space.setFont(Font.font("System", FontWeight.BOLD, 5));
+        Line.setStyle("-fx-background-color: #3d3d3d;");
+
+        VBox spacer = new VBox(LeftBracket,Line);
+
+        spacer.setAlignment(Pos.CENTER);
+
+        VBox DateContainer = new VBox(Date, spacer);
+        DateContainer.setAlignment(Pos.CENTER);
+
+        HBox Start = new HBox (LeftBracket,StartLineContainer, DateContainer);
+        Start.setAlignment(Pos.CENTER);
+        return Start;
+    }
+
+    private VBox GenerateBetween(){
+        Label AboveSpace = new Label("  ");
+
+        AboveSpace.setFont(Font.font("System", FontWeight.BOLD, 20));
+        Label Space = new Label("www");
+        Space.setFont(Font.font("System", FontWeight.BOLD, 5));
+        HBox Line = new HBox(Space);
+        Line.setStyle("-fx-background-color: #3d3d3d;");
+        VBox spacer = new VBox(AboveSpace,Line);
+        spacer.setAlignment(Pos.CENTER);
+        return spacer;
+    }
+
     /**
      * Generates card containers to display on timeline
      */
@@ -152,6 +206,7 @@ public class TimeLineController extends DisplayStylings {
                 return;
             }
 
+            Cards_Container.getChildren().add(GenerateStart());
 
             for (Card cardToAdd : project.getListOfCards()) {
                 try {
@@ -189,6 +244,8 @@ public class TimeLineController extends DisplayStylings {
                     cardOverlay.getChildren().addAll(cardLayout);
                     Cards_Container.getChildren().add(cardOverlay);
 
+                    //Add Spacer
+                    Cards_Container.getChildren().add(GenerateBetween());
 
 
                     System.out.println("Card added: " + cardToAdd.getTitle());
