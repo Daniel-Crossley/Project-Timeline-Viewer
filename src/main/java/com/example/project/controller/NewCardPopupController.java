@@ -8,6 +8,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser;
@@ -38,6 +39,9 @@ public class NewCardPopupController {
     @FXML
     private Button addCardButton;
 
+    @FXML
+    private Label cardErrorText;
+
     private Card newCard;
     private Stage popupStage;
     private Project project;
@@ -64,13 +68,19 @@ public class NewCardPopupController {
     private void onAddCard() {
         //Create a new Card object with the inputted data
         int id = 1;
-        String title = titleField.getText();
-        String description = descriptionField.getText();
-        LocalDate dateCreated = dateCreatedField.getValue();
-        LocalDate datePublished = datePublishedField.getValue();
-        String imageUrl = imageField.getText();
+        String TITLE = titleField.getText();
+        String DESCRIPTION = descriptionField.getText();
+        LocalDate DATE_CREATED = dateCreatedField.getValue();
+        LocalDate DATE_FINISHED = datePublishedField.getValue();
+        String IMAGE_URL = imageField.getText();
 
-        newCard = new Card(title, description, dateCreated.toString(), datePublished.toString(), image.get());
+
+        if (TITLE.isEmpty() || DESCRIPTION.isEmpty() || DATE_CREATED == null || DATE_FINISHED == null || IMAGE_URL.isEmpty()) {
+            cardErrorText.setText("Please fill in all fields");
+            return;
+        }
+
+        newCard = new Card(TITLE, DESCRIPTION, DATE_CREATED.toString(), DATE_FINISHED.toString(), image.get());
 
         cardDAO.addCard(newCard, getProject());
 

@@ -107,7 +107,6 @@ public class RegisterController extends BaseController {
         }
 
         if (!PASSWORD.equals(CONFIRM_PASSWORD)) {
-            ;
             registerErrorText.setText("Passwords do not match");
             return;
         }
