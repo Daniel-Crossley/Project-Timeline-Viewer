@@ -1,10 +1,12 @@
-import com.example.project.model.Card;
 import com.example.project.model.CardComment;
-import com.example.project.model.User;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestComment {
+
+    /**
+     * Checks to see if the ID of the comment has been properly stored
+     */
     @Test
     void commentID(){
         int id = 0;
@@ -15,6 +17,9 @@ public class TestComment {
         assertEquals(id, commentData.getCommentID());
     }
 
+    /**
+     * Checks to see if the text content of the comment has been properly stored
+     */
     @Test
     void commentText(){
         int id = 0;
@@ -25,6 +30,9 @@ public class TestComment {
         assertEquals(comment, commentData.getText());
     }
 
+    /**
+     * Checks to see if the publish date of the comment has been properly stored
+     */
     @Test
     void commentDatePublished(){
         int id = 0;

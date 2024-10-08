@@ -1,0 +1,1183 @@
+*   commit c03297a4810a798036765d2b2f7683bcc0c7ae1d (refs/stash)
+|\  Merge: 24009ce a3cd9e4
+| | Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | AuthorDate: Fri Sep 20 14:07:00 2024 +1000
+| | Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | CommitDate: Fri Sep 20 14:07:00 2024 +1000
+| | 
+| |     WIP on main: 24009ce Added more documentation
+| | 
+| * commit a3cd9e467576521ff5ed0952c10ade34425b12f3
+|/  Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+|   AuthorDate: Fri Sep 20 14:07:00 2024 +1000
+|   Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+|   CommitDate: Fri Sep 20 14:07:00 2024 +1000
+|   
+|       index on main: 24009ce Added more documentation
+|   
+| * commit b2adbc5d373beca669634ff6dfae38b38cfd6a1c (HEAD -> main, origin/main, origin/HEAD)
+|/  Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+|   AuthorDate: Fri Sep 20 12:42:54 2024 +1000
+|   Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+|   CommitDate: Fri Sep 20 12:42:54 2024 +1000
+|   
+|       Documentation - Added Comments where lacking
+|       
+|       Added comments to the tests, and controllers where missing
+| 
+* commit 24009ce4ce134f3f2ac6e3d1e0970fb4757ba733
+| Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| AuthorDate: Fri Sep 20 11:32:47 2024 +1000
+| Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| CommitDate: Fri Sep 20 11:32:47 2024 +1000
+| 
+|     Added more documentation
+| 
+* commit 3ea8b06ced483c4734763f0b37cd374c8159391b
+| Author:     Jack Johnston <jackjj2004@hotmail.com>
+| AuthorDate: Thu Sep 19 16:34:28 2024 +1000
+| Commit:     Jack Johnston <jackjj2004@hotmail.com>
+| CommitDate: Thu Sep 19 16:34:28 2024 +1000
+| 
+|     comments added to the register controller.
+| 
+* commit cdc77165857c7ddf217815d6e83a165a975e0f27
+| Author:     Ahmed <a9-m@hotmail.com>
+| AuthorDate: Thu Sep 19 14:59:39 2024 +1000
+| Commit:     Ahmed <a9-m@hotmail.com>
+| CommitDate: Thu Sep 19 14:59:39 2024 +1000
+| 
+|     Comments in Create New Project files
+| 
+* commit 34b73d98264474b3feb4fa6bc3336113067a93e5
+| Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| AuthorDate: Thu Sep 19 14:14:56 2024 +1000
+| Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| CommitDate: Thu Sep 19 14:14:56 2024 +1000
+| 
+|     Added documentation
+| 
+* commit 6b0c50165e0c0095e13bd5de406020ae966a06bc (origin/tyler-branch, tyler-branch)
+| Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| AuthorDate: Tue Sep 17 12:13:31 2024 +1000
+| Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| CommitDate: Tue Sep 17 12:13:31 2024 +1000
+| 
+|     Fixed back button bug
+| 
+* commit d0856d4f256cad479e43073c93c557abe346dc8b
+| Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| AuthorDate: Tue Sep 17 11:48:51 2024 +1000
+| Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| CommitDate: Tue Sep 17 11:48:51 2024 +1000
+| 
+|     Fixed register
+| 
+* commit f5996f062a5022073125afb456b0a1248e0b4ca7
+| Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| AuthorDate: Tue Sep 17 11:36:24 2024 +1000
+| Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| CommitDate: Tue Sep 17 11:36:24 2024 +1000
+| 
+|     Finished cardDao
+| 
+* commit e9d2a72435a4ba1cf8e2f4f87e38dd1d15491e48
+| Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| AuthorDate: Tue Sep 17 11:30:50 2024 +1000
+| Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| CommitDate: Tue Sep 17 11:30:58 2024 +1000
+| 
+|     Added CardDAO
+| 
+* commit 6847778bce15d98c10c3c209ae05536355adc129
+| Author:     Jack Johnston <jackjj2004@hotmail.com>
+| AuthorDate: Tue Sep 17 11:19:00 2024 +1000
+| Commit:     Jack Johnston <jackjj2004@hotmail.com>
+| CommitDate: Tue Sep 17 11:19:00 2024 +1000
+| 
+|     updated register page
+| 
+* commit 39a163391b80d21aa6d5400547721d68623e4353
+| Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| AuthorDate: Mon Sep 16 22:26:25 2024 +1000
+| Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| CommitDate: Mon Sep 16 22:26:25 2024 +1000
+| 
+|     Updated tests
+| 
+* commit ee54af346847f921a185e7a6a522fd79e86586ca
+| Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| AuthorDate: Mon Sep 16 22:13:06 2024 +1000
+| Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| CommitDate: Mon Sep 16 22:13:06 2024 +1000
+| 
+|     Setup TimeLine
+| 
+* commit e8270a14ba1977e4a7657cebc155aa6fc3702259
+| Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| AuthorDate: Mon Sep 16 21:56:19 2024 +1000
+| Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| CommitDate: Mon Sep 16 21:56:19 2024 +1000
+| 
+|     Fixed add project bug
+| 
+* commit 33ba0688be9cce96e7da4e400e78bf856533ce79
+| Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| AuthorDate: Mon Sep 16 21:25:16 2024 +1000
+| Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| CommitDate: Mon Sep 16 21:25:16 2024 +1000
+| 
+|     Dashboard - Hide New Project
+|     
+|     Made so that the "Add New Project" is hidden when dashboard is viewed by guest
+| 
+* commit b6dd16ae2f761d5984182820a5605797cfe16248
+| Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| AuthorDate: Mon Sep 16 21:17:49 2024 +1000
+| Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| CommitDate: Mon Sep 16 21:17:49 2024 +1000
+| 
+|     Fixed Project display issue
+| 
+* commit 7752f622199bc776e46f73f927760272a845603c
+| Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| AuthorDate: Mon Sep 16 21:03:05 2024 +1000
+| Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| CommitDate: Mon Sep 16 21:03:05 2024 +1000
+| 
+|     Added CreateNewProject persistance
+| 
+* commit b142df15054e2e18c980fb4cac2d51a457c6c198
+| Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| AuthorDate: Mon Sep 16 20:45:00 2024 +1000
+| Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| CommitDate: Mon Sep 16 20:45:00 2024 +1000
+| 
+|     Fixed database connection
+| 
+* commit 22872879b15ef9b5f15e583096541c98067f8681
+| Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| AuthorDate: Mon Sep 16 20:30:44 2024 +1000
+| Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| CommitDate: Mon Sep 16 20:30:53 2024 +1000
+| 
+|     Added return from create new project
+| 
+* commit 9b1d0109a165dbde7671673f054317ab6430e2d6
+| Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| AuthorDate: Mon Sep 16 20:30:14 2024 +1000
+| Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| CommitDate: Mon Sep 16 20:30:14 2024 +1000
+| 
+|     Dashboard - Comments
+|     
+|     Added comments for the different functions
+| 
+* commit 454e632bbcad19a1dbe7084ae81bb7b7aa5f2e0e
+| Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| AuthorDate: Mon Sep 16 20:24:42 2024 +1000
+| Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| CommitDate: Mon Sep 16 20:24:42 2024 +1000
+| 
+|     Dashboard - Added Styling
+|     
+|     Added Additional Styling for menu bar
+| 
+* commit 7c74907c392b0936bd42773d2958704a001f7e66
+| Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| AuthorDate: Mon Sep 16 19:58:23 2024 +1000
+| Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| CommitDate: Mon Sep 16 19:58:23 2024 +1000
+| 
+|     Dashboard - Stylised the Project Container
+|     
+|     Added styling for the project container to look more appealing
+| 
+* commit 08cea6f5def8d05ddd672c71ff07fbf464ee2dc7
+| Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| AuthorDate: Mon Sep 16 19:27:25 2024 +1000
+| Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| CommitDate: Mon Sep 16 19:27:25 2024 +1000
+| 
+|     Dashboard - Fixed Adding Panels
+|     
+|     Added properties for setting the width of the project panels
+| 
+* commit 26926b695c039ad9967de655a3e9f256b8f41259
+| Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| AuthorDate: Mon Sep 16 19:07:40 2024 +1000
+| Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| CommitDate: Mon Sep 16 19:07:40 2024 +1000
+| 
+|     Dashboard - Fixed Parameters
+|     
+|     Added missing parameters to Dashboard
+| 
+* commit c21151a52a732cd59c9652860b3125c803d2fcac
+| Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| AuthorDate: Mon Sep 16 19:04:05 2024 +1000
+| Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| CommitDate: Mon Sep 16 19:04:05 2024 +1000
+| 
+|     Dashboard - Test New Project
+|     
+|     Added code to test new project button
+| 
+* commit f6223c73f5d51f407d060b08cbb961bf1d18b917
+| Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| AuthorDate: Mon Sep 16 18:47:36 2024 +1000
+| Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| CommitDate: Mon Sep 16 18:47:36 2024 +1000
+| 
+|     Update
+| 
+* commit de6f77de4f98a4e9439bd95c81597e8bd6cbb8b6
+| Author:     Jack Johnston <jackjj2004@hotmail.com>
+| AuthorDate: Mon Sep 16 17:30:09 2024 +1000
+| Commit:     Jack Johnston <jackjj2004@hotmail.com>
+| CommitDate: Mon Sep 16 17:30:09 2024 +1000
+| 
+|     back button added to register page
+| 
+* commit 37a09c61325d7a5c703a04c533dca1874d93f65a
+| Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| AuthorDate: Mon Sep 16 17:09:19 2024 +1000
+| Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| CommitDate: Mon Sep 16 17:09:19 2024 +1000
+| 
+|     Updated login fxml
+| 
+* commit 17436e748abf79346290b694f607d3c794a0ab5d (origin/Dashboard-Controller)
+| Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| AuthorDate: Mon Sep 16 16:01:43 2024 +1000
+| Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| CommitDate: Mon Sep 16 16:01:43 2024 +1000
+| 
+|     Dashboard - Container Add Project
+|     
+|     Added logic for adding projects to the different containers
+| 
+* commit d8069829b24aa3229fa058735ebceb98dca1f414
+| Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| AuthorDate: Mon Sep 16 15:55:13 2024 +1000
+| Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| CommitDate: Mon Sep 16 15:55:13 2024 +1000
+| 
+|     Dashboard - Added Container Generation
+|     
+|     Added logic for adding container generation for projects
+|   
+*   commit 121c948e8e97d3bdbe93008bdab175a5a54bd0b0
+|\  Merge: e3f01e9 a53682b
+| | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | AuthorDate: Mon Sep 16 15:24:46 2024 +1000
+| | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | CommitDate: Mon Sep 16 15:24:46 2024 +1000
+| | 
+| |     Merge branch 'Dashboard-Controller'
+| | 
+| * commit a53682be08f003507b4cf2c957f0ff2ab9e0a680
+| | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | AuthorDate: Mon Sep 16 15:24:32 2024 +1000
+| | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | CommitDate: Mon Sep 16 15:24:32 2024 +1000
+| | 
+| |     Dashboard - Added Logout
+| |     
+| |     Added logout function
+| | 
+* | commit e3f01e911ed21fd774d553cf101b2c808f08f7c0
+| | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | AuthorDate: Mon Sep 16 15:11:30 2024 +1000
+| | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | CommitDate: Mon Sep 16 15:11:30 2024 +1000
+| | 
+| |     Dashboard - Altered Text posiitioning
+| |     
+| |     Altered positioning for temporary solution for name clipping
+| | 
+* | commit f95d6f8903ede02efdf7205356431aa064aabefe
+| | Author:     Daniel Crossley <133619399+Daniel-Crossley@users.noreply.github.com>
+| | AuthorDate: Mon Sep 16 15:02:18 2024 +1000
+| | Commit:     GitHub <noreply@github.com>
+| | CommitDate: Mon Sep 16 15:02:18 2024 +1000
+| | 
+| |     Delete contacts.db
+| | 
+* | commit 3e1f55f8dd7b75677984ec334e62e9ac925a2168
+| | Author:     Daniel Crossley <133619399+Daniel-Crossley@users.noreply.github.com>
+| | AuthorDate: Mon Sep 16 15:02:05 2024 +1000
+| | Commit:     GitHub <noreply@github.com>
+| | CommitDate: Mon Sep 16 15:02:05 2024 +1000
+| | 
+| |     Delete target/classes directory
+| | 
+* | commit 74bf99e8f769aebb2871d456dc5e8ee7795f416a
+| | Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | AuthorDate: Mon Sep 16 15:01:41 2024 +1000
+| | Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | CommitDate: Mon Sep 16 15:01:41 2024 +1000
+| | 
+| |     Added driver
+| | 
+* | commit d59690668905f01b602527d594fd9261b3921616
+| | Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | AuthorDate: Mon Sep 16 15:00:10 2024 +1000
+| | Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | CommitDate: Mon Sep 16 15:00:10 2024 +1000
+| | 
+| |     Added driver
+| | 
+* | commit f1cc0f9da11a4814029e5c5cf9e24a4194defe67
+|\| Merge: 6fc7d26 e92d635
+| | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | AuthorDate: Mon Sep 16 14:54:11 2024 +1000
+| | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | CommitDate: Mon Sep 16 14:54:11 2024 +1000
+| | 
+| |     Merge branch 'Dashboard-Controller'
+| |   
+| *   commit e92d635ef86a96f175f93f306c7ca32c88c40ee2
+| |\  Merge: 8af1ed4 0d64da9
+| | | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | AuthorDate: Mon Sep 16 14:53:13 2024 +1000
+| | | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | CommitDate: Mon Sep 16 14:53:13 2024 +1000
+| | | 
+| | |     Merge branch 'main' into Dashboard-Controller
+| | | 
+| * | commit 8af1ed469511d60ceee8e79a54a7b610fa900932
+| | | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | AuthorDate: Mon Sep 16 14:35:21 2024 +1000
+| | | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | CommitDate: Mon Sep 16 14:35:21 2024 +1000
+| | | 
+| | |     Login - Updated and fixed user login
+| | | 
+| * | commit 30bcd2b45564e9a216cf7fd83d52a2e2fa8ccd83
+| | | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | AuthorDate: Mon Sep 16 14:31:27 2024 +1000
+| | | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | CommitDate: Mon Sep 16 14:31:27 2024 +1000
+| | | 
+| | |     Dashboard - Fixed Guest Initialisation
+| | |     
+| | |     Fixed guest initialisation
+| | | 
+| * | commit bc6f3e267fdcc4d6e54ef6f505a8c0596e00ca38
+| | | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | AuthorDate: Mon Sep 16 14:00:24 2024 +1000
+| | | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | CommitDate: Mon Sep 16 14:00:24 2024 +1000
+| | | 
+| | |     Dashboard - Added Elements and ID
+| | |     
+| | |     Added elements and added ID to relevant elements to make referral easy
+| | | 
+* | | commit 6fc7d26867214c5ca48d95e3dd710a391e8832bd
+| | | Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | | AuthorDate: Mon Sep 16 14:51:24 2024 +1000
+| | | Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | | CommitDate: Mon Sep 16 14:51:24 2024 +1000
+| | | 
+| | |     removed DS_STORE
+| | | 
+* | | commit d5e380689b59649e4a8ab5d299e77ffbeea9ae00
+| | | Author:     Daniel Crossley <133619399+Daniel-Crossley@users.noreply.github.com>
+| | | AuthorDate: Mon Sep 16 14:48:44 2024 +1000
+| | | Commit:     GitHub <noreply@github.com>
+| | | CommitDate: Mon Sep 16 14:48:44 2024 +1000
+| | | 
+| | |     Delete target directory
+| | | 
+* | | commit 21494a38c2145b0fb2cd704227019d3fc5574d37
+| | | Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | | AuthorDate: Mon Sep 16 14:48:11 2024 +1000
+| | | Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | | CommitDate: Mon Sep 16 14:48:20 2024 +1000
+| | | 
+| | |     Updated gitignore
+| | | 
+* | | commit db35b13056d138f00c4412e76e5d29aa9eb1efe6
+| | | Author:     Daniel Crossley <133619399+Daniel-Crossley@users.noreply.github.com>
+| | | AuthorDate: Mon Sep 16 14:47:24 2024 +1000
+| | | Commit:     GitHub <noreply@github.com>
+| | | CommitDate: Mon Sep 16 14:47:24 2024 +1000
+| | | 
+| | |     Delete .DS_Store
+| | | 
+* | | commit a1f566feca4e764de79fc3626e5a9b641945281b
+| | | Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | | AuthorDate: Mon Sep 16 14:46:52 2024 +1000
+| | | Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | | CommitDate: Mon Sep 16 14:46:52 2024 +1000
+| | | 
+| | |     updated gitignore
+| | | 
+* | | commit 182ef19e9833f8f79ae9a505d8b3a445835be392
+| | | Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | | AuthorDate: Mon Sep 16 14:42:58 2024 +1000
+| | | Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | | CommitDate: Mon Sep 16 14:44:32 2024 +1000
+| | | 
+| | |     Added git ignore
+| | | 
+* | | commit eca1def3386786027d2ce4a193c14780b8b8a2c6
+| | | Author:     Daniel Crossley <133619399+Daniel-Crossley@users.noreply.github.com>
+| | | AuthorDate: Mon Sep 16 14:42:34 2024 +1000
+| | | Commit:     GitHub <noreply@github.com>
+| | | CommitDate: Mon Sep 16 14:42:34 2024 +1000
+| | | 
+| | |     Delete .idea directory
+| | | 
+* | | commit 2f7ee8bfdc72967f0be841229cc0bb4e2b40dacb
+| |/  Author:     Daniel Crossley <133619399+Daniel-Crossley@users.noreply.github.com>
+|/|   AuthorDate: Mon Sep 16 14:39:27 2024 +1000
+| |   Commit:     GitHub <noreply@github.com>
+| |   CommitDate: Mon Sep 16 14:39:27 2024 +1000
+| |   
+| |       Delete contacts.db
+| | 
+* | commit 0d64da919ecdceda330ecca3857c7e93a3cb7fe2
+| | Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | AuthorDate: Mon Sep 16 14:32:55 2024 +1000
+| | Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | CommitDate: Mon Sep 16 14:32:55 2024 +1000
+| | 
+| |     Fixed registration
+| | 
+* | commit 94e52fdca573f13a7ef6ea2fd85af4441111da0e
+| | Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | AuthorDate: Mon Sep 16 14:09:04 2024 +1000
+| | Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | CommitDate: Mon Sep 16 14:09:04 2024 +1000
+| | 
+| |     Fixed bugs
+| | 
+* | commit 41b2cb1c6070ae55b6c284013cd1fe5e7254be05
+| | Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | AuthorDate: Mon Sep 16 13:49:58 2024 +1000
+| | Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | CommitDate: Mon Sep 16 13:55:48 2024 +1000
+| | 
+| |     Update
+| | 
+* | commit c3474e3f5fd2715a315e90115418f1e9e89bf8ba
+| | Author:     Jack Johnston <jackjj2004@hotmail.com>
+| | AuthorDate: Mon Sep 16 13:54:50 2024 +1000
+| | Commit:     Jack Johnston <jackjj2004@hotmail.com>
+| | CommitDate: Mon Sep 16 13:54:50 2024 +1000
+| | 
+| |     Registration merged to main hashed
+| |   
+* |   commit 1ec7d5bfeea27ce4a3069fc5b71f9ca8c4e20b5e
+|\ \  Merge: 1ded20f 1c8a1d6
+| |/  Author:     Jack Johnston <jackjj2004@hotmail.com>
+|/|   AuthorDate: Mon Sep 16 13:51:53 2024 +1000
+| |   Commit:     Jack Johnston <jackjj2004@hotmail.com>
+| |   CommitDate: Mon Sep 16 13:51:53 2024 +1000
+| |   
+| |       Registration merged to main
+| | 
+| * commit 1c8a1d688521dd7cfdefc98b2e855e15e083d60f (origin/jack-branch)
+| | Author:     Jack Johnston <jackjj2004@hotmail.com>
+| | AuthorDate: Mon Sep 16 10:49:18 2024 +1000
+| | Commit:     Jack Johnston <jackjj2004@hotmail.com>
+| | CommitDate: Mon Sep 16 10:49:18 2024 +1000
+| | 
+| |     added testing
+| | 
+| * commit efcfe4dcee987e37b39ac2d3f5bafb07dc5696f3
+| | Author:     Jack Johnston <jackjj2004@hotmail.com>
+| | AuthorDate: Mon Sep 16 10:35:57 2024 +1000
+| | Commit:     Jack Johnston <jackjj2004@hotmail.com>
+| | CommitDate: Mon Sep 16 10:35:57 2024 +1000
+| | 
+| |     updated checks on registration
+| | 
+| * commit 8268fd86100bbf739beab434339c27e3c70d9874
+| | Author:     Jack Johnston <jackjj2004@hotmail.com>
+| | AuthorDate: Tue Sep 10 11:05:50 2024 +1000
+| | Commit:     Jack Johnston <jackjj2004@hotmail.com>
+| | CommitDate: Tue Sep 10 11:05:50 2024 +1000
+| | 
+| |     Register system setup to mock database with basic checks on inputs
+| | 
+| * commit 3cafbc9ef6d751654e6971ea305409f0742b6edd
+| | Author:     Jack Johnston <jackjj2004@hotmail.com>
+| | AuthorDate: Mon Sep 9 19:19:22 2024 +1000
+| | Commit:     Jack Johnston <jackjj2004@hotmail.com>
+| | CommitDate: Mon Sep 9 19:19:22 2024 +1000
+| | 
+| |     Register system setup to mock database with no checks
+| | 
+| * commit e9ea9b31e29eb2431855a2b65a89f7ce519da67b
+| | Author:     Jack Johnston <jackjj2004@hotmail.com>
+| | AuthorDate: Mon Sep 9 09:10:14 2024 +1000
+| | Commit:     Jack Johnston <jackjj2004@hotmail.com>
+| | CommitDate: Mon Sep 9 09:10:14 2024 +1000
+| | 
+| |     JavaFX for register page
+| | 
+| * commit 01c3d20c1faf624965c8521d1be70f2c550d3380
+| | Author:     Jack Johnston <jackjj2004@hotmail.com>
+| | AuthorDate: Tue Sep 3 11:01:02 2024 +1000
+| | Commit:     Jack Johnston <jackjj2004@hotmail.com>
+| | CommitDate: Tue Sep 3 11:01:02 2024 +1000
+| | 
+| |     creating Jacks branch
+| | 
+* | commit 1ded20fa04c107e08ed0e53855c37dce0444bc2d
+| | Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | AuthorDate: Sun Sep 15 20:21:03 2024 +1000
+| | Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | CommitDate: Sun Sep 15 20:21:03 2024 +1000
+| | 
+| |     updated database driver
+| | 
+* | commit f9218d0be41bd31c9e0461134380b72b4bb8af9e
+| | Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | AuthorDate: Sun Sep 15 20:18:12 2024 +1000
+| | Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | CommitDate: Sun Sep 15 20:18:12 2024 +1000
+| | 
+| |     Moved Controller
+| | 
+* | commit a08b8d249adce1601a0b240c44f3ac0d1c5519c0
+| | Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | AuthorDate: Sun Sep 15 20:17:04 2024 +1000
+| | Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | CommitDate: Sun Sep 15 20:17:04 2024 +1000
+| | 
+| |     Update ProjectDAO
+| | 
+* | commit 035ff6666d262b54aee2d7729976e1a28fe04b20
+| | Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | AuthorDate: Sun Sep 15 19:42:43 2024 +1000
+| | Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | CommitDate: Sun Sep 15 19:48:44 2024 +1000
+| | 
+| |     ProjectDAO update
+| | 
+* | commit 3580310595b4baa5cb5b4d874a068003ade886b0
+| | Author:     Tyler <n11154748@qut.edu.au>
+| | AuthorDate: Sun Sep 15 19:47:11 2024 +1000
+| | Commit:     Tyler <n11154748@qut.edu.au>
+| | CommitDate: Sun Sep 15 19:47:11 2024 +1000
+| | 
+| |     corrected for object and not Holder
+| | 
+* | commit 2d96d0e021deee5046c64604acf45a8fca16cffe
+| | Author:     Tyler <n11154748@qut.edu.au>
+| | AuthorDate: Sun Sep 15 19:41:27 2024 +1000
+| | Commit:     Tyler <n11154748@qut.edu.au>
+| | CommitDate: Sun Sep 15 19:41:27 2024 +1000
+| | 
+| |     corrected for object and not Holder
+| | 
+* | commit 907a373c6a1af094a3479dcb4f1778af4198f9eb
+| | Author:     Tyler <n11154748@qut.edu.au>
+| | AuthorDate: Sun Sep 15 16:37:33 2024 +1000
+| | Commit:     Tyler <n11154748@qut.edu.au>
+| | CommitDate: Sun Sep 15 16:37:33 2024 +1000
+| | 
+| |     corrected Login branch for login function and added handover for giving username for other handling
+| | 
+* | commit 854787fb8c30c0286babfe3041bd1dd7e79ff189
+| | Author:     Tyler <n11154748@qut.edu.au>
+| | AuthorDate: Sun Sep 15 16:19:43 2024 +1000
+| | Commit:     Tyler <n11154748@qut.edu.au>
+| | CommitDate: Sun Sep 15 16:19:43 2024 +1000
+| | 
+| |     Corrected the change to the login and added handover for username
+| |   
+* |   commit d9b7c4de557a1adc51753f66982d638065341d9a
+|\ \  Merge: 96108da 3727db5
+| | | Author:     A7Mx0 <157096454+A7Mx0@users.noreply.github.com>
+| | | AuthorDate: Sun Sep 15 12:26:20 2024 +1000
+| | | Commit:     GitHub <noreply@github.com>
+| | | CommitDate: Sun Sep 15 12:26:20 2024 +1000
+| | | 
+| | |     Merge pull request #8 from Daniel-Crossley/create_new_timeline
+| | |     
+| | |     Merge - Added new files CreateNewProject
+| | | 
+| * | commit 3727db59b0795449a9871b616ed3f894162e70a2 (origin/create_new_timeline)
+|/ /  Author:     A7Mx0 <157096454+A7Mx0@users.noreply.github.com>
+| |   AuthorDate: Sun Sep 15 12:14:00 2024 +1000
+| |   Commit:     A7Mx0 <157096454+A7Mx0@users.noreply.github.com>
+| |   CommitDate: Sun Sep 15 12:14:00 2024 +1000
+| |   
+| |       Added new files CreateNewProject
+| | 
+* | commit 96108da1de57ce21aab9cce2b4fcfd3b159a704b
+| | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | AuthorDate: Sat Sep 14 23:28:52 2024 +1000
+| | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | CommitDate: Sat Sep 14 23:28:52 2024 +1000
+| | 
+| |     Test Comment - Added Test for comment
+| | 
+* | commit 5f3901483b3cf385416672d23c5a557307c2714d
+| | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | AuthorDate: Sat Sep 14 23:20:03 2024 +1000
+| | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | CommitDate: Sat Sep 14 23:20:03 2024 +1000
+| | 
+| |     Test User - Added base testing for user
+| | 
+* | commit f783943a04320d13f44c8ecced5d4ca137a64f01
+| | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | AuthorDate: Sat Sep 14 22:52:52 2024 +1000
+| | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | CommitDate: Sat Sep 14 22:52:52 2024 +1000
+| | 
+| |     LogIn - Updated Guest
+| |     
+| |     Updated guest login to reflect changes to dashboard controller
+| | 
+* | commit 29882cc06d9cafe1e9f7737dbfaf473d7b584891
+| | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | AuthorDate: Sat Sep 14 22:43:45 2024 +1000
+| | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | CommitDate: Sat Sep 14 22:43:45 2024 +1000
+| | 
+| |     Dashboard - Updated Controller
+| |     
+| |     Removed data class and have it handled by controller
+| |   
+* |   commit ee0a1f0c43c1fe2a944cbb8f469013b57df34777
+|\ \  Merge: 68c1ae4 cb7c719
+| | | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | AuthorDate: Sat Sep 14 22:39:09 2024 +1000
+| | | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | CommitDate: Sat Sep 14 22:39:09 2024 +1000
+| | | 
+| | |     Merge branch 'main' of https://github.com/Daniel-Crossley/CAB302-Project-main
+| | | 
+| * | commit cb7c719cb5cc31376074bc55eb8e8006a42c52ee
+| | | Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | | AuthorDate: Sat Sep 14 21:53:35 2024 +1000
+| | | Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | | CommitDate: Sat Sep 14 21:53:43 2024 +1000
+| | | 
+| | |     Updated ProjectDAO
+| | | 
+* | | commit 68c1ae4d6f4630e27d068a913285611f5ae395d7
+|/ /  Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| |   AuthorDate: Sat Sep 14 22:38:57 2024 +1000
+| |   Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| |   CommitDate: Sat Sep 14 22:38:57 2024 +1000
+| |   
+| |       Project - Removed reference to controller
+| |       
+| |       Removed reference to controller so that it can be built
+| | 
+* | commit ac6ed1365881e3ac4a3a3d25730b87097dc1fb5c
+| | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | AuthorDate: Sat Sep 14 16:52:01 2024 +1000
+| | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | CommitDate: Sat Sep 14 16:52:01 2024 +1000
+| | 
+| |     Login - Added comments
+| | 
+* | commit 68aec88c3fbdc3d51c8c3d8b9a25cb4daee353a6
+| | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | AuthorDate: Sat Sep 14 16:45:12 2024 +1000
+| | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | CommitDate: Sat Sep 14 16:45:12 2024 +1000
+| | 
+| |     Login - Fixed Guest Login
+| |     
+| |     Fixed guest login
+| | 
+* | commit 32152abace122f9c1f779db809d02219ae8ca804
+| | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | AuthorDate: Sat Sep 14 16:39:57 2024 +1000
+| | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | CommitDate: Sat Sep 14 16:39:57 2024 +1000
+| | 
+| |     Dashboard - Added Dashboard data
+| |     
+| |     Added class for holding data relating to dashboard
+| | 
+* | commit b6c6f43ba8a15c6577641c2f9e30c67215f6557f
+| | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | AuthorDate: Sat Sep 14 15:50:19 2024 +1000
+| | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | CommitDate: Sat Sep 14 15:50:19 2024 +1000
+| | 
+| |     Test Timeline - Added adding single card
+| |     
+| |     Added tests for adding singular cards
+| | 
+* | commit 46ca3afd90270c89d511067b76fed2c58b500771
+| | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | AuthorDate: Sat Sep 14 15:44:08 2024 +1000
+| | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | CommitDate: Sat Sep 14 15:44:08 2024 +1000
+| | 
+| |     Timeline Test - Added additional tests
+| |     
+| |     Added additional tests for adding 0, 1 and 5 cards
+| |   
+* |   commit 4df43cc4c89ee2a69ded525a02d9c45c21639c46
+|\ \  Merge: 2e3e2c7 559baa8
+| | | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | AuthorDate: Sat Sep 14 15:17:08 2024 +1000
+| | | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | CommitDate: Sat Sep 14 15:17:08 2024 +1000
+| | | 
+| | |     Merge branch 'main' of https://github.com/Daniel-Crossley/CAB302-Project-main
+| | | 
+| * | commit 559baa80ec8aaca2dd79680fd372606b24f31f15
+| | | Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | | AuthorDate: Sat Sep 14 15:04:55 2024 +1000
+| | | Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | | CommitDate: Sat Sep 14 15:04:55 2024 +1000
+| | | 
+| | |     Developing projectsDAO
+| | | 
+| * | commit 206b0afabae5d57b9c45f1636556db03c5fbe7b7
+| | | Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | | AuthorDate: Sat Sep 14 14:57:20 2024 +1000
+| | | Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | | CommitDate: Sat Sep 14 14:57:20 2024 +1000
+| | | 
+| | |     Adding ProjectDAO
+| | | 
+* | | commit 2e3e2c7cf9948d8e36dccdb86d6541c1ffc17ccc
+|/ /  Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| |   AuthorDate: Sat Sep 14 15:13:16 2024 +1000
+| |   Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| |   CommitDate: Sat Sep 14 15:13:16 2024 +1000
+| |   
+| |       Project Test - Added None Test
+| |       
+| |       Added test for project class,
+| |       Fixed test for TestLogin
+| | 
+* | commit aea058649cf2437cdb6aa639e50b0c28eda5ab9e
+| | Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | AuthorDate: Sat Sep 14 14:29:16 2024 +1000
+| | Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | CommitDate: Sat Sep 14 14:29:16 2024 +1000
+| | 
+| |     Made SqliteUserDAO
+| | 
+* | commit 83710ea97bdabaf2e0f089c4fca7f5e73cdd7eeb
+| | Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | AuthorDate: Sat Sep 14 14:01:41 2024 +1000
+| | Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | CommitDate: Sat Sep 14 14:01:59 2024 +1000
+| | 
+| |     Update Login
+| | 
+* | commit bf88128daaedd346fb3b5eed070f6eff8460e309
+| | Author:     Daniel Crossley <133619399+Daniel-Crossley@users.noreply.github.com>
+| | AuthorDate: Fri Sep 13 19:19:18 2024 +1000
+| | Commit:     GitHub <noreply@github.com>
+| | CommitDate: Fri Sep 13 19:19:18 2024 +1000
+| | 
+| |     Delete target directory
+| | 
+* | commit 9c5d6d17c2fa21a88dc6d6c9457dad53f997c686
+| | Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | AuthorDate: Fri Sep 13 19:18:37 2024 +1000
+| | Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | CommitDate: Fri Sep 13 19:18:37 2024 +1000
+| | 
+| |     Updated Structure
+| | 
+* | commit 4cd54f79ca29266a57aa6454d76db1c8df411829
+| | Author:     Daniel Crossley <133619399+Daniel-Crossley@users.noreply.github.com>
+| | AuthorDate: Fri Sep 13 18:47:56 2024 +1000
+| | Commit:     GitHub <noreply@github.com>
+| | CommitDate: Fri Sep 13 18:47:56 2024 +1000
+| | 
+| |     Delete target/classes directory
+| |   
+* |   commit a96ab13b8bab707587d5fb24d81f07f3b3dc0cde
+|\ \  Merge: 22b93be d711c85
+| | | Author:     Tyler <n11154748@qut.edu.au>
+| | | AuthorDate: Fri Sep 13 15:38:44 2024 +1000
+| | | Commit:     Tyler <n11154748@qut.edu.au>
+| | | CommitDate: Fri Sep 13 15:38:44 2024 +1000
+| | | 
+| | |     merging tyler-branch for login
+| | | 
+| * | commit d711c85ef5259f8003123831819f49ada45d7414
+| | | Author:     Tyler <n11154748@qut.edu.au>
+| | | AuthorDate: Fri Sep 13 15:20:35 2024 +1000
+| | | Commit:     Tyler <n11154748@qut.edu.au>
+| | | CommitDate: Fri Sep 13 15:20:35 2024 +1000
+| | | 
+| | |     login error message
+| | | 
+| * | commit 51a7e1cf9010f85bcef2076e527b359cf58e01b9
+| | | Author:     Tyler <n11154748@qut.edu.au>
+| | | AuthorDate: Mon Sep 9 20:18:17 2024 +1000
+| | | Commit:     Tyler <n11154748@qut.edu.au>
+| | | CommitDate: Mon Sep 9 20:18:17 2024 +1000
+| | | 
+| | |     added login method with fxml early change
+| | | 
+| * | commit 796fb2811c8ef5756e62c4e04ebba457ac64b8d7
+| | | Author:     Daniel Crossley <133619399+Daniel-Crossley@users.noreply.github.com>
+| | | AuthorDate: Tue Aug 20 13:59:04 2024 +1000
+| | | Commit:     GitHub <noreply@github.com>
+| | | CommitDate: Tue Aug 20 13:59:04 2024 +1000
+| | | 
+| | |     Delete .idea directory
+| | | 
+| * | commit 5aa99975505abc11ad50983417ef52b841e3a79e
+| | | Author:     Daniel Crossley <133619399+Daniel-Crossley@users.noreply.github.com>
+| | | AuthorDate: Tue Aug 20 13:57:29 2024 +1000
+| | | Commit:     GitHub <noreply@github.com>
+| | | CommitDate: Tue Aug 20 13:57:29 2024 +1000
+| | | 
+| | |     Delete target/classes directory
+| | | 
+| * | commit 4fd14a75c562cca9a439d89ba4607260cca3841d
+| | | Author:     Tyler <tylerfellmann83@hotmail.com>
+| | | AuthorDate: Tue Aug 20 13:39:37 2024 +1000
+| | | Commit:     Tyler <tylerfellmann83@hotmail.com>
+| | | CommitDate: Tue Aug 20 13:39:37 2024 +1000
+| | | 
+| | |     tyler's basic starting interface
+| | |   
+| | | * commit dbdc8c4ac717c4f40b0fcaa49930d41e3741097a (origin/Test-Suite, Test-Suite)
+| | | | Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | | | AuthorDate: Fri Sep 13 14:34:46 2024 +1000
+| | | | Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | | | CommitDate: Fri Sep 13 14:34:46 2024 +1000
+| | | | 
+| | | |     Fixed Testing
+| | | | 
+| | | * commit 20a551782ce8231f099d8cf67ebe8311c78e97b0
+| | | | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | | AuthorDate: Fri Sep 13 14:08:30 2024 +1000
+| | | | Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | | | CommitDate: Fri Sep 13 14:24:09 2024 +1000
+| | | | 
+| | | |     Timeline View - Added Test Suite
+| | | |     
+| | | |     Added tests for adding cards
+| | | | 
+| | | * commit a4eceaa65001fdae50c20bcd52835f83b316e168
+| | | | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | | AuthorDate: Fri Sep 13 14:22:54 2024 +1000
+| | | | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | | CommitDate: Fri Sep 13 14:22:54 2024 +1000
+| | | | 
+| | | |     Attempt Change in Library import
+| | | | 
+| | | * commit 9c386e33984ca2604f6fad91e29dbc9b10743488
+| | | | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | | AuthorDate: Fri Sep 13 14:20:16 2024 +1000
+| | | | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | | CommitDate: Fri Sep 13 14:20:16 2024 +1000
+| | | | 
+| | | |     Move test to test directory
+| | | | 
+| | | * commit 826897cafb5792d4281df85a9ccfb9cdb273d617
+| | | | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | | AuthorDate: Fri Sep 13 14:08:30 2024 +1000
+| | | | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | | CommitDate: Fri Sep 13 14:08:30 2024 +1000
+| | | | 
+| | | |     Timeline View - Added Test Suite
+| | | |     
+| | | |     Added tests for adding cards
+| | | | 
+| | | * commit d7a8b8041f34336edb00668586f1aeb803981cb3
+| | | | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | | AuthorDate: Thu Sep 12 21:55:09 2024 +1000
+| | | | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | | CommitDate: Thu Sep 12 21:55:09 2024 +1000
+| | | | 
+| | | |     Timeline View - Separate Classes
+| | | |     
+| | | |     Separated the classes of the timeline into data and controller
+| | | |     
+| | | | *   commit 8f87155827bd7ea980abf852e8ceb1fba721f442 (origin/timeline-view)
+| | | | |\  Merge: 2503823 89c5b41
+| | | | |/  Author:     Tommy Hua-Tran <166112225+TurnTheKeys@users.noreply.github.com>
+| | | |/|   AuthorDate: Thu Sep 12 21:14:40 2024 +1000
+| | | | |   Commit:     GitHub <noreply@github.com>
+| | | | |   CommitDate: Thu Sep 12 21:14:40 2024 +1000
+| | | | |   
+| | | | |       Merge pull request #5 from Daniel-Crossley/main
+| | | | |       
+| | | | |       Update Timeline View Branch
+| | | | | 
+| | | * | commit 89c5b410b0da4546893f887b7191bab13376afdb
+| | | |\| Merge: 08e53df 2503823
+| | | | | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | | | AuthorDate: Thu Sep 12 21:12:44 2024 +1000
+| | | | | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | | | CommitDate: Thu Sep 12 21:12:44 2024 +1000
+| | | | | 
+| | | | |     Merge branch 'timeline-view'
+| | | | | 
+| | | | * commit 250382377343468057804add0651efbd755890d4
+| | | | | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | | | AuthorDate: Thu Sep 12 21:11:03 2024 +1000
+| | | | | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | | | CommitDate: Thu Sep 12 21:11:03 2024 +1000
+| | | | | 
+| | | | |     Revert "Timeline View - Updated cards list"
+| | | | |     
+| | | | |     This reverts commit 47426ac46c83fb9edeb595fb5e8ac2067e8098a2.
+| | | | | 
+| | | | * commit 68c807a23595b71fa84c2ae4eebf3adaef300690
+| | | | | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | | | AuthorDate: Thu Sep 12 21:10:54 2024 +1000
+| | | | | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | | | CommitDate: Thu Sep 12 21:10:54 2024 +1000
+| | | | | 
+| | | | |     Revert "Merge branch 'Test-Suite' into timeline-view"
+| | | | |     
+| | | | |     This reverts commit 1a243346603a78ec2bed68ad3de8a29dd779f0dd, reversing
+| | | | |     changes made to 47426ac46c83fb9edeb595fb5e8ac2067e8098a2.
+| | | | |   
+| | | | *   commit 1a243346603a78ec2bed68ad3de8a29dd779f0dd
+| | | | |\  Merge: 47426ac 26d70ff
+| | | | | | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | | | | AuthorDate: Tue Sep 10 21:17:24 2024 +1000
+| | | | | | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | | | | CommitDate: Tue Sep 10 21:17:24 2024 +1000
+| | | | | | 
+| | | | | |     Merge branch 'Test-Suite' into timeline-view
+| | | | | | 
+| | | | | * commit 26d70ffdc18ca04548b2e93d58d1748dcc6e12ab
+| | | | | | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | | | | AuthorDate: Tue Sep 10 21:03:59 2024 +1000
+| | | | | | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | | | | CommitDate: Tue Sep 10 21:03:59 2024 +1000
+| | | | | | 
+| | | | | |     Project Testing - Added JUnit 5
+| | | | | |     
+| | | | | |     added framework for building test suite
+| | | | | | 
+| | | | * | commit 47426ac46c83fb9edeb595fb5e8ac2067e8098a2
+| | | | | | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | | | | AuthorDate: Tue Sep 10 21:16:56 2024 +1000
+| | | | | | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | | | | CommitDate: Tue Sep 10 21:16:56 2024 +1000
+| | | | | | 
+| | | | | |     Timeline View - Updated cards list
+| | | | | |     
+| | | | | |     Updated card list to use the class cards
+| | | | | | 
+| | | | * | commit e7aa98c68dd3692964a306eb88051a8ed1cd73fb
+| | | | | | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | | | | AuthorDate: Tue Sep 10 20:43:27 2024 +1000
+| | | | | | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | | | | CommitDate: Tue Sep 10 20:43:27 2024 +1000
+| | | | | | 
+| | | | | |     Timeline View & Cards - added project comments
+| | | | | |     
+| | | | | |     Added comments
+| | | | | |   
+| | | * | |   commit 08e53dfe1a0e5b010e29a1c7cf2fa440d1f32507
+| | | |\ \ \  Merge: 272ca2a 7141e9a
+| | | | |_|/  Author:     A7Mx0 <157096454+A7Mx0@users.noreply.github.com>
+| | | |/| |   AuthorDate: Thu Sep 12 12:18:32 2024 +1000
+| | | | | |   Commit:     GitHub <noreply@github.com>
+| | | | | |   CommitDate: Thu Sep 12 12:18:32 2024 +1000
+| | | | | |   
+| | | | | |       Merge pull request #4 from Daniel-Crossley/Ahmed-branch
+| | | | | |       
+| | | | | |       Creating New Project
+| | | | | | 
+| | | | * | commit 7141e9a627bf88f21a48ea05649e3bfb28ef0cfd (origin/Ahmed-branch)
+| | | | | | Author:     Ahmed <a9-m@hotmail.com>
+| | | | | | AuthorDate: Sun Sep 8 14:34:40 2024 +1000
+| | | | | | Commit:     Ahmed <a9-m@hotmail.com>
+| | | | | | CommitDate: Sun Sep 8 14:34:40 2024 +1000
+| | | | | | 
+| | | | | |     Project controller v2 - Fixed Git
+| | | | | | 
+| | | | * | commit 91a924247914d3aa05da8c98565d9fafab3271b4
+| | | | | | Author:     Ahmed <a9-m@hotmail.com>
+| | | | | | AuthorDate: Sun Sep 8 14:32:06 2024 +1000
+| | | | | | Commit:     Ahmed <a9-m@hotmail.com>
+| | | | | | CommitDate: Sun Sep 8 14:32:06 2024 +1000
+| | | | | | 
+| | | | | |     New controller
+| | | | | | 
+| | | | * | commit 6addc25c0b3715a514afdc0555b7c9286f696d8c
+| | | |/ /  Author:     Ahmed <a9-m@hotmail.com>
+| | |/| |   AuthorDate: Sun Sep 1 18:47:17 2024 +1000
+| | | | |   Commit:     Ahmed <a9-m@hotmail.com>
+| | | | |   CommitDate: Sun Sep 1 18:47:17 2024 +1000
+| | | | |   
+| | | | |       Create New Project Control
+| | | | | 
+| | | * | commit 272ca2afe9f926a393161312d7b47a9a28f896d7
+| |_|/ /  Author:     Daniel Crossley <133619399+Daniel-Crossley@users.noreply.github.com>
+|/| | |   AuthorDate: Tue Sep 10 11:10:49 2024 +1000
+| | | |   Commit:     GitHub <noreply@github.com>
+| | | |   CommitDate: Tue Sep 10 11:10:49 2024 +1000
+| | | |   
+| | | |       Delete target/classes directory
+| | | |   
+* | | |   commit 22b93be344dcc02775e656f66506e790be717902
+|\ \ \ \  Merge: 4f78441 4c7a8ee
+| | |_|/  Author:     Tommy Hua-Tran <166112225+TurnTheKeys@users.noreply.github.com>
+| |/| |   AuthorDate: Fri Sep 6 22:00:44 2024 +1000
+| | | |   Commit:     GitHub <noreply@github.com>
+| | | |   CommitDate: Fri Sep 6 22:00:44 2024 +1000
+| | | |   
+| | | |       Merge pull request #3 from Daniel-Crossley/timeline-view
+| | | |       
+| | | |       Timeline view
+| | | | 
+| * | | commit 4c7a8ee78efe12f9a1425baf81c290d4e591e311
+| | | | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | | AuthorDate: Fri Sep 6 22:00:20 2024 +1000
+| | | | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | | CommitDate: Fri Sep 6 22:00:20 2024 +1000
+| | | | 
+| | | |     Timeline View - Added Card Checks
+| | | |     
+| | | |     Added checks to see if cards were successfully added
+| | | | 
+| * | | commit ba45d213dc07923a8545be79913ed3ef0d051987
+| | | | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | | AuthorDate: Fri Sep 6 21:54:39 2024 +1000
+| | | | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | | CommitDate: Fri Sep 6 21:54:39 2024 +1000
+| | | | 
+| | | |     Timeline View - Added Set Width
+| | | |     
+| | | |     Set width of added cards to being 0.2 of the scene
+| | | | 
+* | | | commit 4f78441f859e772d6b4cd9a0b17763ee0a787f34
+|\| | | Merge: e33c72b bf9d841
+| |_|/  Author:     Tommy Hua-Tran <166112225+TurnTheKeys@users.noreply.github.com>
+|/| |   AuthorDate: Fri Sep 6 21:49:21 2024 +1000
+| | |   Commit:     GitHub <noreply@github.com>
+| | |   CommitDate: Fri Sep 6 21:49:21 2024 +1000
+| | |   
+| | |       Merge pull request #2 from Daniel-Crossley/timeline-view
+| | |       
+| | |       Timeline view
+| | | 
+| * | commit bf9d84143753edb5ff90cac0f348cfecf0398d16
+| | | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | AuthorDate: Fri Sep 6 21:46:36 2024 +1000
+| | | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | CommitDate: Fri Sep 6 21:46:36 2024 +1000
+| | | 
+| | |     Timeline View - Added Card Generation
+| | |     
+| | |     Attempted to add dynamically created card generation
+| | | 
+| * | commit 20a3e19c92dd989e8783d5fc539655c21043f43a
+| | | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | AuthorDate: Fri Sep 6 21:00:52 2024 +1000
+| | | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | CommitDate: Fri Sep 6 21:00:52 2024 +1000
+| | | 
+| | |     Timeline View - Added Initiator description
+| | |     
+| | |     Added initiator description to timeline view
+| | | 
+| * | commit 9dc42d591d9790ba64e545a9969749133fa3d168
+| | | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | AuthorDate: Fri Sep 6 20:41:28 2024 +1000
+| | | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | CommitDate: Fri Sep 6 20:41:28 2024 +1000
+| | | 
+| | |     Cards - Added Fields and function
+| | |     
+| | |     Added fields for cards and added function to initiate card object
+| | | 
+| * | commit 64103e46c1adea97f26fe01e70ea467c894e34d6
+| | | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | AuthorDate: Fri Sep 6 20:08:22 2024 +1000
+| | | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | CommitDate: Fri Sep 6 20:08:22 2024 +1000
+| | | 
+| | |     Timeline View - Added Scene Layout
+| | |     
+| | |     Added layout of scene for timeline view
+| | | 
+| * | commit bd8240bde91627e66ea2881300a32c98ebce4e05
+| | | Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | AuthorDate: Fri Sep 6 16:22:28 2024 +1000
+| | | Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| | | CommitDate: Fri Sep 6 16:22:28 2024 +1000
+| | | 
+| | |     Timeline View - Added fields and methods
+| | |     
+| | |     Added fields and methods to timeline view using mapping created by Daniel
+| | | 
+| * | commit 1d7739d22a2747f16d3eaee83231fec292c9ed92
+|/ /  Author:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| |   AuthorDate: Fri Aug 30 21:01:12 2024 +1000
+| |   Commit:     TurnTheKeys <tommy.hua.tran@gmail.com>
+| |   CommitDate: Fri Aug 30 21:01:12 2024 +1000
+| |   
+| |       Timeline View - Added fxml and java
+| |       
+| |       Added design file and logic.
+| |       Added basic structure to the files.
+| |   
+| | * commit 8d381fc25cc4d14e212bc368ae01e7ac2189de91 (origin/structure_with_db, structure_with_db)
+| | | Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | | AuthorDate: Mon Sep 2 20:38:18 2024 +1000
+| | | Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| | | CommitDate: Mon Sep 2 20:38:18 2024 +1000
+| | | 
+| | |     Adding structure
+| | | 
+| | * commit 7ddcb6ad71a00ab5ab062f8a74174797f57b7a00
+| |/  Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+|/|   AuthorDate: Mon Sep 2 14:07:32 2024 +1000
+| |   Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| |   CommitDate: Mon Sep 2 14:07:32 2024 +1000
+| |   
+| |       Adding structure
+| | 
+* | commit e33c72ba1244ec5ad0493c6568de733a123b3d72
+| | Author:     Daniel Crossley <133619399+Daniel-Crossley@users.noreply.github.com>
+| | AuthorDate: Tue Aug 20 14:00:05 2024 +1000
+| | Commit:     GitHub <noreply@github.com>
+| | CommitDate: Tue Aug 20 14:00:05 2024 +1000
+| | 
+| |     Delete .idea directory
+| | 
+* | commit 4bb244e7e109350d5fe3ea83c62f7ac780377224
+|/  Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+|   AuthorDate: Tue Aug 20 13:17:41 2024 +1000
+|   Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+|   CommitDate: Tue Aug 20 13:17:41 2024 +1000
+|   
+|       Testing git
+| 
+* commit 9aa73744eea1bd73d5f0dc3a3b830dddeb655fb6
+| Author:     Daniel Crossley <133619399+Daniel-Crossley@users.noreply.github.com>
+| AuthorDate: Tue Aug 20 12:32:47 2024 +1000
+| Commit:     GitHub <noreply@github.com>
+| CommitDate: Tue Aug 20 12:32:47 2024 +1000
+| 
+|     Delete src/Main.java
+| 
+* commit 63afab5659a876a077fbc93164e10556e382faf0
+| Author:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| AuthorDate: Tue Aug 13 12:26:10 2024 +1000
+| Commit:     Daniel-Crossley <daniel-crossley@aapt.net.au>
+| CommitDate: Tue Aug 13 12:26:10 2024 +1000
+| 
+|     Update to javaFx
+| 
+* commit 16483d26154fe7b628185bb2d747f1f248027159
+  Author:     Daniel Crossley <daniel-crossley@aapt.net.au>
+  AuthorDate: Tue Jul 30 12:27:52 2024 +1000
+  Commit:     Daniel Crossley <daniel-crossley@aapt.net.au>
+  CommitDate: Tue Jul 30 12:27:52 2024 +1000
+  
+      Initial Main Commit

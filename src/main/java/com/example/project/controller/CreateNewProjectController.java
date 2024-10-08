@@ -11,10 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import java.sql.Date;
@@ -28,83 +25,126 @@ import java.util.ResourceBundle;
 
 public class CreateNewProjectController implements Initializable {
 
+    // CheckBoxes for selecting tags
     @FXML
-    private TextField titleField;
+    private CheckBox tag3DModeling;
+    @FXML
+    private CheckBox tagMetal;
+    @FXML
+    private CheckBox tagSculpting;
+    @FXML
+    private CheckBox tagClayWork;
+    @FXML
+    private CheckBox tagWoodWork;
+    @FXML
+    private CheckBox tagPaperWork;
+
+    // Input fields for project details
+    @FXML
+    private TextField titleField;  // TextField for project title
+    @FXML
+    private TextArea descriptionField;  // TextArea for project description
+    @FXML
+    private ComboBox<String> visibilityComboBox;  // ComboBox for visibility options (Public/Private)
 
     @FXML
-    private TextArea descriptionField;
-
+    private ImageView cardImageView;  // ImageView for displaying card image
     @FXML
-    private ComboBox<String> visibilityComboBox;
+    private TextField colourField;  // TextField for project color
 
+    // Buttons and Labels
     @FXML
-    private ImageView cardImageView;
-
+    private Button goBack;  // Button to navigate back to dashboard
     @FXML
-    private TextField colourField;
-
+    private Button create;  // Button to publish project
     @FXML
-    private Button goBack;
+    private Label InvalidProject;  // Label to display validation error message
 
-    @FXML
-    private Button create;
+    // User and DAO for database interaction
+    private User userInformation;  // Holds the user information
+    private SqliteProjectDAO projectDAO;  // DAO for interacting with SQLite database
 
-    private User userInformation;
-
-    private SqliteProjectDAO projectDAO;
-
+    /**
+     * Initializes the controller. Sets up visibility options.
+     * @param location Location of the FXML file
+     * @param resources Resource bundle for the controller
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        projectDAO = new SqliteProjectDAO();
+        projectDAO = new SqliteProjectDAO();  // Initialize the DAO
         ObservableList<String> visibilityOptions = FXCollections.observableArrayList("Private", "Public");
-        visibilityComboBox.setItems(visibilityOptions);
+        visibilityComboBox.setItems(visibilityOptions);  // Set visibility options in ComboBox
+        visibilityComboBox.setValue("Public");  // Default to Public visibility
     }
 
+    /**
+     * Navigates back to the Owner Dashboard screen.
+     * @throws IOException if an error occurs while loading the view
+     */
     @FXML
     protected void goBack() throws IOException {
-        Stage stage = (Stage) goBack.getScene().getWindow();
+        Stage stage = (Stage) goBack.getScene().getWindow();  // Get current window (stage)
         FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("Owner-Dashboard.fxml"));
-        Parent root = fxmlLoader.load();
-        DashboardController dashboardController = fxmlLoader.getController();
-        userInformation.setProjects(new ArrayList<>());
-        dashboardController.setUserInformation(false, userInformation);
-        Scene scene = new Scene(root, ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
-        stage.setScene(scene);
-        System.out.println("Going back to the previous screen.");
+        Parent root = fxmlLoader.load();  // Load the Owner Dashboard view
+        DashboardController dashboardController = fxmlLoader.getController();  // Get controller
+        userInformation.setProjects(new ArrayList<>());  // Reset user's project list
+        dashboardController.setUserInformation(false, userInformation);  // Pass user information to dashboard
+        Scene scene = new Scene(root, ApplicationStart.WIDTH, ApplicationStart.HEIGHT);  // Create a new scene
+        stage.setScene(scene);  // Set the new scene
     }
 
+    /**
+     * Publishes the project by gathering input data and adding it to the database.
+     * @throws IOException if an error occurs while loading the view
+     */
     @FXML
     protected void publishProject() throws IOException {
+        // Get the input values
+        String title = titleField.getText();  // Project title
+        String description = descriptionField.getText();  // Project description
+        String colour = colourField.getText();  // Project color
+        boolean visibility = visibilityComboBox.getValue().equals("Public");  // Project visibility
 
-        String title = titleField.getText();
-        String description = descriptionField.getText();
-        String colour = colourField.getText();
+        // Collect selected tags
+        ObservableList<String> selectedTags = FXCollections.observableArrayList();
+        if (tag3DModeling.isSelected()) selectedTags.add("3D Modeling");
+        if (tagMetal.isSelected()) selectedTags.add("Metal");
+        if (tagSculpting.isSelected()) selectedTags.add("Sculpting");
+        if (tagClayWork.isSelected()) selectedTags.add("Clay-Work");
+        if (tagWoodWork.isSelected()) selectedTags.add("Wood-Work");
+        if (tagPaperWork.isSelected()) selectedTags.add("Paper-Work");
 
-        boolean visibility = visibilityComboBox.getValue().equals("True");
+        // Validate input fields
+        if (title.isEmpty() || description.isEmpty() || colour.isEmpty() || selectedTags.isEmpty()) {
+            InvalidProject.setVisible(true);  // Show validation error message if any field is empty
+            return;
+        }
 
-        System.out.println("Publishing project:");
-        System.out.println("Title: " + title);
-        System.out.println("Description: " + description);
-        System.out.println("Visibility: " + visibility);
-        System.out.println("Colour: " + colour);
+        // Log selected tags for debugging
+        System.out.println("Selected Tags: " + selectedTags);
 
         LocalDate currentDate = LocalDate.now();
         Date projectDate = Date.valueOf(currentDate);
+        // Create a new project with the gathered data
+        Project newProject = new Project(0, title, description, projectDate, null, visibility, colour, 0, selectedTags);
+        projectDAO.addProject(newProject, userInformation);  // Add project to the database
 
-        Project newProject = new Project(0, title, description, projectDate, null, visibility, colour, 0, "");
-        projectDAO.addProject(newProject, userInformation);
-
-        Stage stage = (Stage) create.getScene().getWindow();
+        // Navigate back to the Owner Dashboard after project creation
+        Stage stage = (Stage) create.getScene().getWindow();  // Get current window (stage)
         FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("Owner-Dashboard.fxml"));
-        Parent root = fxmlLoader.load();
-        DashboardController dashboardController = fxmlLoader.getController();
-        userInformation.setProjects(new ArrayList<>());
-        dashboardController.setUserInformation(false, userInformation);
-        Scene scene = new Scene(root, ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
-        stage.setScene(scene);
+        Parent root = fxmlLoader.load();  // Load the Owner Dashboard view
+        DashboardController dashboardController = fxmlLoader.getController();  // Get controller
+        userInformation.setProjects(new ArrayList<>());  // Reset user's project list
+        dashboardController.setUserInformation(false, userInformation);  // Pass user information to dashboard
+        Scene scene = new Scene(root, ApplicationStart.WIDTH, ApplicationStart.HEIGHT);  // Create a new scene
+        stage.setScene(scene);  // Set the new scene
     }
 
+    /**
+     * Sets the user information for the current session.
+     * @param user The user information to be set
+     */
     public void setUserInformation(User user) {
-        this.userInformation = user;
+        this.userInformation = user;  // Assign user information to the controller
     }
 }

@@ -1,32 +1,29 @@
 package com.example.project.controller;
 
 import com.example.project.ApplicationStart;
-import com.example.project.model.Project;
-import com.example.project.model.SqliteProjectDAO;
-import com.example.project.model.User;
-import javafx.beans.binding.Bindings;
+import com.example.project.model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class DashboardController implements Initializable {
     public Pane Menu;
@@ -36,6 +33,8 @@ public class DashboardController implements Initializable {
     public HBox Container_Completed;
     public ScrollPane Scrollpane_Completed;
     public ScrollPane Scrollpane_Progress;
+
+    SqliteCardDAO cardDAO = new SqliteCardDAO();
 
     @FXML
     private Label Label_Username;
@@ -59,7 +58,6 @@ public class DashboardController implements Initializable {
         updateUserName();
         Container_In_Progress.prefHeightProperty().bind(Scrollpane_Progress.heightProperty().multiply(0.88));
         Container_Completed.prefHeightProperty().bind(Scrollpane_Completed.heightProperty().multiply(0.88));
-
     }
 
 
@@ -132,7 +130,7 @@ public class DashboardController implements Initializable {
     private VBox projectVBoxStyling(String colour) {
         VBox projectContainer = new VBox();
         projectContainer.setAlignment(Pos.CENTER);
-        projectContainer.setSpacing(10);
+        projectContainer.setSpacing(0.2);
         projectContainer.prefHeightProperty().bind(Container_In_Progress.heightProperty().multiply(0.95));
         projectContainer.setPrefWidth(projectWidth);
         projectContainer.setStyle(
@@ -153,15 +151,52 @@ public class DashboardController implements Initializable {
      * @param scrollPane container to be used as reference
      */
     private void generateContainer(Project projectToAdd, HBox parentContainer, ScrollPane scrollPane){
-        VBox projectContainer = projectVBoxStyling(projectToAdd.getColour());
-        Label cardTitle = new Label(projectToAdd.getTitle());
-        Label DateCommenced = new Label ("Commenced: " + projectToAdd.getDateCreated());
-        projectContainer.getChildren().addAll(cardTitle,DateCommenced);
+        int TitleSize = 15;
+        int ContentSize = 10;
 
-        if (!Objects.equals(projectToAdd.getDateCreated(), "none")){
-            Label DateCompleted = new Label ("Completed: " + projectToAdd.getDateFinished());
-            projectContainer.getChildren().addAll(DateCompleted);
+        VBox projectContainer = projectVBoxStyling(projectToAdd.getColour());
+
+        Label cardTitle = new Label(projectToAdd.getTitle());
+        cardTitle.setFont(Font.font("System", FontWeight.BOLD, 15));
+        projectContainer.getChildren().addAll(cardTitle);
+
+        try {
+            List<Card> listofCards = cardDAO.getCards(projectToAdd);
+            if (listofCards.getFirst().getMediaImage() != null) {
+                ImageView mediaImageView = new ImageView(listofCards.getFirst().getMediaImage());
+                mediaImageView.setFitWidth(100);
+                mediaImageView.setFitHeight(50);
+                mediaImageView.setPreserveRatio(true);
+                projectContainer.getChildren().add(mediaImageView);
+            }
+        } catch(NoSuchElementException ignored) {
+
         }
+
+
+        Label DateCommenced = new Label ("Start: ");
+        Label DateCommencedContent = new Label(projectToAdd.getDateCreated());
+        DateCommenced.setFont(Font.font("System", FontWeight.BOLD, 12));
+        DateCommencedContent.setFont(Font.font("System", FontWeight.NORMAL, 12));
+        HBox dateCommencedContainer = new HBox(DateCommenced, DateCommencedContent);
+
+
+        VBox projectInformation = new VBox(dateCommencedContainer);
+        projectInformation.setPadding(new Insets(0, 0, 5, 5));
+
+        projectContainer.getChildren().addAll(projectInformation);
+
+        if (!Objects.equals(projectToAdd.getDateCreated(), " none")){
+            Label DateCompleted = new Label ("Finish: ");
+            Label DateCompletedContent = new Label(projectToAdd.getDateFinished());
+            DateCompleted.setFont(Font.font("System", FontWeight.BOLD, 12));
+            DateCompletedContent.setFont(Font.font("System", FontWeight.NORMAL, 12));
+
+            HBox DateCompletedContainer = new HBox(DateCompleted, DateCompletedContent);
+            projectInformation.getChildren().addAll(DateCompletedContainer);
+        }
+
+
 
         projectContainer.setOnMouseClicked(event -> {
             System.out.println("Project clicked: " + projectToAdd.getTitle());
@@ -173,6 +208,7 @@ public class DashboardController implements Initializable {
                 TimeLineController timelineController = fxmlLoader.getController();
                 timelineController.setProject(projectToAdd);
                 timelineController.setUser(userInformation);
+                timelineController.updateView(stage);
                 Scene scene = new Scene(root, ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
                 stage.setScene(scene);
             } catch (IOException e) {

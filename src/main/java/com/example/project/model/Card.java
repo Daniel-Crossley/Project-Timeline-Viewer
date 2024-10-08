@@ -2,21 +2,58 @@ package com.example.project.model;
 
 import java.util.Date;
 
+import javafx.scene.image.Image;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Card class to store card data
+ */
 public class Card {
     private int id;
     private String title;
     private String description;
     private Date dateCreated;
     private Date dateFinished;
-    // Uncomment when comment class is created
-    //private List<Comment> comments = new ArrayList<>();
+    private List<CardComment> comments = new ArrayList<>();
+    private Image mediaImage;
 
-    public Card(int setID, String setTitle, String setDescription, Date setDateCreated, Date setDateFinished){
-        this.id = setID;
+    /**
+     * Sets the list of image's
+     * @param mediaImage The media images associated with the card
+     */
+    public void setMediaImage(Image mediaImage) {
+        this.mediaImage = mediaImage;
+    }
+
+    /**
+     * Retrieves the card's set media images
+     * @return The media images addresses
+     */
+    public Image getMediaImage(){return mediaImage;}
+
+    /**
+     * Sets the list of comments
+     * @param setComments The comments associated with the card
+     */
+    public void setComments(List<CardComment> setComments) {
+        this.comments = setComments;
+    }
+
+    /**
+     * Retrieves the card's set comments
+     * @return The media comments
+     */
+    public List<CardComment> getComments(){return comments;}
+
+    public Card(String setTitle, String setDescription, Date setDateCreated, Date setDateFinished, Image setMediaImage){
+        //this.id = ID;
         this.title = setTitle;
         this.description = setDescription;
         this.dateCreated = setDateCreated;
         this.dateFinished = setDateFinished;
+        this.mediaImage = setMediaImage;
     }
 
 
@@ -29,18 +66,35 @@ public class Card {
         this.id = id;
     }
 
+    /**
+     * Retrieves the title of the card
+     * @return the title of the card
+     */
+
     public String getTitle(){
         return this.title;
     }
 
+    /**
+     * Retrieves the description of the card
+     * @return the description of the card
+     */
     public String getDescription(){
         return this.description;
     }
 
+    /**
+     * Retrieves the card's date of creation as a string
+     * @return the date the card was created
+     */
     public java.sql.Date getDateCreated(){
         return (java.sql.Date) this.dateCreated;
     }
 
+    /**
+     * Retrieves the card's date of finished as a string
+     * @return the date the card was finished
+     */
     public java.sql.Date getDateFinished(){
         return (java.sql.Date) this.dateFinished;
     }

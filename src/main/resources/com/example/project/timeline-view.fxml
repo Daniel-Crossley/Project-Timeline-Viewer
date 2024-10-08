@@ -1,37 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.VBox?>
-
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.HBox?>
-<VBox alignment="TOP_LEFT" prefHeight="237.0" prefWidth="330.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.controller.TimeLineController">
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-    <!-- Top Row Buttons -->
-    <FlowPane prefHeight="13.0" prefWidth="330.0" fx:id="TopBar">
-        <Button onAction="#onReturnClick" text="Return to Dashboard"/>
-        <Label fx:id="projectTitle" text="Project Title"/>
-        <Button onAction="#onEditClick" text="Edit Project"/>
-    </FlowPane>
-
-
-    <ScrollPane fx:id="cardSpace" prefHeight="181.0" prefWidth="330.0">
-        <Label fx:id="cardStatus" text=" " />
-        <HBox fx:id="cardHolder" spacing="10.0"/>
-    <ScrollPane/>
-
-    <ButtonBar prefHeight="25.0" prefWidth="330.0">
-        <buttons>
-            <Button fx:id="buttonAddCard" mnemonicParsing="false" text="Add Card" />
-            <Button fx:id="buttonExport" mnemonicParsing="false" text="Export" />
-        </buttons>
-    </ButtonBar>
-    <!-- GridPane for holding card entries -->
-    <GridPane >
-        <!-- Cards will be added via java code -->
-    </GridPane>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.controller.TimeLineController">
+   <children>
+      <Pane fx:id="Top_Bar" prefHeight="49.0" prefWidth="600.0" style="-fx-background-color: A1662F;">
+         <children>
+            <Button fx:id="Button_Return" layoutX="14.0" layoutY="12.0" mnemonicParsing="false" onAction="#returnToDashboard" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" stylesheets="@stylesheet.css" text="Go Back">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
+            <Label fx:id="Label_Project_Title" layoutX="90.0" layoutY="6.0" style="-fx-font-size: 25;" text="Project Title" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Button fx:id="Button_Edit_Project" alignment="CENTER_RIGHT" layoutX="709.0" layoutY="12.0" mnemonicParsing="false" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" stylesheets="@stylesheet.css" text="Edit Project">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
+         </children>
+      </Pane>
+      <ScrollPane fx:id="scroll_Container" hbarPolicy="ALWAYS" prefHeight="309.0" prefWidth="600.0" vbarPolicy="NEVER">
+         <content>
+            <VBox fx:id="vBox_Cards" prefHeight="296.0" prefWidth="798.0" style="-fx-background-color: e5c08b;">
+               <children>
+                  <Pane fx:id="Buffer_Cards" prefHeight="79.0" prefWidth="598.0" style="-fx-background-color: e5c08b;">
+                     <children>
+                        <HBox fx:id="statusContainer" layoutX="32.0" layoutY="48.0">
+                           <Label fx:id="cardStatusLabel"/>
+                           <Label fx:id="cardStatus"/>
+                        </HBox>
+                     </children></Pane>
+                  <HBox fx:id="Cards_Container" prefHeight="147.0" prefWidth="598.0" style="-fx-background-color: d6b88d;" />
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+      <Pane prefHeight="43.0" prefWidth="600.0" style="-fx-background-color: A1662F;">
+         <children>
+            <Button fx:id="Button_New_Card" layoutX="710.0" layoutY="9.0" mnemonicParsing="false" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" stylesheets="@stylesheet.css" text="New Card" onAction="#onNewCardClick">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
+            <Button fx:id="Button_Export" layoutX="630.0" layoutY="9.0" mnemonicParsing="false" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" stylesheets="@stylesheet.css" text="Export">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
+         </children>
+      </Pane>
+   </children>
 </VBox>

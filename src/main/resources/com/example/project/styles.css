@@ -1,41 +1,62 @@
-.root {
-    -fx-background-color: #F5F5F5; /* خلفية رمادية فاتحة */
+/* Main container styling for the entire layout */
+.main-container {
+    -fx-padding: 0;  /* No padding for the main container */
 }
 
-.label-title {
-    -fx-font-size: 24px;
-    -fx-font-weight: bold;
-    -fx-background-color: #B0BEC5;
-    -fx-padding: 10px;
-    -fx-border-radius: 10;
-    -fx-background-radius: 10;
+/* Header styling, setting the background color and padding */
+.header {
+    -fx-background-color: #A1662F;  /* Dark brown background color for the header */
+    -fx-pref-height: 48px;  /* Height of the header */
+    -fx-padding: 5;  /* Padding inside the header */
 }
 
-.button-back {
-    -fx-background-color: #CFD8DC;
-    -fx-font-size: 14px;
-    -fx-background-radius: 5;
+/* Header label styling, sets the text color and font */
+.header-label {
+    -fx-text-fill: white;  /* White text color for the label */
+    -fx-font-size: 24px;  /* Large font size for header text */
+    -fx-font-family: "System Bold";  /* Bold font style */
 }
 
-.container {
-    -fx-background-color: #ECEFF1;
-    -fx-border-color: #90A4AE;
-    -fx-border-width: 2;
-    -fx-border-radius: 10;
-    -fx-background-radius: 10;
-    -fx-padding: 20;
-    -fx-spacing: 15;
+/* Back button styling, round shape and shadow effect */
+.back-button {
+    -fx-background-color: #e5c08b;  /* Light brown background color for the button */
+    -fx-background-radius: 50;  /* Rounded button shape */
+    -fx-font-size: 18px;  /* Font size for the back button */
+    -fx-text-fill: white;  /* White text color */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 10, 0, 0, 0);  /* Shadow effect */
+    -fx-margin: 5;  /* Adds space around the button */
 }
 
-.card-image {
-    -fx-background-color: #4E342E;
-    -fx-padding: 10;
-    -fx-background-radius: 5;
+/* Body container styling, setting background color and rounded corners */
+.body-container {
+    -fx-background-color: #d6b88d;  /* Light beige background color for the body */
+    -fx-padding: 10;  /* Padding inside the body container */
+    -fx-background-radius: 10;  /* Rounded corners for the container */
+    -fx-margin: auto;  /* Automatically adjusts margins */
 }
 
-.button-publish {
-    -fx-background-color: #78909C;
-    -fx-font-size: 16px;
-    -fx-text-fill: white;
-    -fx-background-radius: 5;
+/* Card container styling, used for the right-side image and color selection */
+.card-container {
+    -fx-background-color: #d6b88d;  /* Same light beige background as body */
+    -fx-padding: 5;  /* Padding inside the card container */
+    -fx-background-radius: 10;  /* Rounded corners for the card container */
+}
+
+/* Text fields and combo box styling */
+.input-field {
+    -fx-width: 400px;  /* Fixed width for input fields */
+    -fx-background-radius: 10;  /* Rounded corners for text fields and combo boxes */
+    -fx-padding: 5;  /* Padding inside the input fields */
+}
+
+/* Publish button styling, rounded with shadow effect */
+.publish-button {
+    -fx-background-color: #e5c08b;  /* Light brown background color */
+    -fx-background-radius: 10;  /* Rounded corners for the button */
+    -fx-font-size: 14px;  /* Font size for the button text */
+    -fx-text-fill: black;  /* Black text color */
+    -fx-padding: 5;  /* Padding inside the button */
+    -fx-alignment: center;  /* Aligns the text in the center of the button */
+    -fx-pref-width: 200px;  /* Sets the preferred width for the button */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 10, 0, 0, 0);  /* Adds a shadow effect for depth */
 }

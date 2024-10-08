@@ -3,7 +3,10 @@ import com.example.project.model.Project;
 import org.junit.jupiter.api.Test;
 import java.sql.Date;
 import java.time.LocalDate;
+import javafx.scene.image.Image;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,6 +14,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class TestProject {
 
+    /**
+     * Generates project to be used for testing
+     * @return Returns a generic project to be used for testing
+     */
     public Project projectSetup(){
         int testID = 0;
         String testTitle = "testTitle";
@@ -19,25 +26,37 @@ public class TestProject {
         Date testDateCompleted = Date.valueOf(LocalDate.now());
         String testColour = "#ffffff";
         int testLikes = 0;
-        return new Project(testID, testTitle, testDescription, testDateCreated, testDateCompleted, true, testColour, testLikes, "Tag");
+        return new Project(testID, testTitle, testDescription, testDateCreated, testDateCompleted, true, testColour, testLikes, Arrays.asList("Place holder"));
     }
 
-    public List<Card> randomCardListSetup(int numberOfCards) {
+    /**
+     * Generates a random number of cards
+     * @param numberOfCards The number of random cards to be generated
+     * @return a list of randomly generated cards
+     */
+    public List<Card> randomCardListSetup(int numberOfCards){
         List<Card> setOfCards = new ArrayList<>();
 
-        if (numberOfCards != 0) {
-            for (int i = 0; i < numberOfCards; i++) {
+        if (numberOfCards != 0){
+            for (int i = 0; i < numberOfCards; i++){
+                int projectId = 4;
                 String cardTitle = RandomString(5);
                 String cardDescription = RandomString(20);
                 Date dateCreated = Date.valueOf(LocalDate.now());
                 Date dateFinished = Date.valueOf(LocalDate.now());
-                Card randomCard = new Card(i, cardTitle, cardDescription, dateCreated, dateFinished);
+                Image image = null;
+                Card randomCard = new Card(cardTitle,cardDescription,dateCreated,dateFinished, image);
                 setOfCards.add(randomCard);
             }
         }
         return setOfCards;
     }
 
+    /**
+     * Generates a string of a given length with random characters
+     * @param CharacterLength The length of the randomly generated string
+     * @return randomly generated string
+     */
     public String RandomString(int CharacterLength){
         StringBuilder randomString = new StringBuilder();
         String setCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -50,6 +69,9 @@ public class TestProject {
         return randomString.toString();
     }
 
+    /**
+     * Checks to see if 0 cards are able to be stored properly
+     */
     @Test
     void testCardImportNone() {
         int numberTested = 0;
@@ -64,6 +86,9 @@ public class TestProject {
         assertEquals(testProject.getListOfCards(),testCardList,"No cards added test");
     }
 
+    /**
+     * Checks to see if 1 card is imported properly
+     */
     @Test
     void testCardImportOne() {
         int numberTested = 1;
@@ -78,6 +103,9 @@ public class TestProject {
         assertEquals(testProject.getListOfCards(),testCardList,"No cards added test");
     }
 
+    /**
+     * Checks to see if 5 cards are imported properly
+     */
     @Test
     void testCardImportFive() {
         int numberTested = 5;
@@ -92,6 +120,10 @@ public class TestProject {
         assertEquals(testProject.getListOfCards(),testCardList,"No cards added test");
     }
 
+
+    /**
+     * Checks to see if a card can be added
+     */
     @Test
     void testCardAddOne(){
         int numberTested = 1;
@@ -113,6 +145,10 @@ public class TestProject {
         //Test
         assertEquals(testProject.getListOfCards(),testCardList,"No cards added test");
     }
+
+    /**
+     * Checks to see if 5 cards can be added separately
+     */
 
     @Test
     void testCardAddFive(){
