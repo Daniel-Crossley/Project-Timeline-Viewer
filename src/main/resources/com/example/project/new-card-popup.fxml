@@ -22,7 +22,7 @@
         <Label text="Date Created:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
         <DatePicker fx:id="dateCreatedField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-        <Label text="Date Published:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <Label text="Date Finished:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
         <DatePicker fx:id="datePublishedField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
         <Label text="Image URL:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
