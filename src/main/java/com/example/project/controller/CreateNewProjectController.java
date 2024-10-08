@@ -1,5 +1,7 @@
 package com.example.project.controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import com.example.project.ApplicationStart;
 import com.example.project.model.SqliteProjectDAO;
 import com.example.project.model.User;
@@ -120,8 +122,12 @@ public class CreateNewProjectController implements Initializable {
         // Log selected tags for debugging
         System.out.println("Selected Tags: " + selectedTags);
 
+        LocalDate today = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String formattedDate = today.format(formatter);
+
         // Create a new project with the gathered data
-        Project newProject = new Project(0, title, description, "Place holder", "none", visibility, colour, 0, selectedTags);
+        Project newProject = new Project(0, title, description, formattedDate, "none", visibility, colour, 0, selectedTags);
         projectDAO.addProject(newProject, userInformation);  // Add project to the database
 
         // Navigate back to the Owner Dashboard after project creation

@@ -77,7 +77,7 @@ public class SqliteCardDAO implements ISqliteCardDAO {
     public List<Card> getCards(Project project) {
         List<Card> listOfCards = new ArrayList<>();
 
-        String query = "SELECT * FROM Cards WHERE projectId = ?";
+        String query = "SELECT * FROM Cards WHERE projectId = ? ORDER BY dateCreated ASC";
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, project.getId());

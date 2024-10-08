@@ -79,7 +79,7 @@ public class SqliteProjectDAO implements ISqliteProjectDAO {
      */
     public void getProjects(User user) {
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Projects WHERE username = ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Projects WHERE username = ? ORDER BY dateCreated ASC");
             statement.setString(1, user.getUsername());
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
