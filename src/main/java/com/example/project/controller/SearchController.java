@@ -21,7 +21,6 @@ import java.util.*;
 
 public class SearchController {
 
-
     private boolean guest;
     private User userInformation;
     @FXML
@@ -62,40 +61,10 @@ public class SearchController {
     private final String projectBorderColour = "#c27c18";
     private final int projectBorderWidth = 2;
 
-    @FXML
-    public void initialize(){
-
-        topHBOX.prefHeightProperty().bind(SearchScroll.heightProperty().multiply(0.88));
-        projectDAO = new SqliteProjectDAO();
-        buttonStates.put(threeDTag, false);
-        buttonStates.put(metalTag, false);
-        buttonStates.put(clayTag, false);
-        buttonStates.put(sculptingTag, false);
-        buttonStates.put(woodTag, false);
-        buttonStates.put(paperTag, false);
-
-        threeDTag.setOnAction(event -> TagColourChange(threeDTag));
-        metalTag.setOnAction(event -> TagColourChange(metalTag));
-        clayTag.setOnAction(event -> TagColourChange(clayTag));
-        sculptingTag.setOnAction(event -> TagColourChange(sculptingTag));
-        woodTag.setOnAction(event -> TagColourChange(woodTag));
-        paperTag.setOnAction(event -> TagColourChange(paperTag));
-
-        searchButton.setOnAction(event -> SearchButton());
-
-    }
-
-
-    /**
-     * Retrieves user type and user information
-     * @param guest Set to true if person is a guest, false if not
-     * @param user User information
-     */
     public void setUserInformation(boolean guest, User user) {
         this.guest = guest;
         this.userInformation = user;
         updateUserName();
-
     }
 
     /**
@@ -122,7 +91,6 @@ public class SearchController {
         stage.setScene(scene);
     }
 
-
     public void Open_Dashboard() throws IOException{
         Stage stage = (Stage) DashboardSearch.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("Owner-Dashboard.fxml"));
@@ -133,6 +101,29 @@ public class SearchController {
         Scene scene = new Scene(root, ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
         stage.setScene(scene);
         System.out.println("Going back to the previous screen.");
+    }
+
+    @FXML
+    public void initialize(){
+
+        topHBOX.prefHeightProperty().bind(SearchScroll.heightProperty().multiply(0.88));
+        projectDAO = new SqliteProjectDAO();
+        buttonStates.put(threeDTag, false);
+        buttonStates.put(metalTag, false);
+        buttonStates.put(clayTag, false);
+        buttonStates.put(sculptingTag, false);
+        buttonStates.put(woodTag, false);
+        buttonStates.put(paperTag, false);
+
+        threeDTag.setOnAction(event -> TagColourChange(threeDTag));
+        metalTag.setOnAction(event -> TagColourChange(metalTag));
+        clayTag.setOnAction(event -> TagColourChange(clayTag));
+        sculptingTag.setOnAction(event -> TagColourChange(sculptingTag));
+        woodTag.setOnAction(event -> TagColourChange(woodTag));
+        paperTag.setOnAction(event -> TagColourChange(paperTag));
+
+        searchButton.setOnAction(event -> SearchButton());
+
     }
 
     public void TagColourChange(Button clickedButton){
@@ -147,110 +138,11 @@ public class SearchController {
         System.out.println(clickedButton.getId() + " is now " + (newState ? "ON" : "OFF"));
     }
 
-
-
     private void SearchButton() {
-        if (titleSearch != null) {
-            topHBOX.getChildren().clear();
-            String searchText = titleSearch.getText();
-            LocalDate selectedDate = DateSearch.getValue();
-            System.out.println("Searching for: " + searchText);
-            List<Project> searchResults = projectDAO.getSearchProjects(searchText, selectedDate);
-
-            System.out.println("Selected tags:");
-            for (Map.Entry<Button, Boolean> entry : buttonStates.entrySet()) {
-                if (entry.getValue()) {
-                    System.out.println(entry.getKey().getText());
-                }
-            }
-
-
-            if (searchResults !=null && !searchResults.isEmpty()){
-                this.projectList = searchResults;
-                System.out.println("Found " + searchResults.size() + " results.");
-
-                System.out.println(selectedDate);
-                addProjectsToDash();
-            } else {
-                System.out.println("No results found or an error occurred.");
-            }
-
-
-        } else {
-            System.out.println("Error: titleSearch TextField is null");
-        }
+        topHBOX.getChildren().clear();
+        String searchText = titleSearch.getText();
+        LocalDate selectedDate = DateSearch.getValue();
+        String dateString = selectedDate.toString();
+        System.out.println(dateString);
     }
-
-
-
-    public boolean getButtonState(Button button) {
-        return buttonStates.getOrDefault(button, false);
-    }
-
-    private void addProjectsToDash(){
-
-            SearchScroll.widthProperty().addListener((obs, oldWidth, newWidth) -> {
-                int widthCalculation = (int) (newWidth.doubleValue() + projectWidth);
-                topHBOX.setPrefWidth(widthCalculation);
-            });
-
-        for(Project projectToAdd: projectList){
-            if (Objects.equals(projectToAdd.getDateFinished(), null)){
-                generateContainer(projectToAdd, topHBOX, SearchScroll);
-            }
-
-        }
-    }
-
-    private VBox projectVBoxStyling(String colour) {
-        VBox projectContainer = new VBox();
-        projectContainer.setAlignment(Pos.CENTER);
-        projectContainer.setSpacing(10);
-        projectContainer.prefHeightProperty().bind(topHBOX.heightProperty().multiply(0.95));
-        projectContainer.setPrefWidth(projectWidth);
-        projectContainer.setStyle(
-                "-fx-border-width: " + this.projectBorderWidth + "; " +
-                        "-fx-background-color: " + colour + "; " +
-                        "-fx-background-radius: "  + this.projectRadius + "; " +
-                        "-fx-border-color: " + this.projectBorderColour + "; " +
-                        "-fx-border-radius: " + this.projectRadius + "; "
-        );
-
-        return projectContainer;
-    }
-
-    private void generateContainer(Project projectToAdd, HBox parentContainer, ScrollPane scrollPane){
-        VBox projectContainer = projectVBoxStyling(projectToAdd.getColour());
-        Label cardTitle = new Label(projectToAdd.getTitle());
-        Label DateCommenced = new Label ("Commenced: " + projectToAdd.getDateCreated());
-        projectContainer.getChildren().addAll(cardTitle,DateCommenced);
-
-        if (!Objects.equals(projectToAdd.getDateCreated(), "none")){
-            Label DateCompleted = new Label ("Completed: " + projectToAdd.getDateFinished());
-            projectContainer.getChildren().addAll(DateCompleted);
-        }
-
-        projectContainer.setOnMouseClicked(event -> {
-            System.out.println("Project clicked: " + projectToAdd.getTitle());
-            Stage stage = (Stage) projectContainer.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("timeline-view.fxml"));
-            Parent root = null;
-            try {
-                root = fxmlLoader.load();
-                TimeLineController timelineController = fxmlLoader.getController();
-                timelineController.setProject(projectToAdd);
-                timelineController.setUser(userInformation);
-                Scene scene = new Scene(root, ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
-                stage.setScene(scene);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
-        parentContainer.getChildren().addAll(projectContainer);
-        scrollPane.widthProperty().addListener((obs, oldWidth, newWidth) -> {
-            int widthCalculation = (int) (newWidth.doubleValue() + projectWidth);
-            parentContainer.setPrefWidth(widthCalculation);
-        });
-    }
-
 }

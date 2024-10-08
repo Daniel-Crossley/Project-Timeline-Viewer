@@ -1,6 +1,5 @@
 package com.example.project.model;
 
-import java.sql.*;
 import com.example.project.interfaces.ISqliteCardDAO;
 import javafx.scene.image.Image;
 import javafx.embed.swing.SwingFXUtils;
@@ -57,8 +56,8 @@ public class SqliteCardDAO implements ISqliteCardDAO {
             if (resultSet.next()) {
                 String title = resultSet.getString("title");
                 String description = resultSet.getString("description");
-                Date dateCreated = resultSet.getDate("dateCreated");
-                Date dateFinished = resultSet.getDate("dateFinished");
+                String dateCreated = resultSet.getString("dateCreated");
+                String dateFinished = resultSet.getString("dateFinished");
                 Blob imageBlob = resultSet.getBlob("image");
                 InputStream inputStream = imageBlob.getBinaryStream();
                 Image image = new Image(inputStream);
@@ -87,8 +86,8 @@ public class SqliteCardDAO implements ISqliteCardDAO {
                 while (resultSet.next()) {
                     String title = resultSet.getString("title");
                     String description = resultSet.getString("description");
-                    Date dateCreated = resultSet.getDate("dateCreated");
-                    Date dateFinished = resultSet.getDate("dateFinished");
+                    String dateCreated = resultSet.getString("dateCreated");
+                    String dateFinished = resultSet.getString("dateFinished");
 
                     byte[] imageBytes = resultSet.getBytes("image");
                     Image image = null;
@@ -122,8 +121,8 @@ public class SqliteCardDAO implements ISqliteCardDAO {
             statement.setInt(1, project.getId());
             statement.setString(2, card.getTitle());
             statement.setString(3, card.getDescription());
-            statement.setDate(4, card.getDateCreated());
-            statement.setDate(5, card.getDateFinished());
+            statement.setString(4, card.getDateCreated());
+            statement.setString(5, card.getDateFinished());
 
             Image image = card.getMediaImage();
             byte[] imageBytes = null;

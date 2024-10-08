@@ -14,13 +14,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import java.sql.Date;
+
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-
 import java.util.ResourceBundle;
 
 public class CreateNewProjectController implements Initializable {
@@ -123,10 +120,8 @@ public class CreateNewProjectController implements Initializable {
         // Log selected tags for debugging
         System.out.println("Selected Tags: " + selectedTags);
 
-        LocalDate currentDate = LocalDate.now();
-        Date projectDate = Date.valueOf(currentDate);
         // Create a new project with the gathered data
-        Project newProject = new Project(0, title, description, projectDate, null, visibility, colour, 0, selectedTags);
+        Project newProject = new Project(0, title, description, "Place holder", "none", visibility, colour, 0, selectedTags);
         projectDAO.addProject(newProject, userInformation);  // Add project to the database
 
         // Navigate back to the Owner Dashboard after project creation

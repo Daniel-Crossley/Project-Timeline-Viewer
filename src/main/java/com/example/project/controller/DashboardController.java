@@ -113,7 +113,7 @@ public class DashboardController implements Initializable {
 
 
         for(Project projectToAdd: projectList){
-            if (Objects.equals(projectToAdd.getDateFinished(), null)){
+            if (Objects.equals(projectToAdd.getDateFinished(), "none")){
                 generateContainer(projectToAdd, Container_In_Progress, Scrollpane_Progress);
             }
             else{
@@ -287,7 +287,6 @@ public class DashboardController implements Initializable {
             e.printStackTrace();
         }
     }
-
 
 
 }

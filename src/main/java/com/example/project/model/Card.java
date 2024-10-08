@@ -1,7 +1,5 @@
 package com.example.project.model;
 
-import java.util.Date;
-
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
@@ -14,10 +12,11 @@ public class Card {
     private int id;
     private String title;
     private String description;
-    private Date dateCreated;
-    private Date dateFinished;
+    private String dateCreated;
+    private String dateFinished;
     private List<CardComment> comments = new ArrayList<>();
     private Image mediaImage;
+
 
     /**
      * Sets the list of image's
@@ -47,7 +46,7 @@ public class Card {
      */
     public List<CardComment> getComments(){return comments;}
 
-    public Card(String setTitle, String setDescription, Date setDateCreated, Date setDateFinished, Image setMediaImage){
+    public Card(String setTitle, String setDescription, String setDateCreated, String setDateFinished, Image setMediaImage){
         //this.id = ID;
         this.title = setTitle;
         this.description = setDescription;
@@ -55,8 +54,6 @@ public class Card {
         this.dateFinished = setDateFinished;
         this.mediaImage = setMediaImage;
     }
-
-
 
     public int getId(){
         return this.id;
@@ -87,15 +84,15 @@ public class Card {
      * Retrieves the card's date of creation as a string
      * @return the date the card was created
      */
-    public java.sql.Date getDateCreated(){
-        return (java.sql.Date) this.dateCreated;
+    public String getDateCreated(){
+        return this.dateCreated;
     }
 
     /**
      * Retrieves the card's date of finished as a string
      * @return the date the card was finished
      */
-    public java.sql.Date getDateFinished(){
-        return (java.sql.Date) this.dateFinished;
+    public String getDateFinished(){
+        return this.dateFinished;
     }
 }
