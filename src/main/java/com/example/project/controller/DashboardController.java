@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-public class DashboardController implements Initializable {
+public class DashboardController extends BaseController implements Initializable {
     public Pane Menu;
     public Button Button_Logout;
     public Button Button_Search;
@@ -262,12 +262,10 @@ public class DashboardController implements Initializable {
      * @param actionEvent Clicking Action
      * @throws IOException IOException
      */
-    public void Logout(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) Button_Logout.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("hello-view.fxml"));
-        Parent root = fxmlLoader.load();
-        Scene scene = new Scene(root, ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
-        stage.setScene(scene);
+    @FXML
+    public void onLogoutClick(ActionEvent actionEvent) throws IOException {
+        // Call the inherited Logout method from BaseController
+        Logout(actionEvent);
     }
 
     /**

@@ -4,6 +4,7 @@ import com.example.project.ApplicationStart;
 import com.example.project.model.SqliteUserDAO;
 import com.example.project.model.MockUserDAO;
 import com.example.project.model.User;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -20,7 +21,7 @@ import java.util.List;
  */
 
 
-public class RegisterController {
+public class RegisterController extends BaseController {
     @FXML
     private ListView<User> contactsListView;
 
@@ -54,11 +55,9 @@ public class RegisterController {
      */
 
     @FXML
-    protected void onBack() throws IOException {
-        Stage stage = (Stage) backButton.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
-        stage.setScene(scene);
+    public void onBack(ActionEvent actionEvent) throws IOException {
+        // Call the inherited Logout method from BaseController
+        Logout(actionEvent);
     }
 
     /**
