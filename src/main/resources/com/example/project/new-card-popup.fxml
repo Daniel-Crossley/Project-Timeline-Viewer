@@ -49,4 +49,6 @@
       <opaqueInsets>
          <Insets />
       </opaqueInsets></Button>
+
+    <Label fx:id="cardErrorText"/>
 </VBox>
