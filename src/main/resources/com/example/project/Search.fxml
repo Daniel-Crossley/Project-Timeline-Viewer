@@ -8,74 +8,61 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: d6b88d;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.controller.SearchController">
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: d6b88d;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.controller.SearchController">
    <children>
-      <GridPane layoutX="-28.0" prefHeight="400.0" prefWidth="628.0">
-        <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="3.0" prefWidth="14.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="395.0" minWidth="10.0" prefWidth="239.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="396.0" minWidth="0.0" prefWidth="10.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="396.0" minWidth="10.0" prefWidth="375.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints maxHeight="208.0" minHeight="0.0" prefHeight="49.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="356.0" minHeight="10.0" prefHeight="351.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+      <Pane fx:id="Menu" prefHeight="49.0" prefWidth="600.0" style="-fx-background-color: A1662F;">
          <children>
-            <Pane fx:id="Menu" prefHeight="49.0" prefWidth="564.0" style="-fx-background-color: A1662F;" GridPane.columnIndex="1" GridPane.columnSpan="3">
+            <Button fx:id="Button_Logout" layoutX="534.0" layoutY="9.0" mnemonicParsing="false" onAction="#Logout" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" stylesheets="@../../../../../../../MainProject/src/main/resources/com/example/project/stylesheet.css" text="Logout">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
+            <Button fx:id="DashboardSearch" layoutX="14.0" layoutY="12.0" mnemonicParsing="false" onAction="#Open_Dashboard" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" text="Dashboard">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
+            <Label fx:id="Label_Username" layoutX="108.0" layoutY="7.0" text="Guest" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <HBox prefHeight="348.0" prefWidth="600.0">
+         <children>
+            <Pane prefHeight="100.0" prefWidth="209.0" style="-fx-background-color: e5c08b; -fx-background-radius: 25;">
                <children>
-                  <Button fx:id="Button_Logout" layoutX="534.0" layoutY="9.0" mnemonicParsing="false" onAction="#Logout" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" stylesheets="@stylesheet.css" text="Logout">
-                     <effect>
-                        <DropShadow />
-                     </effect>
-                  </Button>
-                  <Button fx:id="DashboardSearch" layoutX="29.0" layoutY="12.0" mnemonicParsing="false" onAction="#Open_Dashboard" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" text="Dashboard">
-                     <effect>
-                        <DropShadow />
-                     </effect>
-                  </Button>
-                  <Label fx:id="Label_Username" layoutX="132.0" layoutY="7.0" text="Guest" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="24.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <Pane prefHeight="351.0" prefWidth="266.0" style="-fx-background-color: e5c08b; -fx-background-radius: 25;" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <children>
-                  <Label layoutX="21.0" layoutY="10.0" text="Search:">
+                  <Label layoutX="9.0" layoutY="8.0" text="Search:">
                      <font>
                         <Font name="Berlin Sans FB" size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="21.0" layoutY="35.0" prefHeight="21.0" prefWidth="87.0" text="Start date:">
+                  <Label layoutX="9.0" layoutY="33.0" prefHeight="21.0" prefWidth="87.0" text="Start date:">
                      <font>
                         <Font name="Berlin Sans FB" size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="titleSearch" layoutX="86.0" layoutY="8.0" prefHeight="25.0" prefWidth="123.0" />
-                  <DatePicker fx:id="DateSearch" layoutX="113.0" layoutY="33.0" prefHeight="25.0" prefWidth="96.0" />
-                  <Label layoutX="21.0" layoutY="59.0" prefHeight="21.0" prefWidth="87.0" text="Tags:">
+                  <TextField fx:id="titleSearch" layoutX="74.0" layoutY="6.0" prefHeight="25.0" prefWidth="123.0" />
+                  <DatePicker fx:id="DateSearch" layoutX="101.0" layoutY="31.0" prefHeight="25.0" prefWidth="96.0" />
+                  <Label layoutX="9.0" layoutY="57.0" prefHeight="21.0" prefWidth="87.0" text="Tags:">
                      <font>
                         <Font name="Berlin Sans FB" size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="26.0" layoutY="221.0" prefHeight="21.0" prefWidth="149.0" text="Project Completed:">
+                  <Label layoutX="14.0" layoutY="219.0" prefHeight="21.0" prefWidth="149.0" text="Project Completed:">
                      <font>
                         <Font name="Berlin Sans FB" size="18.0" />
                      </font>
                   </Label>
                   <RadioButton id="completedRadio" layoutX="175.0" layoutY="223.0" mnemonicParsing="false" />
-                  <VBox layoutX="26.0" layoutY="90.0" prefHeight="131.0" prefWidth="100.0" style="-fx-padding: 5; -fx-spacing: 15;">
+                  <VBox layoutX="14.0" layoutY="88.0" prefHeight="131.0" prefWidth="100.0" style="-fx-padding: 5; -fx-spacing: 15;">
                      <children>
                         <Button fx:id="threeDTag" mnemonicParsing="false" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" text="3D Modeling">
                            <effect>
@@ -94,7 +81,7 @@
                         </Button>
                      </children>
                   </VBox>
-                  <VBox layoutX="125.0" layoutY="90.0" prefHeight="131.0" prefWidth="100.0" style="-fx-padding: 5; -fx-spacing: 15;">
+                  <VBox layoutX="113.0" layoutY="88.0" prefHeight="131.0" prefWidth="100.0" style="-fx-padding: 5; -fx-spacing: 15;">
                      <children>
                         <Button fx:id="sculptingTag" mnemonicParsing="false" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" text="Sculpting">
                            <effect>
@@ -113,7 +100,7 @@
                         </Button>
                      </children>
                   </VBox>
-                  <Button fx:id="searchButton" layoutX="26.0" layoutY="248.0" mnemonicParsing="false" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" text="Search">
+                  <Button fx:id="searchButton" layoutX="14.0" layoutY="246.0" mnemonicParsing="false" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" text="Search">
                      <effect>
                         <DropShadow />
                      </effect>
@@ -126,22 +113,40 @@
                   <DropShadow />
                </effect>
             </Pane>
-            <ScrollPane fx:id="SearchScroll" prefHeight="357.0" prefWidth="387.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="334.0" prefWidth="396.0" style="-fx-background-color: d6b88d;">
+            <VBox prefHeight="348.0" prefWidth="11.0" />
+            <VBox prefHeight="348.0" prefWidth="386.0">
+               <children>
+                  <Pane prefHeight="37.0" prefWidth="596.0" style="-fx-background-color: e5c08b;">
                      <children>
-                        <VBox prefHeight="342.0" prefWidth="373.0" style="-fx-background-color: d6b88d;">
-                           <children>
-                              <HBox fx:id="topHBOX" prefHeight="112.0" prefWidth="373.0" style="-fx-background-color: d6b88d;" />
-                              <HBox fx:id="midHBOX" prefHeight="112.0" prefWidth="373.0" style="-fx-background-color: d6b88d;" />
-                              <HBox fx:id="botHBOX" prefHeight="112.0" prefWidth="373.0" style="-fx-background-color: d6b88d;" />
-                           </children>
-                        </VBox>
+                        <Label layoutX="36.0" layoutY="9.0" text="In-Progress Projects">
+                           <font>
+                              <Font name="Berlin Sans FB" size="18.0" />
+                           </font>
+                        </Label>
                      </children>
-                  </AnchorPane>
-               </content>
-            </ScrollPane>
+                  </Pane>
+                  <ScrollPane fx:id="Scrollpane_Search_Progress" hbarPolicy="ALWAYS" prefHeight="156.0" prefWidth="384.0" vbarPolicy="NEVER">
+                     <content>
+                        <HBox fx:id="Container_Search_Progress" prefHeight="158.0" prefWidth="787.0" style="-fx-background-color: d6b88d;" />
+                     </content>
+                  </ScrollPane>
+                  <Pane prefHeight="38.0" prefWidth="596.0" style="-fx-background-color: e5c08b;">
+                     <children>
+                        <Label layoutX="38.0" layoutY="9.0" text="Completed Projects">
+                           <font>
+                              <Font name="Berlin Sans FB" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <ScrollPane fx:id="Scrollpane_Search_Completed" hbarPolicy="ALWAYS" prefHeight="148.0" prefWidth="671.0" vbarPolicy="NEVER">
+                     <content>
+                        <HBox fx:id="Container_Search_Completed" prefHeight="133.0" prefWidth="999.0" style="-fx-background-color: d6b88d;" />
+                     </content>
+                  </ScrollPane>
+               </children>
+            </VBox>
          </children>
-      </GridPane>
+      </HBox>
    </children>
-</Pane>
+</VBox>

@@ -6,7 +6,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class SqliteProjectDAO implements ISqliteProjectDAO {
@@ -127,5 +129,61 @@ public class SqliteProjectDAO implements ISqliteProjectDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    /**
+     *
+     * @param titleSearch
+     * @param  date
+     * @return list of projects containing title
+     */
+    public List<Project> getSearchProjects(String titleSearch , String date) {
+
+        List<Project> projects = new ArrayList<>();
+        try {
+            PreparedStatement statement = null;
+            if (date == null && (titleSearch == null || titleSearch.isEmpty())) {
+                statement = connection.prepareStatement("SELECT * FROM Projects WHERE visibility == 1");
+            } else if (date == null) {
+                statement = connection.prepareStatement("SELECT * FROM Projects WHERE title LIKE ? AND visibility == 1");
+                statement.setString(1, "%" + titleSearch + "%");
+            } else if (titleSearch == null || titleSearch.isEmpty()) {
+                statement = connection.prepareStatement("SELECT * FROM Projects WHERE " +
+                        "dateCreated >= ? AND dateCreated <= date('now') " +
+                        "AND visibility = 1");
+                statement.setString(1, date);
+            } else {
+                statement = connection.prepareStatement("SELECT * FROM Projects WHERE " +
+                        "dateCreated >= ? AND dateCreated <= date('now') " +
+                        "AND title LIKE ? AND visibility = 1");
+                statement.setString(1, date);
+                statement.setString(2, "%" + titleSearch + "%");
+            }
+            System.out.println("Date: " + date);
+            System.out.println("Title Search: " + titleSearch);
+            System.out.println("SQL: " + statement.toString());
+            try (ResultSet resultSet = statement.executeQuery()){
+                while (resultSet.next()){
+                    int id = resultSet.getInt("id");
+                    String title = resultSet.getString("title");
+                    String description = resultSet.getString("description");
+                    String dateCreated = resultSet.getString("dateCreated");
+                    String dateFinished = null;
+                    boolean visibility = resultSet.getInt("visibility") != 0;
+                    int likes = resultSet.getInt("likes");
+                    String colour = resultSet.getString("colour");
+                    String tags = resultSet.getString("tags");
+                    Project project = new Project(id, title, description, dateCreated, dateFinished, visibility, colour, likes, Collections.singletonList(tags));
+                    projects.add(project);
+                    System.out.println("Found project: " + title);
+                }
+            }
+            System.out.println("Total projects found: " + projects.size());
+        } catch (Exception e) {
+            System.out.println("Error in getSearchProjects: " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
+        return projects;
+
     }
 }

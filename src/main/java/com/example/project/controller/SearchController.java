@@ -1,18 +1,20 @@
 package com.example.project.controller;
 
 import com.example.project.ApplicationStart;
-import com.example.project.model.Project;
-import com.example.project.model.SqliteProjectDAO;
-import com.example.project.model.User;
+import com.example.project.model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -42,10 +44,10 @@ public class SearchController {
     private Button paperTag;
     @FXML
     private Button searchButton;
-    public HBox topHBOX;
-    public HBox midHBOX;
-    public HBox botHBOX;
-    public ScrollPane SearchScroll;
+    public HBox Container_Search_Progress;
+    public HBox Container_Search_Completed;
+    public ScrollPane Scrollpane_Search_Progress;
+    public ScrollPane Scrollpane_Search_Completed;
     private Map<Button, Boolean> buttonStates = new HashMap<>();
     private SqliteProjectDAO projectDAO;
     private List<Project> projectList = new ArrayList<>();
@@ -54,6 +56,7 @@ public class SearchController {
     @FXML
     private DatePicker DateSearch;
 
+    SqliteCardDAO cardDAO = new SqliteCardDAO();
 
     private final int projectWidth = 150;
     private final String projectColour = "#f1d9b7";
@@ -106,7 +109,7 @@ public class SearchController {
     @FXML
     public void initialize(){
 
-        topHBOX.prefHeightProperty().bind(SearchScroll.heightProperty().multiply(0.88));
+        Container_Search_Progress.prefHeightProperty().bind(Scrollpane_Search_Progress.heightProperty().multiply(0.88));
         projectDAO = new SqliteProjectDAO();
         buttonStates.put(threeDTag, false);
         buttonStates.put(metalTag, false);
@@ -139,10 +142,164 @@ public class SearchController {
     }
 
     private void SearchButton() {
-        topHBOX.getChildren().clear();
+        Container_Search_Progress.getChildren().clear();
         String searchText = titleSearch.getText();
         LocalDate selectedDate = DateSearch.getValue();
         String dateString = selectedDate.toString();
         System.out.println(dateString);
+        List<Project> searchResults = projectDAO.getSearchProjects(searchText, dateString);
+
+        System.out.println("Selected tags:");
+        for (Map.Entry<Button, Boolean> entry : buttonStates.entrySet()) {
+            if (entry.getValue()) {
+                System.out.println(entry.getKey().getText());
+            }
+        }
+
+        if (searchResults !=null && !searchResults.isEmpty()){
+            this.projectList =searchResults;
+            System.out.println("Found " + searchResults.size() + " results.");
+            addProjectsToDash();
+        }
+
     }
+
+    /**
+     * Adds project containers to the different containers based on if they have a completion date set
+     */
+    private void addProjectsToDash(){
+        if (!guest){
+
+        }
+        else{
+            Scrollpane_Search_Progress.widthProperty().addListener((obs, oldWidth, newWidth) -> {
+                int widthCalculation = (int) (newWidth.doubleValue() + projectWidth);
+                Container_Search_Progress.setPrefWidth(widthCalculation);
+            });
+            Scrollpane_Search_Completed.widthProperty().addListener((obs, oldWidth, newWidth) -> {
+                int widthCalculation = (int) (newWidth.doubleValue() + projectWidth);
+                Container_Search_Completed.setPrefWidth(widthCalculation);
+            });
+        }
+
+
+        for(Project projectToAdd: projectList){
+            if (Objects.equals(projectToAdd.getDateFinished(), "none")){
+                generateContainer(projectToAdd, Container_Search_Progress, Scrollpane_Search_Progress);
+            }
+            else{
+                generateContainer(projectToAdd, Container_Search_Completed, Scrollpane_Search_Completed);
+            }
+        }
+    }
+
+    /**
+     * Generates generic vbox for project container
+     * @param colour Colour of the vbox
+     * @return Generated project container
+     */
+    private VBox projectVBoxStyling(String colour) {
+        VBox projectContainer = new VBox();
+        projectContainer.setAlignment(Pos.CENTER);
+        projectContainer.setSpacing(0.2);
+        projectContainer.prefHeightProperty().bind(Container_Search_Progress.heightProperty().multiply(0.95));
+        projectContainer.setPrefWidth(projectWidth);
+        projectContainer.setStyle(
+                "-fx-border-width: " + this.projectBorderWidth + "; " +
+                        "-fx-background-color: " + colour + "; " +
+                        "-fx-background-radius: "  + this.projectRadius + "; " +
+                        "-fx-border-color: " + this.projectBorderColour + "; " +
+                        "-fx-border-radius: " + this.projectRadius + "; "
+        );
+
+        return projectContainer;
+    }
+
+    /**
+     * Generates the container of project information to add
+     * @param projectToAdd project to generate container from
+     * @param parentContainer container to add the project to
+     * @param scrollPane container to be used as reference
+     */
+    private void generateContainer(Project projectToAdd, HBox parentContainer, ScrollPane scrollPane){
+        int TitleSize = 15;
+        int ContentSize = 10;
+
+        VBox projectContainer = projectVBoxStyling(projectToAdd.getColour());
+
+        Label cardTitle = new Label(projectToAdd.getTitle());
+        cardTitle.setFont(Font.font("System", FontWeight.BOLD, 15));
+        projectContainer.getChildren().addAll(cardTitle);
+
+        try {
+            List<Card> listofCards = cardDAO.getCards(projectToAdd);
+            if (listofCards.getFirst().getMediaImage() != null) {
+                ImageView mediaImageView = new ImageView(listofCards.getFirst().getMediaImage());
+                mediaImageView.setFitWidth(100);
+                mediaImageView.setFitHeight(50);
+                mediaImageView.setPreserveRatio(true);
+                projectContainer.getChildren().add(mediaImageView);
+            }
+        } catch(NoSuchElementException ignored) {
+
+        }
+
+
+        Label DateCommenced = new Label ("Start: ");
+        Label DateCommencedContent = new Label(projectToAdd.getDateCreated());
+        DateCommenced.setFont(Font.font("System", FontWeight.BOLD, 12));
+        DateCommencedContent.setFont(Font.font("System", FontWeight.NORMAL, 12));
+        HBox dateCommencedContainer = new HBox(DateCommenced, DateCommencedContent);
+
+
+        VBox projectInformation = new VBox(dateCommencedContainer);
+        projectInformation.setPadding(new Insets(0, 0, 5, 5));
+
+        projectContainer.getChildren().addAll(projectInformation);
+
+        if (!Objects.equals(projectToAdd.getDateCreated(), " none")){
+            Label DateCompleted = new Label ("Finish: ");
+            Label DateCompletedContent = new Label(projectToAdd.getDateFinished());
+            DateCompleted.setFont(Font.font("System", FontWeight.BOLD, 12));
+            DateCompletedContent.setFont(Font.font("System", FontWeight.NORMAL, 12));
+
+            HBox DateCompletedContainer = new HBox(DateCompleted, DateCompletedContent);
+            projectInformation.getChildren().addAll(DateCompletedContainer);
+        }
+
+
+
+        projectContainer.setOnMouseClicked(event -> {
+            System.out.println("Project clicked: " + projectToAdd.getTitle());
+            Stage stage = (Stage) projectContainer.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("timeline-view.fxml"));
+            Parent root = null;
+            try {
+                root = fxmlLoader.load();
+                TimeLineController timelineController = fxmlLoader.getController();
+                timelineController.setProject(projectToAdd);
+                timelineController.setUser(userInformation);
+                timelineController.updateView(stage);
+                Scene scene = new Scene(root, ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
+                stage.setScene(scene);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        parentContainer.getChildren().addAll(projectContainer);
+        scrollPane.widthProperty().addListener((obs, oldWidth, newWidth) -> {
+            int widthCalculation = (int) (newWidth.doubleValue() + projectWidth);
+            parentContainer.setPrefWidth(widthCalculation);
+        });
+    }
+
+    /**
+     * Generates the container for generating a new project
+     * @param parentContainer container to add the project to
+     * @param scrollPane container to be used as reference
+     */
+
+
+
+
 }
