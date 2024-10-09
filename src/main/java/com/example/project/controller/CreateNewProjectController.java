@@ -105,7 +105,7 @@ public class CreateNewProjectController implements Initializable {
 
         // Collect selected tags
         ObservableList<String> selectedTags = FXCollections.observableArrayList();
-        if (tag3DModeling.isSelected()) selectedTags.add("3D Modeling");
+        if (tag3DModeling.isSelected()) selectedTags.add("3D-Modeling");
         if (tagMetal.isSelected()) selectedTags.add("Metal");
         if (tagSculpting.isSelected()) selectedTags.add("Sculpting");
         if (tagClayWork.isSelected()) selectedTags.add("Clay-Work");
