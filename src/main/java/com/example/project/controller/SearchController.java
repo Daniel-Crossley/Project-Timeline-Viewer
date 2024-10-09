@@ -5,73 +5,69 @@ import com.example.project.model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
+import java.time.LocalDate;
 import java.util.*;
 
-public class DashboardController extends BaseController implements Initializable {
-    public Pane Menu;
+public class SearchController {
+
+    private boolean guest;
+    private User userInformation;
+    @FXML
+    private Label Label_Username;
     public Button Button_Logout;
-    public Button Button_Search;
-    public HBox Container_In_Progress;
-    public HBox Container_Completed;
-    public ScrollPane Scrollpane_Completed;
-    public ScrollPane Scrollpane_Progress;
+    @FXML
+    public Button DashboardSearch;
+    @FXML
+    private Button threeDTag;
+    @FXML
+    private Button metalTag;
+    @FXML
+    private Button clayTag;
+    @FXML
+    private Button sculptingTag;
+    @FXML
+    private Button woodTag;
+    @FXML
+    private Button paperTag;
+    @FXML
+    private Button searchButton;
+    public HBox Container_Search_Progress;
+    public HBox Container_Search_Completed;
+    public ScrollPane Scrollpane_Search_Progress;
+    public ScrollPane Scrollpane_Search_Completed;
+    private Map<Button, Boolean> buttonStates = new HashMap<>();
+    private SqliteProjectDAO projectDAO;
+    private List<Project> projectList = new ArrayList<>();
+    @FXML
+    private TextField titleSearch;
+    @FXML
+    private DatePicker DateSearch;
 
     SqliteCardDAO cardDAO = new SqliteCardDAO();
 
-    @FXML
-    private Label Label_Username;
-
-    private User userInformation;
-    private SqliteProjectDAO projectDAO;
-    private boolean guest = false;
-
-    private List<Project> projectList = new ArrayList<>();
-
-    //Generic Styling
     private final int projectWidth = 150;
     private final String projectColour = "#f1d9b7";
     private final int projectRadius = 10;
     private final String projectBorderColour = "#c27c18";
     private final int projectBorderWidth = 2;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        projectDAO = new SqliteProjectDAO();
-        updateUserName();
-        Container_In_Progress.prefHeightProperty().bind(Scrollpane_Progress.heightProperty().multiply(0.88));
-        Container_Completed.prefHeightProperty().bind(Scrollpane_Completed.heightProperty().multiply(0.88));
-    }
-
-
-    /**
-     * Retrieves user type and user information
-     * @param guest Set to true if person is a guest, false if not
-     * @param user User information
-     */
     public void setUserInformation(boolean guest, User user) {
         this.guest = guest;
         this.userInformation = user;
         updateUserName();
-        UpdateLists();
-        addProjectsToDash();
     }
 
     /**
@@ -86,11 +82,103 @@ public class DashboardController extends BaseController implements Initializable
     }
 
     /**
-     * Updates project list using user information
+     * Action of logging out
+     * @param actionEvent Clicking Action
+     * @throws IOException IOException
      */
-    private void UpdateLists(){
-        projectDAO.getProjects(userInformation);
-        this.projectList =  userInformation.getProjects();
+    public void Logout(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) Button_Logout.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("hello-view.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root, ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
+        stage.setScene(scene);
+    }
+
+    public void Open_Dashboard() throws IOException{
+        Stage stage = (Stage) DashboardSearch.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("Owner-Dashboard.fxml"));
+        Parent root = fxmlLoader.load();
+        DashboardController dashboardController = fxmlLoader.getController();
+        userInformation.setProjects(new ArrayList<>());
+        dashboardController.setUserInformation(false, userInformation);
+        Scene scene = new Scene(root, ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
+        stage.setScene(scene);
+        System.out.println("Going back to the previous screen.");
+    }
+
+    @FXML
+    public void initialize(){
+
+        Container_Search_Progress.prefHeightProperty().bind(Scrollpane_Search_Progress.heightProperty().multiply(0.88));
+        projectDAO = new SqliteProjectDAO();
+        buttonStates.put(threeDTag, false);
+        buttonStates.put(metalTag, false);
+        buttonStates.put(clayTag, false);
+        buttonStates.put(sculptingTag, false);
+        buttonStates.put(woodTag, false);
+        buttonStates.put(paperTag, false);
+
+        threeDTag.setOnAction(event -> TagColourChange(threeDTag));
+        metalTag.setOnAction(event -> TagColourChange(metalTag));
+        clayTag.setOnAction(event -> TagColourChange(clayTag));
+        sculptingTag.setOnAction(event -> TagColourChange(sculptingTag));
+        woodTag.setOnAction(event -> TagColourChange(woodTag));
+        paperTag.setOnAction(event -> TagColourChange(paperTag));
+
+        searchButton.setOnAction(event -> SearchButton());
+
+    }
+
+    public void TagColourChange(Button clickedButton){
+        boolean newState =!buttonStates.get(clickedButton);
+        buttonStates.put(clickedButton,newState);
+        if (newState) {
+            clickedButton.setStyle("-fx-background-color: #cc8b2e; -fx-background-radius: 50;");
+        } else {
+            clickedButton.setStyle("-fx-background-color: #e5c08b; -fx-background-radius: 50;");
+        }
+
+        System.out.println(clickedButton.getId() + " is now " + (newState ? "ON" : "OFF"));
+    }
+
+    private void SearchButton() {
+        Container_Search_Progress.getChildren().clear();
+        String searchText = titleSearch.getText();
+        LocalDate selectedDate = DateSearch.getValue();
+        System.out.println(selectedDate);
+        String dateString;
+        if (selectedDate == null){
+            dateString = "none";
+        }
+        else {
+            dateString = selectedDate.toString();
+        }
+
+        StringBuilder selectedTags = new StringBuilder();
+        System.out.println("Selected tags:");
+        for (Map.Entry<Button, Boolean> entry : buttonStates.entrySet()) {
+            if (entry.getValue()) {
+                if (selectedTags.length() >0){
+                    selectedTags.append(", ");
+                }
+                selectedTags.append(entry.getKey().getText());
+            }
+        }
+        String SearchTags = selectedTags.toString();
+        System.out.println("Selected tags: " + SearchTags);
+
+
+        System.out.println(dateString);
+        List<Project> searchResults = projectDAO.getSearchProjects(searchText, dateString, SearchTags);
+
+
+        if (searchResults !=null && !searchResults.isEmpty()){
+            this.projectList =searchResults;
+            System.out.println("Found " + searchResults.size() + " results.");
+
+            addProjectsToDash();
+        }
+
     }
 
     /**
@@ -98,26 +186,26 @@ public class DashboardController extends BaseController implements Initializable
      */
     private void addProjectsToDash(){
         if (!guest){
-            newCardContainer(Container_In_Progress, Scrollpane_Progress);
+
         }
         else{
-            Scrollpane_Progress.widthProperty().addListener((obs, oldWidth, newWidth) -> {
+            Scrollpane_Search_Progress.widthProperty().addListener((obs, oldWidth, newWidth) -> {
                 int widthCalculation = (int) (newWidth.doubleValue() + projectWidth);
-                Container_In_Progress.setPrefWidth(widthCalculation);
+                Container_Search_Progress.setPrefWidth(widthCalculation);
             });
-            Scrollpane_Completed.widthProperty().addListener((obs, oldWidth, newWidth) -> {
+            Scrollpane_Search_Completed.widthProperty().addListener((obs, oldWidth, newWidth) -> {
                 int widthCalculation = (int) (newWidth.doubleValue() + projectWidth);
-                Container_Completed.setPrefWidth(widthCalculation);
+                Container_Search_Completed.setPrefWidth(widthCalculation);
             });
         }
 
 
         for(Project projectToAdd: projectList){
             if (Objects.equals(projectToAdd.getDateFinished(), "none")){
-                generateContainer(projectToAdd, Container_In_Progress, Scrollpane_Progress);
+                generateContainer(projectToAdd, Container_Search_Progress, Scrollpane_Search_Progress);
             }
             else{
-                generateContainer(projectToAdd, Container_Completed, Scrollpane_Completed);
+                generateContainer(projectToAdd, Container_Search_Completed, Scrollpane_Search_Completed);
             }
         }
     }
@@ -131,14 +219,14 @@ public class DashboardController extends BaseController implements Initializable
         VBox projectContainer = new VBox();
         projectContainer.setAlignment(Pos.CENTER);
         projectContainer.setSpacing(0.2);
-        projectContainer.prefHeightProperty().bind(Container_In_Progress.heightProperty().multiply(0.95));
+        projectContainer.prefHeightProperty().bind(Container_Search_Progress.heightProperty().multiply(0.95));
         projectContainer.setPrefWidth(projectWidth);
         projectContainer.setStyle(
                 "-fx-border-width: " + this.projectBorderWidth + "; " +
-                "-fx-background-color: " + colour + "; " +
-                "-fx-background-radius: "  + this.projectRadius + "; " +
-                "-fx-border-color: " + this.projectBorderColour + "; " +
-                "-fx-border-radius: " + this.projectRadius + "; "
+                        "-fx-background-color: " + colour + "; " +
+                        "-fx-background-radius: "  + this.projectRadius + "; " +
+                        "-fx-border-color: " + this.projectBorderColour + "; " +
+                        "-fx-border-radius: " + this.projectRadius + "; "
         );
 
         return projectContainer;
@@ -227,64 +315,8 @@ public class DashboardController extends BaseController implements Initializable
      * @param parentContainer container to add the project to
      * @param scrollPane container to be used as reference
      */
-    private void newCardContainer(HBox parentContainer, ScrollPane scrollPane){
-        VBox projectContainer = projectVBoxStyling(projectColour);
-        Label cardTitle = new Label("Create Project");
 
-        projectContainer.getChildren().addAll(cardTitle);
 
-        projectContainer.setOnMouseClicked(event -> {
-            if (!guest) {
-                System.out.println("New Project Button clicked");
-                Stage stage = (Stage) projectContainer.getScene().getWindow();
-                FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("create-new-project.fxml"));
-                Parent root = null;
-                try {
-                    root = fxmlLoader.load();
-                    CreateNewProjectController newProjectController = fxmlLoader.getController();
-                    newProjectController.setUserInformation(userInformation);
-                    Scene scene = new Scene(root, ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
-                    stage.setScene(scene);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        });
-        parentContainer.getChildren().addAll(projectContainer);
-        scrollPane.widthProperty().addListener((obs, oldWidth, newWidth) -> {
-            int widthCalculation = (int) (newWidth.doubleValue() + projectWidth);
-            parentContainer.setPrefWidth(widthCalculation);
-        });
-    }
-
-    /**
-     * Action of logging out
-     * @param actionEvent Clicking Action
-     * @throws IOException IOException
-     */
-    @FXML
-    public void onLogoutClick(ActionEvent actionEvent) throws IOException {
-        // Call the inherited Logout method from BaseController
-        Logout(actionEvent);
-    }
-
-    /**
-     * Action of opening the pane for search
-     * @param actionEvent Clicking Action
-     */
-    public void Open_Search(ActionEvent actionEvent) {
-        try {
-            Stage stage = (Stage) Button_Search.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("Search.fxml"));
-            Parent root = fxmlLoader.load();
-            SearchController searchController = fxmlLoader.getController();
-            searchController.setUserInformation(guest, userInformation);
-            Scene scene = new Scene(root, ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
-            stage.setScene(scene);
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-    }
 
 
 }

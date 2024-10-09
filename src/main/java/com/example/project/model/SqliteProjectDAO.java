@@ -6,7 +6,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class SqliteProjectDAO implements ISqliteProjectDAO {
@@ -127,5 +129,93 @@ public class SqliteProjectDAO implements ISqliteProjectDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    /**
+     *
+     * @param titleSearch
+     * @param  date
+     * @param SearchTags
+     * @return list of projects containing title
+     */
+    public List<Project> getSearchProjects(String titleSearch , String date,String SearchTags) {
+        StringBuilder queryBuilder = new StringBuilder("");
+        List<Project> projects = new ArrayList<>();
+        List<String> parameters = new ArrayList<>();
+
+        if (SearchTags != null && !SearchTags.isEmpty()) {
+            String[] tags = SearchTags.split(",\\s*");
+            for (String tag : tags) {
+                queryBuilder.append(" AND tags LIKE ?");
+                parameters.add("%" + tag.trim() + "%");
+            }
+        }
+
+        try {
+            PreparedStatement statement = null;
+            //Querry for blank inputs
+            if (date == "none" && (titleSearch == null || titleSearch.isEmpty()) && SearchTags == "none") {
+                statement = connection.prepareStatement("SELECT * FROM Projects WHERE visibility == 1");
+
+            }
+            //search for title only
+            else if (date == "none" && SearchTags == "none") {
+                statement = connection.prepareStatement("SELECT * FROM Projects WHERE title LIKE ? AND visibility == 1");
+                statement.setString(1, "%" + titleSearch + "%");
+
+            }
+            //search for date only
+            else if (titleSearch == null || titleSearch.isEmpty() && SearchTags == "none") {
+                //search for date only
+                statement = connection.prepareStatement("SELECT * FROM Projects WHERE " +
+                        "dateCreated >= ? AND dateCreated <= date('now') " +
+                        "AND visibility = 1");
+                statement.setString(1, date);
+            } else if (titleSearch == null || titleSearch.isEmpty() && date == "none" && SearchTags != "none") {
+                statement = connection.prepareStatement("SELECT * FROM Projects WHERE visibility = 1" + queryBuilder.toString());
+                for (int i=0; i<parameters.size();i++){
+                    statement.setString(i + 1, parameters.get(i));
+                }
+            }
+            //search for date, tag and title
+            else {
+
+                statement = connection.prepareStatement("SELECT * FROM Projects WHERE " +
+                        "dateCreated >= ? AND dateCreated <= date('now') " +
+                        "AND title LIKE ? AND visibility = 1"+ queryBuilder.toString());
+
+                statement.setString(1, date);
+                statement.setString(2, "%" + titleSearch + "%");
+                for (int i=0; i<parameters.size();i++){
+                    statement.setString(i + 3, parameters.get(i));
+                }
+            }
+            System.out.println("Date: " + date);
+            System.out.println("Title Search: " + titleSearch);
+            System.out.println("SQL: " + statement.toString());
+            try (ResultSet resultSet = statement.executeQuery()){
+                while (resultSet.next()){
+                    int id = resultSet.getInt("id");
+                    String title = resultSet.getString("title");
+                    String description = resultSet.getString("description");
+                    String dateCreated = resultSet.getString("dateCreated");
+                    String dateFinished = resultSet.getString("dateFinished");
+                    boolean visibility = resultSet.getInt("visibility") != 0;
+                    int likes = resultSet.getInt("likes");
+                    String colour = resultSet.getString("colour");
+                    String tags = resultSet.getString("tags");
+                    Project project = new Project(id, title, description, dateCreated, dateFinished, visibility, colour, likes, Collections.singletonList(tags));
+                    projects.add(project);
+                    System.out.println("Found project: " + title);
+                    System.out.println("Found end: " + dateFinished);
+                }
+            }
+            System.out.println("Total projects found: " + projects.size());
+        } catch (Exception e) {
+            System.out.println("Error in getSearchProjects: " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
+        return projects;
+
     }
 }

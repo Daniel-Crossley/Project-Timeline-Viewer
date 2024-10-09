@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -106,7 +107,7 @@ public class CreateNewProjectController implements Initializable {
 
         // Collect selected tags
         ObservableList<String> selectedTags = FXCollections.observableArrayList();
-        if (tag3DModeling.isSelected()) selectedTags.add("3D Modeling");
+        if (tag3DModeling.isSelected()) selectedTags.add("3D-Modeling");
         if (tagMetal.isSelected()) selectedTags.add("Metal");
         if (tagSculpting.isSelected()) selectedTags.add("Sculpting");
         if (tagClayWork.isSelected()) selectedTags.add("Clay-Work");
@@ -129,7 +130,6 @@ public class CreateNewProjectController implements Initializable {
         // Create a new project with the gathered data
         Project newProject = new Project(0, title, description, formattedDate, "none", visibility, colour, 0, selectedTags);
         projectDAO.addProject(newProject, userInformation);  // Add project to the database
-
         // Navigate back to the Owner Dashboard after project creation
         Stage stage = (Stage) create.getScene().getWindow();  // Get current window (stage)
         FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("Owner-Dashboard.fxml"));

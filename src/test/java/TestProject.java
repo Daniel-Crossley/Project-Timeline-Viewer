@@ -1,6 +1,8 @@
 import com.example.project.model.Card;
 import com.example.project.model.Project;
 import org.junit.jupiter.api.Test;
+import java.sql.Date;
+import java.time.LocalDate;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
@@ -8,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class TestProject {
 
@@ -19,8 +22,8 @@ public class TestProject {
         int testID = 0;
         String testTitle = "testTitle";
         String testDescription = "testDescription";
-        String testDateCreated = "23/11/1963";
-        String testDateCompleted = "23/11/1963";
+        Date testDateCreated = Date.valueOf(LocalDate.now());
+        Date testDateCompleted = Date.valueOf(LocalDate.now());
         String testColour = "#ffffff";
         int testLikes = 0;
         return new Project(testID, testTitle, testDescription, testDateCreated, testDateCompleted, true, testColour, testLikes, Arrays.asList("Place holder"));
@@ -39,8 +42,8 @@ public class TestProject {
                 int projectId = 4;
                 String cardTitle = RandomString(5);
                 String cardDescription = RandomString(20);
-                String dateCreated = "23/11/1963";
-                String dateFinished = "23/11/1963";
+                Date dateCreated = Date.valueOf(LocalDate.now());
+                Date dateFinished = Date.valueOf(LocalDate.now());
                 Image image = null;
                 Card randomCard = new Card(cardTitle,cardDescription,dateCreated,dateFinished, image);
                 setOfCards.add(randomCard);

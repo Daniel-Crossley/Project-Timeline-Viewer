@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: d6b88d;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.controller.SearchController">
+   <children>
+      <Pane fx:id="Menu" prefHeight="49.0" prefWidth="600.0" style="-fx-background-color: A1662F;">
+         <children>
+            <Button fx:id="Button_Logout" layoutX="534.0" layoutY="9.0" mnemonicParsing="false" onAction="#Logout" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" stylesheets="@../../../../../../../MainProject/src/main/resources/com/example/project/stylesheet.css" text="Logout">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
+            <Button fx:id="DashboardSearch" layoutX="14.0" layoutY="12.0" mnemonicParsing="false" onAction="#Open_Dashboard" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" text="Dashboard">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
+            <Label fx:id="Label_Username" layoutX="108.0" layoutY="7.0" text="Guest" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <HBox prefHeight="348.0" prefWidth="600.0">
+         <children>
+            <Pane prefHeight="100.0" prefWidth="209.0" style="-fx-background-color: e5c08b; -fx-background-radius: 25;">
+               <children>
+                  <Label layoutX="9.0" layoutY="8.0" text="Search:">
+                     <font>
+                        <Font name="Berlin Sans FB" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="9.0" layoutY="33.0" prefHeight="21.0" prefWidth="87.0" text="Start date:">
+                     <font>
+                        <Font name="Berlin Sans FB" size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="titleSearch" layoutX="74.0" layoutY="6.0" prefHeight="25.0" prefWidth="123.0" />
+                  <DatePicker fx:id="DateSearch" layoutX="101.0" layoutY="31.0" prefHeight="25.0" prefWidth="96.0" />
+                  <Label layoutX="9.0" layoutY="57.0" prefHeight="21.0" prefWidth="87.0" text="Tags:">
+                     <font>
+                        <Font name="Berlin Sans FB" size="18.0" />
+                     </font>
+                  </Label>
+                  <VBox layoutX="14.0" layoutY="88.0" prefHeight="131.0" prefWidth="100.0" style="-fx-padding: 5; -fx-spacing: 15;">
+                     <children>
+                        <Button fx:id="threeDTag" mnemonicParsing="false" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" text="3D-Modeling">
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </Button>
+                        <Button fx:id="metalTag" mnemonicParsing="false" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" text="Metal-Work">
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </Button>
+                        <Button fx:id="clayTag" mnemonicParsing="false" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" text="Clay-Work">
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="113.0" layoutY="88.0" prefHeight="131.0" prefWidth="100.0" style="-fx-padding: 5; -fx-spacing: 15;">
+                     <children>
+                        <Button fx:id="sculptingTag" mnemonicParsing="false" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" text="Sculpting">
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </Button>
+                        <Button fx:id="woodTag" mnemonicParsing="false" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" text="Wood-work">
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </Button>
+                        <Button fx:id="paperTag" mnemonicParsing="false" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" text="Paper-Work">
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <Button fx:id="searchButton" layoutX="14.0" layoutY="246.0" mnemonicParsing="false" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" text="Search">
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                  </Button>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Pane>
+            <VBox prefHeight="348.0" prefWidth="11.0" />
+            <VBox prefHeight="348.0" prefWidth="386.0">
+               <children>
+                  <Pane prefHeight="37.0" prefWidth="596.0" style="-fx-background-color: e5c08b;">
+                     <children>
+                        <Label layoutX="36.0" layoutY="9.0" text="In-Progress Projects">
+                           <font>
+                              <Font name="Berlin Sans FB" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <ScrollPane fx:id="Scrollpane_Search_Progress" hbarPolicy="ALWAYS" prefHeight="156.0" prefWidth="384.0" vbarPolicy="NEVER">
+                     <content>
+                        <HBox fx:id="Container_Search_Progress" prefHeight="158.0" prefWidth="787.0" style="-fx-background-color: d6b88d;" />
+                     </content>
+                  </ScrollPane>
+                  <Pane prefHeight="38.0" prefWidth="596.0" style="-fx-background-color: e5c08b;">
+                     <children>
+                        <Label layoutX="38.0" layoutY="9.0" text="Completed Projects">
+                           <font>
+                              <Font name="Berlin Sans FB" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <ScrollPane fx:id="Scrollpane_Search_Completed" hbarPolicy="ALWAYS" prefHeight="148.0" prefWidth="671.0" vbarPolicy="NEVER">
+                     <content>
+                        <HBox fx:id="Container_Search_Completed" prefHeight="133.0" prefWidth="999.0" style="-fx-background-color: d6b88d;" />
+                     </content>
+                  </ScrollPane>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</VBox>
