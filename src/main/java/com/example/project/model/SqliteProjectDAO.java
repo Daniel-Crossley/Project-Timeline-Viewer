@@ -104,6 +104,37 @@ public class SqliteProjectDAO implements ISqliteDAO {
     }
 
     /**
+     * @param project the project to update with
+     */
+    public void updateProject(Project project) {
+        try {
+            PreparedStatement statement = connection.prepareStatement(
+                    "UPDATE Projects SET title = ?, " +
+                            "description = ?, " +
+                            "dateCreated = ?, " +
+                            "dateFinished = ?, " +
+                            "visibility = ?, " +
+                            "likes = ?," +
+                            "colour = ?," +
+                            "tags = ?" +
+                            "WHERE id = ?");
+            statement.setString(1, project.getTitle());
+            statement.setString(2, project.getDescription());
+            statement.setString(3, project.getDateCreated());
+            statement.setString(4, project.getDateFinished());
+            statement.setBoolean(5, project.isVisible());
+            statement.setInt(6, project.getLikes());
+            statement.setString(7, project.getColour());
+            statement.setString(8, String.join(", ", project.getTags()));
+            statement.setInt(9, project.getId());
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
      * @param project the project to be added
      * @param user the use to add the foreign key
      */

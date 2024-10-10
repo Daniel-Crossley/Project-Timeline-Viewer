@@ -112,6 +112,41 @@ public class SqliteCardDAO implements ISqliteDAO {
     }
 
     /**
+     * @param card the card to update with
+     */
+    public void updateCard(Card card) {
+        try {
+            PreparedStatement statement = connection.prepareStatement(
+                    "UPDATE Cards SET title = ?, " +
+                            "description = ?, " +
+                            "dateCreated = ?, " +
+                            "dateFinished = ?, " +
+                            "image = ?, " +
+                            "WHERE id = ?");
+            statement.setString(1, card.getTitle());
+            statement.setString(2, card.getDescription());
+            statement.setString(3, card.getDateCreated());
+            statement.setString(4, card.getDateFinished());
+            Image image = card.getMediaImage();
+            byte[] imageBytes = null;
+            if (image != null) {
+                BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
+                try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+                    ImageIO.write(bufferedImage, "png", baos);
+                    imageBytes = baos.toByteArray();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            statement.setBytes(5, imageBytes);
+            statement.setInt(6, card.getId());
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * @param card card object
      * @param project project object for foreign key
      */
