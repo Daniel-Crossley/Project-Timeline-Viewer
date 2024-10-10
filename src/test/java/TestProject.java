@@ -22,8 +22,8 @@ public class TestProject {
         int testID = 0;
         String testTitle = "testTitle";
         String testDescription = "testDescription";
-        Date testDateCreated = Date.valueOf(LocalDate.now());
-        Date testDateCompleted = Date.valueOf(LocalDate.now());
+        String testDateCreated = LocalDate.now().toString();
+        String testDateCompleted = LocalDate.now().toString();
         String testColour = "#ffffff";
         int testLikes = 0;
         return new Project(testID, testTitle, testDescription, testDateCreated, testDateCompleted, true, testColour, testLikes, Arrays.asList("Place holder"));
