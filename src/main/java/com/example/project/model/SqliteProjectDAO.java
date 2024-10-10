@@ -1,6 +1,6 @@
 package com.example.project.model;
 
-import com.example.project.interfaces.ISqliteProjectDAO;
+import com.example.project.interfaces.ISqliteDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class SqliteProjectDAO implements ISqliteProjectDAO {
+public class SqliteProjectDAO implements ISqliteDAO {
     private Connection connection;
 
     /**
@@ -25,7 +25,7 @@ public class SqliteProjectDAO implements ISqliteProjectDAO {
     /**
      * Creates the project table inside DB
      */
-    private void createTable(){
+    public void createTable(){
         try {
             Statement statement = connection.createStatement();
             String query = "CREATE TABLE IF NOT EXISTS Projects ("

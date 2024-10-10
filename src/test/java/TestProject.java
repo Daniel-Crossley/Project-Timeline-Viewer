@@ -42,8 +42,8 @@ public class TestProject {
                 int projectId = 4;
                 String cardTitle = RandomString(5);
                 String cardDescription = RandomString(20);
-                Date dateCreated = Date.valueOf(LocalDate.now());
-                Date dateFinished = Date.valueOf(LocalDate.now());
+                String dateCreated = LocalDate.now().toString();
+                String dateFinished = LocalDate.now().toString();
                 Image image = null;
                 Card randomCard = new Card(cardTitle,cardDescription,dateCreated,dateFinished, image);
                 setOfCards.add(randomCard);

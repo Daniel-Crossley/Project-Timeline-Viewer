@@ -1,6 +1,6 @@
 package com.example.project.model;
 
-import com.example.project.interfaces.ISqliteCardDAO;
+import com.example.project.interfaces.ISqliteDAO;
 import javafx.scene.image.Image;
 import javafx.embed.swing.SwingFXUtils;
 
@@ -12,7 +12,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SqliteCardDAO implements ISqliteCardDAO {
+public class SqliteCardDAO implements ISqliteDAO {
     private Connection connection;
 
     /**
@@ -26,7 +26,7 @@ public class SqliteCardDAO implements ISqliteCardDAO {
     /**
      * Create Cards table
      */
-    private void createTable(){
+    public void createTable(){
         try {
             Statement statement = connection.createStatement();
             String query = "CREATE TABLE IF NOT EXISTS Cards ("
@@ -72,6 +72,7 @@ public class SqliteCardDAO implements ISqliteCardDAO {
 
     /**
      * get all cards owned by project
+     *
      * @param project project to add cards to
      */
     public List<Card> getCards(Project project) {

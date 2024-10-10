@@ -1,12 +1,12 @@
 package com.example.project.model;
 
-import com.example.project.interfaces.ISqliteUserDAO;
 
+import com.example.project.interfaces.ISqliteDAO;
 
 import java.sql.*;
 
 
-public class SqliteUserDAO implements ISqliteUserDAO {
+public class SqliteUserDAO implements ISqliteDAO {
     private Connection connection;
 
     /**
@@ -20,7 +20,7 @@ public class SqliteUserDAO implements ISqliteUserDAO {
     /**
      * Creates table for User accounts
      */
-    private void createTable(){
+    public void createTable(){
         try {
             Statement statement = connection.createStatement();
             String query = "CREATE TABLE IF NOT EXISTS UserAccounts ("

@@ -1,9 +1,7 @@
 package com.example.project.model;
 
-import com.example.project.model.Card.*;
 import javafx.scene.control.Label;
 
-import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
 
