@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ScrollPane?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.controller.EditProjectController" stylesheets="@styles.css">
+    <VBox spacing="10" prefWidth="800" prefHeight="390" alignment="TOP_CENTER" styleClass="main-container">
+
+        <!-- Header section for navigating back and title of the page -->
+        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="header">
+
+            <!-- Back button to navigate to previous screen -->
+            <Button fx:id="goBack" layoutX="14.0" layoutY="12.0" mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" text="←" >
+                <effect>
+                    <DropShadow />
+                </effect>
+            </Button>
+
+            <!-- Page title label -->
+            <Label layoutX="93.0" layoutY="6.0" text="Edits Project Timeline" textFill="WHITE">
+                <font>
+                    <Font name="System Bold" size="24.0" />
+                </font>
+            </Label>
+        </HBox>
+
+        <!-- Body section where project details are entered -->
+
+        <ScrollPane styleClass=""  fitToWidth="true" maxWidth="750" fitToHeight="true"  hbarPolicy="ALWAYS"  vbarPolicy="ALWAYS">
+        <HBox spacing="6" alignment="CENTER" maxWidth="750" styleClass="body-container">
+
+            <!-- Left-side form for entering project details -->
+            <VBox spacing="5">
+                <!-- Project title label and text field -->
+                <Label prefWidth="200.0" text="Title">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets top="5.0" />
+                    </VBox.margin>
+                </Label>
+                <TextField fx:id="titleField" styleClass="input-field"/>
+
+                <!-- Project description label and text area -->
+                <Label prefWidth="200.0" text="Description">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets top="5.0" />
+                    </VBox.margin>
+                </Label>
+                <TextArea fx:id="descriptionField" prefRowCount="2" styleClass="input-field"/>
+
+                <!-- Tags selection and visibility settings -->
+                <HBox spacing="10" alignment="CENTER_LEFT">
+
+                    <!-- Section for selecting project tags using checkboxes -->
+                    <VBox alignment="BASELINE_LEFT" spacing="10">
+                        <Label prefWidth="200.0" text="Set Tags">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets top="5.0" />
+                            </VBox.margin>
+                        </Label>
+                        <CheckBox fx:id="tag3DModeling" text="3D Modeling" />
+                        <CheckBox fx:id="tagMetal" text="Metal" />
+                        <CheckBox fx:id="tagSculpting" text="Sculpting" />
+                        <CheckBox fx:id="tagClayWork" text="Clay-Work" />
+                        <CheckBox fx:id="tagWoodWork" text="Wood-Work" />
+                        <CheckBox fx:id="tagPaperWork" text="Paper-Work" />
+                    </VBox>
+
+                    <!-- Visibility setting using ComboBox -->
+                    <VBox alignment="BASELINE_LEFT" spacing="5">
+                        <Label prefWidth="200.0" text="Set Visibility">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets top="5.0" />
+                            </VBox.margin>
+                        </Label>
+                        <ComboBox fx:id="visibilityComboBox" styleClass="input-field" prefHeight="31.0" prefWidth="168.0"/>
+                    </VBox>
+
+                </HBox>
+            </VBox>
+
+            <!-- Right-side form for displaying the card image and selecting color -->
+            <VBox spacing="5" alignment="TOP_LEFT" styleClass="card-container">
+                <!-- Card image label and image view -->
+                <Label prefWidth="200.0" text="Card Image">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets top="5.0" />
+                    </VBox.margin>
+                </Label>
+                <ImageView fx:id="cardImageView" fitWidth="300" fitHeight="120">
+                    <image>
+                        <Image url="@images/card_image.png"/>
+                    </image>
+                </ImageView>
+
+                <!-- Color label and text field for color input -->
+                <Label prefWidth="200.0" text="Colour">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets top="5.0" />
+                    </VBox.margin>
+                </Label>
+                <TextField fx:id="colourField" text="Kopi Luwak" styleClass="input-field"/>
+            </VBox>
+        </HBox>
+        </ScrollPane>
+
+        <!-- Validation message for missing required fields -->
+        <Label fx:id="InvalidProject" text="Please Enter All Fields" textFill="#721414" visible="false">
+            <font>
+                <Font size="14.0" />
+            </font>
+            <VBox.margin>
+                <Insets top="5.0" />
+            </VBox.margin>
+        </Label>
+
+        <!-- Publish button for creating the project -->
+
+        <Button text="Edit Project" fx:id="create" onAction="#editProject" styleClass="publish-button"/>
+
+    </VBox>
+</AnchorPane>
