@@ -23,7 +23,7 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Button fx:id="Button_Edit_Project" alignment="CENTER_RIGHT" layoutX="709.0" layoutY="12.0" mnemonicParsing="false" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" stylesheets="@stylesheet.css" text="Edit Project">
+            <Button fx:id="Button_Edit_Project" alignment="CENTER_RIGHT" layoutX="709.0" layoutY="12.0" mnemonicParsing="false" style="-fx-background-color: e5c08b; -fx-background-radius: 50;" stylesheets="@stylesheet.css" text="Edit Project" onAction="#onEditProject">
                <effect>
                   <DropShadow />
                </effect>

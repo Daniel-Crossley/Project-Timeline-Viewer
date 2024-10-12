@@ -74,6 +74,20 @@ public class TimeLineController extends DisplayStylings {
         this.project = project;
     }
 
+    public void onEditProject() {
+        Stage stage = (Stage) statusContainer.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("edit-project.fxml"));
+        Parent root = null;
+        try {
+            root = fxmlLoader.load();
+            EditProjectController newEditController = fxmlLoader.getController();
+            newEditController.setUserInformation(user, project);
+            Scene scene = new Scene(root, ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
+            stage.setScene(scene);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     /**
      * Updates the timeline view based on stored data in timeline
      */
@@ -121,15 +135,6 @@ public class TimeLineController extends DisplayStylings {
     @FXML
     private void onReturnClick(ActionEvent actionEvent) {
         navigateTo("Dashboard.fxml", actionEvent);
-    }
-
-    /**
-     * Temporary method for editing timeline details
-     * @param actionEvent Click action
-     */
-    @FXML
-    private void onEditClick(ActionEvent actionEvent) {
-        navigateTo("EditProject.fxml", actionEvent);
     }
 
 

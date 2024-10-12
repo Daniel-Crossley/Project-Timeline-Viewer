@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class EditProjectController implements Initializable {
@@ -62,6 +63,7 @@ public class EditProjectController implements Initializable {
 
     // User and DAO for database interaction
     private User userInformation;  // Holds the user information
+    private Project projectInformation;
     private SqliteProjectDAO projectDAO;  // DAO for interacting with SQLite database
 
     /**
@@ -74,7 +76,6 @@ public class EditProjectController implements Initializable {
         projectDAO = new SqliteProjectDAO();  // Initialize the DAO
         ObservableList<String> visibilityOptions = FXCollections.observableArrayList("Private", "Public");
         visibilityComboBox.setItems(visibilityOptions);  // Set visibility options in ComboBox
-        visibilityComboBox.setValue("Public");  // Default to Public visibility
     }
 
     /**
@@ -84,11 +85,12 @@ public class EditProjectController implements Initializable {
     @FXML
     protected void goBack() throws IOException {
         Stage stage = (Stage) goBack.getScene().getWindow();  // Get current window (stage)
-        FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("Owner-Dashboard.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("timeline-view.fxml"));
         Parent root = fxmlLoader.load();  // Load the Owner Dashboard view
-        DashboardController dashboardController = fxmlLoader.getController();  // Get controller
-        userInformation.setProjects(new ArrayList<>());  // Reset user's project list
-        dashboardController.setUserInformation(false, userInformation);  // Pass user information to dashboard
+        TimeLineController timeLineController = fxmlLoader.getController();  // Get controller
+        timeLineController.setUser(userInformation);
+        timeLineController.setProject(projectInformation);
+        timeLineController.updateView(stage);
         Scene scene = new Scene(root, ApplicationStart.WIDTH, ApplicationStart.HEIGHT);  // Create a new scene
         stage.setScene(scene);  // Set the new scene
     }
@@ -123,13 +125,9 @@ public class EditProjectController implements Initializable {
         // Log selected tags for debugging
         System.out.println("Selected Tags: " + selectedTags);
 
-        LocalDate today = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String formattedDate = today.format(formatter);
-
         // Create a new project with the gathered data
-        Project newProject = new Project(0, title, description, formattedDate, "none", visibility, colour, 0, selectedTags);
-        projectDAO.addProject(newProject, userInformation);  // Add project to the database
+        Project newProject = new Project(projectInformation.getId(), title, description, projectInformation.getDateCreated(), "none", visibility, colour, projectInformation.getLikes(), selectedTags);
+        projectDAO.updateProject(newProject);  // Add project to the database
         // Navigate back to the Owner Dashboard after project creation
         Stage stage = (Stage) create.getScene().getWindow();  // Get current window (stage)
         FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("Owner-Dashboard.fxml"));
@@ -145,7 +143,26 @@ public class EditProjectController implements Initializable {
      * Sets the user information for the current session.
      * @param user The user information to be set
      */
-    public void setUserInformation(User user) {
+    public void setUserInformation(User user, Project project) {
         this.userInformation = user;  // Assign user information to the controller
+        this.projectInformation = project;
+        visibilityComboBox.setValue(projectInformation.isVisible() ? "Public" : "Private");  // Default to Public visibility
+        descriptionField.setText(projectInformation.getDescription());
+        titleField.setText(projectInformation.getTitle());
+        colourField.setText(projectInformation.getColour());
+        List<String> tags = projectInformation.getTags();
+        if (tags.contains("3D-Modeling")) {
+            tag3DModeling.setSelected(true);
+        } else if (tags.contains("Metal")) {
+            tagMetal.setSelected(true);
+        } else if (tags.contains("Sculpting")) {
+            tagSculpting.setSelected(true);
+        } else if (tags.contains("Clay-Work")) {
+            tagClayWork.setSelected(true);
+        } else if (tags.contains("Wood-Work")) {
+            tagWoodWork.setSelected(true);
+        } else if (tags.contains("Paper-Work")) {
+            tagPaperWork.setSelected(true);
+        }
     }
 }
