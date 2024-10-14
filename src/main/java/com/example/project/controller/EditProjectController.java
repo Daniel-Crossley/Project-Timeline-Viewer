@@ -81,7 +81,6 @@ public class EditProjectController implements Initializable {
         ObservableList<String> visibilityOptions = FXCollections.observableArrayList("Private", "Public");
         visibilityComboBox.setItems(visibilityOptions);  // Set visibility options in ComboBox
         visibilityComboBox.setValue("Public");
-        projectDatePicker.setValue(LocalDate.now());
     }
 
     /**
@@ -134,7 +133,12 @@ public class EditProjectController implements Initializable {
         System.out.println("Selected Tags: " + selectedTags);
 
         // Create a new project with the gathered data
-        String dateComp = projectDate.toString();
+        String dateComp;
+        if (projectDate.isEqual(LocalDate.of(0, 1, 1))) {
+            dateComp = projectInformation.getDateFinished();
+        } else {
+            dateComp = projectDate.toString();
+        }
         Project newProject = new Project(projectInformation.getId(), title, description, projectInformation.getDateCreated(), dateComp, visibility, colour, projectInformation.getLikes(), selectedTags);
         projectDAO.updateProject(newProject);  // Add project to the database
         // Navigate back to the Owner Dashboard after project creation
@@ -172,6 +176,11 @@ public class EditProjectController implements Initializable {
             tagWoodWork.setSelected(true);
         } else if (tags.contains("Paper-Work")) {
             tagPaperWork.setSelected(true);
+        }
+        if (projectInformation.getDateFinished().equals("none")) {
+            projectDatePicker.setValue(LocalDate.of(0, 1, 1));
+        } else {
+            projectDatePicker.setValue(LocalDate.parse(projectInformation.getDateFinished()));
         }
     }
 }

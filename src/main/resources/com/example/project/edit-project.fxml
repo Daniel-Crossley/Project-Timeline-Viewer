@@ -67,7 +67,7 @@
 
                         <!-- DatePicker for project date -->
                         <VBox alignment="BASELINE_LEFT">
-                            <Label prefWidth="200.0" text="Project Date">
+                            <Label prefWidth="200.0" text="Date Finished">
                                 <font>
                                     <Font size="14.0" />
                                 </font>
