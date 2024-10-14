@@ -38,7 +38,7 @@
 /* Card container styling, used for the right-side image and color selection */
 .card-container {
     -fx-background-color: #d6b88d;  /* Same light beige background as body */
-    -fx-padding: 5;  /* Padding inside the card container */
+    -fx-padding: 0;  /* Padding inside the card container */
     -fx-background-radius: 10;  /* Rounded corners for the card container */
 }
 
