@@ -26,22 +26,22 @@ public class SearchController {
     private boolean guest;
     private User userInformation;
     @FXML
-    private Label Label_Username;
+    public Label Label_Username;
     public Button Button_Logout;
     @FXML
     public Button DashboardSearch;
     @FXML
-    private Button threeDTag;
+    public Button threeDTag;
     @FXML
-    private Button metalTag;
+    public Button metalTag;
     @FXML
-    private Button clayTag;
+    public Button clayTag;
     @FXML
-    private Button sculptingTag;
+    public Button sculptingTag;
     @FXML
-    private Button woodTag;
+    public Button woodTag;
     @FXML
-    private Button paperTag;
+    public Button paperTag;
     @FXML
     private Button searchButton;
     public HBox Container_Search_Progress;
@@ -49,12 +49,12 @@ public class SearchController {
     public ScrollPane Scrollpane_Search_Progress;
     public ScrollPane Scrollpane_Search_Completed;
     private Map<Button, Boolean> buttonStates = new HashMap<>();
-    private SqliteProjectDAO projectDAO;
-    private List<Project> projectList = new ArrayList<>();
+    public SqliteProjectDAO projectDAO;
+    public List<Project> projectList = new ArrayList<>();
     @FXML
-    private TextField titleSearch;
+    public TextField titleSearch;
     @FXML
-    private DatePicker DateSearch;
+    public DatePicker DateSearch;
 
     SqliteCardDAO cardDAO = new SqliteCardDAO();
 
@@ -94,6 +94,11 @@ public class SearchController {
         stage.setScene(scene);
     }
 
+
+    /**
+     * Goes back to the dashboard scene
+     * @throws IOException
+     */
     public void Open_Dashboard() throws IOException{
         Stage stage = (Stage) DashboardSearch.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("Owner-Dashboard.fxml"));
@@ -106,6 +111,10 @@ public class SearchController {
         System.out.println("Going back to the previous screen.");
     }
 
+
+    /**
+     * starts the tags to false and prepares the scroller
+     */
     @FXML
     public void initialize(){
 
@@ -141,7 +150,7 @@ public class SearchController {
         System.out.println(clickedButton.getId() + " is now " + (newState ? "ON" : "OFF"));
     }
 
-    private void SearchButton() {
+    public void SearchButton() {
         Container_Search_Progress.getChildren().clear();
         String searchText = titleSearch.getText();
         LocalDate selectedDate = DateSearch.getValue();
@@ -165,7 +174,7 @@ public class SearchController {
             }
         }
         String SearchTags = selectedTags.toString();
-        System.out.println("Selected tags: " + SearchTags);
+        //System.out.println("Selected tags: " + SearchTags);
 
 
         System.out.println(dateString);
@@ -184,7 +193,7 @@ public class SearchController {
     /**
      * Adds project containers to the different containers based on if they have a completion date set
      */
-    private void addProjectsToDash(){
+    public void addProjectsToDash(){
         if (!guest){
 
         }
@@ -309,13 +318,6 @@ public class SearchController {
             parentContainer.setPrefWidth(widthCalculation);
         });
     }
-
-    /**
-     * Generates the container for generating a new project
-     * @param parentContainer container to add the project to
-     * @param scrollPane container to be used as reference
-     */
-
 
 
 
