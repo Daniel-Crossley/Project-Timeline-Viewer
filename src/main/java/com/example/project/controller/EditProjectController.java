@@ -61,6 +61,10 @@ public class EditProjectController implements Initializable {
     @FXML
     private Label InvalidProject;  // Label to display validation error message
 
+    @FXML
+    private DatePicker projectDatePicker;  // DatePicker for selecting the project date
+
+
     // User and DAO for database interaction
     private User userInformation;  // Holds the user information
     private Project projectInformation;
@@ -76,6 +80,8 @@ public class EditProjectController implements Initializable {
         projectDAO = new SqliteProjectDAO();  // Initialize the DAO
         ObservableList<String> visibilityOptions = FXCollections.observableArrayList("Private", "Public");
         visibilityComboBox.setItems(visibilityOptions);  // Set visibility options in ComboBox
+        visibilityComboBox.setValue("Public");
+        projectDatePicker.setValue(LocalDate.now());
     }
 
     /**
@@ -106,6 +112,8 @@ public class EditProjectController implements Initializable {
         String description = descriptionField.getText();  // Project description
         String colour = colourField.getText();  // Project color
         boolean visibility = visibilityComboBox.getValue().equals("Public");  // Project visibility
+        // Get the selected date
+        LocalDate projectDate = projectDatePicker.getValue();
 
         // Collect selected tags
         ObservableList<String> selectedTags = FXCollections.observableArrayList();
@@ -117,7 +125,7 @@ public class EditProjectController implements Initializable {
         if (tagPaperWork.isSelected()) selectedTags.add("Paper-Work");
 
         // Validate input fields
-        if (title.isEmpty() || description.isEmpty() || colour.isEmpty() || selectedTags.isEmpty()) {
+        if (title.isEmpty() || description.isEmpty() || colour.isEmpty() || selectedTags.isEmpty() || projectDate==null ) {
             InvalidProject.setVisible(true);  // Show validation error message if any field is empty
             return;
         }
@@ -126,7 +134,8 @@ public class EditProjectController implements Initializable {
         System.out.println("Selected Tags: " + selectedTags);
 
         // Create a new project with the gathered data
-        Project newProject = new Project(projectInformation.getId(), title, description, projectInformation.getDateCreated(), "none", visibility, colour, projectInformation.getLikes(), selectedTags);
+        String dateComp = projectDate.toString();
+        Project newProject = new Project(projectInformation.getId(), title, description, projectInformation.getDateCreated(), dateComp, visibility, colour, projectInformation.getLikes(), selectedTags);
         projectDAO.updateProject(newProject);  // Add project to the database
         // Navigate back to the Owner Dashboard after project creation
         Stage stage = (Stage) create.getScene().getWindow();  // Get current window (stage)
