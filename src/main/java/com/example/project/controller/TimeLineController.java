@@ -1,7 +1,7 @@
 package com.example.project.controller;
 
 import com.example.project.ApplicationStart;
-import com.example.project.interfaces.DisplayStylings;
+import com.example.project.OOJ.DisplayStylings;
 import com.example.project.model.SqliteCardDAO;
 import com.example.project.model.User;
 import javafx.event.ActionEvent;
@@ -30,8 +30,6 @@ import java.util.ArrayList;
 
 import com.example.project.model.Project;
 import com.example.project.model.Card;
-
-import javax.swing.text.LabelView;
 
 /**
  * Controller to handle project information as well as link buttons to create popups for creating and viewing cards
@@ -373,21 +371,18 @@ public class TimeLineController extends DisplayStylings {
         int TitleSize = 15;
         int ContentSize = 10;
 
-        Label dateAddedTitle = new Label("Date Added:");
-        Label dateAdded = new Label(cardToRead.getDateCreated());
-        Label descriptionTitle = new Label("Description:");
-        Label description = new Label(cardToRead.getDescription());
+        Label dateAddedTitle = titleLabel("Date Added:", TitleSize);
+        Label dateAdded = contentLabel(cardToRead.getDateCreated(), ContentSize);
+
+        Label descriptionTitle = titleLabel("Description:", TitleSize);
+        Label description = contentLabel(cardToRead.getDescription(), ContentSize);
         VBox cardInformation = new VBox(dateAddedTitle, dateAdded, descriptionTitle, description);
         cardInformation.setPadding(new Insets(0, 0, 10, 10));
 
-        dateAddedTitle.setFont(Font.font("System", FontWeight.BOLD, TitleSize));
-        descriptionTitle.setFont(Font.font("System", FontWeight.BOLD, TitleSize));
-        dateAdded.setFont(Font.font("System", FontWeight.NORMAL, ContentSize));
-        description.setFont(Font.font("System", FontWeight.NORMAL, ContentSize));
 
         // Create the popup
         Popup cardPopup = new Popup();
-        VBox cardContainer = vBoxStyling(projectColour, projectWidth, projectBorderWidth, projectBorderColour, String.valueOf(projectRadius));
+        VBox cardContainer = vBoxStyling(projectColour, projectWidth, projectBorderWidth, projectBorderColour, projectRadius);
         cardContainer.getChildren().addAll(titleContainer, mediaContainer, cardInformation);
         cardPopup.getContent().add(cardContainer);
 

@@ -1,5 +1,6 @@
-package com.example.project.interfaces;
+package com.example.project.OOJ;
 
+import com.example.project.controller.BaseController;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
@@ -10,7 +11,7 @@ import javafx.scene.text.FontWeight;
 /**
  * Holds the classes that would be used to style cards and projects
  */
-public class DisplayStylings{
+public class DisplayStylings extends BaseController {
 
     /**
      * Creates a styled stackpane
@@ -45,7 +46,7 @@ public class DisplayStylings{
      * @param radius The radius of the VBox
      * @return Stylised VBox
      */
-    protected VBox vBoxStyling(String colour, int width, int borderWidth, String borderColour, String radius) {
+    protected VBox vBoxStyling(String colour, int width, int borderWidth, String borderColour, int radius) {
         VBox projectContainer = new VBox();
         projectContainer.setAlignment(Pos.CENTER);
         projectContainer.setPrefWidth(width);

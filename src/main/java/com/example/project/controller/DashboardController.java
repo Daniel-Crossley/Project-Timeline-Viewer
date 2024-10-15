@@ -1,6 +1,7 @@
 package com.example.project.controller;
 
 import com.example.project.ApplicationStart;
+import com.example.project.OOJ.DisplayStylings;
 import com.example.project.model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,7 +29,7 @@ import java.util.*;
 /**
  * Handles the controller for the dashboard, such as displaying the projects and buttons to create them
  */
-public class DashboardController extends BaseController implements Initializable {
+public class DashboardController extends DisplayStylings implements Initializable {
     public Pane Menu;
     public Button Button_Logout;
     public Button Button_Search;
@@ -125,27 +126,6 @@ public class DashboardController extends BaseController implements Initializable
         }
     }
 
-    /**
-     * Generates generic vbox for project container
-     * @param colour Colour of the vbox
-     * @return Generated project container
-     */
-    private VBox projectVBoxStyling(String colour) {
-        VBox projectContainer = new VBox();
-        projectContainer.setAlignment(Pos.CENTER);
-        projectContainer.setSpacing(0.2);
-        projectContainer.prefHeightProperty().bind(Container_In_Progress.heightProperty().multiply(0.95));
-        projectContainer.setPrefWidth(projectWidth);
-        projectContainer.setStyle(
-                "-fx-border-width: " + this.projectBorderWidth + "; " +
-                "-fx-background-color: " + colour + "; " +
-                "-fx-background-radius: "  + this.projectRadius + "; " +
-                "-fx-border-color: " + this.projectBorderColour + "; " +
-                "-fx-border-radius: " + this.projectRadius + "; "
-        );
-
-        return projectContainer;
-    }
 
     /**
      * Generates the container of project information to add
@@ -157,10 +137,9 @@ public class DashboardController extends BaseController implements Initializable
         int TitleSize = 15;
         int ContentSize = 10;
 
-        VBox projectContainer = projectVBoxStyling(projectToAdd.getColour());
+        VBox projectContainer = vBoxStyling(projectToAdd.getColour(), projectWidth, this.projectBorderWidth, this.projectBorderColour, this.projectRadius);
 
-        Label cardTitle = new Label(projectToAdd.getTitle());
-        cardTitle.setFont(Font.font("System", FontWeight.BOLD, 15));
+        Label cardTitle = titleLabel(projectToAdd.getTitle(), 15);
         projectContainer.getChildren().addAll(cardTitle);
 
         try {
@@ -177,10 +156,8 @@ public class DashboardController extends BaseController implements Initializable
         }
 
 
-        Label DateCommenced = new Label ("Start: ");
-        Label DateCommencedContent = new Label(projectToAdd.getDateCreated());
-        DateCommenced.setFont(Font.font("System", FontWeight.BOLD, 12));
-        DateCommencedContent.setFont(Font.font("System", FontWeight.NORMAL, 12));
+        Label DateCommenced = titleLabel ("Start: ", 12);
+        Label DateCommencedContent = contentLabel(projectToAdd.getDateCreated(), 12);
         HBox dateCommencedContainer = new HBox(DateCommenced, DateCommencedContent);
 
         VBox projectInformation = new VBox(dateCommencedContainer);
@@ -189,10 +166,8 @@ public class DashboardController extends BaseController implements Initializable
         projectContainer.getChildren().addAll(projectInformation);
 
         if (!Objects.equals(projectToAdd.getDateCreated(), " none")){
-            Label DateCompleted = new Label ("Finish: ");
-            Label DateCompletedContent = new Label(projectToAdd.getDateFinished());
-            DateCompleted.setFont(Font.font("System", FontWeight.BOLD, 12));
-            DateCompletedContent.setFont(Font.font("System", FontWeight.NORMAL, 12));
+            Label DateCompleted = titleLabel ("Finish: ", 12);
+            Label DateCompletedContent = contentLabel(projectToAdd.getDateFinished(), 12);
 
             HBox DateCompletedContainer = new HBox(DateCompleted, DateCompletedContent);
             projectInformation.getChildren().addAll(DateCompletedContainer);
@@ -230,7 +205,7 @@ public class DashboardController extends BaseController implements Initializable
      * @param scrollPane container to be used as reference
      */
     private void newCardContainer(HBox parentContainer, ScrollPane scrollPane){
-        VBox projectContainer = projectVBoxStyling(projectColour);
+        VBox projectContainer = vBoxStyling(projectColour, projectWidth, this.projectBorderWidth, this.projectBorderColour, this.projectRadius);
         Label cardTitle = new Label("Create Project");
 
         projectContainer.getChildren().addAll(cardTitle);

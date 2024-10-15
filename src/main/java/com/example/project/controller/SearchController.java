@@ -185,10 +185,6 @@ public class SearchController {
 
         String SearchTags = selectedTags.toString();
 
-        //System.out.println("Selected tags: " + SearchTags);
-
-
-
         List<Project> searchResults = projectDAO.getSearchProjects(searchText, dateString, SearchTags);
 
 

@@ -1,6 +1,4 @@
-package com.example.project.interfaces;
-
-import java.util.List;
+package com.example.project.OOJ;
 
 /**
  * Interface for SQLliteDAO

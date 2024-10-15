@@ -1,6 +1,6 @@
 package com.example.project.model;
 
-import com.example.project.interfaces.ISqliteDAO;
+import com.example.project.OOJ.ISqliteDAO;
 import javafx.scene.image.Image;
 import javafx.embed.swing.SwingFXUtils;
 
