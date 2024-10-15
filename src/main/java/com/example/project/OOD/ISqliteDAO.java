@@ -1,4 +1,4 @@
-package com.example.project.OOJ;
+package com.example.project.OOD;
 
 /**
  * Interface for SQLliteDAO

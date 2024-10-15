@@ -1,7 +1,7 @@
 package com.example.project.controller;
 
 import com.example.project.ApplicationStart;
-import com.example.project.OOJ.DisplayStylings;
+import com.example.project.OOD.DisplayStylings;
 import com.example.project.model.SqliteCardDAO;
 import com.example.project.model.User;
 import javafx.event.ActionEvent;

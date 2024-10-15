@@ -1,7 +1,7 @@
 package com.example.project.model;
 
 
-import com.example.project.OOJ.ISqliteDAO;
+import com.example.project.OOD.ISqliteDAO;
 
 import java.sql.*;
 
