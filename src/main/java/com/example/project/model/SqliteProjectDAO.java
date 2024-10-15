@@ -173,6 +173,7 @@ public class SqliteProjectDAO implements ISqliteDAO {
         List<Project> projects = new ArrayList<>();
         List<String> parameters = new ArrayList<>();
 
+
         if (SearchTags != null && !SearchTags.isEmpty()) {
             String[] tags = SearchTags.split(",\\s*");
             for (String tag : tags) {
@@ -184,24 +185,25 @@ public class SqliteProjectDAO implements ISqliteDAO {
         try {
             PreparedStatement statement = null;
             //Querry for blank inputs
-            if (date == "none" && (titleSearch == null || titleSearch.isEmpty()) && SearchTags == "none") {
+            if (date == "none" && (titleSearch == null || titleSearch.isEmpty()) && SearchTags == null) {
                 statement = connection.prepareStatement("SELECT * FROM Projects WHERE visibility == 1");
 
             }
             //search for title only
-            else if (date == "none" && SearchTags == "none") {
+            else if (titleSearch != null && date =="none" && SearchTags.isEmpty()) {
                 statement = connection.prepareStatement("SELECT * FROM Projects WHERE title LIKE ? AND visibility == 1");
                 statement.setString(1, "%" + titleSearch + "%");
 
             }
             //search for date only
-            else if (titleSearch == null || titleSearch.isEmpty() && SearchTags == "none") {
+            else if (titleSearch == null || titleSearch.isEmpty() && SearchTags.isEmpty() && date !="none") {
                 //search for date only
                 statement = connection.prepareStatement("SELECT * FROM Projects WHERE " +
                         "dateCreated >= ? AND dateCreated <= date('now') " +
                         "AND visibility = 1");
                 statement.setString(1, date);
-            } else if (titleSearch == null || titleSearch.isEmpty() && date == "none" && SearchTags != "none") {
+            //tag search
+            } else if (titleSearch == null || titleSearch.isEmpty() && date == "none" && !SearchTags.isEmpty()) {
                 statement = connection.prepareStatement("SELECT * FROM Projects WHERE visibility = 1" + queryBuilder.toString());
                 for (int i=0; i<parameters.size();i++){
                     statement.setString(i + 1, parameters.get(i));
@@ -220,8 +222,9 @@ public class SqliteProjectDAO implements ISqliteDAO {
                     statement.setString(i + 3, parameters.get(i));
                 }
             }
-            System.out.println("Date: " + date);
-            System.out.println("Title Search: " + titleSearch);
+            //System.out.println("Date: " + date);
+            //System.out.println("Title Search: " + titleSearch);
+            //System.out.println("Selected tags: " + SearchTags);
             System.out.println("SQL: " + statement.toString());
             try (ResultSet resultSet = statement.executeQuery()){
                 while (resultSet.next()){

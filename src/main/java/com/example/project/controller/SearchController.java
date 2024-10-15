@@ -154,7 +154,7 @@ public class SearchController {
         Container_Search_Progress.getChildren().clear();
         String searchText = titleSearch.getText();
         LocalDate selectedDate = DateSearch.getValue();
-        System.out.println(selectedDate);
+
         String dateString;
         if (selectedDate == null){
             dateString = "none";
@@ -164,7 +164,6 @@ public class SearchController {
         }
 
         StringBuilder selectedTags = new StringBuilder();
-        System.out.println("Selected tags:");
         for (Map.Entry<Button, Boolean> entry : buttonStates.entrySet()) {
             if (entry.getValue()) {
                 if (selectedTags.length() >0){
@@ -173,11 +172,13 @@ public class SearchController {
                 selectedTags.append(entry.getKey().getText());
             }
         }
+
         String SearchTags = selectedTags.toString();
+
         //System.out.println("Selected tags: " + SearchTags);
 
 
-        System.out.println(dateString);
+
         List<Project> searchResults = projectDAO.getSearchProjects(searchText, dateString, SearchTags);
 
 
