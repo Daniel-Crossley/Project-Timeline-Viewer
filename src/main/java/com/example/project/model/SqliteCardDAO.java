@@ -12,6 +12,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Used to handle database functions relating to retrieving, updating and uploading card information
+ */
 public class SqliteCardDAO implements ISqliteDAO {
     private Connection connection;
 

@@ -17,6 +17,9 @@ import javafx.scene.image.Image;
 
 import java.time.LocalDate;
 
+/**
+ * The controller for the popup to create a new card, handles collecting the values from fields to be sent to DOA
+ */
 public class NewCardPopupController {
 
     private SqliteCardDAO cardDAO;
@@ -64,9 +67,11 @@ public class NewCardPopupController {
         cardDAO = new SqliteCardDAO();
     }
 
+    /**
+     * Create a new Card object with the inputted data
+     */
     @FXML
     private void onAddCard() {
-        //Create a new Card object with the inputted data
         int id = 1;
         String TITLE = titleField.getText();
         String DESCRIPTION = descriptionField.getText();
@@ -87,6 +92,9 @@ public class NewCardPopupController {
         popupStage.close();
     }
 
+    /**
+     * Opens the explorer to allow user to select an image file to upload to database
+     */
     @FXML
     private void onChooseImage() {
         //Create a FileChooser to select the image

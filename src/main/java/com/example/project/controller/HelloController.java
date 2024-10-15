@@ -10,6 +10,9 @@ import com.example.project.ApplicationStart;
 
 import java.io.IOException;
 
+/**
+ * Main controller for starting the application
+ */
 public class HelloController {
     @FXML
     private Label welcomeText;
@@ -22,6 +25,10 @@ public class HelloController {
         welcomeText.setText("Welcome to JavaFX Application!");
     }
 
+    /**
+     * Opens the scene with the register view
+     * @throws IOException
+     */
     @FXML
     protected void onRegisterButtonClick() throws IOException {
         Stage stage = (Stage) registerButton.getScene().getWindow();

@@ -1,5 +1,8 @@
 package com.example.project.model;
 
+/**
+ * Used to store comment information
+ */
 public class CardComment {
     int ID;
     String text;

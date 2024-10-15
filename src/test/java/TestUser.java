@@ -8,6 +8,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Used to test functions relating to the user such as creation and setting user properties
+ */
 public class TestUser {
 
     /**

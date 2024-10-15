@@ -7,6 +7,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+/**
+ * Holds the classes that would be used to style cards and projects
+ */
 public class DisplayStylings{
 
     /**

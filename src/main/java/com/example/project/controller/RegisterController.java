@@ -19,8 +19,6 @@ import java.util.List;
 /**
  * A simple controller class that takes button inputs to add new user information to a database.
  */
-
-
 public class RegisterController extends BaseController {
     @FXML
     private ListView<User> contactsListView;

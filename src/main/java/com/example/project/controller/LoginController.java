@@ -22,6 +22,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for handling login logic, creates user object
+ */
 public class LoginController {
     @FXML
     private TextField userNameTextField;
@@ -43,7 +46,10 @@ public class LoginController {
         userDAO = new SqliteUserDAO(); // Initialize the DAO here
     }
 
-    //go to separate registration page
+    /**
+     * go to separate registration page
+     * @throws IOException
+     */
     @FXML
     protected void onRegisterButtonClick() throws IOException {
         Stage stage = (Stage) registerButton.getScene().getWindow();
@@ -126,10 +132,5 @@ public class LoginController {
             System.out.println("Invalid username");
             InvalidPass.setVisible(true);
         }
-
-
-
     }
-
-
 }

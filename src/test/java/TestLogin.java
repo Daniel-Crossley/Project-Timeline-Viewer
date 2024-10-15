@@ -3,6 +3,9 @@ import com.example.project.model.User;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Checks to see if the username and password of the user has been properly stored
+ */
 public class TestLogin {
 
     /**

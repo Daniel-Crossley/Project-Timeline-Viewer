@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Used to generate a mock database for testing purposes
+ */
 public class MockUserDAO {
     public static final ArrayList<User> users = new ArrayList<>();
 

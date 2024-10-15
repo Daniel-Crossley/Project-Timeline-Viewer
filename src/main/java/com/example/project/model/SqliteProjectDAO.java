@@ -11,6 +11,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Used to retrieve, update and upload project information for database
+ */
 public class SqliteProjectDAO implements ISqliteDAO {
     private Connection connection;
 

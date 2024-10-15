@@ -25,6 +25,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
+/**
+ * Handles the controller for the dashboard, such as displaying the projects and buttons to create them
+ */
 public class DashboardController extends BaseController implements Initializable {
     public Pane Menu;
     public Button Button_Logout;
@@ -179,7 +182,6 @@ public class DashboardController extends BaseController implements Initializable
         DateCommenced.setFont(Font.font("System", FontWeight.BOLD, 12));
         DateCommencedContent.setFont(Font.font("System", FontWeight.NORMAL, 12));
         HBox dateCommencedContainer = new HBox(DateCommenced, DateCommencedContent);
-
 
         VBox projectInformation = new VBox(dateCommencedContainer);
         projectInformation.setPadding(new Insets(0, 0, 5, 5));

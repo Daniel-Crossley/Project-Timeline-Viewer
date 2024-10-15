@@ -21,6 +21,9 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * Controller to handle searches of different projects
+ */
 public class SearchController {
 
     private boolean guest;
@@ -138,6 +141,10 @@ public class SearchController {
 
     }
 
+    /**
+     * Used to update the colour of the tag button
+     * @param clickedButton The button to be modified
+     */
     public void TagColourChange(Button clickedButton){
         boolean newState =!buttonStates.get(clickedButton);
         buttonStates.put(clickedButton,newState);
@@ -150,6 +157,9 @@ public class SearchController {
         System.out.println(clickedButton.getId() + " is now " + (newState ? "ON" : "OFF"));
     }
 
+    /**
+     * Handles the logic for displaying the cards
+     */
     public void SearchButton() {
         Container_Search_Progress.getChildren().clear();
         String searchText = titleSearch.getText();

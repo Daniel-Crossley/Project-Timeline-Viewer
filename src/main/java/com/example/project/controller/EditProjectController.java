@@ -24,6 +24,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Controller that imports information to allow for user to edit then sends information to DAO
+ */
 public class EditProjectController implements Initializable {
 
     // CheckBoxes for selecting tags

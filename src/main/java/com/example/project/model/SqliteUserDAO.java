@@ -5,7 +5,9 @@ import com.example.project.interfaces.ISqliteDAO;
 
 import java.sql.*;
 
-
+/**
+ * Used to retrieve, update and upload user information for database
+ */
 public class SqliteUserDAO implements ISqliteDAO {
     private Connection connection;
 

@@ -2,6 +2,9 @@ import com.example.project.model.CardComment;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Tests the storage of comment information
+ */
 public class TestComment {
 
     /**

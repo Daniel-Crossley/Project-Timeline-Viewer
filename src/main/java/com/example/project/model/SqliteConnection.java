@@ -3,6 +3,9 @@ package com.example.project.model;
 
 import java.sql.*;
 
+/**
+ * Used to establish connection to SQLite database
+ */
 public class SqliteConnection {
     private static Connection instance = null;
 

@@ -23,6 +23,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for creating a new project, collects the values and sends them to the relevant DOA
+ */
 public class CreateNewProjectController implements Initializable {
 
     // CheckBoxes for selecting tags

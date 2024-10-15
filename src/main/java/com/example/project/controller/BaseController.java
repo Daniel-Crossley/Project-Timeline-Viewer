@@ -11,6 +11,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Base controller used to handle logging out user
+ */
 public class BaseController {
     public void Logout(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) ((Node)  actionEvent.getSource()).getScene().getWindow();

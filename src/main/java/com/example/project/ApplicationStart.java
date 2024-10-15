@@ -7,12 +7,20 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Start of application
+ */
 public class ApplicationStart extends Application {
     public static final String TITLE = "Model Hut";
     public static final int WIDTH = 800;
     public static final int HEIGHT = 400;
 
 
+    /**
+     * Used to start the program, opens at hello-view
+     * @param stage Stage that will display the program
+     * @throws IOException Exception
+     */
     @Override
     public void start(Stage stage) throws IOException {
         //FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("edit-project.fxml"));

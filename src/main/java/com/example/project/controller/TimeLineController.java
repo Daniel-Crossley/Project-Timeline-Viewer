@@ -33,6 +33,9 @@ import com.example.project.model.Card;
 
 import javax.swing.text.LabelView;
 
+/**
+ * Controller to handle project information as well as link buttons to create popups for creating and viewing cards
+ */
 public class TimeLineController extends DisplayStylings {
 
 
@@ -236,18 +239,14 @@ public class TimeLineController extends DisplayStylings {
                 System.out.println("No cards stored in project!");
                 return;
             }
-
             Cards_Container.getChildren().add(GenerateStart());
-
             for (Card cardToAdd : project.getListOfCards()) {
                 try {
                     //Add Spacer
                     Cards_Container.getChildren().add(GenerateBetween());
-
                     //Containers for Cards
                     StackPane cardOverlay = StackPaneStyling(projectColour, projectWidth, projectBorderWidth, projectRadius, projectBorderColour);
                     cardOverlay.prefWidthProperty().bind(Cards_Container.widthProperty().multiply(0.3));
-
                     // Card
                     int TitleSize = 15;
                     int ContentSize = 10;
@@ -256,7 +255,6 @@ public class TimeLineController extends DisplayStylings {
                     Label cardDate = titleLabel("Date:", TitleSize);
                     Label cardDateContent = contentLabel(cardToAdd.getDateCreated(), ContentSize);
                     VBox cardLayout = new VBox();
-
                     // Set Controller stuff
                     cardOverlay.setId("card_" + cardToAdd.getId());
 
@@ -264,7 +262,6 @@ public class TimeLineController extends DisplayStylings {
                         System.out.println("Card clicked: " + cardToAdd.getTitle());
                         OpenCard(stage, cardToAdd);
                     });
-
                     // Add to main container
                     HBox mediaContainer = DisplayImage(cardToAdd, 150, 100);
                     cardLayout.getChildren().add(mediaContainer);
@@ -274,10 +271,6 @@ public class TimeLineController extends DisplayStylings {
                     cardLayout.getChildren().addAll(textContent);
                     cardOverlay.getChildren().addAll(cardLayout);
                     Cards_Container.getChildren().add(cardOverlay);
-
-
-
-
                     System.out.println("Card added: " + cardToAdd.getTitle());
                 } catch (Exception e) {
                     e.printStackTrace();
