@@ -1,6 +1,8 @@
 package com.example.project.controller;
 
 import com.example.project.ApplicationStart;
+import com.example.project.OOD.DisplayStylings;
+import com.example.project.OOD.ProjectsDisplay;
 import com.example.project.model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,7 +26,7 @@ import java.util.*;
 /**
  * Controller to handle searches of different projects
  */
-public class SearchController {
+public class SearchController extends ProjectsDisplay {
 
     private boolean guest;
     private User userInformation;
@@ -61,11 +63,9 @@ public class SearchController {
 
     SqliteCardDAO cardDAO = new SqliteCardDAO();
 
-    private final int projectWidth = 150;
-    private final String projectColour = "#f1d9b7";
-    private final int projectRadius = 10;
-    private final String projectBorderColour = "#c27c18";
-    private final int projectBorderWidth = 2;
+    //Generic Styling
+    HashMap<Object, Object> stylings_dictionary = SetStylings();
+
 
     public void setUserInformation(boolean guest, User user) {
         this.guest = guest;
@@ -192,139 +192,11 @@ public class SearchController {
             this.projectList =searchResults;
             System.out.println("Found " + searchResults.size() + " results.");
 
-            addProjectsToDash();
+            addProjectsToDash(userInformation, stylings_dictionary, Container_Search_Progress, Container_Search_Completed, Scrollpane_Search_Progress, Scrollpane_Search_Completed, projectList, guest);
         }
 
     }
 
-    /**
-     * Adds project containers to the different containers based on if they have a completion date set
-     */
-    public void addProjectsToDash(){
-        if (!guest){
-
-        }
-        else{
-            Scrollpane_Search_Progress.widthProperty().addListener((obs, oldWidth, newWidth) -> {
-                int widthCalculation = (int) (newWidth.doubleValue() + projectWidth);
-                Container_Search_Progress.setPrefWidth(widthCalculation);
-            });
-            Scrollpane_Search_Completed.widthProperty().addListener((obs, oldWidth, newWidth) -> {
-                int widthCalculation = (int) (newWidth.doubleValue() + projectWidth);
-                Container_Search_Completed.setPrefWidth(widthCalculation);
-            });
-        }
-
-
-        for(Project projectToAdd: projectList){
-            if (Objects.equals(projectToAdd.getDateFinished(), "none")){
-                generateContainer(projectToAdd, Container_Search_Progress, Scrollpane_Search_Progress);
-            }
-            else{
-                generateContainer(projectToAdd, Container_Search_Completed, Scrollpane_Search_Completed);
-            }
-        }
-    }
-
-    /**
-     * Generates generic vbox for project container
-     * @param colour Colour of the vbox
-     * @return Generated project container
-     */
-    private VBox projectVBoxStyling(String colour) {
-        VBox projectContainer = new VBox();
-        projectContainer.setAlignment(Pos.CENTER);
-        projectContainer.setSpacing(0.2);
-        projectContainer.prefHeightProperty().bind(Container_Search_Progress.heightProperty().multiply(0.95));
-        projectContainer.setPrefWidth(projectWidth);
-        projectContainer.setStyle(
-                "-fx-border-width: " + this.projectBorderWidth + "; " +
-                        "-fx-background-color: " + colour + "; " +
-                        "-fx-background-radius: "  + this.projectRadius + "; " +
-                        "-fx-border-color: " + this.projectBorderColour + "; " +
-                        "-fx-border-radius: " + this.projectRadius + "; "
-        );
-
-        return projectContainer;
-    }
-
-    /**
-     * Generates the container of project information to add
-     * @param projectToAdd project to generate container from
-     * @param parentContainer container to add the project to
-     * @param scrollPane container to be used as reference
-     */
-    private void generateContainer(Project projectToAdd, HBox parentContainer, ScrollPane scrollPane){
-        int TitleSize = 15;
-        int ContentSize = 10;
-
-        VBox projectContainer = projectVBoxStyling(projectToAdd.getColour());
-
-        Label cardTitle = new Label(projectToAdd.getTitle());
-        cardTitle.setFont(Font.font("System", FontWeight.BOLD, 15));
-        projectContainer.getChildren().addAll(cardTitle);
-
-        try {
-            List<Card> listofCards = cardDAO.getCards(projectToAdd);
-            if (listofCards.getFirst().getMediaImage() != null) {
-                ImageView mediaImageView = new ImageView(listofCards.getFirst().getMediaImage());
-                mediaImageView.setFitWidth(100);
-                mediaImageView.setFitHeight(50);
-                mediaImageView.setPreserveRatio(true);
-                projectContainer.getChildren().add(mediaImageView);
-            }
-        } catch(NoSuchElementException ignored) {
-
-        }
-
-
-        Label DateCommenced = new Label ("Start: ");
-        Label DateCommencedContent = new Label(projectToAdd.getDateCreated());
-        DateCommenced.setFont(Font.font("System", FontWeight.BOLD, 12));
-        DateCommencedContent.setFont(Font.font("System", FontWeight.NORMAL, 12));
-        HBox dateCommencedContainer = new HBox(DateCommenced, DateCommencedContent);
-
-
-        VBox projectInformation = new VBox(dateCommencedContainer);
-        projectInformation.setPadding(new Insets(0, 0, 5, 5));
-
-        projectContainer.getChildren().addAll(projectInformation);
-
-        if (!Objects.equals(projectToAdd.getDateCreated(), " none")){
-            Label DateCompleted = new Label ("Finish: ");
-            Label DateCompletedContent = new Label(projectToAdd.getDateFinished());
-            DateCompleted.setFont(Font.font("System", FontWeight.BOLD, 12));
-            DateCompletedContent.setFont(Font.font("System", FontWeight.NORMAL, 12));
-
-            HBox DateCompletedContainer = new HBox(DateCompleted, DateCompletedContent);
-            projectInformation.getChildren().addAll(DateCompletedContainer);
-        }
-
-
-
-        projectContainer.setOnMouseClicked(event -> {
-            System.out.println("Project clicked: " + projectToAdd.getTitle());
-            Stage stage = (Stage) projectContainer.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("timeline-view.fxml"));
-            Parent root = null;
-            try {
-                root = fxmlLoader.load();
-                TimeLineController timelineController = fxmlLoader.getController();
-                timelineController.setProject(projectToAdd);
-                timelineController.setUser(userInformation);
-                timelineController.updateView(stage);
-                Scene scene = new Scene(root, ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
-                stage.setScene(scene);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
-        parentContainer.getChildren().addAll(projectContainer);
-        scrollPane.widthProperty().addListener((obs, oldWidth, newWidth) -> {
-            int widthCalculation = (int) (newWidth.doubleValue() + projectWidth);
-            parentContainer.setPrefWidth(widthCalculation);
-        });
-    }
 
 
 

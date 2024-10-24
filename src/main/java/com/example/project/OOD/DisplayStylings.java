@@ -46,10 +46,11 @@ public class DisplayStylings extends BaseController {
      * @param radius The radius of the VBox
      * @return Stylised VBox
      */
-    protected VBox vBoxStyling(String colour, int width, int borderWidth, String borderColour, int radius) {
+    protected VBox vBoxStyling(String colour, Object width, Object borderWidth, Object borderColour, Object radius) {
         VBox projectContainer = new VBox();
         projectContainer.setAlignment(Pos.CENTER);
-        projectContainer.setPrefWidth(width);
+        projectContainer.setPrefWidth((double)width);
+        projectContainer.setSpacing(0.2);
         projectContainer.setStyle(
                 "-fx-border-width: " + borderWidth + "; " +
                         "-fx-background-color: " + colour + "; " +

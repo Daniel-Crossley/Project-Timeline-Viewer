@@ -1,7 +1,7 @@
 package com.example.project.controller;
 
 import com.example.project.ApplicationStart;
-import com.example.project.OOD.DisplayStylings;
+import com.example.project.OOD.ProjectsDisplay;
 import com.example.project.model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,7 +26,7 @@ import java.util.*;
 /**
  * Handles the controller for the dashboard, such as displaying the projects and buttons to create them
  */
-public class DashboardController extends DisplayStylings implements Initializable {
+public class DashboardController extends ProjectsDisplay implements Initializable {
     public Pane Menu;
     public Button Button_Logout;
     public Button Button_Search;
@@ -35,7 +35,7 @@ public class DashboardController extends DisplayStylings implements Initializabl
     public ScrollPane Scrollpane_Completed;
     public ScrollPane Scrollpane_Progress;
 
-    SqliteCardDAO cardDAO = new SqliteCardDAO();
+
 
     @FXML
     private Label Label_Username;
@@ -47,11 +47,7 @@ public class DashboardController extends DisplayStylings implements Initializabl
     private List<Project> projectList = new ArrayList<>();
 
     //Generic Styling
-    private final int projectWidth = 150;
-    private final String projectColour = "#f1d9b7";
-    private final int projectRadius = 10;
-    private final String projectBorderColour = "#c27c18";
-    private final int projectBorderWidth = 2;
+    HashMap<Object, Object> stylings_dictionary = SetStylings();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -72,7 +68,7 @@ public class DashboardController extends DisplayStylings implements Initializabl
         this.userInformation = user;
         updateUserName();
         UpdateLists();
-        addProjectsToDash();
+        addProjectsToDash(userInformation, stylings_dictionary, Container_In_Progress, Container_Completed, Scrollpane_Progress, Scrollpane_Completed, projectList, guest);
     }
 
     /**
@@ -94,142 +90,7 @@ public class DashboardController extends DisplayStylings implements Initializabl
         this.projectList =  userInformation.getProjects();
     }
 
-    /**
-     * Adds project containers to the different containers based on if they have a completion date set
-     */
-    private void addProjectsToDash(){
-        if (!guest){
-            newCardContainer(Container_In_Progress, Scrollpane_Progress);
-        }
-        else{
-            Scrollpane_Progress.widthProperty().addListener((obs, oldWidth, newWidth) -> {
-                int widthCalculation = (int) (newWidth.doubleValue() + projectWidth);
-                Container_In_Progress.setPrefWidth(widthCalculation);
-            });
-            Scrollpane_Completed.widthProperty().addListener((obs, oldWidth, newWidth) -> {
-                int widthCalculation = (int) (newWidth.doubleValue() + projectWidth);
-                Container_Completed.setPrefWidth(widthCalculation);
-            });
-        }
 
-
-        for(Project projectToAdd: projectList){
-            if (Objects.equals(projectToAdd.getDateFinished(), "none")){
-                generateContainer(projectToAdd, Container_In_Progress, Scrollpane_Progress);
-            }
-            else{
-                generateContainer(projectToAdd, Container_Completed, Scrollpane_Completed);
-            }
-        }
-    }
-
-
-    /**
-     * Generates the container of project information to add
-     * @param projectToAdd project to generate container from
-     * @param parentContainer container to add the project to
-     * @param scrollPane container to be used as reference
-     */
-    private void generateContainer(Project projectToAdd, HBox parentContainer, ScrollPane scrollPane){
-        int TitleSize = 15;
-        int ContentSize = 10;
-
-        VBox projectContainer = vBoxStyling(projectToAdd.getColour(), projectWidth, this.projectBorderWidth, this.projectBorderColour, this.projectRadius);
-
-        Label cardTitle = titleLabel(projectToAdd.getTitle(), 15);
-        projectContainer.getChildren().addAll(cardTitle);
-
-        try {
-            List<Card> listofCards = cardDAO.getCards(projectToAdd);
-            if (listofCards.getFirst().getMediaImage() != null) {
-                ImageView mediaImageView = new ImageView(listofCards.getFirst().getMediaImage());
-                mediaImageView.setFitWidth(100);
-                mediaImageView.setFitHeight(50);
-                mediaImageView.setPreserveRatio(true);
-                projectContainer.getChildren().add(mediaImageView);
-            }
-        } catch(NoSuchElementException ignored) {
-
-        }
-
-
-        Label DateCommenced = titleLabel ("Start: ", 12);
-        Label DateCommencedContent = contentLabel(projectToAdd.getDateCreated(), 12);
-        HBox dateCommencedContainer = new HBox(DateCommenced, DateCommencedContent);
-
-        VBox projectInformation = new VBox(dateCommencedContainer);
-        projectInformation.setPadding(new Insets(0, 0, 5, 5));
-
-        projectContainer.getChildren().addAll(projectInformation);
-
-        if (!Objects.equals(projectToAdd.getDateCreated(), " none")){
-            Label DateCompleted = titleLabel ("Finish: ", 12);
-            Label DateCompletedContent = contentLabel(projectToAdd.getDateFinished(), 12);
-
-            HBox DateCompletedContainer = new HBox(DateCompleted, DateCompletedContent);
-            projectInformation.getChildren().addAll(DateCompletedContainer);
-        }
-
-
-
-        projectContainer.setOnMouseClicked(event -> {
-            System.out.println("Project clicked: " + projectToAdd.getTitle());
-            Stage stage = (Stage) projectContainer.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("timeline-view.fxml"));
-            Parent root = null;
-            try {
-                root = fxmlLoader.load();
-                TimeLineController timelineController = fxmlLoader.getController();
-                timelineController.setProject(projectToAdd);
-                timelineController.setUser(userInformation);
-                timelineController.updateView(stage);
-                Scene scene = new Scene(root, ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
-                stage.setScene(scene);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
-        parentContainer.getChildren().addAll(projectContainer);
-        scrollPane.widthProperty().addListener((obs, oldWidth, newWidth) -> {
-            int widthCalculation = (int) (newWidth.doubleValue() + projectWidth);
-            parentContainer.setPrefWidth(widthCalculation);
-        });
-    }
-
-    /**
-     * Generates the container for generating a new project
-     * @param parentContainer container to add the project to
-     * @param scrollPane container to be used as reference
-     */
-    private void newCardContainer(HBox parentContainer, ScrollPane scrollPane){
-        VBox projectContainer = vBoxStyling(projectColour, projectWidth, this.projectBorderWidth, this.projectBorderColour, this.projectRadius);
-        Label cardTitle = new Label("Create Project");
-
-        projectContainer.getChildren().addAll(cardTitle);
-
-        projectContainer.setOnMouseClicked(event -> {
-            if (!guest) {
-                System.out.println("New Project Button clicked");
-                Stage stage = (Stage) projectContainer.getScene().getWindow();
-                FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("create-new-project.fxml"));
-                Parent root = null;
-                try {
-                    root = fxmlLoader.load();
-                    CreateNewProjectController newProjectController = fxmlLoader.getController();
-                    newProjectController.setUserInformation(userInformation);
-                    Scene scene = new Scene(root, ApplicationStart.WIDTH, ApplicationStart.HEIGHT);
-                    stage.setScene(scene);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        });
-        parentContainer.getChildren().addAll(projectContainer);
-        scrollPane.widthProperty().addListener((obs, oldWidth, newWidth) -> {
-            int widthCalculation = (int) (newWidth.doubleValue() + projectWidth);
-            parentContainer.setPrefWidth(widthCalculation);
-        });
-    }
 
     /**
      * Action of logging out

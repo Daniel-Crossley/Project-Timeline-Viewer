@@ -1,4 +1,5 @@
 
+import com.example.project.controller.LoginController;
 import com.example.project.model.User;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
