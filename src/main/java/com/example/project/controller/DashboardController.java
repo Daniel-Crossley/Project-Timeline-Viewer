@@ -3,20 +3,16 @@ package com.example.project.controller;
 import com.example.project.ApplicationStart;
 import com.example.project.OOD.ProjectsDisplay;
 import com.example.project.model.*;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -46,9 +42,6 @@ public class DashboardController extends ProjectsDisplay implements Initializabl
 
     private List<Project> projectList = new ArrayList<>();
 
-    //Generic Styling
-    HashMap<Object, Object> stylings_dictionary = SetStylings();
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         projectDAO = new SqliteProjectDAO();
@@ -68,7 +61,7 @@ public class DashboardController extends ProjectsDisplay implements Initializabl
         this.userInformation = user;
         updateUserName();
         UpdateLists();
-        addProjectsToDash(userInformation, stylings_dictionary, Container_In_Progress, Container_Completed, Scrollpane_Progress, Scrollpane_Completed, projectList, guest);
+        addProjectsToDash(userInformation, Container_In_Progress, Container_Completed, Scrollpane_Progress, Scrollpane_Completed, projectList, guest);
     }
 
     /**
@@ -90,24 +83,10 @@ public class DashboardController extends ProjectsDisplay implements Initializabl
         this.projectList =  userInformation.getProjects();
     }
 
-
-
-    /**
-     * Action of logging out
-     * @param actionEvent Clicking Action
-     * @throws IOException IOException
-     */
-    @FXML
-    public void onLogoutClick(ActionEvent actionEvent) throws IOException {
-        // Call the inherited Logout method from BaseController
-        Logout(actionEvent);
-    }
-
     /**
      * Action of opening the pane for search
-     * @param actionEvent Clicking Action
      */
-    public void Open_Search(ActionEvent actionEvent) {
+    public void Open_Search() {
         try {
             Stage stage = (Stage) Button_Search.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("Search.fxml"));

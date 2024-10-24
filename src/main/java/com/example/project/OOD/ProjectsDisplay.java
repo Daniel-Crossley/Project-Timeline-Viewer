@@ -24,12 +24,22 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
+/**
+ * Contains code for generating the display of projects
+ */
 public class ProjectsDisplay extends DisplayStylings{
 
     SqliteCardDAO cardDAO = new SqliteCardDAO();
 
+    /**
+     * Generic Styling
+     */
+    HashMap<Object, Object> projectStylings = SetStylings();
 
-
+    /**
+     * Sets up the HashMap for the styling used for each project
+     * @return Composed HashMap with styling
+     */
     protected HashMap<Object, Object> SetStylings(){
         HashMap<Object,Object> stylings_dictionary = new HashMap<>();
         stylings_dictionary.put("projectWidth", 150.00);
@@ -42,10 +52,17 @@ public class ProjectsDisplay extends DisplayStylings{
 
     /**
      * Adds project containers to the different containers based on if they have a completion date set
+     * @param userInformation Contains information relating to the user
+     * @param Container_In_Progress The container for projects that are still in progress
+     * @param Container_Completed The container for adding projects that are completed
+     * @param Scrollpane_Progress Scrollpane inside Container_In_Progress
+     * @param Scrollpane_Completed Scrollpane inside Container_Completed
+     * @param projectList List of Projects
+     * @param guest If the user is guest, true, otherwise, false
      */
-    protected void addProjectsToDash( User userInformation, HashMap<Object,Object> projectStylings,HBox Container_In_Progress, HBox Container_Completed, ScrollPane Scrollpane_Progress, ScrollPane Scrollpane_Completed, List<Project> projectList, boolean guest){
+    protected void addProjectsToDash(User userInformation, HBox Container_In_Progress, HBox Container_Completed, ScrollPane Scrollpane_Progress, ScrollPane Scrollpane_Completed, List<Project> projectList, boolean guest){
         if (!guest){
-            newCardContainer(Container_In_Progress, Scrollpane_Progress, projectStylings, guest, userInformation);
+            newCardContainer(Container_In_Progress, Scrollpane_Progress, guest, userInformation);
         }
         else{
             Scrollpane_Progress.widthProperty().addListener((obs, oldWidth, newWidth) -> {
@@ -62,20 +79,22 @@ public class ProjectsDisplay extends DisplayStylings{
 
         for(Project projectToAdd: projectList){
             if (Objects.equals(projectToAdd.getDateFinished(), "none")){
-                generateContainer(projectToAdd, Container_In_Progress, Scrollpane_Progress, userInformation, projectStylings);
+                generateContainer(projectToAdd, Container_In_Progress, Scrollpane_Progress, userInformation);
             }
             else{
-                generateContainer(projectToAdd, Container_Completed, Scrollpane_Completed, userInformation, projectStylings);
+                generateContainer(projectToAdd, Container_Completed, Scrollpane_Completed, userInformation);
             }
         }
     }
 
     /**
-     * Generates the container for generating a new project
-     * @param parentContainer container to add the project to
-     * @param scrollPane container to be used as reference
+     * newCardContainerGenerates the container for generating a new project
+     * @param parentContainer The parent container to add the projects
+     * @param scrollPane The scrollpane to add the projects to
+     * @param guest Are they guest
+     * @param userInformation Contains user information
      */
-    private void newCardContainer(HBox parentContainer, ScrollPane scrollPane, HashMap<Object,Object> projectStylings, boolean guest, User userInformation){
+    private void newCardContainer(HBox parentContainer, ScrollPane scrollPane, boolean guest, User userInformation){
         VBox projectContainer = vBoxStyling((String) projectStylings.get("projectColour"), projectStylings.get("projectWidth"), projectStylings.get("projectBorderWidth"), projectStylings.get("projectBorderColour"), projectStylings.get("projectRadius"));
         Label cardTitle = new Label("Create Project");
 
@@ -86,7 +105,7 @@ public class ProjectsDisplay extends DisplayStylings{
                 System.out.println("New Project Button clicked");
                 Stage stage = (Stage) projectContainer.getScene().getWindow();
                 FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("create-new-project.fxml"));
-                Parent root = null;
+                Parent root;
                 try {
                     root = fxmlLoader.load();
                     CreateNewProjectController newProjectController = fxmlLoader.getController();
@@ -105,15 +124,16 @@ public class ProjectsDisplay extends DisplayStylings{
         });
     }
 
+
     /**
      * Generates the container of project information to add
      * @param projectToAdd project to generate container from
      * @param parentContainer container to add the project to
      * @param scrollPane container to be used as reference
+     * @param userInformation contains the user information to pass on
      */
-    private void generateContainer(Project projectToAdd, HBox parentContainer, ScrollPane scrollPane, User userInformation, HashMap<Object,Object> projectStylings){
-        int TitleSize = 15;
-        int ContentSize = 10;
+    private void generateContainer(Project projectToAdd, HBox parentContainer, ScrollPane scrollPane, User userInformation){
+
 
         VBox projectContainer = vBoxStyling(projectToAdd.getColour(), projectStylings.get("projectWidth"), projectStylings.get("projectBorderWidth"), projectStylings.get("projectBorderColour"), projectStylings.get("projectRadius"));
 
@@ -157,7 +177,7 @@ public class ProjectsDisplay extends DisplayStylings{
             System.out.println("Project clicked: " + projectToAdd.getTitle());
             Stage stage = (Stage) projectContainer.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(ApplicationStart.class.getResource("timeline-view.fxml"));
-            Parent root = null;
+            Parent root;
             try {
                 root = fxmlLoader.load();
                 TimeLineController timelineController = fxmlLoader.getController();

@@ -1,22 +1,15 @@
 package com.example.project.controller;
 
 import com.example.project.ApplicationStart;
-import com.example.project.OOD.DisplayStylings;
 import com.example.project.OOD.ProjectsDisplay;
 import com.example.project.model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -61,12 +54,6 @@ public class SearchController extends ProjectsDisplay {
     @FXML
     public DatePicker DateSearch;
 
-    SqliteCardDAO cardDAO = new SqliteCardDAO();
-
-    //Generic Styling
-    HashMap<Object, Object> stylings_dictionary = SetStylings();
-
-
     public void setUserInformation(boolean guest, User user) {
         this.guest = guest;
         this.userInformation = user;
@@ -100,7 +87,7 @@ public class SearchController extends ProjectsDisplay {
 
     /**
      * Goes back to the dashboard scene
-     * @throws IOException
+     * @throws IOException Excepiton
      */
     public void Open_Dashboard() throws IOException{
         Stage stage = (Stage) DashboardSearch.getScene().getWindow();
@@ -192,7 +179,7 @@ public class SearchController extends ProjectsDisplay {
             this.projectList =searchResults;
             System.out.println("Found " + searchResults.size() + " results.");
 
-            addProjectsToDash(userInformation, stylings_dictionary, Container_Search_Progress, Container_Search_Completed, Scrollpane_Search_Progress, Scrollpane_Search_Completed, projectList, guest);
+            addProjectsToDash(userInformation, Container_Search_Progress, Container_Search_Completed, Scrollpane_Search_Progress, Scrollpane_Search_Completed, projectList, guest);
         }
 
     }
