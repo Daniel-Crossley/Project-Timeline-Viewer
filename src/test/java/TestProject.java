@@ -60,7 +60,7 @@ public class TestProject {
      */
     public String RandomString(int characterLength) {
         StringBuilder randomString = new StringBuilder();
-        String setCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        String setCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789./?";
         int characterSetLength = setCharacters.length();
         int counter = 0;
         while (counter < characterLength) {

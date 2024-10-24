@@ -60,6 +60,10 @@ public class TimeLineController extends DisplayStylings {
     private final String projectBorderColour = "#c27c18";
     private final int projectBorderWidth = 2;
 
+
+    int TitleSize = 15;
+    int ContentSize = 10;
+
     private SqliteCardDAO cardDAO = new SqliteCardDAO();
 
     public void initialize(User user, Project projectReference) {
@@ -246,8 +250,7 @@ public class TimeLineController extends DisplayStylings {
                     StackPane cardOverlay = StackPaneStyling(projectColour, projectWidth, projectBorderWidth, projectRadius, projectBorderColour);
                     cardOverlay.prefWidthProperty().bind(Cards_Container.widthProperty().multiply(0.3));
                     // Card
-                    int TitleSize = 15;
-                    int ContentSize = 10;
+
                     Label cardTitle = titleLabel("Title:", TitleSize);
                     Label cardTitleContent = contentLabel(cardToAdd.getTitle(), ContentSize);
                     Label cardDate = titleLabel("Date:", TitleSize);
@@ -368,9 +371,6 @@ public class TimeLineController extends DisplayStylings {
 
 
         // Card information
-        int TitleSize = 15;
-        int ContentSize = 10;
-
         Label dateAddedTitle = titleLabel("Date Added:", TitleSize);
         Label dateAdded = contentLabel(cardToRead.getDateCreated(), ContentSize);
 
