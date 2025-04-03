@@ -57,19 +57,10 @@ While designed specifically with **sculptors** in mind, the platform can also be
 
 ---
 
-## **Key Requirements**
-
-- Ability to create and manage projects
-- Ability to create multiple progress cards under each project
-- Public sharing of projects
-- Search functionality
-
----
-
 ## **Project Quality & Development**
 
 The team followed the **AGILE** methodology, with:
-- Weekly **Scrum Meetings** (Tuesdays)
+- Weekly **Scrum Meetings**
 - Development guided by **user stories**
 - Multiple prototype iterations
 - **User testing** and feedback integration
