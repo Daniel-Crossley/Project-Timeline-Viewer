@@ -6,7 +6,7 @@ A **JavaFX application** designed to help sculptors and creative professionals v
 
 The **Project Timeline Viewer** is a timeline-based project management tool that allows users—particularly sculptors—to log the development stages of their work. The application provides a clean, card-based interface to record milestones, update progress, and showcase projects publicly or privately.
 
-This project was developed following **Agile principles**, with a strong focus on modular design, iterative development, and continuous user feedback.
+This project was developed for a University Assignment following **Agile principles**, with a strong focus on modular design, iterative development, and continuous user feedback.
 
 ---
 
